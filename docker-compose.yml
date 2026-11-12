@@ -1,0 +1,98 @@
+# Ambiente local persistente: banco e API privados, frontend exposto somente no loopback.
+# O seed é opcional; migrations precisam terminar antes da inicialização da API.
+name: thindesk-dashboard
+
+x-api-image: &api-image
+  image: thindesk-dashboard-api:local
+
+x-database-environment: &database-environment
+  DATABASE_URL: postgresql://dashboard:${POSTGRES_PASSWORD:?Execute node scripts/prepare-compose.mjs}@db:5432/thindesk_dashboard
+
+services:
+  db:
+    image: postgres:18-bookworm
+    environment:
+      POSTGRES_USER: dashboard
+      POSTGRES_DB: thindesk_dashboard
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Execute node scripts/prepare-compose.mjs}
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U "$${POSTGRES_USER}" -d "$${POSTGRES_DB}"']
+      interval: 5s
+      timeout: 3s
+      retries: 12
+      start_period: 10s
+    restart: unless-stopped
+
+  migrate:
+    <<: *api-image
+    command: [node, scripts/database.mjs, migrate]
+    environment: *database-environment
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: "no"
+
+  api:
+    <<: *api-image
+    build:
+      context: ./api
+    environment:
+      <<: *database-environment
+      NODE_ENV: production
+      HOST: 0.0.0.0
+      PORT: 3000
+      API_ACCESS_TOKEN: ${API_ACCESS_TOKEN:?Execute node scripts/prepare-compose.mjs}
+      CORS_ORIGINS: http://localhost:${DASHBOARD_PORT:-8080},http://127.0.0.1:${DASHBOARD_PORT:-8080}
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    healthcheck:
+      test: [CMD, node, -e, "fetch('http://127.0.0.1:3000/health',{signal:AbortSignal.timeout(2000)}).then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+      start_period: 10s
+    security_opt:
+      - no-new-privileges:true
+    cap_drop: [ALL]
+    restart: unless-stopped
+
+  web:
+    image: thindesk-dashboard-web:local
+    build:
+      context: ./web
+    environment:
+      API_ACCESS_TOKEN: ${API_ACCESS_TOKEN:?Execute node scripts/prepare-compose.mjs}
+      NGINX_ENVSUBST_FILTER: API_ACCESS_TOKEN
+    ports:
+      - "127.0.0.1:${DASHBOARD_PORT:-8080}:8080"
+    depends_on:
+      api:
+        condition: service_healthy
+    healthcheck:
+      test: [CMD, wget, -q, --spider, http://127.0.0.1:8080/healthz]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+      start_period: 5s
+    security_opt:
+      - no-new-privileges:true
+    cap_drop: [ALL]
+    restart: unless-stopped
+
+  seed:
+    <<: *api-image
+    profiles: [demo]
+    command: [node, scripts/database.mjs, seed]
+    environment:
+      <<: *database-environment
+      SEED_REFERENCE_DATE: ${SEED_REFERENCE_DATE:-}
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    restart: "no"
+
+volumes:
+  postgres_data:

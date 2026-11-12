@@ -1,0 +1,62 @@
+# Verifica código e contêineres sem publicar imagens ou implantar o dashboard.
+name: Validation
+
+on:
+  push:
+    branches: [main, develop, 'feature/**', 'release/**', 'hotfix/**']
+  pull_request:
+    branches: [main, develop]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validation-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  application:
+    name: Application and PostgreSQL
+    runs-on: windows-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: |
+            api/package-lock.json
+            web/package-lock.json
+      - run: npm --prefix api ci --ignore-scripts
+      - run: npm --prefix web ci --ignore-scripts
+      - run: npm --prefix api run validate:phase-5
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: application-evidence
+          path: docs/evidencias/fase-5/
+          retention-days: 14
+
+  containers:
+    name: Compose and HTTP
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - run: node scripts/validate-compose.mjs
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: compose-evidence
+          path: docs/evidencias/fase-6/
+          retention-days: 14
