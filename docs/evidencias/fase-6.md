@@ -43,11 +43,17 @@ Os PRs para `develop` devem ser revisados na ordem API → dashboard → entrega
 
 Os PRs [#1 — API](https://github.com/joao-fagundess/controle-pizzaria/pull/1), [#2 — dashboard](https://github.com/joao-fagundess/controle-pizzaria/pull/2) e [#3 — entrega](https://github.com/joao-fagundess/controle-pizzaria/pull/3) foram publicados em rascunho. URLs, bases e estados capturados constam no [relatório de PRs](fase-6/github-prs.json). Descrições em [docs/prs](../prs/delivery.md), com um [template comum](../../.github/pull_request_template.md). O [fluxo documentado](../gitflow.md) explica integração, sincronização de `develop` e tag. A tag `v0.1.0` fica para a aprovação efetiva; não é apresentada como release já aprovada.
 
+O [PR #4 — candidata 0.1.0](https://github.com/joao-fagundess/controle-pizzaria/pull/4) reúne a entrega completa para revisão antes de integrar em `main`. Os quatro PRs permanecem em rascunho, sem revisão humana ou aprovação declaradas. As branches remotas foram publicadas usando a conta de destino confirmada.
+
 ## CI e documentação final
 
-O [workflow de validação](../../.github/workflows/validation.yml) prepara os checks da aplicação em Windows e dos contêineres em Ubuntu, com permissões de leitura. Os relatórios são publicados como artefatos de teste; o workflow não publica imagens nem implanta o dashboard. Uma execução remota só conta como aprovada depois de seu resultado real no [GitHub Actions](https://github.com/joao-fagundess/controle-pizzaria/actions).
+O [workflow de validação](../../.github/workflows/validation.yml) executa aplicação e contêineres em dois jobs Ubuntu, com permissões de leitura. O primeiro teste remoto identificou que o runner Windows hospedado usa administrador, condição recusada pelo PostgreSQL. O job foi ajustado para Linux sem privilégios, com instalação que hidrata os links de bibliotecas do pacote nativo. A versão 18.6 foi confirmada também com UID 1000 no contêiner de diagnóstico; não houve criação de usuários no computador do usuário.
+
+Os relatórios são publicados como artefatos de teste; o workflow não publica imagens nem implanta o dashboard. Uma execução remota só conta como aprovada depois de seu resultado real no [GitHub Actions](https://github.com/joao-fagundess/controle-pizzaria/actions). Os resultados Windows locais da Fase 5 permanecem válidos; a mudança é do ambiente da CI.
 
 O [documento final](../entrega.md) reúne requisitos funcionais/não funcionais, decisões, modelo, endpoints, integração, dashboard, testes, cobertura, capturas e matriz RF → endpoint → teste. O [roteiro do vídeo](../roteiro-video.md) distribui a demonstração em 2min55s, com margem de cinco segundos.
+
+A demonstração persistente foi iniciada em [http://127.0.0.1:8080/](http://127.0.0.1:8080/), com 480 chamados fictícios; o [registro local](fase-6/local-demo.json) distingue esse ambiente dos recursos descartáveis já removidos pelo validador. Para encerrar preservando os chamados, usar `docker compose down` na raiz.
 
 Arquivos acrescentados: `docker-compose.yml`, `.env.example`, `.gitattributes`, Dockerfiles e `.dockerignore` de API/frontend, três arquivos Nginx, scripts de configuração/validação, workflow/template de PR, documentos de implantação/Gitflow/entrega/roteiro, descrições de PR e relatórios desta fase. README e documentos de estado foram atualizados. Credenciais locais, dependências e builds ficam fora do versionamento.
 
