@@ -27,6 +27,7 @@ Na Fase 6, foram entregues Compose, imagens da API/frontend, proxy Nginx, valida
 - [Gitflow e revisão](docs/gitflow.md)
 - [Documento final da entrega](docs/entrega.md)
 - [Roteiro de vídeo de até três minutos](docs/roteiro-video.md)
+- [Homologação local do Thindesk original](docs/homologacao-thindesk.md) e [evidências](docs/evidencias/thindesk-local.md)
 
 ## Estrutura atual
 
@@ -56,6 +57,8 @@ README.md
 ```
 
 A Fase 5 consolidou testes, cobertura e rastreabilidade. A Fase 6 acrescentou a execução com contêineres e os documentos de entrega.
+
+A etapa complementar `feature/thindesk-homologation` reproduz o Thindesk do ZIP com Java/MongoDB, bancos separados e três chamados fictícios. Os testes de login e recepção passaram; o [dashboard de homologação](http://127.0.0.1:8180/) mostra três exclusões e nenhum chamado canônico, pois os campos analíticos continuam ausentes. Preparação, acesso e comandos em [homologacao-thindesk.md](docs/homologacao-thindesk.md). Essa etapa é posterior à tag `v0.1.0`.
 
 ## Execução e configuração
 
@@ -128,4 +131,4 @@ Indicadores, distribuição e lista usam criação; série e ranking de atendime
 
 O Thindesk fornecido usa Java/MongoDB e possui listagens autenticadas, mas seus chamados não têm datas, prioridade, histórico ou considerações técnicas. O comando `npm.cmd run thindesk:sync` preserva os legados e os motivos de rejeição separados dos indicadores; não promove dados incompletos. Sua autenticação foi testada com uma origem HTTP local controlada. Credenciais do ZIP não foram copiadas nem usadas.
 
-O PostgreSQL independente foi validado na Fase 5. Não houve homologação com Thindesk real ou autenticação corporativa. Os planos SQL com 10 mil registros são uma inspeção local, sem comprovação da meta de p95 ou concorrência. A branch `release/0.1.0` preserva a candidata integrada e a tag `v0.1.0` identifica a entrega em `main`. O roteiro foi entregue, mas o vídeo ainda precisa ser gravado.
+O PostgreSQL independente foi validado na Fase 5, e a etapa complementar executou o código original do Thindesk em ambiente local com dados fictícios. A homologação da instância operacional e a autenticação corporativa continuam pendentes. Os planos SQL com 10 mil registros são uma inspeção local, sem comprovação da meta de p95 ou concorrência. A branch `release/0.1.0` preserva a candidata integrada e a tag `v0.1.0` identifica a primeira entrega em `main`. O roteiro foi entregue, mas o vídeo ainda precisa ser gravado.

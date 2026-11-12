@@ -57,6 +57,6 @@ Exemplo de recepção de um chamado legado identificado:
 
 ## Limite operacional
 
-O teste de login e leitura usa um servidor HTTP local de teste que reproduz o contrato observado. Não foi fornecida uma instância Thindesk acessível; não houve uso das credenciais do ZIP, acesso a dados reais ou homologação com MongoDB.
+Na Fase 3, o teste de login e leitura usou um servidor HTTP controlado que reproduzia o contrato observado. Na etapa complementar de 12/11/2026, a [homologação local](homologacao-thindesk.md) compilou o Java original do ZIP e verificou login, sessão, leitura e recepção com MongoDB em execução e dados fictícios. Não houve uso das credenciais do ZIP ou de dados reais; a instância operacional continua pendente.
 
 Para sustentar todos os indicadores reais, a origem deve fornecer datas confiáveis, prioridade, vínculos estáveis e, para o detalhe completo, histórico e considerações. Até lá, o dashboard deve avisar que existem registros excluídos e mostrar a qualidade global devolvida pelo resumo. Polling do frontend apenas refaz consultas e não executa este comando de recepção. Nenhum agendamento automático foi criado nesta fase.

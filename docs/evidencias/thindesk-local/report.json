@@ -1,0 +1,90 @@
+{
+  "generated_at": "2026-11-12T14:22:40.859Z",
+  "status": "passed",
+  "project": "thindesk-homologation",
+  "archive_sha256": "CECBA3087577848DF5A975217F42AEE4821DB30B61E3D0DA326F90AB3E2E73C7",
+  "copied_original_files": 29,
+  "original_archive_unchanged": true,
+  "original_sources_verified": true,
+  "credentials_from_original": false,
+  "steps": [
+    {
+      "name": "Docker disponível",
+      "exit_code": 0,
+      "duration_ms": 489
+    },
+    {
+      "name": "Configuração isolada",
+      "exit_code": 0,
+      "duration_ms": 346
+    },
+    {
+      "name": "Build do código Java e das imagens de recepção",
+      "exit_code": 0,
+      "duration_ms": 12702
+    },
+    {
+      "name": "Inicialização e saúde dos seis serviços",
+      "exit_code": 0,
+      "duration_ms": 8853
+    },
+    {
+      "name": "Fixtures sintéticas no MongoDB separado",
+      "exit_code": 0,
+      "duration_ms": 2138
+    },
+    {
+      "name": "Login, leitura e recepção pelo conector compilado",
+      "exit_code": 0,
+      "duration_ms": 11244
+    },
+    {
+      "name": "Origem preservada depois da recepção",
+      "exit_code": 0,
+      "duration_ms": 1145
+    },
+    {
+      "name": "Versão do Java em execução",
+      "exit_code": 0,
+      "duration_ms": 769
+    },
+    {
+      "name": "Versão do MongoDB",
+      "exit_code": 0,
+      "duration_ms": 838
+    },
+    {
+      "name": "Estado dos serviços de homologação",
+      "exit_code": 0,
+      "duration_ms": 4096
+    },
+    {
+      "name": "Identificação das imagens locais",
+      "exit_code": 0,
+      "duration_ms": 1752
+    }
+  ],
+  "mongo_source_unchanged": true,
+  "mongo_snapshot_sha256": "a422f87eb05c8f1873bc126ab9a2887a55f58feda17bb8b3deaf5a81665d2e39",
+  "verification_groups": 16,
+  "connector_executions": 5,
+  "dashboard": {
+    "total": 0,
+    "rejected": 3,
+    "promoted": 0
+  },
+  "java": "openjdk version \"23.0.2\" 2025-01-21\nOpenJDK Runtime Environment Temurin-23.0.2+7 (build 23.0.2+7)\nOpenJDK 64-Bit Server VM Temurin-23.0.2+7 (build 23.0.2+7, mixed mode, sharing)",
+  "mongo": "8.0.38",
+  "image_digests": [
+    "[thindesk-homologation-source:local] sha256:3e18717ecc50075b0b987acf54e7fddb8c1f3e4d5e1de2fb4d0b69ec570fad3b [\"thindesk-homologation-source@sha256:3e18717ecc50075b0b987acf54e7fddb8c1f3e4d5e1de2fb4d0b69ec570fad3b\"]",
+    "[thindesk-homologation-api:local] sha256:fc322ae060c4eeb1605d95b243635f1892c9f34465634060776caf8d2bac2e49 [\"thindesk-homologation-api@sha256:fc322ae060c4eeb1605d95b243635f1892c9f34465634060776caf8d2bac2e49\"]",
+    "[thindesk-homologation-web:local] sha256:fa58f9e08d8fe879d3a0c522c3ef9809fdc6c85abec2c70913b928f674726799 [\"thindesk-homologation-web@sha256:fa58f9e08d8fe879d3a0c522c3ef9809fdc6c85abec2c70913b928f674726799\"]",
+    "[mongo:8.0] sha256:d97fea17ccb8d004cd137be8dab54d70d0df11be69c9f422aefe4484c8414ab7 [\"mongo@sha256:d97fea17ccb8d004cd137be8dab54d70d0df11be69c9f422aefe4484c8414ab7\"]",
+    "[postgres:18-bookworm] sha256:f1ea2a1a4fb7b68d4836be1fdcb8a6466a89b072158bf9d97663600538c294c5 [\"postgres@sha256:f1ea2a1a4fb7b68d4836be1fdcb8a6466a89b072158bf9d97663600538c294c5\"]"
+  ],
+  "local_urls": {
+    "thindesk": "http://127.0.0.1:8081/login",
+    "dashboard": "http://127.0.0.1:8180/"
+  },
+  "environment_kept_running": true
+}
