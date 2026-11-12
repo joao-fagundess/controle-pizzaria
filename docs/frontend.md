@@ -115,7 +115,7 @@ npm.cmd run build
 
 Os testes desta fase usam respostas controladas apenas em `web/tests`. A aplicação não importa fixtures. A verificação no navegador usa o backend real do projeto com PostgreSQL embarcado e seed; ver [evidências](evidencias/fase-4.md).
 
-A Fase 5 consolidou [cobertura e evidências](evidencias/fase-5.md), validou PostgreSQL independente e gerou a [matriz RF → endpoint → teste](rastreabilidade.md). A Fase 6 acrescentou a imagem estática com Nginx e proxy de mesma origem, descrita em [implantacao.md](implantacao.md), e a documentação de entrega. Homologação do Thindesk real depende do acesso e dos campos faltantes na origem.
+A Fase 5 consolidou [cobertura e evidências](evidencias/fase-5.md), validou PostgreSQL independente e gerou a [matriz RF → endpoint → teste](rastreabilidade.md). A imagem estática com Nginx e a documentação final serão entregues na Fase 6. Homologação do Thindesk real depende do acesso e dos campos faltantes na origem.
 
 ## Referências técnicas
 
