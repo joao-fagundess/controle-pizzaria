@@ -1,0 +1,9 @@
+# Exclui configuração privada e artefatos locais do contexto de build.
+node_modules
+dist
+.env
+.env.*
+!.env.example
+coverage
+tests
+*.log

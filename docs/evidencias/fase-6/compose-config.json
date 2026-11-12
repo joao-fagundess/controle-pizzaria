@@ -1,0 +1,172 @@
+{
+  "name": "thindesk-phase6-ff2f529f5466",
+  "networks": {
+    "default": {
+      "name": "thindesk-phase6-ff2f529f5466_default",
+      "ipam": {}
+    }
+  },
+  "services": {
+    "api": {
+      "build": {
+        "context": "C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria\\api",
+        "dockerfile": "Dockerfile"
+      },
+      "cap_drop": [
+        "ALL"
+      ],
+      "command": null,
+      "depends_on": {
+        "migrate": {
+          "condition": "service_completed_successfully",
+          "required": true
+        }
+      },
+      "entrypoint": null,
+      "environment": {
+        "API_ACCESS_TOKEN": "[REDACTED]",
+        "CORS_ORIGINS": "http://localhost:53644,http://127.0.0.1:53644",
+        "DATABASE_URL": "postgresql://dashboard:[REDACTED]@db:5432/thindesk_dashboard",
+        "HOST": "0.0.0.0",
+        "NODE_ENV": "production",
+        "PORT": "3000"
+      },
+      "healthcheck": {
+        "test": [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:3000/health',{signal:AbortSignal.timeout(2000)}).then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
+        ],
+        "timeout": "3s",
+        "interval": "5s",
+        "retries": 12,
+        "start_period": "10s"
+      },
+      "image": "thindesk-dashboard-api:local",
+      "networks": {
+        "default": null
+      },
+      "restart": "unless-stopped",
+      "security_opt": [
+        "no-new-privileges:true"
+      ]
+    },
+    "db": {
+      "command": null,
+      "entrypoint": null,
+      "environment": {
+        "POSTGRES_DB": "thindesk_dashboard",
+        "POSTGRES_PASSWORD": "[REDACTED]",
+        "POSTGRES_USER": "dashboard"
+      },
+      "healthcheck": {
+        "test": [
+          "CMD-SHELL",
+          "pg_isready -U \"$${POSTGRES_USER}\" -d \"$${POSTGRES_DB}\""
+        ],
+        "timeout": "3s",
+        "interval": "5s",
+        "retries": 12,
+        "start_period": "10s"
+      },
+      "image": "postgres:18-bookworm",
+      "networks": {
+        "default": null
+      },
+      "restart": "unless-stopped",
+      "volumes": [
+        {
+          "type": "volume",
+          "source": "postgres_data",
+          "target": "/var/lib/postgresql",
+          "volume": {}
+        }
+      ]
+    },
+    "migrate": {
+      "command": [
+        "node",
+        "scripts/database.mjs",
+        "migrate"
+      ],
+      "depends_on": {
+        "db": {
+          "condition": "service_healthy",
+          "required": true
+        }
+      },
+      "entrypoint": null,
+      "environment": {
+        "DATABASE_URL": "postgresql://dashboard:[REDACTED]@db:5432/thindesk_dashboard"
+      },
+      "image": "thindesk-dashboard-api:local",
+      "networks": {
+        "default": null
+      },
+      "restart": "no"
+    },
+    "web": {
+      "build": {
+        "context": "C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria\\web",
+        "dockerfile": "Dockerfile"
+      },
+      "cap_drop": [
+        "ALL"
+      ],
+      "command": null,
+      "depends_on": {
+        "api": {
+          "condition": "service_healthy",
+          "required": true
+        }
+      },
+      "entrypoint": null,
+      "environment": {
+        "API_ACCESS_TOKEN": "[REDACTED]",
+        "NGINX_ENVSUBST_FILTER": "API_ACCESS_TOKEN"
+      },
+      "healthcheck": {
+        "test": [
+          "CMD",
+          "wget",
+          "-q",
+          "--spider",
+          "http://127.0.0.1:8080/healthz"
+        ],
+        "timeout": "3s",
+        "interval": "5s",
+        "retries": 12,
+        "start_period": "5s"
+      },
+      "image": "thindesk-dashboard-web:local",
+      "networks": {
+        "default": null
+      },
+      "ports": [
+        {
+          "mode": "ingress",
+          "host_ip": "127.0.0.1",
+          "target": 8080,
+          "published": "53644",
+          "protocol": "tcp"
+        }
+      ],
+      "restart": "unless-stopped",
+      "security_opt": [
+        "no-new-privileges:true"
+      ]
+    }
+  },
+  "volumes": {
+    "postgres_data": {
+      "name": "thindesk-phase6-ff2f529f5466_postgres_data"
+    }
+  },
+  "x-api-image": {
+    "image": "thindesk-dashboard-api:local"
+  },
+  "x-database-environment": {
+    "DATABASE_URL": "postgresql://dashboard:[REDACTED]@db:5432/thindesk_dashboard"
+  }
+}
