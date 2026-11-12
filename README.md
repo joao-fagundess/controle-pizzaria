@@ -58,7 +58,7 @@ README.md
 
 A Fase 5 consolidou testes, cobertura e rastreabilidade. A Fase 6 acrescentou a execução com contêineres e os documentos de entrega.
 
-A etapa complementar `feature/thindesk-homologation` reproduz o Thindesk do ZIP com Java/MongoDB, bancos separados e três chamados fictícios. Os testes de login e recepção passaram; o [dashboard de homologação](http://127.0.0.1:8180/) mostra três exclusões e nenhum chamado canônico, pois os campos analíticos continuam ausentes. Preparação, acesso e comandos em [homologacao-thindesk.md](docs/homologacao-thindesk.md). Essa etapa é posterior à tag `v0.1.0`.
+A homologação complementar foi integrada em `develop` pelo [PR #5](https://github.com/joao-fagundess/controle-pizzaria/pull/5). Ela reproduz o Thindesk do ZIP com Java/MongoDB, bancos separados e três chamados fictícios. Os testes de login e recepção passaram; o [dashboard de homologação](http://127.0.0.1:8180/) mostra três exclusões e nenhum chamado canônico, pois os campos analíticos continuam ausentes. Preparação, acesso e comandos em [homologacao-thindesk.md](docs/homologacao-thindesk.md). Essa etapa é posterior à tag `v0.1.0`; `main` e a tag preservam a primeira entrega.
 
 ## Execução e configuração
 

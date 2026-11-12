@@ -1,6 +1,6 @@
 # Evidências — Thindesk original em ambiente local
 
-Etapa complementar executada em 12/11/2026, na branch `feature/thindesk-homologation`. O usuário autorizou preparar o ZIP localmente. A execução foi aprovada e o ambiente foi mantido para consulta. Procedimento e credenciais locais em [homologacao-thindesk.md](../homologacao-thindesk.md).
+Etapa complementar executada em 12/11/2026, na branch `feature/thindesk-homologation`, e integrada em `develop` pelo [PR #5](https://github.com/joao-fagundess/controle-pizzaria/pull/5). O usuário autorizou preparar o ZIP localmente e depois autorizou o merge no chat. A execução foi aprovada e o ambiente foi mantido para consulta. Procedimento e credenciais locais em [homologacao-thindesk.md](../homologacao-thindesk.md).
 
 ## Resultados
 
@@ -20,6 +20,7 @@ Etapa complementar executada em 12/11/2026, na branch `feature/thindesk-homologa
 | Saída dos comandos sem segredos | [validation.txt](thindesk-local/validation.txt) |
 | Configuração com credenciais removidas | [compose-config.json](thindesk-local/compose-config.json) |
 | Estado dos serviços | [containers.json](thindesk-local/containers.json) |
+| Integração real do PR #5 | [github-pr.json](thindesk-local/github-pr.json) |
 
 ## Cenários
 

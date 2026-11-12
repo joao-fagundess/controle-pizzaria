@@ -2,6 +2,8 @@
 
 Etapa complementar autorizada em 12/11/2026, após a entrega `v0.1.0`. O usuário escolheu executar o ZIP em ambiente local. A aplicação Java original foi compilada e sua integração foi verificada com MongoDB, PostgreSQL receptor e conector Node.js reais, usando apenas dados fictícios.
 
+O [PR #5](https://github.com/joao-fagundess/controle-pizzaria/pull/5) foi integrado em `develop` após autorização do usuário no chat em 12/11/2026. O [registro de integração](evidencias/thindesk-local/github-pr.json) contém o SHA verificado e o commit do merge. A branch de origem foi mantida; a tag `v0.1.0` não foi alterada.
+
 ## Ambientes disponíveis
 
 | Endereço | Conteúdo |

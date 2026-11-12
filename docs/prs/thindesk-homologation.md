@@ -8,4 +8,4 @@ Validação local: [16 grupos aprovados](../evidencias/thindesk-local.md), cinco
 
 Os módulos de produção do conector/dashboard não foram alterados. A CI comum verifica a aplicação e o Compose principal; a homologação do Java original depende do ZIP local e tem evidência própria. A instância operacional e o contrato complementar para datas, prioridade e identidades permanecem pendentes.
 
-Base de revisão: `develop`. A integração desta etapa aguarda a revisão do PR; a tag `v0.1.0` permanece no commit já entregue.
+Integrado em `develop` pelo [PR #5](https://github.com/joao-fagundess/controle-pizzaria/pull/5), após autorização do usuário no chat em 12/11/2026 e CI aprovada do head. A tag `v0.1.0` permanece no commit já entregue.
