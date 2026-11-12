@@ -1,0 +1,47 @@
+{
+  "generated_at": "2026-11-12T13:35:51.519Z",
+  "repository": "joao-fagundess/controle-pizzaria",
+  "authenticated_as": "joao-fagundess",
+  "pull_requests": [
+    {
+      "number": 1,
+      "url": "https://github.com/joao-fagundess/controle-pizzaria/pull/1",
+      "state": "open",
+      "draft": true,
+      "title": "build: empacotar API TypeScript para PostgreSQL",
+      "head": "feature/api-endpoints",
+      "base": "develop",
+      "head_sha": "ae225a440fbb686d32efc8d8703a2b04f729a89b"
+    },
+    {
+      "number": 2,
+      "url": "https://github.com/joao-fagundess/controle-pizzaria/pull/2",
+      "state": "open",
+      "draft": true,
+      "title": "build: servir dashboard com proxy Nginx",
+      "head": "feature/dashboard-ui",
+      "base": "develop",
+      "head_sha": "2399c8a1946cab159ff20e06dbb8f6843882166c"
+    },
+    {
+      "number": 3,
+      "url": "https://github.com/joao-fagundess/controle-pizzaria/pull/3",
+      "state": "open",
+      "draft": true,
+      "title": "build: integrar ambiente Compose e validar entrega",
+      "head": "feature/delivery",
+      "base": "develop",
+      "head_sha": "73e23c2597769df1fbb8668df19bf45f53fcb323"
+    },
+    {
+      "number": 4,
+      "url": "https://github.com/joao-fagundess/controle-pizzaria/pull/4",
+      "state": "open",
+      "draft": true,
+      "title": "release: entregar dashboard administrativo de chamados",
+      "head": "release/0.1.0",
+      "base": "main",
+      "head_sha": "39313205e18bb9930776c06412952fd7dc367495"
+    }
+  ]
+}

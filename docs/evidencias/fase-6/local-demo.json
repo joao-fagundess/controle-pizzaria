@@ -1,0 +1,8 @@
+{
+  "checked_at": "2026-11-12T13:33:14.346Z",
+  "url": "http://127.0.0.1:8080/",
+  "status": "running",
+  "tickets": 480,
+  "data": "fictitious",
+  "persistent_volume": "thindesk-dashboard_postgres_data"
+}
