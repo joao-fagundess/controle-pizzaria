@@ -6,4 +6,4 @@ As evidências e suas limitações estão reunidas no [documento final](../entre
 
 A aprovação depende de os checks da candidata passarem e de a equipe aceitar as pendências documentadas: homologação da origem, autenticação/HTTPS corporativos e desempenho sob carga. O roteiro foi entregue; o vídeo não foi gravado nesta sessão.
 
-Base prevista: `main`, com sincronização dos ajustes em `develop`. Este arquivo é a descrição preparada, não um PR publicado ou uma release aprovada.
+Base de revisão: `main`, com sincronização dos ajustes em `develop`. PR publicado em rascunho: [#4](https://github.com/joao-fagundess/controle-pizzaria/pull/4). A candidata ainda aguarda revisão e aprovação.

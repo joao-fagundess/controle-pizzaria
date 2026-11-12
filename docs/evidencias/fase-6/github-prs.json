@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-12T13:33:32.634Z",
+  "generated_at": "2026-11-12T13:35:51.519Z",
   "repository": "joao-fagundess/controle-pizzaria",
   "authenticated_as": "joao-fagundess",
   "pull_requests": [
@@ -31,7 +31,17 @@
       "title": "build: integrar ambiente Compose e validar entrega",
       "head": "feature/delivery",
       "base": "develop",
-      "head_sha": "1ee7af8c863819108de8ac21ec4af4c6051be75a"
+      "head_sha": "73e23c2597769df1fbb8668df19bf45f53fcb323"
+    },
+    {
+      "number": 4,
+      "url": "https://github.com/joao-fagundess/controle-pizzaria/pull/4",
+      "state": "open",
+      "draft": true,
+      "title": "release: entregar dashboard administrativo de chamados",
+      "head": "release/0.1.0",
+      "base": "main",
+      "head_sha": "39313205e18bb9930776c06412952fd7dc367495"
     }
   ]
 }
