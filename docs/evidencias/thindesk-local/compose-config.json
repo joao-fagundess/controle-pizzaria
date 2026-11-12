@@ -1,0 +1,331 @@
+{
+  "name": "thindesk-homologation",
+  "networks": {
+    "default": {
+      "name": "thindesk-homologation_default",
+      "ipam": {}
+    }
+  },
+  "services": {
+    "api": {
+      "build": {
+        "context": "C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria\\api",
+        "dockerfile": "Dockerfile"
+      },
+      "cap_drop": [
+        "ALL"
+      ],
+      "command": null,
+      "depends_on": {
+        "migrate": {
+          "condition": "service_completed_successfully",
+          "required": true
+        }
+      },
+      "entrypoint": null,
+      "environment": {
+        "API_ACCESS_TOKEN": "[REDACTED]",
+        "CORS_ORIGINS": "http://localhost:8180,http://127.0.0.1:8180",
+        "DATABASE_URL": "postgresql://dashboard_hml:[REDACTED]@db:5432/thindesk_homologation",
+        "HOST": "0.0.0.0",
+        "NODE_ENV": "production",
+        "PORT": "3000"
+      },
+      "healthcheck": {
+        "test": [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:3000/health',{signal:AbortSignal.timeout(2000)}).then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
+        ],
+        "timeout": "3s",
+        "interval": "5s",
+        "retries": 24
+      },
+      "image": "thindesk-homologation-api:local",
+      "networks": {
+        "default": null
+      },
+      "restart": "unless-stopped",
+      "security_opt": [
+        "no-new-privileges:true"
+      ]
+    },
+    "db": {
+      "command": null,
+      "entrypoint": null,
+      "environment": {
+        "POSTGRES_DB": "thindesk_homologation",
+        "POSTGRES_PASSWORD": "[REDACTED]",
+        "POSTGRES_USER": "dashboard_hml"
+      },
+      "healthcheck": {
+        "test": [
+          "CMD-SHELL",
+          "pg_isready -U \"$${POSTGRES_USER}\" -d \"$${POSTGRES_DB}\""
+        ],
+        "timeout": "3s",
+        "interval": "5s",
+        "retries": 24
+      },
+      "image": "postgres:18-bookworm",
+      "networks": {
+        "default": null
+      },
+      "restart": "unless-stopped",
+      "volumes": [
+        {
+          "type": "volume",
+          "source": "postgres_data",
+          "target": "/var/lib/postgresql",
+          "volume": {}
+        }
+      ]
+    },
+    "migrate": {
+      "command": [
+        "node",
+        "scripts/database.mjs",
+        "migrate"
+      ],
+      "depends_on": {
+        "db": {
+          "condition": "service_healthy",
+          "required": true
+        }
+      },
+      "entrypoint": null,
+      "environment": {
+        "DATABASE_URL": "postgresql://dashboard_hml:[REDACTED]@db:5432/thindesk_homologation"
+      },
+      "image": "thindesk-homologation-api:local",
+      "networks": {
+        "default": null
+      },
+      "restart": "no"
+    },
+    "mongo": {
+      "command": null,
+      "entrypoint": null,
+      "environment": {
+        "MONGO_INITDB_ROOT_PASSWORD": "[REDACTED]",
+        "MONGO_INITDB_ROOT_USERNAME": "homologacao"
+      },
+      "healthcheck": {
+        "test": [
+          "CMD",
+          "mongosh",
+          "--quiet",
+          "--eval",
+          "db.getSiblingDB('admin').auth(process.env.MONGO_INITDB_ROOT_USERNAME,process.env.MONGO_INITDB_ROOT_PASSWORD);db.adminCommand({ping:1})"
+        ],
+        "timeout": "5s",
+        "interval": "5s",
+        "retries": 24
+      },
+      "image": "mongo:8.0",
+      "networks": {
+        "default": null
+      },
+      "restart": "unless-stopped",
+      "volumes": [
+        {
+          "type": "volume",
+          "source": "mongo_data",
+          "target": "/data/db",
+          "volume": {}
+        }
+      ]
+    },
+    "sync": {
+      "profiles": [
+        "tools"
+      ],
+      "command": [
+        "node",
+        "dist/thindesk-sync.js"
+      ],
+      "depends_on": {
+        "migrate": {
+          "condition": "service_completed_successfully",
+          "required": true
+        },
+        "thindesk": {
+          "condition": "service_healthy",
+          "required": true
+        }
+      },
+      "entrypoint": null,
+      "environment": {
+        "DATABASE_URL": "postgresql://dashboard_hml:[REDACTED]@db:5432/thindesk_homologation",
+        "THINDESK_BASE_URL": "http://127.0.0.1:8080",
+        "THINDESK_PASSWORD": "[REDACTED]",
+        "THINDESK_USERNAME": "homologacao"
+      },
+      "image": "thindesk-homologation-api:local",
+      "network_mode": "service:thindesk",
+      "restart": "no"
+    },
+    "thindesk": {
+      "build": {
+        "context": "C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria\\.cache\\thindesk-homologation\\source",
+        "dockerfile": "../../../integration/thindesk/Dockerfile"
+      },
+      "cap_drop": [
+        "ALL"
+      ],
+      "command": null,
+      "depends_on": {
+        "mongo": {
+          "condition": "service_healthy",
+          "required": true
+        }
+      },
+      "entrypoint": null,
+      "environment": {
+        "THINDESK_MONGO_URI": "mongodb://homologacao:[REDACTED]@mongo:27017/thindesk_homologation?authSource=admin",
+        "THINDESK_PASSWORD": "[REDACTED]",
+        "THINDESK_USERNAME": "homologacao"
+      },
+      "healthcheck": {
+        "test": [
+          "CMD",
+          "curl",
+          "--fail",
+          "--silent",
+          "http://127.0.0.1:8080/login"
+        ],
+        "timeout": "5s",
+        "interval": "5s",
+        "retries": 36,
+        "start_period": "20s"
+      },
+      "image": "thindesk-homologation-source:local",
+      "networks": {
+        "default": null
+      },
+      "ports": [
+        {
+          "mode": "ingress",
+          "host_ip": "127.0.0.1",
+          "target": 8080,
+          "published": "8081",
+          "protocol": "tcp"
+        }
+      ],
+      "restart": "unless-stopped",
+      "security_opt": [
+        "no-new-privileges:true"
+      ]
+    },
+    "verify": {
+      "profiles": [
+        "tools"
+      ],
+      "command": [
+        "node",
+        "/checks/verify-thindesk.mjs"
+      ],
+      "depends_on": {
+        "api": {
+          "condition": "service_healthy",
+          "required": true
+        },
+        "thindesk": {
+          "condition": "service_healthy",
+          "required": true
+        }
+      },
+      "entrypoint": null,
+      "environment": {
+        "API_ACCESS_TOKEN": "[REDACTED]",
+        "DATABASE_URL": "postgresql://dashboard_hml:[REDACTED]@db:5432/thindesk_homologation",
+        "THINDESK_BASE_URL": "http://127.0.0.1:8080",
+        "THINDESK_PASSWORD": "[REDACTED]",
+        "THINDESK_USERNAME": "homologacao"
+      },
+      "image": "thindesk-homologation-api:local",
+      "network_mode": "service:thindesk",
+      "restart": "no",
+      "volumes": [
+        {
+          "type": "bind",
+          "source": "C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria\\integration\\thindesk",
+          "target": "/checks",
+          "read_only": true,
+          "bind": {}
+        }
+      ]
+    },
+    "web": {
+      "build": {
+        "context": "C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria\\web",
+        "dockerfile": "Dockerfile"
+      },
+      "cap_drop": [
+        "ALL"
+      ],
+      "command": null,
+      "depends_on": {
+        "api": {
+          "condition": "service_healthy",
+          "required": true
+        }
+      },
+      "entrypoint": null,
+      "environment": {
+        "API_ACCESS_TOKEN": "[REDACTED]",
+        "NGINX_ENVSUBST_FILTER": "API_ACCESS_TOKEN"
+      },
+      "healthcheck": {
+        "test": [
+          "CMD",
+          "wget",
+          "-q",
+          "--spider",
+          "http://127.0.0.1:8080/healthz"
+        ],
+        "timeout": "3s",
+        "interval": "5s",
+        "retries": 24
+      },
+      "image": "thindesk-homologation-web:local",
+      "networks": {
+        "default": null
+      },
+      "ports": [
+        {
+          "mode": "ingress",
+          "host_ip": "127.0.0.1",
+          "target": 8080,
+          "published": "8180",
+          "protocol": "tcp"
+        }
+      ],
+      "restart": "unless-stopped",
+      "security_opt": [
+        "no-new-privileges:true"
+      ]
+    }
+  },
+  "volumes": {
+    "mongo_data": {
+      "name": "thindesk-homologation_mongo_data"
+    },
+    "postgres_data": {
+      "name": "thindesk-homologation_postgres_data"
+    }
+  },
+  "x-api-image": {
+    "image": "thindesk-homologation-api:local"
+  },
+  "x-database-environment": {
+    "DATABASE_URL": "postgresql://dashboard_hml:[REDACTED]@db:5432/thindesk_homologation"
+  },
+  "x-source-environment": {
+    "DATABASE_URL": "postgresql://dashboard_hml:[REDACTED]@db:5432/thindesk_homologation",
+    "THINDESK_BASE_URL": "http://127.0.0.1:8080",
+    "THINDESK_PASSWORD": "[REDACTED]",
+    "THINDESK_USERNAME": "homologacao"
+  }
+}

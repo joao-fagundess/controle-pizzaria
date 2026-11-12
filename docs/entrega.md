@@ -20,6 +20,7 @@ Dashboard administrativo de **chamados técnicos de helpdesk** integrado à API 
 | Organização de branches e revisão | [Gitflow](gitflow.md) |
 | Verificação e pendências da entrega | [Fase 6](evidencias/fase-6.md) |
 | Escopo e integração da versão 0.1.0 | [Notas da versão](versao-0.1.0.md) |
+| Homologação complementar do código original do ZIP | [Procedimento](homologacao-thindesk.md), [evidências](evidencias/thindesk-local.md) |
 | Apresentação em até três minutos | [Roteiro do vídeo](roteiro-video.md) |
 
 Os 480 chamados são fictícios. A origem fornecida usa Java/MongoDB e não contém datas, prioridade, histórico ou considerações técnicas necessários aos indicadores completos. A recepção conserva os legados e motivos de rejeição; não inventa valores nem os inclui nos KPIs.

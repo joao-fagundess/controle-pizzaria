@@ -1,0 +1,122 @@
+{
+  "status": "passed",
+  "source": "Thindesk 1.0-alpha do ZIP",
+  "authentication": "form/session",
+  "synthetic_source_tickets": 3,
+  "checks": [
+    {
+      "name": "origem exige sessão para a API",
+      "status": "passed"
+    },
+    {
+      "name": "página original de login é servida",
+      "status": "passed"
+    },
+    {
+      "name": "senha incorreta não autentica",
+      "status": "passed"
+    },
+    {
+      "name": "login válido emite sessão",
+      "status": "passed"
+    },
+    {
+      "name": "API Java retorna os três chamados e apenas os campos legados",
+      "status": "passed"
+    },
+    {
+      "name": "receptor inicia sem dados fictícios do seed do dashboard",
+      "status": "passed"
+    },
+    {
+      "name": "comando compilado lê a origem Java com login e preserva o lote",
+      "status": "passed"
+    },
+    {
+      "name": "registros incompletos ficam rejeitados e sem chamado canônico",
+      "status": "passed"
+    },
+    {
+      "name": "resumo mostra exclusões e mantém indicadores vazios",
+      "status": "passed"
+    },
+    {
+      "name": "proxy do dashboard consulta o receptor correto sem token no cliente",
+      "status": "passed"
+    },
+    {
+      "name": "segunda recepção é idempotente e conserva first_seen_at",
+      "status": "passed"
+    },
+    {
+      "name": "comando aceita uma sessão válida já existente",
+      "status": "passed"
+    },
+    {
+      "name": "falha de login no comando não altera a recepção",
+      "status": "passed"
+    },
+    {
+      "name": "cookie inválido no comando é recusado sem alterar dados",
+      "status": "passed"
+    },
+    {
+      "name": "logout invalida a sessão original",
+      "status": "passed"
+    },
+    {
+      "name": "tabela de chamados permanece vazia",
+      "status": "passed"
+    }
+  ],
+  "connector_executions": [
+    {
+      "exit_code": 0,
+      "received": 3,
+      "preserved": 3,
+      "rejected": 3,
+      "unidentified": 0,
+      "promoted": 0
+    },
+    {
+      "exit_code": 0,
+      "received": 3,
+      "preserved": 3,
+      "rejected": 3,
+      "unidentified": 0,
+      "promoted": 0
+    },
+    {
+      "exit_code": 0,
+      "received": 3,
+      "preserved": 3,
+      "rejected": 3,
+      "unidentified": 0,
+      "promoted": 0
+    },
+    {
+      "exit_code": 1,
+      "controlled_failure": true
+    },
+    {
+      "exit_code": 1,
+      "controlled_failure": true
+    }
+  ],
+  "source_fields": [
+    "descricao",
+    "id",
+    "status",
+    "tecnico",
+    "tipo",
+    "usuario"
+  ],
+  "authenticated_home_status": 200,
+  "dashboard": {
+    "total": 0,
+    "rejected": 3,
+    "promoted": 0
+  },
+  "compiled_connector_sha256": "f6f21924f7e0f5ea1d2cd80669d483328a1d02e45e5581e5ea4a213ee42a1352",
+  "node": "v24.22.3"
+}
