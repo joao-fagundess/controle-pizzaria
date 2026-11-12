@@ -94,7 +94,7 @@ Esses pontos não impedem a análise. A aprovação das premissas permite inicia
 | ID | Informação pendente | Momento em que é necessária |
 | --- | --- | --- |
 | PV01 | Parcialmente resolvido pelo ZIP: versão `1.0-alpha`, listagens sem paginação e login por sessão. Faltam URL operacional, acesso autorizado e limites de consumo. | Antes de homologar o conector real. |
-| PV02 | Campos analíticos ausentes confirmados. Definir evolução da origem ou export complementar, catálogo completo, identidades de pessoas e política de reabertura/cancelamento. | Antes de importar chamados reais para os indicadores completos. |
+| PV02 | Campos ausentes confirmados na origem homologada localmente. A [proposta 1.0](contrato-complementar-thindesk.md) define campos, mapeamentos e regras para revisão; implementação e proveniência dos dados reais seguem pendentes. | Antes de importar chamados reais para os indicadores completos. |
 | PV03 | Origem atual não possui considerações técnicas. Confirmar como serão produzidas/exportadas e quais usuários poderão acessá-las, com restrições por equipe se aplicáveis. | Antes de disponibilizar dados reais aos usuários do painel. |
 | PV04 | Mecanismo corporativo de autenticação, ambiente de implantação e origens permitidas por CORS. | Antes da configuração do ambiente compartilhado ou de produção. |
 | PV05 | Volume esperado, usuários simultâneos, infraestrutura e tolerância à defasagem dos dados do Thindesk. | Antes de validar desempenho e definir sincronização operacional. |

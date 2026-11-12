@@ -1,0 +1,13 @@
+{
+  "contract_version": "1.0",
+  "source_system": "thindesk",
+  "exported_at": "2026-11-12T15:00:00.000Z",
+  "tickets": [{
+    "id": "homologacao-001",
+    "descricao": "Impressora do laboratório de homologação não imprime",
+    "status": "ABERTO",
+    "tipo": "Impressão",
+    "tecnico": "Técnico de Homologação",
+    "usuario": "Solicitante de Homologação"
+  }]
+}

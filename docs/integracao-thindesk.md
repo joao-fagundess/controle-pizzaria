@@ -41,6 +41,8 @@ Normalização de status reconhece `Aberto`/`ABERTO`, `EM_ANDAMENTO`/`Em andamen
 
 Campos que eventualmente apareçam em um payload novo não são interpretados como extensão oficial: é preciso aprovar e implementar um contrato complementar antes da promoção. Isso evita atribuir significado incorreto a datas ou autores com nomes semelhantes.
 
+A [proposta de contrato complementar 1.0](contrato-complementar-thindesk.md) define os campos e a declaração de completude, com schema e exemplos para revisão. Ela não foi ativada neste comando: o leitor legado não aceita o envelope proposto como formato de importação. A validação estrutural da proposta, isoladamente, não libera registros para os indicadores.
+
 ## Relatório e códigos de saída
 
 Exemplo de recepção de um chamado legado identificado:

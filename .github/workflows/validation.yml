@@ -33,6 +33,7 @@ jobs:
             web/package-lock.json
       - run: npm --prefix api ci
       - run: npm --prefix web ci
+      - run: npm --prefix api run test:thindesk-contract
       - run: npm --prefix api run validate:phase-5
       - uses: actions/upload-artifact@v7
         if: always()
