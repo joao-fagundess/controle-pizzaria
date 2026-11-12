@@ -118,7 +118,7 @@ A interface foi verificada no navegador com a API do projeto em 360, 768 e 1440 
 
 As configurações públicas do frontend são `VITE_API_BASE_URL` e `VITE_POLL_INTERVAL_SECONDS`. `API_PROXY_TARGET` e o eventual `API_ACCESS_TOKEN` ficam somente no servidor do proxy local. A implantação estática precisa de gateway autenticado; não colocar credenciais em variáveis `VITE_*`. Ver [frontend.md](docs/frontend.md).
 
-Para verificar o empacotamento em contêineres, executar `node scripts/validate-compose.mjs` na raiz. O comando usa porta, credenciais e projeto Compose próprios, testa HTTP e persistência e remove seus recursos descartáveis. Os resultados ficam em `docs/evidencias/fase-6/`. O workflow em `.github/workflows/validation.yml` prepara os mesmos checks para o GitHub; uma execução remota ainda não foi realizada.
+Para verificar o empacotamento em contêineres, executar `node scripts/validate-compose.mjs` na raiz. O comando usa porta, credenciais e projeto Compose próprios, testa HTTP e persistência e remove seus recursos descartáveis. Os resultados ficam em `docs/evidencias/fase-6/`. O workflow em `.github/workflows/validation.yml` executa os checks nas branches de entrega e PRs; resultados em [GitHub Actions](https://github.com/joao-fagundess/controle-pizzaria/actions).
 
 ## Stack e decisões
 

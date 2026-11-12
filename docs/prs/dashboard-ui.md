@@ -6,4 +6,4 @@ Validação local: build do frontend em Linux e execução das rotas pelo proxy 
 
 A publicação padrão é somente no loopback. O proxy local não autentica usuários; acesso compartilhado com dados reais exige gateway corporativo e HTTPS.
 
-Base prevista: `develop`. Este arquivo é a descrição preparada, não um PR publicado.
+Base de revisão: `develop`. PR publicado em rascunho: [#2](https://github.com/joao-fagundess/controle-pizzaria/pull/2). Revisar após a API; revisão e integração pendentes.

@@ -6,4 +6,4 @@ A documentação reúne requisitos, modelo, contrato, evidências, matriz de ras
 
 Validação: consultar os [resultados reais da Fase 6](../evidencias/fase-6.md) e o [resumo da Fase 5](../evidencias/fase-5/summary.json). CI remota, PRs e integração com o Thindesk real só devem ser declarados concluídos quando houver a evidência correspondente.
 
-Base prevista: `develop`. Este arquivo é a descrição preparada, não um PR publicado.
+Base de revisão: `develop`. PR publicado em rascunho: [#3](https://github.com/joao-fagundess/controle-pizzaria/pull/3). Revisar após API e dashboard; revisão e integração pendentes.

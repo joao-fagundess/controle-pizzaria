@@ -41,7 +41,7 @@ O baseline registra o código que já existia antes do empacotamento, com data r
 
 Os PRs para `develop` devem ser revisados na ordem API → dashboard → entrega, pois as branches posteriores partem da integração local das anteriores. A candidata para `main` reúne o resultado completo. Enquanto os PRs aguardam revisão, o `develop` remoto preserva a base para comparação; não é sobrescrito com os merges locais. Essa separação mantém diferenças revisáveis e evita declarar revisão humana que não ocorreu.
 
-Descrições em [docs/prs](../prs/delivery.md), com um [template comum](../../.github/pull_request_template.md). URLs e estados reais dos PRs ficam no relatório `fase-6/github-prs.json` após a publicação. O [fluxo documentado](../gitflow.md) explica integração, sincronização de `develop` e tag. A tag `v0.1.0` fica para a aprovação efetiva; não é apresentada como release já aprovada.
+Os PRs [#1 — API](https://github.com/joao-fagundess/controle-pizzaria/pull/1), [#2 — dashboard](https://github.com/joao-fagundess/controle-pizzaria/pull/2) e [#3 — entrega](https://github.com/joao-fagundess/controle-pizzaria/pull/3) foram publicados em rascunho. URLs, bases e estados capturados constam no [relatório de PRs](fase-6/github-prs.json). Descrições em [docs/prs](../prs/delivery.md), com um [template comum](../../.github/pull_request_template.md). O [fluxo documentado](../gitflow.md) explica integração, sincronização de `develop` e tag. A tag `v0.1.0` fica para a aprovação efetiva; não é apresentada como release já aprovada.
 
 ## CI e documentação final
 
