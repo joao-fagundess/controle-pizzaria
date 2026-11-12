@@ -1,0 +1,44 @@
+# Evolução local isolada: compartilha apenas o arquivo de credenciais gerado, com banco e volume próprios.
+name: thindesk-analytics-source
+services:
+  mongo:
+    image: mongo:8.0
+    command: [mongod, --wiredTigerCacheSizeGB, "0.25"]
+    mem_limit: 768m
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: homologacao
+      MONGO_INITDB_ROOT_PASSWORD: ${THINDESK_MONGO_PASSWORD:?Prepare a homologação primeiro}
+    volumes: [analytics_mongo_data:/data/db]
+    healthcheck:
+      test: [CMD, mongosh, --quiet, --eval, "db.getSiblingDB('admin').auth(process.env.MONGO_INITDB_ROOT_USERNAME,process.env.MONGO_INITDB_ROOT_PASSWORD);db.adminCommand({ping:1})"]
+      interval: 15s
+      timeout: 30s
+      start_period: 60s
+      retries: 12
+    restart: unless-stopped
+  thindesk:
+    image: thindesk-analytics-source:local
+    build:
+      context: ./.cache/thindesk-homologation/analytics-source
+      dockerfile: ../../../integration/thindesk/Dockerfile
+    environment:
+      THINDESK_MONGO_URI: mongodb://homologacao:${THINDESK_MONGO_PASSWORD:?Prepare a homologação primeiro}@mongo:27017/thindesk_analytics?authSource=admin
+      THINDESK_USERNAME: ${THINDESK_LOGIN_USERNAME:?Prepare a homologação primeiro}
+      THINDESK_PASSWORD: ${THINDESK_LOGIN_PASSWORD:?Prepare a homologação primeiro}
+      THINDESK_ANALYTICS_ENABLED: "true"
+      JAVA_TOOL_OPTIONS: -Xms64m -Xmx256m
+    mem_limit: 768m
+    ports: ["127.0.0.1:${THINDESK_ANALYTICS_PORT:-8082}:8080"]
+    depends_on:
+      mongo: {condition: service_healthy}
+    healthcheck:
+      test: [CMD, curl, --fail, --silent, http://127.0.0.1:8080/login]
+      interval: 15s
+      timeout: 10s
+      retries: 36
+      start_period: 60s
+    security_opt: [no-new-privileges:true]
+    cap_drop: [ALL]
+    restart: unless-stopped
+volumes:
+  analytics_mongo_data:

@@ -1,10 +1,10 @@
-# Contrato complementar do Thindesk — proposta 1.0
+# Contrato complementar do Thindesk — versão 1.0
 
-**Estado: proposta para revisão.** O usuário autorizou a definição desta etapa após integrar a homologação local. Este documento descreve o formato que permitiria alimentar os indicadores com dados confiáveis. O Java recebido continua com seis campos legados e o conector atual continua preservando esses registros fora de `tickets`.
+**Estado: aprovado para evolução local da origem.** O usuário autorizou a próxima parte em 12/11/2026 e o [PR #6](https://github.com/joao-fagundess/controle-pizzaria/pull/6) foi integrado em `develop`, commit `6e15ce0ee6e34e8d32d0c39bc3f56040f2156e75`, após CI aprovada. A [implementação local de captura e export](evolucao-local-thindesk.md) deriva uma cópia separada; o ZIP e a extração original permanecem preservados. O conector do painel continua exclusivamente legado, sem promoção para `tickets`.
 
 Entregáveis: [JSON Schema 2020-12](contracts/thindesk-analytics-v1.schema.json), [exemplo resolvido](contracts/examples/valid-resolved.json), [exemplo reaberto/parcial](contracts/examples/valid-reopened-partial.json), [legado recusado](contracts/examples/invalid-legacy.json) e [testes estruturais](../integration/thindesk/contract.test.mjs). Todos os exemplos são fictícios. Validade estrutural não autoriza importação nem comprova a origem dos valores.
 
-## Decisões propostas para aprovação
+## Decisões aprovadas
 
 | ID | Proposta | Motivo |
 | --- | --- | --- |
@@ -16,7 +16,7 @@ Entregáveis: [JSON Schema 2020-12](contracts/thindesk-analytics-v1.schema.json)
 | CP06 | Promoção exige validação semântica e apresentação da completude no painel. | O schema não compara datas, resolve catálogos ou comprova transições. |
 | CP07 | Eventos incluem sequência estável por chamado. | Evita inventar ordem causal a partir de IDs opacos quando dois eventos têm o mesmo instante. |
 
-Recomendação: aprovar esse formato e depois evoluir a origem para capturar informações futuras. Para dados antigos, aceitar um export complementar apenas quando houver evidência confiável e vínculo pelo identificador do chamado. Acrescentar campos agora não recupera o passado.
+Aplicação aprovada: evoluir a origem local para capturar informações futuras. Para dados antigos, aceitar um export complementar apenas quando houver evidência confiável e vínculo pelo identificador do chamado. Acrescentar campos agora não recupera o passado.
 
 ## Alternativas de produção do export
 
@@ -25,7 +25,7 @@ Recomendação: aprovar esse formato e depois evoluir a origem para capturar inf
 | Evoluir o Java/MongoDB | Registra datas, prioridade, vínculos e movimentações no momento correto. | Exige alterações do modelo e dos fluxos de escrita da origem. |
 | Export complementar confiável | Permite aproveitar informações que já existam em outra fonte autorizada. | Exige comprovar correspondência e significado dos campos; nomes de pessoas não bastam. |
 
-O export é a fronteira comum das duas opções. Nesta proposta não há endpoint novo implementado. `GET /api/chamados`, seu login/sessão e o conector legado permanecem com o contrato atual. Um transporte HTTP futuro deverá publicar esse DTO em uma rota versionada separada, com autorização de leitura, HTTPS remoto e limites definidos antes de sua implementação.
+O export é a fronteira comum das duas opções. A evolução local publica o DTO em `GET /api/v1/analytics/tickets/export`, sob login/sessão e limite de 5 MiB, somente no loopback. `GET /api/chamados` preserva seus seis campos. As escritas legadas de chamados complementares retornam `409` para proteger os fatos; as de chamados antigos continuam disponíveis. HTTPS remoto e autorização corporativa continuam necessários antes de disponibilizar a evolução fora da homologação local.
 
 ## Envelope e dados principais
 
@@ -125,9 +125,9 @@ Para snapshots vinculados, o payload preservado representa a versão aceita. Uma
 
 Nesta proposta, dados principais completos poderão sustentar KPIs mesmo com notas/histórico parciais ou indisponíveis, **depois** de implementar os avisos correspondentes. Não aceitar silenciosamente o DTO novo no comando legado. A futura importação deve selecionar a versão explicitamente; os sete endpoints atuais continuam com seus contratos enquanto as extensões de metadados são projetadas e testadas.
 
-## Alterações necessárias depois da aprovação
+## Estado da implementação após aprovação
 
-1. Capturar datas, prioridade e vínculos estáveis na origem ou formalizar um export complementar confiável. Produzir os marcadores de completude e o DTO versionado.
+1. **Implementado na cópia local derivada:** captura de datas, prioridade, vínculos, notas/histórico completos de novos chamados e export versionado. Procedimento e limites em [evolução local](evolucao-local-thindesk.md). Não recupera dados antigos nem altera a instância operacional.
 2. Implementar o leitor da versão nova, validação semântica, mapeamento de tipos e promoção transacional. Preservar o fluxo legado e sua política `promoted: 0`.
 3. Acrescentar, em migration nova, identidade externa de notas/eventos e sua unicidade por chamado, além da sequência dos eventos; definir persistência da proveniência/completude e da versão aceita. Não alterar migrations já aplicadas.
 4. Expor metadados de completude e título derivado na API própria e atualizar os rótulos do frontend. Até isso existir, os estados desconhecidos não podem ser apresentados como coleções vazias confirmadas.

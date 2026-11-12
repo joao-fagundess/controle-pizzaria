@@ -1,0 +1,139 @@
+Contexto derivado preparado: .cache/thindesk-homologation/analytics-source. Origem verificada e preservada.
+#1 [internal] load local bake definitions
+#1 reading from stdin 702B 0.0s done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 30B 0.1s
+#2 transferring dockerfile: 665B 0.1s done
+#2 DONE 0.2s
+
+#3 [internal] load metadata for docker.io/library/maven:3.9.9-eclipse-temurin-23
+#3 DONE 2.5s
+
+#4 [internal] load metadata for docker.io/library/eclipse-temurin:23-jre
+#4 DONE 2.5s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 66B done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 DONE 0.0s
+
+#7 [build 1/5] FROM docker.io/library/maven:3.9.9-eclipse-temurin-23@sha256:6df31244c87c5107dd2c3f62f5634e5cb3cddedbb99b07cb8778284f576c2646
+#7 resolve docker.io/library/maven:3.9.9-eclipse-temurin-23@sha256:6df31244c87c5107dd2c3f62f5634e5cb3cddedbb99b07cb8778284f576c2646
+#7 resolve docker.io/library/maven:3.9.9-eclipse-temurin-23@sha256:6df31244c87c5107dd2c3f62f5634e5cb3cddedbb99b07cb8778284f576c2646 0.1s done
+#7 DONE 0.2s
+
+#8 [runtime 1/4] FROM docker.io/library/eclipse-temurin:23-jre@sha256:4972459272d4050ab14700677ac7a7511194f1d9ed333b95e886c3c8c80dedae
+#8 resolve docker.io/library/eclipse-temurin:23-jre@sha256:4972459272d4050ab14700677ac7a7511194f1d9ed333b95e886c3c8c80dedae
+#8 resolve docker.io/library/eclipse-temurin:23-jre@sha256:4972459272d4050ab14700677ac7a7511194f1d9ed333b95e886c3c8c80dedae 0.1s done
+#8 DONE 0.2s
+
+#6 [internal] load build context
+#6 transferring context: 85.21kB 0.1s done
+#6 DONE 0.1s
+
+#9 [build 2/5] WORKDIR /app
+#9 CACHED
+
+#10 [build 3/5] COPY pom.xml ./
+#10 CACHED
+
+#11 [build 4/5] COPY src ./src
+#11 DONE 0.2s
+
+#12 [build 5/5] RUN mvn -B -ntp -Dmaven.compiler.parameters=true -DskipTests package org.springframework.boot:spring-boot-maven-plugin:3.4.0:repackage
+#12 7.713 [INFO] Scanning for projects...
+#12 15.38 [INFO]
+#12 15.38 [INFO] --------------------------< com.pfc:thindesk >--------------------------
+#12 15.38 [INFO] Building thindesk 1.0-alpha
+#12 15.38 [INFO]   from pom.xml
+#12 15.38 [INFO] --------------------------------[ war ]---------------------------------
+#12 27.61 [INFO]
+#12 27.61 [INFO] --- dependency:3.8.1:copy (default) @ thindesk ---
+#12 39.71 [INFO]
+#12 39.71 [INFO] --- resources:3.3.1:resources (default-resources) @ thindesk ---
+#12 40.09 [INFO] Copying 13 resources from src/main/resources to target/classes
+#12 40.10 [INFO]
+#12 40.10 [INFO] --- compiler:3.13.0:compile (default-compile) @ thindesk ---
+#12 40.98 [INFO] Recompiling the module because of changed source code.
+#12 40.99 [INFO] Compiling 18 source files with javac [debug parameters release 23] to target/classes
+#12 42.96 [INFO]
+#12 42.96 [INFO] --- resources:3.3.1:testResources (default-testResources) @ thindesk ---
+#12 42.97 [INFO] skip non existing resourceDirectory /app/src/test/resources
+#12 42.97 [INFO]
+#12 42.97 [INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ thindesk ---
+#12 42.98 [INFO] No sources to compile
+#12 42.98 [INFO]
+#12 42.98 [INFO] --- surefire:3.2.5:test (default-test) @ thindesk ---
+#12 46.05 [INFO] Tests are skipped.
+#12 46.05 [INFO]
+#12 46.06 [INFO] --- war:3.4.0:war (default-war) @ thindesk ---
+#12 47.93 [INFO] Packaging webapp
+#12 47.93 [INFO] Assembling webapp [thindesk] in [/app/target/thindesk-1.0-alpha]
+#12 47.94 [INFO] Processing war project
+#12 49.76 [INFO] Building war: /app/target/thindesk-1.0-alpha.war
+#12 50.99 [INFO]
+#12 50.99 [INFO] --- spring-boot:3.4.0:repackage (default-cli) @ thindesk ---
+#12 57.38 [INFO] Replacing main artifact /app/target/thindesk-1.0-alpha.war with repackaged archive, adding nested dependencies in BOOT-INF/.
+#12 57.38 [INFO] The original artifact has been renamed to /app/target/thindesk-1.0-alpha.war.original
+#12 57.39 [INFO] ------------------------------------------------------------------------
+#12 57.39 [INFO] BUILD SUCCESS
+#12 57.39 [INFO] ------------------------------------------------------------------------
+#12 57.42 [INFO] Total time:  50.043 s
+#12 57.42 [INFO] Finished at: 2026-11-12T19:24:13Z
+#12 57.42 [INFO] ------------------------------------------------------------------------
+#12 DONE 62.9s
+
+#13 [runtime 2/4] RUN apt-get update && apt-get install -y --no-install-recommends curl && rm -rf /var/lib/apt/lists/*
+#13 CACHED
+
+#14 [runtime 3/4] WORKDIR /app
+#14 CACHED
+
+#15 [runtime 4/4] COPY --from=build /app/target/*.war /app/app.war
+#15 DONE 1.3s
+
+#16 exporting to image
+#16 exporting layers
+#16 exporting layers 3.2s done
+#16 exporting manifest sha256:1e89c61f43877a295b9165625037bfef18898495d135d41157b2c6d56d7947a2 0.1s done
+#16 exporting config sha256:854c8152f9a360a4f71b5e193fe90b786f455cfd4150f320b6e559bd529c5f8e 0.1s done
+#16 exporting attestation manifest sha256:e718fa2783654c498ad63f8554c5344281707952e794c0c35065d9d703d2f53f
+#16 exporting attestation manifest sha256:e718fa2783654c498ad63f8554c5344281707952e794c0c35065d9d703d2f53f 0.1s done
+#16 exporting manifest list sha256:e2656f94d6ab3df04c2cba229e3ae29ca1de504b0ba2617e5fd780da539545c1 0.1s done
+#16 naming to docker.io/library/thindesk-analytics-source:local
+#16 naming to docker.io/library/thindesk-analytics-source:local 0.0s done
+#16 unpacking to docker.io/library/thindesk-analytics-source:local
+#16 unpacking to docker.io/library/thindesk-analytics-source:local 0.8s done
+#16 DONE 4.9s
+
+#17 resolving provenance for metadata file
+#17 DONE 0.2s
+ Image thindesk-analytics-source:local Building
+ Image thindesk-analytics-source:local Built
+ Container thindesk-analytics-source-thindesk-1 Recreate
+ Container thindesk-analytics-source-thindesk-1 Recreated
+ Container thindesk-analytics-source-mongo-1 Starting
+ Container thindesk-analytics-source-mongo-1 Started
+ Container thindesk-analytics-source-mongo-1 Waiting
+ Container thindesk-analytics-source-mongo-1 Healthy
+ Container thindesk-analytics-source-thindesk-1 Starting
+ Container thindesk-analytics-source-thindesk-1 Started
+ Container thindesk-analytics-source-mongo-1 Waiting
+ Container thindesk-analytics-source-thindesk-1 Waiting
+ Container thindesk-analytics-source-mongo-1 Healthy
+ Container thindesk-analytics-source-thindesk-1 Healthy
+[Operação MongoDB: conteúdo omitido.]
+[Operação MongoDB: conteúdo omitido.]
+[Operação MongoDB: conteúdo omitido.]
+[Operação MongoDB: conteúdo omitido.]
+[Operação MongoDB: conteúdo omitido.]
+sha256:e2656f94d6ab3df04c2cba229e3ae29ca1de504b0ba2617e5fd780da539545c1
+openjdk 23.0.2 2025-01-21
+OpenJDK Runtime Environment Temurin-23.0.2+7 (build 23.0.2+7)
+OpenJDK 64-Bit Server VM Temurin-23.0.2+7 (build 23.0.2+7, mixed mode, sharing)
+Picked up JAVA_TOOL_OPTIONS: -Xms64m -Xmx256m
+Contexto derivado preparado: .cache/thindesk-homologation/analytics-source. Origem verificada e preservada.

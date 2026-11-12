@@ -34,6 +34,11 @@ jobs:
       - run: npm --prefix api ci
       - run: npm --prefix web ci
       - run: npm --prefix api run test:thindesk-contract
+      - name: Check local Thindesk tooling syntax
+        run: |
+          node --check scripts/prepare-thindesk-analytics.mjs
+          node --check scripts/validate-thindesk-analytics.mjs
+          node --check integration/thindesk/analytics.verify.mjs
       - run: npm --prefix api run validate:phase-5
       - uses: actions/upload-artifact@v7
         if: always()
