@@ -1,0 +1,24 @@
+npm notice run thindesk-dashboard-api@0.1.0 test:database
+npm notice run node --test tests/database.test.mjs
+✔ reexecutar migrations não altera o schema já aplicado (1938.6445ms)
+✔ checksum divergente impede ignorar uma migration modificada (4.6697ms)
+✔ seed distribui 480 chamados em ao menos oito meses e catálogos completos (4.2541ms)
+✔ reexecutar seed preserva chamados, notas e histórico sem duplicação (38.8844ms)
+✔ seed contém reaberturas e eventos dentro da vida do chamado (3.2157ms)
+✔ conclusão sem data de resolução é rejeitada (3.2141ms)
+✔ chamado aberto não pode manter uma resolução vigente (1.3364ms)
+✔ datas anteriores à criação e atualização anterior à resolução são rejeitadas (2.5931ms)
+✔ responsável inexistente e exclusão de solicitante referenciado são rejeitados (2.613ms)
+✔ identidade externa não pode ser duplicada nem preenchida parcialmente (2.1184ms)
+✔ registro legado incompleto é preservado sem entrar nos indicadores (2.9587ms)
+✔ registro da origem não pode ser marcado como vinculado sem chamado válido (0.7847ms)
+✔ catálogos desconhecidos e conteúdo vazio são rejeitados (2.7616ms)
+✔ data de referência inválida não inicia o seed (0.7247ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2367.8916

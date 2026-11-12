@@ -1,0 +1,2 @@
+npm notice run thindesk-dashboard-api@0.1.0 typecheck
+npm notice run tsc -p tsconfig.test.json --noEmit

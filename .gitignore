@@ -1,0 +1,9 @@
+# Artefatos locais, credenciais e saídas reproduzíveis.
+node_modules/
+.env
+.env.*
+!.env.example
+.cache/
+coverage/
+dist/
+*.log

@@ -1,0 +1,18 @@
+npm notice run thindesk-dashboard-api@0.1.0 test:api
+npm notice run vitest run --reporter=default --reporter=json --outputFile=../docs/evidencias/fase-5/postgres-tests.json
+
+ RUN  v5.1.0 C:/Users/arthur.randis/Documents/Programas/Controle de Pizzaria/api
+
+ ✓ tests/api.test.ts (45 tests) 816ms
+ ✓ tests/thindesk.test.ts (17 tests) 488ms
+ ✓ tests/openapi.test.ts (1 test) 133ms
+
+ Test Files  3 passed (3)
+      Tests  63 passed (63)
+   Start at  09:58:08
+   Duration  3.13s (tests 58%, import 39%, transform 3%, worker 1%)
+
+    Isolate  3 workers spawned · ~212ms startup each (spawn + environment, per file)
+             at least ~424ms faster with isolate: false — reuses workers across files instead of one per file
+
+JSON report written to C:/Users/arthur.randis/Documents/Programas/Controle de Pizzaria/docs/evidencias/fase-5/postgres-tests.json

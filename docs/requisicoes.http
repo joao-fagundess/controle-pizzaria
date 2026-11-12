@@ -1,0 +1,57 @@
+# Consultas da API de chamados. Executar com a API local ou ajustar a URL.
+# Quando bearer estiver configurado, adicionar Authorization: Bearer <token> às consultas.
+@baseUrl = http://127.0.0.1:3000
+@startDate = 2026-10-12
+@endDate = 2026-11-11
+
+### Saúde do banco
+GET {{baseUrl}}/health
+
+### Opções dos filtros
+# @name filterOptions
+GET {{baseUrl}}/api/v1/filters/options
+Accept: application/json
+
+### Indicadores gerais
+GET {{baseUrl}}/api/v1/dashboard/summary?start_date={{startDate}}&end_date={{endDate}}
+Accept: application/json
+
+### Série diária de conclusões
+GET {{baseUrl}}/api/v1/dashboard/tickets-by-period?start_date={{startDate}}&end_date={{endDate}}&group_by=day
+
+### Série semanal
+GET {{baseUrl}}/api/v1/dashboard/tickets-by-period?start_date={{startDate}}&end_date={{endDate}}&group_by=week
+
+### Série mensal
+GET {{baseUrl}}/api/v1/dashboard/tickets-by-period?start_date={{startDate}}&end_date={{endDate}}&group_by=month
+
+### Distribuição por status
+GET {{baseUrl}}/api/v1/dashboard/status-distribution?start_date={{startDate}}&end_date={{endDate}}
+
+### Tipos mais atendidos
+GET {{baseUrl}}/api/v1/dashboard/top-ticket-types?start_date={{startDate}}&end_date={{endDate}}&limit=3
+
+### Listagem paginada; executar antes do detalhe
+# @name ticketPage
+GET {{baseUrl}}/api/v1/tickets?page=1&page_size=10&sort_by=priority&sort_order=desc
+
+### Detalhe do primeiro chamado da listagem anterior
+GET {{baseUrl}}/api/v1/tickets/{{ticketPage.response.body.$.tickets[0].id}}
+
+### Filtros combinados; executar opções antes para obter o tipo
+GET {{baseUrl}}/api/v1/tickets?start_date={{startDate}}&end_date={{endDate}}&status=resolved&priority=high&type_id={{filterOptions.response.body.$.options.types[0].id}}&assignee_id={{filterOptions.response.body.$.options.assignees[0].id}}
+
+### Estado vazio válido
+GET {{baseUrl}}/api/v1/dashboard/summary?start_date=2020-01-01&end_date=2020-01-31
+
+### 400: formato inválido
+GET {{baseUrl}}/api/v1/dashboard/summary?start_date=11-11-2026&end_date=2026-11-11
+
+### 422: período invertido
+GET {{baseUrl}}/api/v1/dashboard/summary?start_date=2026-11-11&end_date=2026-10-01
+
+### 404: chamado inexistente
+GET {{baseUrl}}/api/v1/tickets/00000000-0000-0000-0000-000000000000
+
+### Contrato OpenAPI
+GET {{baseUrl}}/docs/openapi.json

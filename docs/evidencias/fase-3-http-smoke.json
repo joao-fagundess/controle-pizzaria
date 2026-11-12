@@ -1,0 +1,97 @@
+{
+  "mode": "demo",
+  "seed_reference_date": "2026-11-11",
+  "summary": {
+    "total": 480,
+    "open": 39,
+    "in_progress": 52,
+    "waiting": 42,
+    "resolved": 347,
+    "average_resolution_seconds": 259495.33141210375,
+    "resolution_rate": 72.29166666666667
+  },
+  "checks": [
+    {
+      "path": "/health",
+      "status": 200,
+      "keys": [
+        "status"
+      ]
+    },
+    {
+      "path": "/api/v1/dashboard/summary",
+      "status": 200,
+      "keys": [
+        "summary",
+        "meta"
+      ]
+    },
+    {
+      "path": "/api/v1/dashboard/tickets-by-period?start_date=2026-10-12&end_date=2026-11-11&group_by=week",
+      "status": 200,
+      "keys": [
+        "periods",
+        "group_by",
+        "meta"
+      ]
+    },
+    {
+      "path": "/api/v1/dashboard/status-distribution",
+      "status": 200,
+      "keys": [
+        "statuses",
+        "meta"
+      ]
+    },
+    {
+      "path": "/api/v1/dashboard/top-ticket-types?limit=3",
+      "status": 200,
+      "keys": [
+        "types",
+        "limit",
+        "meta"
+      ]
+    },
+    {
+      "path": "/api/v1/tickets?page_size=2",
+      "status": 200,
+      "keys": [
+        "tickets",
+        "pagination",
+        "sort_by",
+        "sort_order",
+        "meta"
+      ]
+    },
+    {
+      "path": "/api/v1/tickets/981dfdea-9e21-a1cb-e434-abe611cff26f",
+      "status": 200,
+      "keys": [
+        "ticket",
+        "technical_notes",
+        "history",
+        "meta"
+      ]
+    },
+    {
+      "path": "/api/v1/filters/options",
+      "status": 200,
+      "keys": [
+        "options",
+        "meta"
+      ]
+    },
+    {
+      "path": "/docs/openapi.json",
+      "status": 200,
+      "keys": [
+        "openapi",
+        "info",
+        "servers",
+        "security",
+        "components",
+        "paths"
+      ]
+    }
+  ]
+}

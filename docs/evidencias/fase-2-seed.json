@@ -1,0 +1,73 @@
+{
+  "node": "v24.21.0",
+  "pglite": "0.5.16",
+  "seed_reference_date": "2026-11-11",
+  "engine": "PostgreSQL 18.6 (PGlite 0.5.16) on wasm32-unknown-emscripten, compiled by emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 6.0.13 (e13ee988ce3d87a738dd8f3661d02223308c412a), 32-bit",
+  "totals": {
+    "tickets": 480,
+    "users": 6,
+    "requesters": 24,
+    "technical_notes": 830,
+    "ticket_history": 1438
+  },
+  "by_month": [
+    {
+      "month": "2026-03",
+      "tickets": 11
+    },
+    {
+      "month": "2026-04",
+      "tickets": 38
+    },
+    {
+      "month": "2026-05",
+      "tickets": 34
+    },
+    {
+      "month": "2026-06",
+      "tickets": 41
+    },
+    {
+      "month": "2026-07",
+      "tickets": 71
+    },
+    {
+      "month": "2026-08",
+      "tickets": 55
+    },
+    {
+      "month": "2026-09",
+      "tickets": 83
+    },
+    {
+      "month": "2026-10",
+      "tickets": 103
+    },
+    {
+      "month": "2026-11",
+      "tickets": 44
+    }
+  ],
+  "by_status": [
+    {
+      "status_code": "closed",
+      "tickets": 88
+    },
+    {
+      "status_code": "in_progress",
+      "tickets": 52
+    },
+    {
+      "status_code": "open",
+      "tickets": 39
+    },
+    {
+      "status_code": "resolved",
+      "tickets": 259
+    },
+    {
+      "status_code": "waiting",
+      "tickets": 42
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "requirements": [
+    {
+      "id": "RF01",
+      "description": "Indicadores gerais e regras de resolução",
+      "endpoints": ["/api/v1/dashboard/summary"],
+      "tests": [
+        { "suite": "api", "file": "api/tests/api.test.ts", "title": "inclui fechados no total resolvido e calcula média e taxa da população criada" },
+        { "suite": "api", "file": "api/tests/api.test.ts", "title": "retorna null para métricas sem base e zero para contagens" },
+        { "suite": "api", "file": "api/tests/api.test.ts", "title": "nova resolução após reabertura mede desde a criação e conta uma única conclusão vigente" },
+        { "suite": "web", "file": "web/tests/dashboard.test.tsx", "title": "exibe os seis indicadores, bases temporais e aviso de demonstração" }
+      ]
+    },
+    {
+      "id": "RF02",
+      "description": "Série de conclusões por dia, semana e mês",
+      "endpoints": ["/api/v1/dashboard/tickets-by-period"],
+      "tests": [
+        { "suite": "api", "file": "api/tests/api.test.ts", "title": "agrupa por resolução e preenche dias sem conclusão" },
+        { "suite": "api", "file": "api/tests/api.test.ts", "title": "inicia semanas na segunda-feira e respeita recortes parciais" },
+        { "suite": "api", "file": "api/tests/api.test.ts", "title": "agrupa meses de calendário e completa meses vazios" },
+        { "suite": "api", "file": "api/tests/api.test.ts", "title": "retira a resolução vigente da série quando o chamado é reaberto" },
+        { "suite": "web", "file": "web/tests/dashboard.test.tsx", "title": "mudar agrupamento refaz somente a série temporal" }
+      ]
+    },
+    {
+      "id": "RF03",
+      "description": "Status, listagem, considerações técnicas e histórico",
+      "endpoints": ["/api/v1/dashboard/status-distribution", "/api/v1/tickets", "/api/v1/tickets/{id}"],
+      "tests": [
+        { "suite": "api", "file": "api/tests/api.test.ts", "title": "soma a distribuição até o mesmo total do resumo e mantém status zerados" },
+        { "suite": "api", "file": "api/tests/api.test.ts", "title": "pagina sem duplicações e preserva o total em página além do fim" },
+        { "suite": "api", "file": "api/tests/api.test.ts", "title": "retorna a última consideração e o detalhe em ordem cronológica" },
+        { "suite": "api", "file": "api/tests/api.test.ts", "title": "representa técnico e consideração ausentes sem inventar texto ou autoria" },
+        { "suite": "web", "file": "web/tests/dashboard.test.tsx", "title": "abre detalhe com considerações e histórico e devolve o foco ao fechar" }
+      ]
+    },
+    {
+      "id": "RF04",
+      "description": "Ranking de tipos atendidos, limite e desempate",
+      "endpoints": ["/api/v1/dashboard/top-ticket-types"],
+      "tests": [
+        { "suite": "api", "file": "api/tests/api.test.ts", "title": "ranqueia chamados concluídos sem duplicar notas e respeita limit" },
+        { "suite": "api", "file": "api/tests/api.test.ts", "title": "desempata o ranking pelo nome do tipo" },
+        { "suite": "web", "file": "web/tests/dashboard.test.tsx", "title": "exibe os seis indicadores, bases temporais e aviso de demonstração" }
+      ]
+    },
+    {
+      "id": "RF05",
+      "description": "Filtros combinados, calendário, paginação e ordenação",
+      "endpoints": ["/api/v1/filters/options", "/api/v1/tickets", "/api/v1/dashboard/summary", "/api/v1/dashboard/tickets-by-period", "/api/v1/dashboard/status-distribution", "/api/v1/dashboard/top-ticket-types"],
+      "tests": [
+        { "suite": "api", "file": "api/tests/api.test.ts", "title": "combina todos os filtros com E lógico" },
+        { "suite": "api", "file": "api/tests/api.test.ts", "title": "inclui o último milissegundo local e exclui o início do dia seguinte" },
+        { "suite": "api", "file": "api/tests/api.test.ts", "title": "respeita o dia de 23 horas no início do horário de verão de São Paulo" },
+        { "suite": "api", "file": "api/tests/api.test.ts", "title": "rejeita agrupamento e limite fora do contrato" },
+        { "suite": "web", "file": "web/tests/dashboard.test.tsx", "title": "aplica os seis filtros em conjunto e mantém o rascunho sem consultar antes de aplicar" },
+        { "suite": "web", "file": "web/tests/dashboard.test.tsx", "title": "paginação e ordenação refazem somente a listagem" },
+        { "suite": "web", "file": "web/tests/dashboard.test.tsx", "title": "impede intervalo invertido e limpar restaura os últimos trinta dias" }
+      ]
+    },
+    {
+      "id": "RF06",
+      "description": "Integração HTTP do frontend com a API própria",
+      "endpoints": ["/api/v1/dashboard/summary", "/api/v1/dashboard/tickets-by-period", "/api/v1/dashboard/status-distribution", "/api/v1/dashboard/top-ticket-types", "/api/v1/tickets", "/api/v1/tickets/{id}", "/api/v1/filters/options"],
+      "tests": [
+        { "suite": "web", "file": "web/tests/api-service.test.ts", "title": "envia os filtros preenchidos e valida a resposta do resumo" },
+        { "suite": "web", "file": "web/tests/api-service.test.ts", "title": "rejeita payload incompleto mesmo com HTTP 200" },
+        { "suite": "api", "file": "api/tests/api.test.ts", "title": "serve saúde, Swagger e o contrato dos sete endpoints" }
+      ]
+    },
+    {
+      "id": "RF07",
+      "description": "Atualização, validação, loading, vazio, falha e recuperação",
+      "endpoints": ["/api/v1/dashboard/summary", "/api/v1/dashboard/tickets-by-period", "/api/v1/dashboard/status-distribution", "/api/v1/dashboard/top-ticket-types", "/api/v1/tickets", "/api/v1/tickets/{id}", "/api/v1/filters/options"],
+      "tests": [
+        { "suite": "web", "file": "web/tests/dashboard.test.tsx", "title": "mostra carregamento inicial sem apresentar indicadores antigos e impede refresh sobreposto" },
+        { "suite": "web", "file": "web/tests/dashboard.test.tsx", "title": "falha de refresh preserva a seção válida, informa a idade e não anuncia atualização completa" },
+        { "suite": "web", "file": "web/tests/dashboard.test.tsx", "title": "apresenta estados vazios e métricas sem base como travessão" },
+        { "suite": "web", "file": "web/tests/dashboard.test.tsx", "title": "uma resposta atrasada de filtros antigos não substitui a seleção atual" },
+        { "suite": "web", "file": "web/tests/dashboard.test.tsx", "title": "permite recuperar opções de filtros sem descartar os indicadores válidos" },
+        { "suite": "web", "file": "web/tests/polling.test.ts", "title": "cancela o relógio ao ocultar a aba e retoma quando ela fica visível" },
+        { "suite": "web", "file": "web/tests/polling.test.ts", "title": "não agenda consultas quando a atualização automática está desativada" },
+        { "suite": "web", "file": "web/tests/api-service.test.ts", "title": "distingue timeout de cancelamento por troca de filtros" },
+        { "suite": "api", "file": "api/tests/thindesk.test.ts", "title": "preserva payload e erros sem inventar datas ou aumentar indicadores" },
+        { "suite": "api", "file": "api/tests/api.test.ts", "title": "não expõe SQL, credenciais ou stack no erro inesperado" }
+      ]
+    }
+  ]
+}

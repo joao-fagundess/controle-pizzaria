@@ -1,0 +1,175 @@
+{
+  "date": "2026-11-12",
+  "source": "API própria com PostgreSQL embarcado e dados fictícios",
+  "checks": [
+    {
+      "check": "desktop_initial",
+      "alertCount": 0,
+      "charts": 2,
+      "clientWidth": 1423,
+      "pageWidth": 1423,
+      "viewport": {
+        "height": 1050,
+        "width": 1440
+      }
+    },
+    {
+      "check": "combined_filters",
+      "total": "Total de chamados\n1\nCriados no período",
+      "rows": 1,
+      "filters": [
+        {
+          "value": "2026-10-14"
+        },
+        {
+          "value": "2026-11-12"
+        },
+        {
+          "value": "resolved"
+        },
+        {
+          "value": "e5a1dbc1-d350-f48d-4b1d-74b69b178f28"
+        },
+        {
+          "value": "normal"
+        },
+        {
+          "value": "72e03d91-5b28-f499-969a-9a345cac131a"
+        }
+      ]
+    },
+    {
+      "check": "detail_focus_after_fix",
+      "dialogClosed": true,
+      "focusedTag": "BUTTON",
+      "focusedText": "Impressora da recepção não imprime"
+    },
+    {
+      "check": "mobile_long_duration_after_fix",
+      "clientWidth": 343,
+      "metricOverflow": 0,
+      "pageWidth": 343,
+      "viewport": {
+        "height": 800,
+        "width": 360
+      }
+    },
+    {
+      "check": "tablet_default",
+      "clientWidth": 751,
+      "metricOverflow": 0,
+      "pageWidth": 751,
+      "viewport": {
+        "height": 1000,
+        "width": 767
+      }
+    },
+    {
+      "check": "tablet_768",
+      "clientWidth": 752,
+      "metricOverflow": 0,
+      "pageWidth": 752,
+      "viewport": {
+        "height": 1000,
+        "width": 768
+      }
+    },
+    {
+      "check": "monthly_group",
+      "pressed": "true",
+      "text": "Chamados atendidos\n\nConcluídos por data de resolução\n\nDia\nSemana\nMês\n67\nconcluídos no intervalo\n10/26\n11/26\n0\n9\n18\n27\n36\nVer valores do gráfico"
+    },
+    {
+      "check": "pagination",
+      "text": "26–50 de 121 chamados\n\nPor página\n10\n25\n50\n100\nAnterior\nPágina 2 de 5\nPróxima"
+    },
+    {
+      "check": "api_outage_retains_previous_response",
+      "alerts": 6,
+      "refreshStatus": "Atualização incompleta. Verifique as seções abaixo.",
+      "retainedSummary": "Total de chamados121Criados no período",
+      "staleMessages": [
+        "Exibindo a última consulta válida: 12/11/2026, 09:21.",
+        "Exibindo a última consulta válida: 12/11/2026, 09:21.",
+        "Exibindo a última consulta válida: 12/11/2026, 09:21.",
+        "Exibindo a última consulta válida: 12/11/2026, 09:21.",
+        "Exibindo a última consulta válida: 12/11/2026, 09:21."
+      ]
+    },
+    {
+      "check": "api_recovered",
+      "alerts": 0,
+      "refreshStatus": "Visão geral atualizada às 09:23:09",
+      "summary": "Total de chamados121Criados no período"
+    },
+    {
+      "check": "automatic_poll_30_seconds",
+      "before": {
+        "hidden": false,
+        "status": "Visão geral atualizada às 09:23:09"
+      },
+      "after": {
+        "hidden": false,
+        "status": "Visão geral atualizada às 09:26:10"
+      },
+      "updated": true
+    },
+    {
+      "check": "compiled_dashboard_desktop",
+      "alerts": 0,
+      "charts": 2,
+      "clientWidth": 1423,
+      "pageWidth": 1423,
+      "summary": "Total de chamados121Criados no período",
+      "viewport": {
+        "height": 1050,
+        "width": 1440
+      }
+    },
+    {
+      "check": "compiled_mobile_combined_filters",
+      "clientWidth": 343,
+      "filters": [
+        {
+          "value": "2026-10-15"
+        },
+        {
+          "value": "2026-11-11"
+        },
+        {
+          "value": "resolved"
+        },
+        {
+          "value": "e5a1dbc1-d350-f48d-4b1d-74b69b178f28"
+        },
+        {
+          "value": "normal"
+        },
+        {
+          "value": "72e03d91-5b28-f499-969a-9a345cac131a"
+        }
+      ],
+      "metricOverflow": 0,
+      "pageWidth": 343,
+      "period": "Período aplicado: 15/10/2026 a 11/11/2026",
+      "rows": 1,
+      "summary": "Total de chamados1Criados no período",
+      "viewport": {
+        "height": 800,
+        "width": 360
+      }
+    },
+    {
+      "check": "compiled_dialog_focus",
+      "dialogClosed": true,
+      "focusedTag": "BUTTON",
+      "focusedText": "Impressora da recepção não imprime"
+    },
+    {
+      "check": "mobile_poll_control",
+      "visible": true,
+      "footer": "Datas e horários de São Paulo · Atualização automática pausada em aba oculta.\n\nAtualização automática\nDesativada\nA cada 30 segundos\nA cada 1 minuto\nA cada 2 minutos\nA cada 5 minutos"
+    }
+  ],
+  "compiledConsoleErrors": []
+}

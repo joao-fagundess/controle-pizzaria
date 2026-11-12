@@ -1,0 +1,94 @@
+TAP version 13
+# Subtest: reexecutar migrations não altera o schema já aplicado
+ok 1 - reexecutar migrations não altera o schema já aplicado
+  ---
+  duration_ms: 5007.7272
+  type: 'test'
+  ...
+# Subtest: checksum divergente impede ignorar uma migration modificada
+ok 2 - checksum divergente impede ignorar uma migration modificada
+  ---
+  duration_ms: 960.3391
+  type: 'test'
+  ...
+# Subtest: seed distribui 480 chamados em ao menos oito meses e catálogos completos
+ok 3 - seed distribui 480 chamados em ao menos oito meses e catálogos completos
+  ---
+  duration_ms: 14.1126
+  type: 'test'
+  ...
+# Subtest: reexecutar seed preserva chamados, notas e histórico sem duplicação
+ok 4 - reexecutar seed preserva chamados, notas e histórico sem duplicação
+  ---
+  duration_ms: 148.7699
+  type: 'test'
+  ...
+# Subtest: seed contém reaberturas e eventos dentro da vida do chamado
+ok 5 - seed contém reaberturas e eventos dentro da vida do chamado
+  ---
+  duration_ms: 10.7762
+  type: 'test'
+  ...
+# Subtest: conclusão sem data de resolução é rejeitada
+ok 6 - conclusão sem data de resolução é rejeitada
+  ---
+  duration_ms: 7.3558
+  type: 'test'
+  ...
+# Subtest: chamado aberto não pode manter uma resolução vigente
+ok 7 - chamado aberto não pode manter uma resolução vigente
+  ---
+  duration_ms: 2.464
+  type: 'test'
+  ...
+# Subtest: datas anteriores à criação e atualização anterior à resolução são rejeitadas
+ok 8 - datas anteriores à criação e atualização anterior à resolução são rejeitadas
+  ---
+  duration_ms: 9.6705
+  type: 'test'
+  ...
+# Subtest: responsável inexistente e exclusão de solicitante referenciado são rejeitados
+ok 9 - responsável inexistente e exclusão de solicitante referenciado são rejeitados
+  ---
+  duration_ms: 6.9257
+  type: 'test'
+  ...
+# Subtest: identidade externa não pode ser duplicada nem preenchida parcialmente
+ok 10 - identidade externa não pode ser duplicada nem preenchida parcialmente
+  ---
+  duration_ms: 7.8896
+  type: 'test'
+  ...
+# Subtest: registro legado incompleto é preservado sem entrar nos indicadores
+ok 11 - registro legado incompleto é preservado sem entrar nos indicadores
+  ---
+  duration_ms: 8.5801
+  type: 'test'
+  ...
+# Subtest: registro da origem não pode ser marcado como vinculado sem chamado válido
+ok 12 - registro da origem não pode ser marcado como vinculado sem chamado válido
+  ---
+  duration_ms: 2.5193
+  type: 'test'
+  ...
+# Subtest: catálogos desconhecidos e conteúdo vazio são rejeitados
+ok 13 - catálogos desconhecidos e conteúdo vazio são rejeitados
+  ---
+  duration_ms: 12.0907
+  type: 'test'
+  ...
+# Subtest: data de referência inválida não inicia o seed
+ok 14 - data de referência inválida não inicia o seed
+  ---
+  duration_ms: 0.6896
+  type: 'test'
+  ...
+1..14
+# tests 14
+# suites 0
+# pass 14
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 6654.1193

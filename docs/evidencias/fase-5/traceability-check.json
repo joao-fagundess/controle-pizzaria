@@ -1,0 +1,44 @@
+[
+  {
+    "requirement": "RF01",
+    "endpoints": 1,
+    "named_scenarios": 4,
+    "status": "passed"
+  },
+  {
+    "requirement": "RF02",
+    "endpoints": 1,
+    "named_scenarios": 5,
+    "status": "passed"
+  },
+  {
+    "requirement": "RF03",
+    "endpoints": 3,
+    "named_scenarios": 5,
+    "status": "passed"
+  },
+  {
+    "requirement": "RF04",
+    "endpoints": 1,
+    "named_scenarios": 3,
+    "status": "passed"
+  },
+  {
+    "requirement": "RF05",
+    "endpoints": 6,
+    "named_scenarios": 7,
+    "status": "passed"
+  },
+  {
+    "requirement": "RF06",
+    "endpoints": 7,
+    "named_scenarios": 3,
+    "status": "passed"
+  },
+  {
+    "requirement": "RF07",
+    "endpoints": 7,
+    "named_scenarios": 10,
+    "status": "passed"
+  }
+]

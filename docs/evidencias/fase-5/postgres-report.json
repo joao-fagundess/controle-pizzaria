@@ -1,0 +1,70 @@
+{
+  "status": "passed",
+  "engine": {
+    "version": "PostgreSQL 18.6 on x86_64-windows, compiled by msvc-19.44.35228, 64-bit",
+    "address": "127.0.0.1/32"
+  },
+  "transport": "TCP",
+  "host": "127.0.0.1",
+  "port": 59491,
+  "server_process": "postgres.exe",
+  "server_pid": 416,
+  "integrity_tests": 14,
+  "endpoint_and_connector_tests": 63,
+  "leaked_schemas": 0,
+  "http_checks": [
+    {
+      "path": "/health",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/dashboard/summary",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/dashboard/tickets-by-period?group_by=week",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/dashboard/status-distribution",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/dashboard/top-ticket-types?limit=3",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/tickets?page_size=2",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/tickets/981dfdea-9e21-a1cb-e434-abe611cff26f",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/filters/options",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/dashboard/summary?start_date=invalid",
+      "status": 400
+    },
+    {
+      "path": "/api/v1/dashboard/summary?start_date=2026-11-11&end_date=2026-10-01",
+      "status": 422
+    },
+    {
+      "path": "/api/v1/tickets/00000000-0000-0000-0000-000000000000",
+      "status": 404
+    },
+    {
+      "path": "/api/v1/dashboard/summary",
+      "status": 401
+    },
+    {
+      "path": "/api/v1/dashboard/summary",
+      "status": 500
+    }
+  ],
+  "cleanup_completed": true
+}

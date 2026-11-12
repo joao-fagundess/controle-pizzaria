@@ -1,0 +1,14 @@
+npm notice run thindesk-dashboard-web@0.1.0 build
+npm notice run tsc --noEmit && vite build
+vite v8.3.8 building client environment for production...
+transforming...
+✓ 540 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                               0.65 kB │ gzip:   0.39 kB
+dist/assets/index-cvZfgB9g.css               23.15 kB │ gzip:   5.40 kB
+dist/assets/TicketDetailDialog-DtBLDseN.js    4.46 kB │ gzip:   1.56 kB
+dist/assets/index-D996G8jP.js               365.33 kB │ gzip: 111.03 kB
+dist/assets/TicketCharts-BQvvKAxL.js        386.63 kB │ gzip: 110.78 kB
+
+✓ built in 441ms

@@ -1,0 +1,42 @@
+npm notice run thindesk-dashboard-api@0.1.0 test
+npm notice run npm run typecheck && npm run test:database && npm run test:api
+npm notice run thindesk-dashboard-api@0.1.0 typecheck
+npm notice run tsc -p tsconfig.test.json --noEmit
+npm notice run thindesk-dashboard-api@0.1.0 test:database
+npm notice run node --test tests/database.test.mjs
+✔ reexecutar migrations não altera o schema já aplicado (7817.6759ms)
+✔ checksum divergente impede ignorar uma migration modificada (17.9163ms)
+✔ seed distribui 480 chamados em ao menos oito meses e catálogos completos (6.6647ms)
+✔ reexecutar seed preserva chamados, notas e histórico sem duplicação (75.4771ms)
+✔ seed contém reaberturas e eventos dentro da vida do chamado (7.6294ms)
+✔ conclusão sem data de resolução é rejeitada (5.0625ms)
+✔ chamado aberto não pode manter uma resolução vigente (2.6242ms)
+✔ datas anteriores à criação e atualização anterior à resolução são rejeitadas (6.3699ms)
+✔ responsável inexistente e exclusão de solicitante referenciado são rejeitados (6.7815ms)
+✔ identidade externa não pode ser duplicada nem preenchida parcialmente (4.3255ms)
+✔ registro legado incompleto é preservado sem entrar nos indicadores (14.8425ms)
+✔ registro da origem não pode ser marcado como vinculado sem chamado válido (1.7101ms)
+✔ catálogos desconhecidos e conteúdo vazio são rejeitados (4.9274ms)
+✔ data de referência inválida não inicia o seed (1.1155ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 8975.776
+npm notice run thindesk-dashboard-api@0.1.0 test:api
+npm notice run vitest run
+
+ RUN  v5.1.0 C:/Users/arthur.randis/Documents/Programas/Controle de Pizzaria/api
+
+
+ Test Files  3 passed (3)
+      Tests  61 passed (61)
+   Start at  17:31:25
+   Duration  14.86s (tests 81%, import 15%, transform 4%)
+
+    Isolate  3 workers spawned · ~580ms startup each (spawn + environment, per file)
+             at least ~1.16s faster with isolate: false — reuses workers across files instead of one per file
+

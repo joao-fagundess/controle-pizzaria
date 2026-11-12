@@ -1,0 +1,38 @@
+npm notice run thindesk-dashboard-web@0.1.0 test:coverage
+npm notice run vitest run --coverage --reporter=default --reporter=json --outputFile=../docs/evidencias/fase-5/web-tests.json
+
+ RUN  v5.1.0 C:/Users/arthur.randis/Documents/Programas/Controle de Pizzaria/web
+      Coverage enabled with v8
+
+ ✓ tests/dashboard.test.tsx (13 tests) 5098ms
+   ✓ consulta e apresentação (6)
+     ✓ exibe os seis indicadores, bases temporais e aviso de demonstração 974ms
+     ✓ aplica os seis filtros em conjunto e mantém o rascunho sem consultar antes de aplicar 624ms
+     ✓ impede intervalo invertido e limpar restaura os últimos trinta dias 315ms
+     ✓ mudar agrupamento refaz somente a série temporal 348ms
+     ✓ paginação e ordenação refazem somente a listagem 526ms
+     ✓ abre detalhe com considerações e histórico e devolve o foco ao fechar 587ms
+   ✓ estados de atualização (7)
+     ✓ falha de refresh preserva a seção válida, informa a idade e não anuncia atualização completa 328ms
+     ✓ uma resposta atrasada de filtros antigos não substitui a seleção atual 581ms
+ ✓ tests/polling.test.ts (3 tests) 23ms
+ ✓ tests/api-service.test.ts (6 tests) 19ms
+
+ Test Files  3 passed (3)
+      Tests  22 passed (22)
+   Start at  09:57:42
+   Duration  12.34s (tests 54%, environment 27%, setup 8%, import 6%, transform 2%, worker 1%)
+
+Environment  jsdom was created 3 times · 2.58s total, 27% of tracked time
+             create it once per worker with pool: 'vmThreads' (keeps per-file isolation) or isolate: false (shares it across files)
+             learn more: https://vitest.dev/guide/improving-performance#test-environments
+
+JSON report written to C:/Users/arthur.randis/Documents/Programas/Controle de Pizzaria/docs/evidencias/fase-5/web-tests.json
+ % Coverage report from v8
+
+=============================== Coverage summary ===============================
+Statements   : 90.35% ( 253/280 )
+Branches     : 79.16% ( 190/240 )
+Functions    : 85.59% ( 101/118 )
+Lines        : 91.5% ( 237/259 )
+================================================================================

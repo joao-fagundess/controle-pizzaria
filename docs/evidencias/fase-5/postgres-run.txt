@@ -1,0 +1,3 @@
+npm notice run thindesk-dashboard-api@0.1.0 test:postgres
+npm notice run node scripts/test-postgres.mjs
+PostgreSQL nativo: 14 testes de integridade, 63 testes de API/conector e 13 verificações HTTP passaram.

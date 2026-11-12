@@ -1,0 +1,720 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Code coverage report for src/ticket-repository.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="../theme.js"></script>
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+    
+<body>
+<div class='wrapper'>
+    <div class='pad1'>
+        
+        <label class="theme-select quiet">
+            Theme
+            <select id="themeSelect" autocomplete="off">
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+                <option value="legacy">Legacy</option>
+            </select>
+        </label>
+
+        <h1><a href="../index.html">All files</a> / <a href="index.html">src</a> ticket-repository.ts</h1>
+        <div class='clearfix'>
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Statements</span>
+                <span class='fraction'>60/60</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">96.29% </span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>26/27</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>15/15</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Lines</span>
+                <span class='fraction'>52/52</span>
+            </div>
+        
+            
+        </div>
+        <p class="quiet">
+            Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
+        </p>
+        <template id="filterTemplate">
+            <div class="quiet">
+                Filter:
+                <input type="search" id="fileSearch">
+            </div>
+        </template>
+    </div>
+    <div class='status-line high'></div>
+    <pre><table class="coverage">
+<tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
+<a name='L2'></a><a href='#L2'>2</a>
+<a name='L3'></a><a href='#L3'>3</a>
+<a name='L4'></a><a href='#L4'>4</a>
+<a name='L5'></a><a href='#L5'>5</a>
+<a name='L6'></a><a href='#L6'>6</a>
+<a name='L7'></a><a href='#L7'>7</a>
+<a name='L8'></a><a href='#L8'>8</a>
+<a name='L9'></a><a href='#L9'>9</a>
+<a name='L10'></a><a href='#L10'>10</a>
+<a name='L11'></a><a href='#L11'>11</a>
+<a name='L12'></a><a href='#L12'>12</a>
+<a name='L13'></a><a href='#L13'>13</a>
+<a name='L14'></a><a href='#L14'>14</a>
+<a name='L15'></a><a href='#L15'>15</a>
+<a name='L16'></a><a href='#L16'>16</a>
+<a name='L17'></a><a href='#L17'>17</a>
+<a name='L18'></a><a href='#L18'>18</a>
+<a name='L19'></a><a href='#L19'>19</a>
+<a name='L20'></a><a href='#L20'>20</a>
+<a name='L21'></a><a href='#L21'>21</a>
+<a name='L22'></a><a href='#L22'>22</a>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a>
+<a name='L38'></a><a href='#L38'>38</a>
+<a name='L39'></a><a href='#L39'>39</a>
+<a name='L40'></a><a href='#L40'>40</a>
+<a name='L41'></a><a href='#L41'>41</a>
+<a name='L42'></a><a href='#L42'>42</a>
+<a name='L43'></a><a href='#L43'>43</a>
+<a name='L44'></a><a href='#L44'>44</a>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a>
+<a name='L83'></a><a href='#L83'>83</a>
+<a name='L84'></a><a href='#L84'>84</a>
+<a name='L85'></a><a href='#L85'>85</a>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a>
+<a name='L89'></a><a href='#L89'>89</a>
+<a name='L90'></a><a href='#L90'>90</a>
+<a name='L91'></a><a href='#L91'>91</a>
+<a name='L92'></a><a href='#L92'>92</a>
+<a name='L93'></a><a href='#L93'>93</a>
+<a name='L94'></a><a href='#L94'>94</a>
+<a name='L95'></a><a href='#L95'>95</a>
+<a name='L96'></a><a href='#L96'>96</a>
+<a name='L97'></a><a href='#L97'>97</a>
+<a name='L98'></a><a href='#L98'>98</a>
+<a name='L99'></a><a href='#L99'>99</a>
+<a name='L100'></a><a href='#L100'>100</a>
+<a name='L101'></a><a href='#L101'>101</a>
+<a name='L102'></a><a href='#L102'>102</a>
+<a name='L103'></a><a href='#L103'>103</a>
+<a name='L104'></a><a href='#L104'>104</a>
+<a name='L105'></a><a href='#L105'>105</a>
+<a name='L106'></a><a href='#L106'>106</a>
+<a name='L107'></a><a href='#L107'>107</a>
+<a name='L108'></a><a href='#L108'>108</a>
+<a name='L109'></a><a href='#L109'>109</a>
+<a name='L110'></a><a href='#L110'>110</a>
+<a name='L111'></a><a href='#L111'>111</a>
+<a name='L112'></a><a href='#L112'>112</a>
+<a name='L113'></a><a href='#L113'>113</a>
+<a name='L114'></a><a href='#L114'>114</a>
+<a name='L115'></a><a href='#L115'>115</a>
+<a name='L116'></a><a href='#L116'>116</a>
+<a name='L117'></a><a href='#L117'>117</a>
+<a name='L118'></a><a href='#L118'>118</a>
+<a name='L119'></a><a href='#L119'>119</a>
+<a name='L120'></a><a href='#L120'>120</a>
+<a name='L121'></a><a href='#L121'>121</a>
+<a name='L122'></a><a href='#L122'>122</a>
+<a name='L123'></a><a href='#L123'>123</a>
+<a name='L124'></a><a href='#L124'>124</a>
+<a name='L125'></a><a href='#L125'>125</a>
+<a name='L126'></a><a href='#L126'>126</a>
+<a name='L127'></a><a href='#L127'>127</a>
+<a name='L128'></a><a href='#L128'>128</a>
+<a name='L129'></a><a href='#L129'>129</a>
+<a name='L130'></a><a href='#L130'>130</a>
+<a name='L131'></a><a href='#L131'>131</a>
+<a name='L132'></a><a href='#L132'>132</a>
+<a name='L133'></a><a href='#L133'>133</a>
+<a name='L134'></a><a href='#L134'>134</a>
+<a name='L135'></a><a href='#L135'>135</a>
+<a name='L136'></a><a href='#L136'>136</a>
+<a name='L137'></a><a href='#L137'>137</a>
+<a name='L138'></a><a href='#L138'>138</a>
+<a name='L139'></a><a href='#L139'>139</a>
+<a name='L140'></a><a href='#L140'>140</a>
+<a name='L141'></a><a href='#L141'>141</a>
+<a name='L142'></a><a href='#L142'>142</a>
+<a name='L143'></a><a href='#L143'>143</a>
+<a name='L144'></a><a href='#L144'>144</a>
+<a name='L145'></a><a href='#L145'>145</a>
+<a name='L146'></a><a href='#L146'>146</a>
+<a name='L147'></a><a href='#L147'>147</a>
+<a name='L148'></a><a href='#L148'>148</a>
+<a name='L149'></a><a href='#L149'>149</a>
+<a name='L150'></a><a href='#L150'>150</a>
+<a name='L151'></a><a href='#L151'>151</a>
+<a name='L152'></a><a href='#L152'>152</a>
+<a name='L153'></a><a href='#L153'>153</a>
+<a name='L154'></a><a href='#L154'>154</a>
+<a name='L155'></a><a href='#L155'>155</a>
+<a name='L156'></a><a href='#L156'>156</a>
+<a name='L157'></a><a href='#L157'>157</a>
+<a name='L158'></a><a href='#L158'>158</a>
+<a name='L159'></a><a href='#L159'>159</a>
+<a name='L160'></a><a href='#L160'>160</a>
+<a name='L161'></a><a href='#L161'>161</a>
+<a name='L162'></a><a href='#L162'>162</a>
+<a name='L163'></a><a href='#L163'>163</a>
+<a name='L164'></a><a href='#L164'>164</a>
+<a name='L165'></a><a href='#L165'>165</a>
+<a name='L166'></a><a href='#L166'>166</a>
+<a name='L167'></a><a href='#L167'>167</a>
+<a name='L168'></a><a href='#L168'>168</a>
+<a name='L169'></a><a href='#L169'>169</a>
+<a name='L170'></a><a href='#L170'>170</a>
+<a name='L171'></a><a href='#L171'>171</a>
+<a name='L172'></a><a href='#L172'>172</a>
+<a name='L173'></a><a href='#L173'>173</a>
+<a name='L174'></a><a href='#L174'>174</a>
+<a name='L175'></a><a href='#L175'>175</a>
+<a name='L176'></a><a href='#L176'>176</a>
+<a name='L177'></a><a href='#L177'>177</a>
+<a name='L178'></a><a href='#L178'>178</a>
+<a name='L179'></a><a href='#L179'>179</a>
+<a name='L180'></a><a href='#L180'>180</a>
+<a name='L181'></a><a href='#L181'>181</a>
+<a name='L182'></a><a href='#L182'>182</a>
+<a name='L183'></a><a href='#L183'>183</a>
+<a name='L184'></a><a href='#L184'>184</a>
+<a name='L185'></a><a href='#L185'>185</a>
+<a name='L186'></a><a href='#L186'>186</a>
+<a name='L187'></a><a href='#L187'>187</a>
+<a name='L188'></a><a href='#L188'>188</a>
+<a name='L189'></a><a href='#L189'>189</a>
+<a name='L190'></a><a href='#L190'>190</a>
+<a name='L191'></a><a href='#L191'>191</a>
+<a name='L192'></a><a href='#L192'>192</a>
+<a name='L193'></a><a href='#L193'>193</a>
+<a name='L194'></a><a href='#L194'>194</a>
+<a name='L195'></a><a href='#L195'>195</a>
+<a name='L196'></a><a href='#L196'>196</a>
+<a name='L197'></a><a href='#L197'>197</a>
+<a name='L198'></a><a href='#L198'>198</a>
+<a name='L199'></a><a href='#L199'>199</a>
+<a name='L200'></a><a href='#L200'>200</a>
+<a name='L201'></a><a href='#L201'>201</a>
+<a name='L202'></a><a href='#L202'>202</a>
+<a name='L203'></a><a href='#L203'>203</a>
+<a name='L204'></a><a href='#L204'>204</a>
+<a name='L205'></a><a href='#L205'>205</a>
+<a name='L206'></a><a href='#L206'>206</a>
+<a name='L207'></a><a href='#L207'>207</a>
+<a name='L208'></a><a href='#L208'>208</a>
+<a name='L209'></a><a href='#L209'>209</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">25x</span>
+<span class="cline-any cline-yes">25x</span>
+<span class="cline-any cline-yes">51x</span>
+<span class="cline-any cline-yes">25x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">25x</span>
+<span class="cline-any cline-yes">25x</span>
+<span class="cline-any cline-yes">25x</span>
+<span class="cline-any cline-yes">25x</span>
+<span class="cline-any cline-yes">25x</span>
+<span class="cline-any cline-yes">25x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">31x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">22x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// Consultas parametrizadas e agregações do dashboard, executadas no PostgreSQL.
+// Listagem agrega depois da paginação para não multiplicar chamados por notas ou eventos.
+import { ApiError } from './api-error.js';
+import { isoTimestamp, type TicketDatabase } from './database.js';
+import type { TicketFilters, TicketQuery } from './ticket-filters.js';
+import { summarizeTickets, type TicketCounts } from './ticket-metrics.js';
+&nbsp;
+type DateValue = Date | string;
+interface TicketRow {
+  id: string; title: string; description: string; status_code: string; status_name: string;
+  type_id: string; type_code: string; type_name: string; priority_code: string; priority_name: string;
+  assignee_id: string | null; assignee_name: string | null; requester_id: string; requester_name: string;
+  department: string | null; created_at: DateValue; updated_at: DateValue; resolved_at: DateValue | null;
+  source_system: string | null; external_id: string | null;
+  note_id: string | null; note_content: string | null; note_created_at: DateValue | null;
+  note_author_id: string | null; note_author_name: string | null;
+}
+interface NoteRow { id: string; content: string; created_at: DateValue; author_id: string | null; author_name: string | null }
+interface HistoryRow { id: string; event_type: string; occurred_at: DateValue; author_id: string | null;
+  author_name: string | null; previous_value: unknown; new_value: unknown }
+&nbsp;
+function ticketSelection(filters: TicketFilters, basis: 'created_at' | 'resolved_at', completedOnly = false) {
+  const parameters: unknown[] = [];
+  const predicates = ['TRUE'];
+  const bind = (value: unknown) =&gt; { parameters.push(value); return `$${parameters.length}`; };
+  if (filters.start_date) {
+    // O limite final exclusivo inclui o último dia, inclusive em mudanças históricas de fuso.
+    predicates.push(`t.${basis} &gt;= (${bind(filters.start_date)}::date::timestamp AT TIME ZONE 'America/Sao_Paulo')`);
+    predicates.push(`t.${basis} &lt; ((${bind(filters.end_date)}::date + 1)::timestamp AT TIME ZONE 'America/Sao_Paulo')`);
+  }
+  if (filters.status) predicates.push(`t.status_code = ${bind(filters.status)}`);
+  if (filters.type_id) predicates.push(`t.type_id = ${bind(filters.type_id)}::uuid`);
+  if (filters.priority) predicates.push(`t.priority_code = ${bind(filters.priority)}`);
+  if (filters.assignee_id) predicates.push(`t.assignee_id = ${bind(filters.assignee_id)}::uuid`);
+  if (completedOnly) predicates.push("t.status_code IN ('resolved', 'closed')");
+  return { clause: predicates.join(' AND '), parameters };
+}
+&nbsp;
+const ticketColumns = `t.*, statuses.name AS status_name, types.code AS type_code, types.name AS type_name,
+  priorities.name AS priority_name, assignees.name AS assignee_name,
+  requesters.name AS requester_name, requesters.department,
+  last_note.id AS note_id, last_note.content AS note_content, last_note.created_at AS note_created_at,
+  last_note.author_id AS note_author_id, last_note.author_name AS note_author_name`;
+const ticketJoins = `JOIN ticket_statuses statuses ON statuses.code = t.status_code
+  JOIN ticket_types types ON types.id = t.type_id
+  JOIN ticket_priorities priorities ON priorities.code = t.priority_code
+  JOIN requesters ON requesters.id = t.requester_id
+  LEFT JOIN users assignees ON assignees.id = t.assignee_id
+  LEFT JOIN LATERAL (
+    SELECT notes.id, notes.content, notes.created_at, notes.author_id, authors.name AS author_name
+    FROM technical_notes notes LEFT JOIN users authors ON authors.id = notes.author_id
+    WHERE notes.ticket_id = t.id ORDER BY notes.created_at DESC, notes.id DESC LIMIT 1
+  ) last_note ON TRUE`;
+&nbsp;
+function authorReference(id: string | null, name: string | null) {
+  return id ? { id, name } : null;
+}
+&nbsp;
+function presentTicket(ticket: TicketRow) {
+  return { id: ticket.id, title: ticket.title, description: ticket.description,
+    status: { code: ticket.status_code, name: ticket.status_name },
+    type: { id: ticket.type_id, code: ticket.type_code, name: ticket.type_name },
+    priority: { code: ticket.priority_code, name: ticket.priority_name },
+    assignee: authorReference(ticket.assignee_id, ticket.assignee_name),
+    requester: { id: ticket.requester_id, name: ticket.requester_name, department: ticket.department },
+    created_at: isoTimestamp(ticket.created_at), updated_at: isoTimestamp(ticket.updated_at),
+    resolved_at: isoTimestamp(ticket.resolved_at),
+    source: ticket.source_system ? <span class="branch-0 cbranch-no" title="branch not covered" >{ system: ticket.source_system, external_id: ticket.external_id } : n</span>ull,
+    latest_technical_note: ticket.note_id ? { id: ticket.note_id, content: ticket.note_content,
+      created_at: isoTimestamp(ticket.note_created_at), author: authorReference(ticket.note_author_id, ticket.note_author_name) } : null };
+}
+&nbsp;
+export class TicketRepository {
+  constructor(private database: TicketDatabase) {}
+&nbsp;
+  async summary(filters: TicketFilters) {
+    const selection = ticketSelection(filters, 'created_at');
+    const ticketCounts = await this.database.query&lt;TicketCounts&gt;(`SELECT count(*)::int AS total,
+      count(*) FILTER (WHERE t.status_code = 'open')::int AS open,
+      count(*) FILTER (WHERE t.status_code = 'in_progress')::int AS in_progress,
+      count(*) FILTER (WHERE t.status_code = 'waiting')::int AS waiting,
+      count(*) FILTER (WHERE t.status_code IN ('resolved', 'closed'))::int AS resolved,
+      avg(extract(epoch FROM t.resolved_at - t.created_at))
+        FILTER (WHERE t.status_code IN ('resolved', 'closed'))::float8 AS average_resolution_seconds
+      FROM tickets t WHERE ${selection.clause}`, selection.parameters);
+    return summarizeTickets(ticketCounts.rows[0]);
+  }
+&nbsp;
+  async sourceQuality() {
+    const sourceQuality = await this.database.query&lt;{ received: number; rejected: number; pending: number;
+      linked: number; last_received_at: DateValue | null; mode: string }&gt;(`SELECT count(*)::int AS received,
+      count(*) FILTER (WHERE import_state = 'rejected')::int AS rejected,
+      count(*) FILTER (WHERE import_state = 'pending')::int AS pending,
+      count(*) FILTER (WHERE import_state = 'linked')::int AS linked,
+      max(last_seen_at) AS last_received_at,
+      (SELECT CASE WHEN count(*) = 0 THEN 'empty'
+        WHEN count(*) FILTER (WHERE source_system = 'demo') = count(*) THEN 'demo'
+        WHEN count(*) FILTER (WHERE source_system = 'demo') = 0 THEN 'operational'
+        ELSE 'mixed' END FROM tickets) AS mode FROM ticket_source_records`);
+    return { ...sourceQuality.rows[0], last_received_at: isoTimestamp(sourceQuality.rows[0].last_received_at) };
+  }
+&nbsp;
+  async statusDistribution(filters: TicketFilters) {
+    const selection = ticketSelection(filters, 'created_at');
+    const statusBreakdown = await this.database.query&lt;{ code: string; name: string; tickets: number }&gt;(`
+      WITH selected_counts AS (SELECT t.status_code, count(*)::int AS tickets FROM tickets t
+        WHERE ${selection.clause} GROUP BY t.status_code)
+      SELECT statuses.code, statuses.name, coalesce(selected_counts.tickets, 0) AS tickets
+      FROM ticket_statuses statuses LEFT JOIN selected_counts ON selected_counts.status_code = statuses.code
+      ORDER BY array_position(ARRAY['open', 'in_progress', 'waiting', 'resolved', 'closed'], statuses.code)`, selection.parameters);
+    return statusBreakdown.rows;
+  }
+&nbsp;
+  async ticketsByPeriod(query: TicketQuery) {
+    const selection = ticketSelection(query, 'resolved_at', true);
+    const groupParameter = `$${selection.parameters.push(query.group_by)}`;
+    const startParameter = `$${selection.parameters.push(query.start_date ?? null)}`;
+    const endParameter = `$${selection.parameters.push(query.end_date ?? null)}`;
+    const periodCounts = await this.database.query&lt;{ period_start: string; tickets: number }&gt;(`
+      WITH selected_tickets AS (
+        SELECT t.resolved_at AT TIME ZONE 'America/Sao_Paulo' AS local_resolution
+        FROM tickets t WHERE ${selection.clause}
+      ), bounds AS (
+        SELECT coalesce(${startParameter}::date, min(local_resolution)::date) AS first_day,
+          coalesce(${endParameter}::date, max(local_resolution)::date) AS last_day FROM selected_tickets
+      ), buckets AS (
+        SELECT generate_series(date_trunc(${groupParameter}, first_day::timestamp),
+          date_trunc(${groupParameter}, last_day::timestamp),
+          CASE ${groupParameter} WHEN 'day' THEN interval '1 day' WHEN 'week' THEN interval '1 week'
+            ELSE interval '1 month' END) AS period_start FROM bounds
+      ), resolutions AS (
+        SELECT date_trunc(${groupParameter}, local_resolution) AS period_start, count(*)::int AS tickets
+        FROM selected_tickets GROUP BY 1
+      )
+      SELECT to_char(buckets.period_start, 'YYYY-MM-DD') AS period_start,
+        coalesce(resolutions.tickets, 0) AS tickets FROM buckets
+      LEFT JOIN resolutions USING (period_start) ORDER BY buckets.period_start`, selection.parameters);
+    return periodCounts.rows;
+  }
+&nbsp;
+  async topTicketTypes(query: TicketQuery) {
+    const selection = ticketSelection(query, 'resolved_at', true);
+    const limitParameter = `$${selection.parameters.push(query.limit)}`;
+    const typeRanking = await this.database.query&lt;{ id: string; code: string; name: string; tickets: number }&gt;(`
+      SELECT types.id, types.code, types.name, count(*)::int AS tickets
+      FROM tickets t JOIN ticket_types types ON types.id = t.type_id
+      WHERE ${selection.clause} GROUP BY types.id, types.code, types.name
+      ORDER BY tickets DESC, types.name COLLATE "C" ASC, types.id ASC LIMIT ${limitParameter}`, selection.parameters);
+    return typeRanking.rows;
+  }
+&nbsp;
+  async listTickets(query: TicketQuery) {
+    const selection = ticketSelection(query, 'created_at');
+    const limitParameter = `$${selection.parameters.push(query.page_size)}`;
+    const offsetParameter = `$${selection.parameters.push((query.page - 1) * query.page_size)}`;
+    const sortColumn = { created_at: 's.created_at', updated_at: 's.updated_at',
+      resolved_at: 's.resolved_at', priority: 's.priority_severity' }[query.sort_by];
+    // Identificadores não aceitam bind; só estas expressões internas entram na ordenação.
+    const direction = query.sort_order === 'asc' ? 'ASC' : 'DESC';
+    const sorting = `${sortColumn} ${direction} NULLS LAST, s.id ${direction}`;
+    const ticketPage = await this.database.query&lt;{ total: number; ticket_rows: TicketRow[] }&gt;(`
+      WITH selected_tickets AS MATERIALIZED (
+        SELECT t.*, priorities.severity AS priority_severity FROM tickets t
+        JOIN ticket_priorities priorities ON priorities.code = t.priority_code WHERE ${selection.clause}
+      ), selected_page AS (
+        SELECT s.*, row_number() OVER (ORDER BY ${sorting}) AS page_order FROM selected_tickets s
+        ORDER BY ${sorting} LIMIT ${limitParameter} OFFSET ${offsetParameter}
+      )
+      SELECT (SELECT count(*)::int FROM selected_tickets) AS total,
+        coalesce(jsonb_agg(to_jsonb(ticket_rows) ORDER BY ticket_rows.page_order), '[]'::jsonb) AS ticket_rows
+      FROM (SELECT ${ticketColumns} FROM selected_page t ${ticketJoins}) ticket_rows`, selection.parameters);
+    const { total, ticket_rows } = ticketPage.rows[0];
+    return { tickets: ticket_rows.map(presentTicket), pagination: { page: query.page, page_size: query.page_size,
+      total, total_pages: Math.ceil(total / query.page_size) } };
+  }
+&nbsp;
+  async ticketDetail(ticketId: string) {
+    const ticketMatches = await this.database.query&lt;TicketRow &amp; { technical_notes: NoteRow[]; history: HistoryRow[] }&gt;(`
+      SELECT ${ticketColumns},
+        (SELECT coalesce(jsonb_agg(to_jsonb(note_rows) ORDER BY note_rows.created_at, note_rows.id), '[]'::jsonb)
+          FROM (SELECT n.id, n.content, n.created_at, n.author_id, u.name AS author_name
+            FROM technical_notes n LEFT JOIN users u ON u.id = n.author_id WHERE n.ticket_id = t.id) note_rows) AS technical_notes,
+        (SELECT coalesce(jsonb_agg(to_jsonb(history_rows) ORDER BY history_rows.occurred_at, history_rows.id), '[]'::jsonb)
+          FROM (SELECT h.id, h.event_type, h.occurred_at, h.author_id, h.previous_value, h.new_value, u.name AS author_name
+            FROM ticket_history h LEFT JOIN users u ON u.id = h.author_id WHERE h.ticket_id = t.id) history_rows) AS history
+      FROM tickets t ${ticketJoins} WHERE t.id = $1::uuid`, [ticketId]);
+    const ticket = ticketMatches.rows[0];
+    if (!ticket) throw new ApiError(404, 'TICKET_NOT_FOUND', 'Chamado não encontrado.');
+    return { ticket: presentTicket(ticket),
+      technical_notes: ticket.technical_notes.map((note) =&gt; ({ id: note.id, content: note.content,
+        created_at: isoTimestamp(note.created_at), author: authorReference(note.author_id, note.author_name) })),
+      history: ticket.history.map((event) =&gt; ({ id: event.id, event_type: event.event_type,
+        occurred_at: isoTimestamp(event.occurred_at), author: authorReference(event.author_id, event.author_name),
+        previous_value: event.previous_value, new_value: event.new_value })) };
+  }
+&nbsp;
+  async filterOptions() {
+    const [statuses, types, priorities, assignees] = await Promise.all([
+      this.database.query('SELECT code, name FROM ticket_statuses ORDER BY code'),
+      this.database.query(`SELECT id, code, name, active FROM ticket_types WHERE active
+        OR EXISTS (SELECT 1 FROM tickets WHERE type_id = ticket_types.id) ORDER BY name COLLATE "C", id`),
+      this.database.query('SELECT code, name, severity FROM ticket_priorities ORDER BY severity'),
+      this.database.query(`SELECT id, name, active FROM users WHERE role = 'technician'
+        AND (active OR EXISTS (SELECT 1 FROM tickets WHERE assignee_id = users.id)) ORDER BY name COLLATE "C", id`),
+    ]);
+    return { statuses: statuses.rows, types: types.rows, priorities: priorities.rows, assignees: assignees.rows };
+  }
+}
+&nbsp;</pre></td></tr></table></pre>
+
+                <div class='push'></div><!-- for sticky footer -->
+            </div><!-- /wrapper -->
+            <div class='footer quiet pad2 space-top1 center small'>
+                Code coverage generated by
+                <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
+                at 2026-11-12T12:57:40.536Z
+            </div>
+        <script src="../prettify.js"></script>
+        <script>
+            window.onload = function () {
+                prettyPrint();
+            };
+        </script>
+        <script src="../sorter.js"></script>
+        <script src="../block-navigation.js"></script>
+    </body>
+</html>
+    
