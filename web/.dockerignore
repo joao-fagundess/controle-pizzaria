@@ -1,0 +1,9 @@
+# O frontend não recebe arquivos de ambiente privados durante a compilação.
+node_modules
+dist
+.env
+.env.*
+!.env.example
+coverage
+tests
+*.log
