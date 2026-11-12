@@ -18,7 +18,7 @@ concurrency:
 jobs:
   application:
     name: Application and PostgreSQL
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v7
@@ -31,8 +31,8 @@ jobs:
           cache-dependency-path: |
             api/package-lock.json
             web/package-lock.json
-      - run: npm --prefix api ci --ignore-scripts
-      - run: npm --prefix web ci --ignore-scripts
+      - run: npm --prefix api ci
+      - run: npm --prefix web ci
       - run: npm --prefix api run validate:phase-5
       - uses: actions/upload-artifact@v7
         if: always()

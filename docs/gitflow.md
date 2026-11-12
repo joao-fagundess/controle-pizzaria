@@ -37,7 +37,9 @@ O [template de PR](../.github/pull_request_template.md) pede comportamento final
 
 ## CI preparada
 
-O [workflow](../.github/workflows/validation.yml) prepara dois jobs independentes: aplicação em Windows com as suítes consolidadas e PostgreSQL nativo, e contêineres em Ubuntu com Docker Compose e HTTP. Usa Node.js 24, permissões de leitura e publica somente artefatos de teste, por 14 dias. Não publica imagens nem implanta a aplicação. Resultados remotos devem ser consultados no GitHub; a evidência local não substitui esses checks.
+O [workflow](../.github/workflows/validation.yml) executa dois jobs independentes em Ubuntu: aplicação com as suítes consolidadas e PostgreSQL nativo, e contêineres com Docker Compose e HTTP. O usuário sem privilégios do runner permite iniciar o PostgreSQL; o runner Windows hospedado, que executa como administrador, foi substituído após a falha real de inicialização. A instalação normal das dependências restaura os links de bibliotecas do pacote PostgreSQL Linux. A validação Windows permanece registrada localmente na Fase 5.
+
+A CI usa Node.js 24, permissões de leitura e publica somente artefatos de teste, por 14 dias. Não publica imagens nem implanta a aplicação. Resultados remotos devem ser consultados no GitHub; a evidência local não substitui esses checks. A concorrência por branch cancela execuções substituídas de push/PR para a mesma seleção de código.
 
 Os gatilhos cobrem pushes nas branches do fluxo, PRs para `main`/`develop` e execução manual. Depois de obter resultados reais no repositório, configurar proteção de `main`/`develop` com revisão e checks obrigatórios conforme a política da equipe; isso não foi habilitado nesta sessão.
 
