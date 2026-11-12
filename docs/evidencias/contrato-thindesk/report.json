@@ -1,0 +1,10 @@
+{
+  "executed_at": "2026-11-12T16:06:13.045Z",
+  "status": "passed",
+  "tests": 44,
+  "exit_code": 0,
+  "scope": "JSON Schema e exemplos da proposta, sem banco ou origem",
+  "schema": "docs/contracts/thindesk-analytics-v1.schema.json",
+  "runtime_activated": false,
+  "semantic_validation_implemented": false
+}

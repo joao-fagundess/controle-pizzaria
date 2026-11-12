@@ -80,6 +80,8 @@ Esta etapa confirma o funcionamento local do código original e do fluxo de rece
 
 Para alimentar os indicadores com dados da origem, o próximo passo é definir um contrato complementar: datas de criação/atualização/resolução, prioridade, identidades estáveis e, para detalhe completo, histórico e considerações técnicas. Só depois desse contrato deve ser implementada a promoção para `tickets`. Uma evolução da origem registra eventos futuros, mas não recupera por si só as informações históricas ausentes.
 
+A [proposta 1.0](contrato-complementar-thindesk.md) foi preparada na etapa seguinte, com decisões para revisão, schema e exemplos fictícios. O ambiente homologado permanece com o comportamento legado; as três fixtures não foram completadas ou promovidas para demonstrar aceitação do formato novo.
+
 ## Referências
 
 - [Spring Boot — empacotamento executável](https://docs.spring.io/spring-boot/maven-plugin/packaging.html).

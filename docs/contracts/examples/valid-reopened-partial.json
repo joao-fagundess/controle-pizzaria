@@ -1,0 +1,55 @@
+{
+  "contract_version": "1.0",
+  "source_system": "thindesk",
+  "exported_at": "2026-11-12T15:00:00.000Z",
+  "tickets": [
+    {
+      "external_id": "example-ticket-002",
+      "title": "Estação de teste reinicia durante uso",
+      "title_is_derived": true,
+      "description": "Estação de teste reinicia durante uso",
+      "status": "in_progress",
+      "priority": "normal",
+      "type": {
+        "external_id": "type-hardware",
+        "name": "Hardware"
+      },
+      "requester": {
+        "external_id": "example-requester-002",
+        "name": "Solicitante do Laboratório",
+        "department": null
+      },
+      "assignee": null,
+      "created_at": "2026-11-10T09:00:00.000Z",
+      "updated_at": "2026-11-12T12:00:00.000Z",
+      "resolved_at": null,
+      "history": {
+        "coverage": "partial",
+        "items": [
+          {
+            "external_id": "event-010",
+            "sequence": 10,
+            "event_type": "status_changed",
+            "author": null,
+            "occurred_at": "2026-11-11T10:00:00.000Z",
+            "previous_value": "in_progress",
+            "new_value": "resolved"
+          },
+          {
+            "external_id": "event-011",
+            "sequence": 11,
+            "event_type": "status_changed",
+            "author": null,
+            "occurred_at": "2026-11-12T12:00:00.000Z",
+            "previous_value": "resolved",
+            "new_value": "in_progress"
+          }
+        ]
+      },
+      "technical_notes": {
+        "coverage": "unavailable",
+        "items": []
+      }
+    }
+  ]
+}

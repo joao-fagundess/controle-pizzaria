@@ -28,6 +28,7 @@ Na Fase 6, foram entregues Compose, imagens da API/frontend, proxy Nginx, valida
 - [Documento final da entrega](docs/entrega.md)
 - [Roteiro de vídeo de até três minutos](docs/roteiro-video.md)
 - [Homologação local do Thindesk original](docs/homologacao-thindesk.md) e [evidências](docs/evidencias/thindesk-local.md)
+- [Proposta do contrato complementar do Thindesk](docs/contrato-complementar-thindesk.md) e [testes estruturais](docs/evidencias/contrato-thindesk.md)
 
 ## Estrutura atual
 
@@ -59,6 +60,8 @@ README.md
 A Fase 5 consolidou testes, cobertura e rastreabilidade. A Fase 6 acrescentou a execução com contêineres e os documentos de entrega.
 
 A homologação complementar foi integrada em `develop` pelo [PR #5](https://github.com/joao-fagundess/controle-pizzaria/pull/5). Ela reproduz o Thindesk do ZIP com Java/MongoDB, bancos separados e três chamados fictícios. Os testes de login e recepção passaram; o [dashboard de homologação](http://127.0.0.1:8180/) mostra três exclusões e nenhum chamado canônico, pois os campos analíticos continuam ausentes. Preparação, acesso e comandos em [homologacao-thindesk.md](docs/homologacao-thindesk.md). Essa etapa é posterior à tag `v0.1.0`; `main` e a tag preservam a primeira entrega.
+
+A branch `feature/thindesk-analytics-contract` acrescenta a proposta de export complementar `1.0`, com schema, exemplos e 44 testes estruturais. As decisões estão em revisão. O conector existente não consome esse formato; a promoção depende da validação semântica, do mapeamento e da apresentação de completude ainda a implementar após aprovação.
 
 ## Execução e configuração
 
