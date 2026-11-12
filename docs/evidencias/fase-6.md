@@ -1,6 +1,6 @@
 # Fase 6 — Empacotamento, Gitflow e entrega
 
-Candidata de entrega `0.1.0`, verificada em 12/11/2026. O ambiente local com contêineres e a documentação estão preparados; revisão dos PRs antecede a aprovação da release. O vídeo não foi gravado: o escopo entregue é seu roteiro.
+Entrega `0.1.0`, verificada em 12/11/2026 e autorizada pelo usuário para integração e criação da tag. O ambiente local com contêineres e a documentação estão entregues, e os quatro PRs foram integrados. O vídeo não foi gravado: o escopo entregue é seu roteiro.
 
 ## Contêineres e validação
 
@@ -37,13 +37,13 @@ O código de produção da API e do dashboard não foi alterado pelo empacotamen
 
 Repositório escolhido pelo usuário: [joao-fagundess/controle-pizzaria](https://github.com/joao-fagundess/controle-pizzaria). O remoto estava vazio. Os commits usam a autoria fornecida de João Pedro Flor; o Git Credential Manager confirmou autenticação como `joao-fagundess` e permissão de escrita. A seleção dessa conta foi configurada neste repositório, preservando a separação entre autoria e autenticação.
 
-O baseline registra o código que já existia antes do empacotamento, com data real. As branches `feature/api-endpoints`, `feature/dashboard-ui` e `feature/delivery` registram mudanças concretas da Fase 6. A integração foi preparada localmente em `develop`; `release/0.1.0` é a candidata. `main` preserva o baseline até a revisão da entrega. Não foi criada uma branch `hotfix/*` sem uma correção concreta.
+O baseline registra o código que já existia antes do empacotamento, com data real. As branches `feature/api-endpoints`, `feature/dashboard-ui` e `feature/delivery` registram mudanças concretas da Fase 6. Os PRs das features foram integrados em `develop`, e `release/0.1.0` foi integrada em `main`. As branches foram mantidas para consulta do histórico. Não foi criada uma branch `hotfix/*` sem uma correção concreta.
 
-Os PRs para `develop` devem ser revisados na ordem API → dashboard → entrega, pois as branches posteriores partem da integração local das anteriores. A candidata para `main` reúne o resultado completo. Enquanto os PRs aguardam revisão, o `develop` remoto preserva a base para comparação; não é sobrescrito com os merges locais. Essa separação mantém diferenças revisáveis e evita declarar revisão humana que não ocorreu.
+Os PRs foram integrados na ordem API → dashboard → entrega → release, depois da autorização do usuário no chat. A atualização da entrega com os merges remotos ocorreu localmente sem conflitos ou mudanças de conteúdo. Os novos heads da entrega e da release tiveram os dois jobs da CI aprovados antes da integração. A sincronização de `develop` preserva tanto os merges locais quanto os remotos, sem force push.
 
-Os PRs [#1 — API](https://github.com/joao-fagundess/controle-pizzaria/pull/1), [#2 — dashboard](https://github.com/joao-fagundess/controle-pizzaria/pull/2) e [#3 — entrega](https://github.com/joao-fagundess/controle-pizzaria/pull/3) foram publicados em rascunho. URLs, bases e estados capturados constam no [relatório de PRs](fase-6/github-prs.json). Descrições em [docs/prs](../prs/delivery.md), com um [template comum](../../.github/pull_request_template.md). O [fluxo documentado](../gitflow.md) explica integração, sincronização de `develop` e tag. A tag `v0.1.0` fica para a aprovação efetiva; não é apresentada como release já aprovada.
+Os PRs [#1 — API](https://github.com/joao-fagundess/controle-pizzaria/pull/1), [#2 — dashboard](https://github.com/joao-fagundess/controle-pizzaria/pull/2) e [#3 — entrega](https://github.com/joao-fagundess/controle-pizzaria/pull/3) foram integrados em `develop`. URLs, bases, horários e estados capturados constam no [relatório de PRs](fase-6/github-prs.json). Descrições em [docs/prs](../prs/delivery.md), com um [template comum](../../.github/pull_request_template.md). O [fluxo documentado](../gitflow.md) explica integração, sincronização de `develop` e tag.
 
-O [PR #4 — candidata 0.1.0](https://github.com/joao-fagundess/controle-pizzaria/pull/4) reúne a entrega completa para revisão antes de integrar em `main`. Os quatro PRs permanecem em rascunho, sem revisão humana ou aprovação declaradas. As branches remotas foram publicadas usando a conta de destino confirmada.
+O [PR #4 — entrega 0.1.0](https://github.com/joao-fagundess/controle-pizzaria/pull/4) foi integrado em `main`. Os quatro PRs estão encerrados como integrados. A aprovação da integração e da tag foi dada pelo usuário no chat em 12/11/2026; não é uma revisão humana registrada no GitHub. A tag anotada `v0.1.0` identifica o commit final de `main` após seus checks.
 
 ## CI e documentação final
 
@@ -61,4 +61,4 @@ Arquivos acrescentados: `docker-compose.yml`, `.env.example`, `.gitattributes`, 
 
 O Compose é uma demonstração local com dados fictícios e credencial técnica entre proxy e API. Acesso compartilhado requer autenticação de pessoas e HTTPS. Continuam pendentes a homologação com o Thindesk real e seus campos analíticos complementares, a infraestrutura corporativa de acesso e a medição de p95/carga em ambiente representativo. As verificações locais não comprovam essas metas.
 
-O próximo passo de revisão é aprovar e integrar os PRs, confirmar os checks remotos e então criar a tag da release. Gravar o vídeo é uma atividade posterior ao roteiro entregue. Essas ações não são declaradas realizadas sem a evidência correspondente.
+A integração dos quatro PRs concluiu o fluxo de entrega autorizado. As [notas da versão](../versao-0.1.0.md) reúnem escopo, execução e limites. A tag é publicada somente após a CI do commit final de `main`. Gravar o vídeo e homologar a origem real são atividades posteriores, com dependências já documentadas.

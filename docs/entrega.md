@@ -19,8 +19,9 @@ Dashboard administrativo de **chamados técnicos de helpdesk** integrado à API 
 | Banco, API e frontend em contêineres | [Implantação](implantacao.md), [Compose](../docker-compose.yml) |
 | Organização de branches e revisão | [Gitflow](gitflow.md) |
 | Verificação e pendências da entrega | [Fase 6](evidencias/fase-6.md) |
+| Escopo e integração da versão 0.1.0 | [Notas da versão](versao-0.1.0.md) |
 | Apresentação em até três minutos | [Roteiro do vídeo](roteiro-video.md) |
 
 Os 480 chamados são fictícios. A origem fornecida usa Java/MongoDB e não contém datas, prioridade, histórico ou considerações técnicas necessários aos indicadores completos. A recepção conserva os legados e motivos de rejeição; não inventa valores nem os inclui nos KPIs.
 
-As suítes e evidências locais estão concluídas nas fases indicadas. A disponibilidade em produção depende de homologação da origem, autenticação/HTTPS e infraestrutura representativa. A medição de p95/carga permanece pendente. Repositório, autoria e autenticação da conta de destino foram confirmados; o estado real dos PRs e da candidata está registrado na Fase 6.
+As seis fases foram entregues, e os quatro PRs foram integrados com autorização do usuário em 12/11/2026. A disponibilidade em produção depende de homologação da origem, autenticação/HTTPS e infraestrutura representativa. A medição de p95/carga permanece pendente. O estado real dos PRs está registrado na Fase 6; a versão `0.1.0` reúne a entrega aprovada para uso local.

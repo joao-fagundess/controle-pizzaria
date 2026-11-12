@@ -6,9 +6,9 @@ O domínio é **helpdesk de TI**. O nome da pasta local não define o domínio d
 
 ## Estado da entrega
 
-Fases 1 a 5 concluídas: análise, modelagem, migrations, seed, API REST, Swagger, recepção legada, dashboard React integrado e validação consolidada. A interface inclui indicadores, gráficos, filtros, tabela paginada, detalhe e atualização automática. A integração operacional com o Thindesk ainda depende de uma instância acessível e de um contrato complementar para os campos analíticos ausentes.
+Fases 1 a 6 concluídas: análise, modelagem, migrations, seed, API REST, Swagger, recepção legada, dashboard React integrado, validação consolidada e entrega com Gitflow e Compose. A interface inclui indicadores, gráficos, filtros, tabela paginada, detalhe e atualização automática. A integração operacional com o Thindesk ainda depende de uma instância acessível e de um contrato complementar para os campos analíticos ausentes.
 
-Na Fase 6, foram preparados Compose, imagens da API/frontend, proxy Nginx, validação em contêineres, workflow de CI, documentação final e roteiro do vídeo. Repositório de entrega: [joao-fagundess/controle-pizzaria](https://github.com/joao-fagundess/controle-pizzaria). A candidata e o estado dos PRs estão no [relatório da Fase 6](docs/evidencias/fase-6.md).
+Na Fase 6, foram entregues Compose, imagens da API/frontend, proxy Nginx, validação em contêineres, workflow de CI, documentação final e roteiro do vídeo. Os quatro PRs foram integrados com autorização do usuário em 12/11/2026. A versão `0.1.0` reúne essa entrega em `main`; detalhes e evidências no [relatório da Fase 6](docs/evidencias/fase-6.md) e nas [notas da versão](docs/versao-0.1.0.md). Repositório: [joao-fagundess/controle-pizzaria](https://github.com/joao-fagundess/controle-pizzaria).
 
 - [Requisitos, atores, casos de uso e regras de negócio](docs/requisitos.md)
 - [Premissas, decisões e pontos a validar](docs/decisoes-de-analise.md)
@@ -128,4 +128,4 @@ Indicadores, distribuição e lista usam criação; série e ranking de atendime
 
 O Thindesk fornecido usa Java/MongoDB e possui listagens autenticadas, mas seus chamados não têm datas, prioridade, histórico ou considerações técnicas. O comando `npm.cmd run thindesk:sync` preserva os legados e os motivos de rejeição separados dos indicadores; não promove dados incompletos. Sua autenticação foi testada com uma origem HTTP local controlada. Credenciais do ZIP não foram copiadas nem usadas.
 
-O PostgreSQL independente foi validado na Fase 5. Não houve homologação com Thindesk real ou autenticação corporativa. Os planos SQL com 10 mil registros são uma inspeção local, sem comprovação da meta de p95 ou concorrência. A candidata de entrega fica em `release/0.1.0`; revisão e integração dos PRs antecedem a aprovação da release. O roteiro foi entregue, mas o vídeo ainda precisa ser gravado.
+O PostgreSQL independente foi validado na Fase 5. Não houve homologação com Thindesk real ou autenticação corporativa. Os planos SQL com 10 mil registros são uma inspeção local, sem comprovação da meta de p95 ou concorrência. A branch `release/0.1.0` preserva a candidata integrada e a tag `v0.1.0` identifica a entrega em `main`. O roteiro foi entregue, mas o vídeo ainda precisa ser gravado.

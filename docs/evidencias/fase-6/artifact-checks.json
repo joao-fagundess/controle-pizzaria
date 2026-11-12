@@ -1,7 +1,9 @@
 {
-  "checked_at": "2026-11-12T13:33:14.209Z",
-  "local_markdown_links": 170,
+  "checked_at": "2026-11-12T13:56:50.586Z",
+  "local_markdown_links": 181,
   "compose_report": "passed",
   "workflow_yaml": "valid",
-  "credentials_in_client_assets": false
+  "credentials_in_client_assets": false,
+  "merged_pull_requests": 4,
+  "merge_commits_verified": true
 }

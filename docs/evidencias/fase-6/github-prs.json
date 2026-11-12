@@ -1,47 +1,60 @@
 {
-  "generated_at": "2026-11-12T13:35:51.519Z",
+  "generated_at": "2026-11-12T13:52:45.094Z",
   "repository": "joao-fagundess/controle-pizzaria",
   "authenticated_as": "joao-fagundess",
+  "authorization": "Integração e tag autorizadas pelo usuário no chat em 12/11/2026.",
   "pull_requests": [
     {
       "number": 1,
       "url": "https://github.com/joao-fagundess/controle-pizzaria/pull/1",
-      "state": "open",
-      "draft": true,
+      "state": "closed",
+      "draft": false,
+      "merged": true,
       "title": "build: empacotar API TypeScript para PostgreSQL",
       "head": "feature/api-endpoints",
       "base": "develop",
-      "head_sha": "ae225a440fbb686d32efc8d8703a2b04f729a89b"
+      "head_sha": "ae225a440fbb686d32efc8d8703a2b04f729a89b",
+      "merged_at": "2026-11-12T13:48:42Z",
+      "merge_commit_sha": "32d86d929ff22046853eaeb921a735606e60c6db"
     },
     {
       "number": 2,
       "url": "https://github.com/joao-fagundess/controle-pizzaria/pull/2",
-      "state": "open",
-      "draft": true,
+      "state": "closed",
+      "draft": false,
+      "merged": true,
       "title": "build: servir dashboard com proxy Nginx",
       "head": "feature/dashboard-ui",
       "base": "develop",
-      "head_sha": "2399c8a1946cab159ff20e06dbb8f6843882166c"
+      "head_sha": "2399c8a1946cab159ff20e06dbb8f6843882166c",
+      "merged_at": "2026-11-12T13:48:47Z",
+      "merge_commit_sha": "b0b7369dd4e64e94b650e801f1ac770336f5b583"
     },
     {
       "number": 3,
       "url": "https://github.com/joao-fagundess/controle-pizzaria/pull/3",
-      "state": "open",
-      "draft": true,
+      "state": "closed",
+      "draft": false,
+      "merged": true,
       "title": "build: integrar ambiente Compose e validar entrega",
       "head": "feature/delivery",
       "base": "develop",
-      "head_sha": "73e23c2597769df1fbb8668df19bf45f53fcb323"
+      "head_sha": "4910c72efb78f49436da0b09ccdcd4d9cb3e797a",
+      "merged_at": "2026-11-12T13:52:28Z",
+      "merge_commit_sha": "7b9a8af1a8b71dc664c5c672ef5bce2728e33d03"
     },
     {
       "number": 4,
       "url": "https://github.com/joao-fagundess/controle-pizzaria/pull/4",
-      "state": "open",
-      "draft": true,
+      "state": "closed",
+      "draft": false,
+      "merged": true,
       "title": "release: entregar dashboard administrativo de chamados",
       "head": "release/0.1.0",
       "base": "main",
-      "head_sha": "39313205e18bb9930776c06412952fd7dc367495"
+      "head_sha": "8a9dea0220dd263a88453b9144560383cba71e76",
+      "merged_at": "2026-11-12T13:52:35Z",
+      "merge_commit_sha": "d22ac1b39e85aa9768b61bc93f0f7decf8722795"
     }
   ]
 }

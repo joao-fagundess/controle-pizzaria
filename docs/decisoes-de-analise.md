@@ -99,7 +99,7 @@ Esses pontos não impedem a análise. A aprovação das premissas permite inicia
 | PV04 | Mecanismo corporativo de autenticação, ambiente de implantação e origens permitidas por CORS. | Antes da configuração do ambiente compartilhado ou de produção. |
 | PV05 | Volume esperado, usuários simultâneos, infraestrutura e tolerância à defasagem dos dados do Thindesk. | Antes de validar desempenho e definir sincronização operacional. |
 | PV06 | Regras da Fase 1 mantidas após a autorização para avançar; nova limitação de completude da origem registrada em `thindesk-inspecao.md`. | Revisar antes de homologar indicadores com a operação. |
-| PV07 | Repositório e autoria informados na Fase 6; autenticação como `joao-fagundess` confirmada. A revisão e aprovação dos PRs ficam registradas no relatório de entrega. | Antes de integrar a candidata em `main` e aprovar a release. |
+| PV07 | Resolvido: repositório e autoria informados; autenticação como `joao-fagundess` confirmada. O usuário autorizou a integração e a tag em 12/11/2026, e os quatro PRs foram integrados. | Concluído no encerramento da Fase 6. |
 
 ## Conteúdo disponível para o vídeo final
 

@@ -6,4 +6,4 @@ Validação local: build da imagem com `npm ci` e `tsc` em Linux; suíte de inte
 
 O comando `start:demo` continua disponível fora da imagem de produção, com dependência de desenvolvimento. O Compose usa PostgreSQL independente. A homologação com Thindesk real e autenticação corporativa permanece pendente.
 
-Base de revisão: `develop`. PR publicado em rascunho: [#1](https://github.com/joao-fagundess/controle-pizzaria/pull/1). Revisão e integração pendentes.
+Integrado em `develop` pelo [PR #1](https://github.com/joao-fagundess/controle-pizzaria/pull/1), com autorização do usuário em 12/11/2026.

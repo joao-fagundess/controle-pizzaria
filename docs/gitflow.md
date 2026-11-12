@@ -2,7 +2,7 @@
 
 O diretório foi inicializado como repositório Git com branch inicial `main`; não havia histórico anterior. O usuário informou João Pedro Flor (`joaopedroflor123@hotmail.com`) como autor e [joao-fagundess/controle-pizzaria](https://github.com/joao-fagundess/controle-pizzaria) como destino. A autoria e a seleção da conta foram configuradas somente neste repositório. A autenticação confirmou o login `joao-fagundess` e acesso de escrita. O estado efetivamente executado está nas [evidências da Fase 6](evidencias/fase-6.md).
 
-## Organização prevista
+## Organização adotada
 
 | Branch | Responsabilidade |
 | --- | --- |
@@ -14,9 +14,15 @@ O diretório foi inicializado como repositório Git com branch inicial `main`; n
 | `release/0.1.0` | Candidata de entrega, documentação e ajustes de estabilização. |
 | `hotfix/*` | Correção urgente originada de `main`, integrada também em `develop`. Só criar quando houver uma correção concreta. |
 
-Como as Fases 1 a 5 aconteceram antes do Git, o primeiro commit deve registrar esse conjunto como **baseline existente**, com data real. As branches de feature passam a registrar o empacotamento desta fase, sem reconstruir uma cronologia fictícia de desenvolvimento. Não criar commits vazios para simular trabalho nas branches.
+Como as Fases 1 a 5 aconteceram antes do Git, o primeiro commit registrou esse conjunto como **baseline existente**, com data real. As branches de feature registram o empacotamento desta fase, sem reconstruir uma cronologia fictícia de desenvolvimento. Não criar commits vazios para simular trabalho nas branches.
 
 As descrições objetivas estão em [API](prs/api-endpoints.md), [dashboard](prs/dashboard-ui.md), [entrega](prs/delivery.md) e [release](prs/release-0.1.0.md). Os links e estados reais dos PRs ficam nas evidências. Um PR precisa de uma branch com diferença real em relação à base.
+
+## Encerramento da versão 0.1.0
+
+O usuário autorizou a integração dos PRs e a criação da tag em 12/11/2026. Os PRs #1, #2 e #3 foram integrados em `develop`, e o PR #4 em `main`, com merges que preservam o histórico. A documentação de encerramento foi registrada em `main` e sincronizada com `develop`. As branches de feature e release foram mantidas para consulta.
+
+A integração da entrega precisou ser atualizada com os merges remotos já realizados. A junção local não apresentou conflitos nem alterou arquivos; os novos heads passaram novamente pela CI antes dos merges restantes. A tag anotada `v0.1.0` é publicada no commit final de `main` após seus checks. O [relatório dos PRs](evidencias/fase-6/github-prs.json) registra a integração real; a autorização no chat não é apresentada como uma revisão registrada na interface do GitHub.
 
 ## Sequência de integração
 
