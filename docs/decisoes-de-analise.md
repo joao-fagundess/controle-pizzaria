@@ -81,6 +81,12 @@ A alternativa local com seed fictício pode funcionar sem autenticação para de
 
 Na Fase 3, a API exige bearer configurado para produção ou escuta fora do loopback. É uma proteção técnica para acesso direto ou por gateway, sem implementar usuários/senhas do produto; autenticação corporativa e TLS ainda precisam de homologação. A demonstração embarcada é restrita ao loopback e não pode usar `NODE_ENV=production`.
 
+### DA10 — Empacotar o ambiente local sem publicar dados reais
+
+Na Fase 6, o Compose reúne PostgreSQL, migrations, API e frontend. O seed é explícito, o volume é persistente e só o Nginx publica porta no loopback. O token técnico fica no proxy; o navegador não recebe credenciais da API. Essa configuração atende à demonstração local, enquanto autenticação de pessoas, HTTPS e acesso corporativo continuam dependentes do ambiente real.
+
+O diretório não possuía histórico Git. O baseline registra a implementação existente com data real; as features da Fase 6 registram seu empacotamento. O usuário informou a autoria de João Pedro Flor e o repositório `joao-fagundess/controle-pizzaria`; a autenticação da conta de destino foi confirmada. Não simular commits históricos ou revisão humana de PRs.
+
 ## Pontos a validar
 
 Esses pontos não impedem a análise. A aprovação das premissas permite iniciar a modelagem e os dados fictícios; os itens de integração e acesso bloqueiam apenas o uso real correspondente.
@@ -93,8 +99,8 @@ Esses pontos não impedem a análise. A aprovação das premissas permite inicia
 | PV04 | Mecanismo corporativo de autenticação, ambiente de implantação e origens permitidas por CORS. | Antes da configuração do ambiente compartilhado ou de produção. |
 | PV05 | Volume esperado, usuários simultâneos, infraestrutura e tolerância à defasagem dos dados do Thindesk. | Antes de validar desempenho e definir sincronização operacional. |
 | PV06 | Regras da Fase 1 mantidas após a autorização para avançar; nova limitação de completude da origem registrada em `thindesk-inspecao.md`. | Revisar antes de homologar indicadores com a operação. |
-| PV07 | Repositório remoto GitHub e acesso para branches e PRs. | Antes da entrega remota da Fase 6. |
+| PV07 | Repositório e autoria informados na Fase 6; autenticação como `joao-fagundess` confirmada. A revisão e aprovação dos PRs ficam registradas no relatório de entrega. | Antes de integrar a candidata em `main` e aprovar a release. |
 
 ## Conteúdo disponível para o vídeo final
 
-As decisões de análise que podem ser explicadas no vídeo são: foco em helpdesk técnico; consulta pela API própria; definição de concluído; distinção entre criação e resolução; tempo corrido e tratamento de reaberturas; escolha de agregação no PostgreSQL; preservação de dados legados incompletos sem inventar datas. O roteiro será preparado na Fase 6 com as evidências efetivamente produzidas.
+As decisões de análise que podem ser explicadas no vídeo são: foco em helpdesk técnico; consulta pela API própria; definição de concluído; distinção entre criação e resolução; tempo corrido e tratamento de reaberturas; escolha de agregação no PostgreSQL; preservação de dados legados incompletos sem inventar datas. O [roteiro de 2min55s](roteiro-video.md) foi elaborado na Fase 6 com as evidências efetivamente produzidas.
