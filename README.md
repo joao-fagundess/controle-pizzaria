@@ -31,6 +31,7 @@ Na Fase 6, foram entregues Compose, imagens da API/frontend, proxy Nginx, valida
 - [Contrato complementar aprovado do Thindesk](docs/contrato-complementar-thindesk.md) e [testes estruturais](docs/evidencias/contrato-thindesk.md)
 - [Captura e export na evolução local do Thindesk](docs/evolucao-local-thindesk.md)
 - [Recepção versionada, validação e completude](docs/recepcao-versionada-thindesk.md) e [evidências](docs/evidencias/thindesk-import.md)
+- [Encerramento da entrega local](docs/encerramento.md)
 
 ## Estrutura atual
 
