@@ -1,0 +1,23 @@
+{
+  "checked_at": "2026-11-12T19:30:47.363Z",
+  "status": "passed",
+  "reason": "Evolução local encerrada após testes para preservar memória do computador de 8 GB; volumes mantidos.",
+  "restored_services": [
+    "/thindesk-dashboard-web-1 running healthy",
+    "/thindesk-dashboard-api-1 running healthy",
+    "/thindesk-dashboard-db-1 running healthy",
+    "/thindesk-homologation-thindesk-1 running healthy",
+    "/thindesk-homologation-mongo-1 running healthy",
+    "/thindesk-homologation-api-1 running healthy",
+    "/thindesk-homologation-web-1 running healthy",
+    "/thindesk-homologation-db-1 running healthy"
+  ],
+  "analytics_services": [
+    "/thindesk-analytics-source-thindesk-1 exited",
+    "/thindesk-analytics-source-mongo-1 exited"
+  ],
+  "original_demo_total": 480,
+  "legacy_dashboard_total": 0,
+  "legacy_rejected": 3,
+  "unrelated_containers_modified": false
+}

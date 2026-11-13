@@ -21,7 +21,8 @@ Dashboard administrativo de **chamados técnicos de helpdesk** integrado à API 
 | Verificação e pendências da entrega | [Fase 6](evidencias/fase-6.md) |
 | Escopo e integração da versão 0.1.0 | [Notas da versão](versao-0.1.0.md) |
 | Homologação complementar do código original do ZIP | [Procedimento](homologacao-thindesk.md), [evidências](evidencias/thindesk-local.md) |
-| Proposta de evolução dos dados da origem | [Contrato complementar em revisão](contrato-complementar-thindesk.md), [testes do schema](evidencias/contrato-thindesk.md) |
+| Evolução dos dados da origem | [Contrato complementar aprovado](contrato-complementar-thindesk.md), [testes do schema](evidencias/contrato-thindesk.md) |
+| Captura e export na cópia local derivada | [Procedimento e limites](evolucao-local-thindesk.md), [relatório HTTP](evidencias/thindesk-analytics/report.json) |
 | Apresentação em até três minutos | [Roteiro do vídeo](roteiro-video.md) |
 
 Os 480 chamados são fictícios. A origem fornecida usa Java/MongoDB e não contém datas, prioridade, histórico ou considerações técnicas necessários aos indicadores completos. A recepção conserva os legados e motivos de rejeição; não inventa valores nem os inclui nos KPIs.

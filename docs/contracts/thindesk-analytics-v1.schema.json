@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "urn:thindesk:analytics-export:1.0",
-  "$comment": "Proposta de estrutura do export complementar. Não habilita importação nem valida cronologia, vínculos ou transições entre registros.",
-  "title": "Proposta de export analítico Thindesk 1.0",
+  "$comment": "Estrutura aprovada para evolução local do export complementar. Não habilita importação nem valida cronologia, vínculos ou transições entre registros.",
+  "title": "Export analítico Thindesk 1.0",
   "type": "object",
   "additionalProperties": false,
   "required": [

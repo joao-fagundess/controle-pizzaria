@@ -80,7 +80,7 @@ Esta etapa confirma o funcionamento local do código original e do fluxo de rece
 
 Para alimentar os indicadores com dados da origem, o próximo passo é definir um contrato complementar: datas de criação/atualização/resolução, prioridade, identidades estáveis e, para detalhe completo, histórico e considerações técnicas. Só depois desse contrato deve ser implementada a promoção para `tickets`. Uma evolução da origem registra eventos futuros, mas não recupera por si só as informações históricas ausentes.
 
-A [proposta 1.0](contrato-complementar-thindesk.md) foi preparada na etapa seguinte, com decisões para revisão, schema e exemplos fictícios. O ambiente homologado permanece com o comportamento legado; as três fixtures não foram completadas ou promovidas para demonstrar aceitação do formato novo.
+O [contrato 1.0](contrato-complementar-thindesk.md) foi aprovado na etapa seguinte. A [evolução local](evolucao-local-thindesk.md) captura novos chamados em cópia derivada, banco próprio e porta 8082. Este ambiente homologado permanece com o comportamento legado; as três fixtures não foram completadas ou promovidas para demonstrar aceitação do formato novo.
 
 ## Referências
 

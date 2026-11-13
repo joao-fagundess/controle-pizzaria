@@ -1,5 +1,7 @@
 # Evidências — proposta de contrato complementar
 
+Registro histórico da proposta: aprovada posteriormente pelo usuário e integrada pelo [PR #6](https://github.com/joao-fagundess/controle-pizzaria/pull/6), commit `6e15ce0ee6e34e8d32d0c39bc3f56040f2156e75`. A [captura/export local](../evolucao-local-thindesk.md) tem evidências próprias. As observações abaixo descrevem o escopo original da etapa do contrato.
+
 Contrato `1.0` em revisão, definido em 12/11/2026. A entrega é uma proposta de formato e regras, com schema, exemplos fictícios e testes. Não foi acrescentado leitor da versão nova, endpoint na origem, migration, promoção de dados ou metadado novo na API em execução.
 
 ## Resultado
