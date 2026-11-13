@@ -2,7 +2,9 @@
 
 Entrega encerrada a pedido do usuário em **13/11/2026**, sem iniciar outra fase de desenvolvimento.
 
-O [PR #8](https://github.com/joao-fagundess/controle-pizzaria/pull/8) foi integrado em `develop`, commit `c694adc3d27337296139e499df23f6f2986b5cc4`, após conferir o head aprovado e a [CI bem-sucedida](https://github.com/joao-fagundess/controle-pizzaria/actions/runs/43427349062). A evolução reúne recepção explícita 1.0, validação semântica, migrations incrementais, controle de versão/fatos e proveniência/completude na API e na interface. `main` e a tag `v0.1.0` preservam a primeira entrega; não foi criada outra release.
+O [PR #8](https://github.com/joao-fagundess/controle-pizzaria/pull/8) foi integrado em `develop`, commit `c694adc3d27337296139e499df23f6f2986b5cc4`, com [CI aprovada](https://github.com/joao-fagundess/controle-pizzaria/actions/runs/43427349062). Essa atualização trouxe a importação do contrato `1.0`, validação dos registros, migrations incrementais e controle de versões. A API e a interface também passaram a informar de onde vieram os dados e se o histórico e as considerações estão completos.
+
+Na publicação seguinte, solicitada em 13/11/2026, essa evolução e a revisão dos textos passam a integrar a `main`. A tag `v0.1.0` continua identificando a primeira entrega. Essa publicação atualiza o código no GitHub; não implanta a aplicação nem cria uma nova tag de versão.
 
 | Ambiente | Estado da entrega |
 | --- | --- |

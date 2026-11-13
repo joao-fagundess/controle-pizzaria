@@ -40,7 +40,7 @@ export function QueryState({
             <p>{error.message}</p>
             {hasContent && (
               <small>
-                Exibindo a última consulta válida: {formatInstant(updatedAt)}.
+                Mostrando os dados de {formatInstant(updatedAt)}.
               </small>
             )}
           </div>

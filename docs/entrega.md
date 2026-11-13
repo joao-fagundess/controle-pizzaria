@@ -1,6 +1,6 @@
-# Documento final da entrega
+# Documentação da entrega
 
-Dashboard administrativo de **chamados técnicos de helpdesk** integrado à API própria. Este índice reúne os documentos finais sem duplicar regras ou resultados históricos.
+Os documentos abaixo explicam como o painel de chamados funciona, como executar o projeto e quais testes foram realizados. O sistema consulta uma API própria e recebe dados do Thindesk por uma integração de leitura.
 
 | Conteúdo | Documento |
 | --- | --- |
@@ -29,4 +29,6 @@ Dashboard administrativo de **chamados técnicos de helpdesk** integrado à API 
 
 Os 480 chamados são fictícios. A origem fornecida usa Java/MongoDB e não contém datas, prioridade, histórico ou considerações técnicas necessários aos indicadores completos. A recepção conserva os legados e motivos de rejeição; não inventa valores nem os inclui nos KPIs.
 
-As seis fases foram entregues, e os quatro PRs foram integrados com autorização do usuário em 12/11/2026. A disponibilidade em produção depende de homologação da origem, autenticação/HTTPS e infraestrutura representativa. A medição de p95/carga permanece pendente. O estado real dos PRs está registrado na Fase 6; a versão `0.1.0` reúne a entrega aprovada para uso local.
+As seis fases da primeira entrega foram concluídas em 12/11/2026. Depois, o projeto recebeu a homologação local do Thindesk e o importador do contrato `1.0`. A `main` reúne essa evolução e a revisão dos textos; a tag `v0.1.0` preserva a primeira versão.
+
+O projeto está preparado para demonstração e homologação local. Antes do uso operacional, ainda é preciso validar a instância real do Thindesk, autenticação, HTTPS e infraestrutura. O tempo de resposta sob carga, incluindo p95, ainda não foi medido.

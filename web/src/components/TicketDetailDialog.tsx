@@ -113,8 +113,8 @@ export function TicketDetailDialog({
                   </span>
                 </div>
                 <p className="detail-description">{ticket.description}</p>
-                {ticket.provenance?.title_is_derived && <p className="muted-text">Título derivado da descrição fornecida pela origem.</p>}
-                {ticket.provenance?.exported_at && <p className="muted-text">Informações fornecidas pelo Thindesk · exportação de {formatInstant(ticket.provenance.exported_at)}</p>}
+                {ticket.provenance?.title_is_derived && <p className="muted-text">Título criado a partir da descrição do Thindesk.</p>}
+                {ticket.provenance?.exported_at && <p className="muted-text">Dados exportados do Thindesk em {formatInstant(ticket.provenance.exported_at)}</p>}
                 <dl className="detail-fields">
                   <div>
                     <dt>Tipo de chamado</dt>
@@ -141,7 +141,7 @@ export function TicketDetailDialog({
                     <dd>{formatInstant(ticket.updated_at)}</dd>
                   </div>
                   <div>
-                    <dt>Resolução vigente</dt>
+                    <dt>Data da resolução atual</dt>
                     <dd>
                       {ticket.resolved_at
                         ? formatInstant(ticket.resolved_at)
@@ -154,7 +154,7 @@ export function TicketDetailDialog({
                     Considerações técnicas{" "}
                     <span>{ticket.provenance?.technical_notes_coverage === "unavailable" ? "—" : detail.data!.technical_notes.length}</span>
                   </h3>
-                  {ticket.provenance?.technical_notes_coverage === "partial" && <p className="muted-text">Considerações parciais: a origem não garante o fornecimento de todos os registros.</p>}
+                  {ticket.provenance?.technical_notes_coverage === "partial" && <p className="muted-text">Considerações parciais: o Thindesk pode não ter enviado todas as anotações.</p>}
                   {detail.data!.technical_notes.length ? (
                     <ol className="technical-notes">
                       {detail.data!.technical_notes.map((note) => (
@@ -177,7 +177,7 @@ export function TicketDetailDialog({
                 </section>
                 <section className="detail-section">
                   <h3>Histórico de movimentações</h3>
-                  {ticket.provenance?.history_coverage === "partial" && <p className="muted-text">Histórico parcial: a origem não garante o fornecimento de todas as movimentações.</p>}
+                  {ticket.provenance?.history_coverage === "partial" && <p className="muted-text">Histórico parcial: o Thindesk pode não ter enviado todas as movimentações.</p>}
                   {detail.data!.history.length ? (
                     <ol className="ticket-history">
                       {detail.data!.history.map((event) => (

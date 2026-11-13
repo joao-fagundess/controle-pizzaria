@@ -1,6 +1,6 @@
 # Recepção do export Thindesk 1.0
 
-O usuário aprovou a integração do [PR #7](https://github.com/joao-fagundess/controle-pizzaria/pull/7) e a recepção versionada em 13/11/2026. O PR foi integrado em `develop`, commit `68d413bb0810d34ec894d7cf5b5c7434335a56ca`. Esta fase implementa leitura, validação semântica, promoção transacional, migration e apresentação de proveniência/completude. A primeira entrega em `main`/`v0.1.0` permanece preservada.
+A recepção `1.0` lê o export do Thindesk, valida os registros e importa os chamados válidos em transação. A API e o painel informam de onde vieram os dados e se o histórico e as considerações estão completos. A captura na origem foi integrada pelo [PR #7](https://github.com/joao-fagundess/controle-pizzaria/pull/7), e o receptor pelo [PR #8](https://github.com/joao-fagundess/controle-pizzaria/pull/8). A `main` reúne essa integração; a tag `v0.1.0` preserva a primeira entrega.
 
 ## Comandos e mapeamento
 

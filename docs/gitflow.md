@@ -1,6 +1,6 @@
 # Gitflow e revisão da entrega
 
-O diretório foi inicializado como repositório Git com branch inicial `main`; não havia histórico anterior. O usuário informou João Pedro Flor (`joaopedroflor123@hotmail.com`) como autor e [joao-fagundess/controle-pizzaria](https://github.com/joao-fagundess/controle-pizzaria) como destino. A autoria e a seleção da conta foram configuradas somente neste repositório. A autenticação confirmou o login `joao-fagundess` e acesso de escrita. O estado efetivamente executado está nas [evidências da Fase 6](evidencias/fase-6.md).
+O código está em [joao-fagundess/controle-pizzaria](https://github.com/joao-fagundess/controle-pizzaria), com autoria configurada para João Pedro Flor. A `main` recebe as entregas validadas e a `develop` reúne as mudanças em desenvolvimento. Os merges preservam o histórico e os resultados da primeira entrega estão nas [evidências da Fase 6](evidencias/fase-6.md).
 
 ## Organização adotada
 
@@ -24,7 +24,11 @@ O usuário autorizou a integração dos PRs e a criação da tag em 12/11/2026. 
 
 A integração da entrega precisou ser atualizada com os merges remotos já realizados. A junção local não apresentou conflitos nem alterou arquivos; os novos heads passaram novamente pela CI antes dos merges restantes. A tag anotada `v0.1.0` é publicada no commit final de `main` após seus checks. O [relatório dos PRs](evidencias/fase-6/github-prs.json) registra a integração real; a autorização no chat não é apresentada como uma revisão registrada na interface do GitHub.
 
-## Sequência de integração
+## Atualização da branch principal
+
+Em 13/11/2026, foi solicitada a publicação na `main` das mudanças já integradas em `develop`: homologação local do Thindesk, contrato `1.0`, captura/exportação e importação validada. A mesma publicação inclui uma revisão dos textos da interface e da documentação. O PR parte da `develop`, passa pela CI e entra na `main` com merge, sem reescrever commits. Depois, a `develop` é sincronizada com o resultado. A tag `v0.1.0` permanece no commit da primeira entrega.
+
+## Sequência da primeira entrega
 
 1. Configurar `user.name` e `user.email` **somente neste repositório**, conforme os dados fornecidos. Conferir o remoto escolhido e se já possui histórico antes de adicionar `origin` ou enviar commits. Nunca usar force push para contornar divergência.
 2. Registrar o baseline das Fases 1 a 5 em `main`, excluindo `.env`, caches, dependências e builds. Criar `develop` a partir desse commit.
