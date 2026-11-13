@@ -1,4 +1,4 @@
-# Evidências — Fase 3
+# Validação da API
 
 Validação em 11/11/2026 no Windows com Node.js 24.21.0. Dependências estão fixadas em `api/package-lock.json`. O banco de testes e demonstração é PostgreSQL 18.6 embarcado via PGlite 0.5.16.
 
@@ -15,9 +15,9 @@ Validação em 11/11/2026 no Windows com Node.js 24.21.0. Dependências estão f
 
 Arquivos gerados:
 
-- [Saída dos testes](fase-3-tests.txt)
-- [Consulta HTTP à versão compilada](fase-3-http-smoke.json)
-- [Planos SQL com ANALYZE e BUFFERS](fase-3-query-plans.json)
+- [Saída dos testes](api-tests.txt)
+- [Consulta HTTP à versão compilada](api-http-smoke.json)
+- [Planos SQL com ANALYZE e BUFFERS](api-query-plans.json)
 
 Para reproduzir, na pasta `api`:
 
@@ -48,4 +48,4 @@ Essa amostra serve para inspecionar o comportamento das consultas e índices. As
 
 Docker continua sem serviço disponível. Não houve integração com PostgreSQL independente por rede nem homologação com uma instância real do Thindesk; o ZIP não fornece os campos analíticos necessários. Também não houve implantação, autenticação corporativa ou benchmark concorrente.
 
-Cobertura percentual consolidada, testes de componentes, prints do dashboard e matriz final RF → endpoint → teste pertencem à Fase 5. O frontend será implementado na Fase 4; esta evidência comprova somente a API e a recepção legada descritas.
+Este relatório registra a API e a importação legada na data indicada. Os testes de componentes, as capturas do painel e a cobertura consolidada estão em [interface](interface.md) e [testes](testes.md).

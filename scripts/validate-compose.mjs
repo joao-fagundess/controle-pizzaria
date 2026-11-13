@@ -11,14 +11,14 @@ import { setTimeout as wait } from 'node:timers/promises';
 import { fileURLToPath } from 'node:url';
 
 const projectRoot = await realpath(fileURLToPath(new URL('../', import.meta.url)));
-const evidenceRoot = join(projectRoot, process.env.ANALYTICS_EVIDENCE === '1' ? 'docs/evidencias/thindesk-import/compose' : 'docs/evidencias/fase-6');
+const evidenceRoot = join(projectRoot, process.env.ANALYTICS_EVIDENCE === '1' ? 'docs/evidencias/thindesk-import/compose' : 'docs/evidencias/compose');
 await mkdir(evidenceRoot, { recursive: true });
 const cacheRoot = join(projectRoot, '.cache');
 await mkdir(cacheRoot, { recursive: true });
 const resolvedCache = await realpath(cacheRoot);
 assert.ok(!relative(projectRoot, resolvedCache).startsWith('..') && !isAbsolute(relative(projectRoot, resolvedCache)));
-const temporaryRoot = await mkdtemp(join(resolvedCache, 'phase6-compose-'));
-const projectName = `thindesk-phase6-${randomBytes(6).toString('hex')}`;
+const temporaryRoot = await mkdtemp(join(resolvedCache, 'compose-test-'));
+const projectName = `thindesk-check-${randomBytes(6).toString('hex')}`;
 const password = randomBytes(32).toString('hex');
 const accessToken = randomBytes(32).toString('hex');
 const reservation = createServer().listen(0, '127.0.0.1');
@@ -158,13 +158,13 @@ try {
 } finally {
   try {
     if (dockerAvailable) {
-      assert.match(projectName, /^thindesk-phase6-[a-f0-9]{12}$/);
+      assert.match(projectName, /^thindesk-check-[a-f0-9]{12}$/);
       const volumes = await command('Confinamento dos volumes de teste', ['volume', 'ls', '--filter', `label=com.docker.compose.project=${projectName}`, '--format', '{{.Name}}']);
       assert.ok(volumes.trim().split(/\r?\n/).every((volume) => !volume || volume.startsWith(`${projectName}_`)));
       await compose('Limpeza do projeto descartável', ['down', '--volumes', '--remove-orphans'], 120_000);
     }
     const cleanupTarget = relative(resolvedCache, resolve(temporaryRoot));
-    assert.ok(cleanupTarget.startsWith('phase6-compose-') && !cleanupTarget.includes('..') && !isAbsolute(cleanupTarget));
+    assert.ok(cleanupTarget.startsWith('compose-test-') && !cleanupTarget.includes('..') && !isAbsolute(cleanupTarget));
     await rm(temporaryRoot, { recursive: true, force: true });
     report.cleanup_completed = true;
   } catch (cleanupFailure) {

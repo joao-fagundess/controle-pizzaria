@@ -1,4 +1,4 @@
-# Dashboard — Fase 4
+# Interface do painel
 
 Interface React/TypeScript com Vite, Recharts e TanStack Query, concluída em 12/11/2026. Consome os sete endpoints da API própria; não usa respostas fixas nem calcula os indicadores com dados locais. A origem real do Thindesk continua sujeita às limitações descritas em [integracao-thindesk.md](integracao-thindesk.md).
 
@@ -35,7 +35,7 @@ npm.cmd run build
 npm.cmd run preview
 ```
 
-Prévia em `http://127.0.0.1:4173/`. Os arquivos publicáveis ficam em `web/dist`. O servidor de prévia é uma ferramenta local de verificação; publicação e infraestrutura definitiva pertencem à Fase 6.
+Prévia em `http://127.0.0.1:4173/`. O build gera os arquivos em `web/dist`. Para servir a aplicação com Nginx e proxy, consulte [implantação](implantacao.md).
 
 ## Variáveis de ambiente
 
@@ -113,9 +113,9 @@ npm.cmd run test
 npm.cmd run build
 ```
 
-Os testes desta fase usam respostas controladas apenas em `web/tests`. A aplicação não importa fixtures. A verificação no navegador usa o backend real do projeto com PostgreSQL embarcado e seed; ver [evidências](evidencias/fase-4.md).
+Os testes desta versão usam respostas controladas apenas em `web/tests`. A aplicação não importa fixtures. A verificação no navegador usa o backend real do projeto com PostgreSQL embarcado e seed; ver [evidências](evidencias/interface.md).
 
-A Fase 5 consolidou [cobertura e evidências](evidencias/fase-5.md), validou PostgreSQL independente e gerou a [matriz RF → endpoint → teste](rastreabilidade.md). A Fase 6 acrescentou a imagem estática com Nginx e proxy de mesma origem, descrita em [implantacao.md](implantacao.md), e a documentação de entrega. Homologação do Thindesk real depende do acesso e dos campos faltantes na origem.
+Os [testes e relatórios de cobertura](evidencias/testes.md) e a [matriz de rastreabilidade](rastreabilidade.md) registram os cenários aprovados. A execução com Nginx e proxy de mesma origem está em [implantação](implantacao.md). A homologação operacional do Thindesk ainda depende do acesso à instância real e dos dados fornecidos por ela.
 
 ## Referências técnicas
 

@@ -1,4 +1,4 @@
-# Evidências — Fase 4
+# Verificação da interface
 
 Verificação final em 12/11/2026. O trabalho iniciado em 11/11 foi retomado após a interrupção, preservando os arquivos já implementados.
 
@@ -18,14 +18,14 @@ Verificação final em 12/11/2026. O trabalho iniciado em 11/11 foi retomado ap�
 
 Artefatos:
 
-- [Saída dos testes](fase-4-tests.txt)
-- [Saída da compilação](fase-4-build.txt)
-- [Verificações do navegador](fase-4-browser-checks.json)
-- [Dashboard desktop](fase-4-desktop.jpg)
-- [Dashboard tablet](fase-4-tablet.jpg)
-- [Celular com filtros e duração longa](fase-4-mobile-filtrado.jpg)
-- [Detalhe do chamado](fase-4-detalhe.jpg)
-- [API indisponível com conteúdo anterior](fase-4-erro-api.jpg)
+- [Saída dos testes](interface-tests.txt)
+- [Saída da compilação](interface-build.txt)
+- [Verificações do navegador](interface-browser-checks.json)
+- [Dashboard desktop](interface-desktop.jpg)
+- [Dashboard tablet](interface-tablet.jpg)
+- [Celular com filtros e duração longa](interface-mobile-filtrado.jpg)
+- [Detalhe do chamado](interface-detalhe.jpg)
+- [API indisponível com conteúdo anterior](interface-erro-api.jpg)
 
 ## Testes automatizados
 
@@ -45,4 +45,4 @@ As capturas foram feitas pelo navegador, sem montagem ou substituição dos indi
 
 Todos os dados demonstrados são fictícios. A API real do projeto foi usada, mas não houve homologação com uma instância operacional do Thindesk, nem com um servidor PostgreSQL independente. Também não houve auditoria completa WCAG, implantação ou configuração do gateway corporativo.
 
-Cobertura percentual, testes consolidados com banco independente e matriz final de rastreabilidade pertencem à Fase 5. As evidências das Fases 2 e 3 continuam válidas para suas respectivas entregas; não foram contadas como novas execuções nesta fase.
+Os relatórios de [banco](banco.md), [API](api.md) e [testes consolidados](testes.md) têm escopos próprios. Suas execuções não foram somadas às verificações de navegador descritas aqui.

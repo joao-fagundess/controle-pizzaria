@@ -1,6 +1,6 @@
 # Encerramento da entrega local
 
-Entrega encerrada a pedido do usuário em **13/11/2026**, sem iniciar outra fase de desenvolvimento.
+Registro da entrega local em **13/11/2026**.
 
 O [PR #8](https://github.com/joao-fagundess/controle-pizzaria/pull/8) foi integrado em `develop`, commit `c694adc3d27337296139e499df23f6f2986b5cc4`, com [CI aprovada](https://github.com/joao-fagundess/controle-pizzaria/actions/runs/43427349062). Essa atualização trouxe a importação do contrato `1.0`, validação dos registros, migrations incrementais e controle de versões. A API e a interface também passaram a informar de onde vieram os dados e se o histórico e as considerações estão completos.
 

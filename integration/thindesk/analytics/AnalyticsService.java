@@ -15,7 +15,7 @@ import org.springframework.web.server.ResponseStatusException;
 import static com.mongodb.client.model.Filters.*;
 
 // Mantém snapshot, projeção legada e fatos no mesmo documento, com revisão otimista.
-// O catálogo desta fase é imutável; datas e autores vêm da operação autenticada na origem.
+// O catálogo desta versão é imutável; datas e autores vêm da operação autenticada na origem.
 @Service
 public class AnalyticsService {
     private static final int LIMIT = 5 * 1024 * 1024;
@@ -95,7 +95,7 @@ public class AnalyticsService {
         catch (MongoWriteException exception) {
             if (exception.getError().getCode() != 11000) throw exception;
             if (!catalog.find(eq("_id", key)).first().get("value").equals(value))
-                throw failure(HttpStatus.CONFLICT, "Identidade já cadastrada com outros metadados; catálogo imutável nesta fase.");
+                throw failure(HttpStatus.CONFLICT, "Identidade já cadastrada com outros metadados; catálogo imutável nesta versão.");
         }
         return value;
     }

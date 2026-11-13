@@ -58,9 +58,9 @@ Não inferir `closed`, `waiting` ou cancelamento sem regra explícita da origem.
 
 Manter o Thindesk Java/MongoDB como origem e a API analítica Node.js/PostgreSQL como aplicação separada, conforme a stack solicitada. Não substituir o banco original nem tentar convertê-lo por migration do dashboard.
 
-Na Fase 2, criar `ticket_source_records` para guardar o último payload recebido, identidade externa, erros de validação e eventual vínculo ao chamado normalizado. Registros sem datas, prioridade ou identificação confiável permanecem fora de `tickets`. O seed é separado pela origem `demo` e nunca preenche lacunas de um chamado real.
+A tabela `ticket_source_records` guarda o payload recebido, a identidade externa, os erros de validação e o vínculo com um chamado normalizado quando houver. Registros sem datas, prioridade ou identificação confiável ficam fora de `tickets`. O seed usa a origem `demo` e não preenche lacunas de chamados reais.
 
-Na Fase 3, foi implementado um conector de leitura, com autenticação configurável, validação de conteúdo, normalização explícita e relatório de registros preservados/rejeitados. Ele não promove os legados para indicadores sem um contrato complementar. Sua existência no código não comprova integração operacional até haver uma instância acessível e homologação. O resumo da API informa a qualidade global da recepção; o painel precisará mostrar a exclusão de registros incompletos e a defasagem da origem para não apresentar um total parcial como o total completo do Thindesk. Ver `integracao-thindesk.md`.
+O conector de leitura autentica na origem, valida o conteúdo e registra os motivos de rejeição. Ele não promove os legados incompletos aos indicadores. A homologação local não comprova integração operacional. A API e o painel mostram quantos registros ficaram fora dos cálculos; o funcionamento está em [importação legada](integracao-thindesk.md) e [recepção 1.0](recepcao-versionada-thindesk.md).
 
 Para que os registros reais sustentem todos os RFs, será necessário evoluir a origem para registrar os campos ausentes e exportá-los, ou obter um export complementar confiável com essas informações. Evoluir a entidade agora permite registrar eventos futuros, mas não recupera o histórico passado. Essa limitação não é resolvida por polling.
 

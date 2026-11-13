@@ -74,7 +74,7 @@ O serviço de teste compartilha a namespace de rede do Java. Assim, a origem é 
 
 O validador compara a coleção MongoDB antes/depois e confirma que a leitura não alterou seus registros. Ele também verifica saúde dos serviços, versões, digest das imagens, acesso pelo host e integridade do arquivo original. Os bancos são exclusivos do ambiente de homologação. Não há carga do seed analítico de 480 chamados nesse receptor.
 
-Saídas completas, contagens e identificação das imagens estão nas [evidências](evidencias/thindesk-local.md). São verificações de integração adicionais, sem alterar a contagem ou a cobertura V8 registradas na Fase 5.
+Saídas completas, contagens e identificação das imagens estão nas [evidências](evidencias/thindesk-local.md). São verificações de integração adicionais, sem alterar a contagem ou a cobertura V8 registradas na validação consolidada.
 
 ## Limite da homologação
 

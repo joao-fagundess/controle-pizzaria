@@ -72,7 +72,7 @@ A integração foi verificada **localmente, com dados fictícios**. O uso operac
 Depois de instalar as dependências de `api` e `web`, execute a validação completa na raiz:
 
 ```powershell
-npm.cmd --prefix api run validate:phase-5
+npm.cmd --prefix api run validate
 ```
 
 O comando compila os dois projetos, verifica os tipos, executa os testes em bancos descartáveis e gera os relatórios de cobertura. Ele não usa o banco configurado em `DATABASE_URL`. Os binários do PostgreSQL nativo são instalados como dependência de desenvolvimento; no Windows, execute com um usuário sem privilégios de administrador.
@@ -99,4 +99,4 @@ O workflow do [GitHub Actions](https://github.com/joao-fagundess/controle-pizzar
 | Testes, capturas e histórico da entrega | [Índice da entrega](docs/entrega.md) e [encerramento local](docs/encerramento.md) |
 | Execução e versionamento | [Implantação](docs/implantacao.md) e [Gitflow](docs/gitflow.md) |
 
-A `main` reúne a entrega atual, incluindo a integração local do Thindesk e a revisão dos textos. A tag `v0.1.0` mantém o registro da primeira versão; os relatórios das fases anteriores descrevem o que foi validado em cada etapa.
+A `main` reúne a entrega atual, incluindo a integração local do Thindesk. A tag `v0.1.0` mantém o registro da primeira versão. Os relatórios estão organizados por assunto no [índice de validações](docs/evidencias/README.md).

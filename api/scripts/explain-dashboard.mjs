@@ -36,7 +36,7 @@ try {
     const queryPlan = await embedded.database.query(`EXPLAIN (ANALYZE, BUFFERS, FORMAT JSON) ${query.sql}`, query.parameters);
     plans.push({ query: queryNames[index], parameters: query.parameters, plan: queryPlan.rows[0]['QUERY PLAN'] });
   }
-  await writeFile(new URL('../../docs/evidencias/fase-3-query-plans.json', import.meta.url),
+  await writeFile(new URL('../../docs/evidencias/api-query-plans.json', import.meta.url),
     `${JSON.stringify({ tickets: 10000, engine: 'PGlite 0.5.16 / PostgreSQL 18.6', filters: commonFilters, plans }, null, 2)}\n`);
   process.stdout.write(`${JSON.stringify(plans.map((entry) => ({ query: entry.query,
     execution_ms: entry.plan[0]['Execution Time'] })))}\n`);

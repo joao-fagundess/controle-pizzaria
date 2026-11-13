@@ -1,6 +1,6 @@
 # Premissas e decisões de análise
 
-Registro da Fase 1 em 11/11/2026, atualizado até 12/11/2026 após as autorizações das Fases 2, 3 e 4. Modelo, API HTTP, recepção legada e frontend estão implementados; homologação operacional permanece pendente.
+Este documento reúne as escolhas de arquitetura, as regras dos indicadores e os pontos que ainda precisam ser validados antes do uso operacional.
 
 ## Premissas
 
@@ -9,7 +9,7 @@ Registro da Fase 1 em 11/11/2026, atualizado até 12/11/2026 após as autorizaç
 - Supervisor e técnico podem consultar o mesmo conjunto de chamados. Restrição por equipe, organização ou solicitante não foi solicitada; se necessária, deve ser definida antes de usar dados reais.
 - A pasta de trabalho estava vazia ao iniciar a análise. Depois, o usuário forneceu `thindesk.zip`; a inspeção encontrou código Java/Spring Boot/MongoDB, endpoints, um objeto de exemplo e login por formulário/sessão. Não foi fornecida uma instância acessível para homologação.
 - O desenvolvimento inicial pode usar PostgreSQL e seed fictício, com exemplos verossímeis de chamados e pessoas brasileiras. Isso permite validar a API própria e o frontend, mas não comprova sincronização com o Thindesk.
-- Não se presume disponibilidade de acesso ao GitHub ou de remoto Git configurado. Gitflow e PRs pertencem à Fase 6; publicação depende de um repositório acessível.
+- O código é versionado no GitHub. As entregas passam por PR e validação automática; o fluxo está em [versionamento](gitflow.md).
 
 ## Decisões propostas
 
@@ -28,7 +28,7 @@ O frontend consumirá a API própria versionada em `/api/v1`, e a API consultar�
 | Consulta direta à API do Thindesk | Menos cópia local de dados. | Dashboard depende da disponibilidade, limites e capacidade de agregação da origem. |
 | Sincronização para PostgreSQL | Agregações previsíveis e histórico local consultável. | Exige processo de ingestão, identidade externa, política de atualização e monitoramento de defasagem. |
 
-Decisão: manter a origem Java/MongoDB e receber os registros no PostgreSQL, coerente com a persistência solicitada. A Fase 2 acrescentou `ticket_source_records`, e a Fase 3 implementou login/leitura e recepção transacional de payloads incompletos, fora dos indicadores. Datas, prioridade, histórico e considerações não existem no modelo fornecido; a promoção para chamados normalizados exige evolução da origem ou contrato complementar. O conector legado não implementa essa promoção, e sua homologação exige instância acessível. Polling do dashboard atualiza a consulta à API própria; ele não sincroniza o Thindesk.
+Decisão: manter a origem Java/MongoDB e receber os registros no PostgreSQL. A tabela `ticket_source_records` preserva payloads e motivos de rejeição; o conector legado trata os dados incompletos sem incluí-los nos indicadores. A [recepção 1.0](recepcao-versionada-thindesk.md) valida o contrato complementar e importa os chamados válidos em transação. O polling do dashboard refaz consultas à API própria; não executa a importação do Thindesk.
 
 ### DA03 — Definir atendido como concluído
 
@@ -61,7 +61,7 @@ Alternativa: contar eventos de resolução, inclusive várias conclusões do mes
 
 ### DA07 — Agregar no banco e manter a estrutura pequena
 
-As agregações devem ocorrer no PostgreSQL para evitar transportar todos os chamados à API e ao navegador. Índices serão definidos conforme filtros e consultas na Fase 2; sua eficácia deverá ser verificada nos planos de execução.
+As agregações ficam no PostgreSQL para evitar transportar todos os chamados à API e ao navegador. Os índices seguem os filtros e as consultas implementadas. Os planos de execução com 10 mil registros estão nas [evidências da API](evidencias/api.md); eles não substituem uma medição de carga.
 
 Separar rotas, validação e acesso a banco quando houver responsabilidade concreta. Não criar services ou controllers que apenas repassem a chamada. Consultas envolvendo histórico e considerações devem preservar uma linha por chamado antes de contar ou paginar.
 
@@ -71,7 +71,7 @@ Iniciar a interface nos últimos 30 dias, listagem com 25 itens e atualização 
 
 Polling é suficiente para uma tela analítica sem exigência de tempo real. WebSocket acrescentaria complexidade sem requisito correspondente. A interface deve expor a última consulta bem-sucedida e, havendo sincronização externa, distinguir a idade da origem da idade da consulta.
 
-Na Fase 4, TanStack Query foi adotado para cache por seleção, cancelamento e refetch. O frontend valida as respostas com Zod; gráficos e detalhe são carregados em chunks separados. As seções têm estados próprios e não reaproveitam dados de outros filtros como placeholder. O polling espera o término das consultas e pausa em aba oculta, com configuração inicial de 60 segundos e seletor para desativar ou alterar o intervalo.
+TanStack Query cuida do cache por seleção, cancelamento e atualização das consultas. O frontend valida as respostas com Zod; gráficos e detalhe são carregados separadamente. Cada seção trata seus erros e não reaproveita dados de outros filtros. O polling aguarda as consultas terminarem e pausa com a aba oculta. O intervalo inicial é de 60 segundos e pode ser alterado ou desativado.
 
 ### DA09 — Segurança sem ampliar o produto para gestão de usuários
 
@@ -79,13 +79,13 @@ Prever acesso interno autenticado em ambiente compartilhado ou de produção, pr
 
 A alternativa local com seed fictício pode funcionar sem autenticação para desenvolvimento e demonstração. A política para dados reais precisa ser confirmada antes da disponibilização, especialmente porque considerações técnicas podem conter informações internas.
 
-Na Fase 3, a API exige bearer configurado para produção ou escuta fora do loopback. É uma proteção técnica para acesso direto ou por gateway, sem implementar usuários/senhas do produto; autenticação corporativa e TLS ainda precisam de homologação. A demonstração embarcada é restrita ao loopback e não pode usar `NODE_ENV=production`.
+A API exige um bearer configurado em produção ou quando escuta fora do loopback. Essa proteção permite o acesso direto ou por gateway, mas não implementa contas de usuário do painel. Autenticação corporativa e TLS ainda precisam de homologação. A demonstração embarcada fica restrita ao loopback e não aceita `NODE_ENV=production`.
 
 ### DA10 — Empacotar o ambiente local sem publicar dados reais
 
-Na Fase 6, o Compose reúne PostgreSQL, migrations, API e frontend. O seed é explícito, o volume é persistente e só o Nginx publica porta no loopback. O token técnico fica no proxy; o navegador não recebe credenciais da API. Essa configuração atende à demonstração local, enquanto autenticação de pessoas, HTTPS e acesso corporativo continuam dependentes do ambiente real.
+O Compose reúne PostgreSQL, migrations, API e frontend. O seed é explícito, o volume é persistente e só o Nginx publica porta no loopback. O token técnico fica no proxy, sem chegar ao navegador. Essa configuração atende à demonstração local; autenticação de pessoas, HTTPS e acesso corporativo dependem do ambiente de implantação.
 
-O diretório não possuía histórico Git. O baseline registra a implementação existente com data real; as features da Fase 6 registram seu empacotamento. O usuário informou a autoria de João Pedro Flor e o repositório `joao-fagundess/controle-pizzaria`; a autenticação da conta de destino foi confirmada. Não simular commits históricos ou revisão humana de PRs.
+O [fluxo de versionamento](gitflow.md) mantém as entregas validadas na `main` e as mudanças em desenvolvimento na `develop`. Os merges preservam os commits e a tag `v0.1.0` identifica a primeira versão.
 
 ## Pontos a validar
 
@@ -98,9 +98,9 @@ Esses pontos não impedem a análise. A aprovação das premissas permite inicia
 | PV03 | O ZIP original não possui considerações técnicas; a evolução local captura notas futuras com autoria do login. Confirmar produção operacional e quais usuários poderão acessá-las, com restrições por equipe se aplicáveis. | Antes de disponibilizar dados reais aos usuários do painel. |
 | PV04 | Mecanismo corporativo de autenticação, ambiente de implantação e origens permitidas por CORS. | Antes da configuração do ambiente compartilhado ou de produção. |
 | PV05 | Volume esperado, usuários simultâneos, infraestrutura e tolerância à defasagem dos dados do Thindesk. | Antes de validar desempenho e definir sincronização operacional. |
-| PV06 | Regras da Fase 1 mantidas após a autorização para avançar; nova limitação de completude da origem registrada em `thindesk-inspecao.md`. | Revisar antes de homologar indicadores com a operação. |
-| PV07 | Resolvido: repositório e autoria informados; autenticação como `joao-fagundess` confirmada. O usuário autorizou a integração e a tag em 12/11/2026, e os quatro PRs foram integrados. | Concluído no encerramento da Fase 6. |
+| PV06 | Regras dos indicadores definidas; limitações da origem registradas em `thindesk-inspecao.md`. | Conferir a interpretação dos indicadores com a operação. |
+| PV07 | Repositório publicado, PRs integrados e versão `v0.1.0` registrada. | Concluído; consultar [versionamento](gitflow.md). |
 
 ## Conteúdo disponível para o vídeo final
 
-As decisões de análise que podem ser explicadas no vídeo são: foco em helpdesk técnico; consulta pela API própria; definição de concluído; distinção entre criação e resolução; tempo corrido e tratamento de reaberturas; escolha de agregação no PostgreSQL; preservação de dados legados incompletos sem inventar datas. O [roteiro de 2min55s](roteiro-video.md) foi elaborado na Fase 6 com as evidências efetivamente produzidas.
+A apresentação pode explicar o foco em helpdesk, a API própria, a definição de concluído, a diferença entre criação e resolução, o tratamento de reaberturas e as agregações no PostgreSQL. O [roteiro da primeira entrega](roteiro-video.md) usa os resultados registrados naquela versão.

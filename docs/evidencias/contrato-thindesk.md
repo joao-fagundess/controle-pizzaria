@@ -27,7 +27,7 @@ npm.cmd --prefix api run test:thindesk-contract
 
 O comando usa apenas os arquivos da proposta; não conecta bancos nem chama o Thindesk. A dependência do validador é de desenvolvimento. O workflow passa a executar esse comando antes da suíte consolidada da aplicação. As saídas usuais de aplicação/Compose continuam separadas desses 44 casos.
 
-As evidências originais de 99 casos distintos, 176 execuções, 13 verificações HTTP da API compilada, 27 verificações do Compose principal e 16 grupos da homologação Java mantêm seus escopos e datas próprios. Os testes do schema não foram somados às contagens nem à cobertura V8 da Fase 5.
+As evidências originais de 99 casos distintos, 176 execuções, 13 verificações HTTP da API compilada, 27 verificações do Compose principal e 16 grupos da homologação Java mantêm seus escopos e datas próprios. Os testes do schema não foram somados às contagens nem à cobertura V8 da validação consolidada.
 
 ## Próximo passo
 
