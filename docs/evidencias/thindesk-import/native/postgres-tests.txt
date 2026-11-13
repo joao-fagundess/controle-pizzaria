@@ -1,0 +1,61 @@
+npm notice run thindesk-dashboard-api@0.1.0 test:api
+npm notice run vitest run --reporter=default --reporter=json --outputFile=../docs/evidencias/thindesk-import/native/postgres-tests.json
+
+ RUN  v5.1.0 C:/Users/arthur.randis/Documents/Programas/Controle de Pizzaria/api
+
+ ✓ tests/api.test.ts (45 tests) 1650ms
+ ✓ tests/analytics-import.test.ts (41 tests) 22505ms
+   ✓ recepção versionada (27)
+     ✓ recusa lote sem corromper texto não representável: "\ud800" 375ms
+     ✓ recusa lote sem corromper texto não representável: "\udc00" 428ms
+     ✓ promove o snapshot, preserva o payload e expõe proveniência sem fabricar datas 646ms
+     ✓ repete sem duplicar fatos, pessoas ou observação inicial 404ms
+     ✓ aceita offsets equivalentes e diferenças abaixo de microssegundo sem confundir a versão 322ms
+     ✓ última nota e detalhe conservam nanossegundos em vez da ordem dos UUIDs locais 321ms
+     ✓ reabre e resolve novamente sem duplicar conclusões ou perder a resolução antiga 347ms
+     ✓ snapshot antigo não substitui payload, cadastro ou chamado aceitos 379ms
+     ✓ atualização inválida vinculada reverte também outros chamados do lote 418ms
+     ✓ recusa alteração de evidência aceita: created-at 340ms
+     ✓ recusa alteração de evidência aceita: edit-note 472ms
+     ✓ recusa alteração de evidência aceita: remove-note 584ms
+     ✓ recusa alteração de evidência aceita: edit-event 1168ms
+     ✓ identidades e metadados conflitantes impedem o lote antes de qualquer promoção 1070ms
+     ✓ preserva novos inválidos, contabiliza não identificados e nunca promove legados incompletos 1240ms
+     ✓ não associa homônimos e permite autoria explicitamente desconhecida 898ms
+     ✓ cobertura parcial e indisponível chega ao contrato de consulta sem afirmar ausência 456ms
+     ✓ cadastros atualizados mantêm IDs e mudam nomes sem editar fatos ou aceitar regressão 421ms
+     ✓ mapeamento de tipo já utilizado não muda silenciosamente 368ms
+     ✓ troca de papel não deixa outros chamados atribuídos a supervisor 526ms
+     ✓ não reassume automaticamente um chamado canônico que perdeu a versão de origem 520ms
+     ✓ identidades históricas podem ser resolvidas por cadastro já aceito, sem repetição por nome 594ms
+     ✓ cópia do schema de execução coincide com o contrato publicado 1380ms
+     ✓ recebe o export real da homologação e exclui históricos sem cadastro resolvido 1608ms
+   ✓ recusa semântica inválida sem aumentar indicadores: atualização futura 687ms
+   ✓ recusa semântica inválida sem aumentar indicadores: nota anterior à criação 647ms
+   ✓ recusa semântica inválida sem aumentar indicadores: sequência com lacuna completa 365ms
+   ✓ recusa semântica inválida sem aumentar indicadores: sequência sem precisão 516ms
+   ✓ recusa semântica inválida sem aumentar indicadores: instantes fora de ordem 472ms
+   ✓ recusa semântica inválida sem aumentar indicadores: estado final divergente 526ms
+   ✓ recusa semântica inválida sem aumentar indicadores: resolução divergente 317ms
+   ✓ recusa semântica inválida sem aumentar indicadores: notas com mesmo ID 355ms
+   ✓ recusa semântica inválida sem aumentar indicadores: eventos com mesmo ID 581ms
+ ✓ tests/thindesk.test.ts (17 tests) 1057ms
+ ✓ tests/analytics-migration.test.ts (1 test) 966ms
+   ✓ migra dados anteriores sem perder fatos e impõe unicidade das identidades de origem 965ms
+ ✓ tests/openapi.test.ts (1 test) 318ms
+   ✓ publica um OpenAPI válido com os sete endpoints e exemplos de resposta 314ms
+ ✓ tests/analytics-cli.test.ts (3 tests) 6421ms
+   ✓ CLI 1.0 compilada com PostgreSQL nativo (3)
+     ✓ autentica, lê o endpoint novo e repete o arquivo sem duplicar 2158ms
+     ✓ rejeita versão, tamanho, UTF-8 e uso do comando legado sem tocar na versão aceita 2509ms
+     ✓ registros novos rejeitados retornam código 2 e relatório explícito 787ms
+
+ Test Files  6 passed (6)
+      Tests  108 passed (108)
+   Start at  09:22:11
+   Duration  43.79s (tests 83%, import 14%, transform 3%, worker 1%)
+
+    Isolate  6 workers spawned · ~635ms startup each (spawn + environment, per file)
+             at least ~3.18s faster with isolate: false — reuses workers across files instead of one per file
+
+JSON report written to C:/Users/arthur.randis/Documents/Programas/Controle de Pizzaria/docs/evidencias/thindesk-import/native/postgres-tests.json

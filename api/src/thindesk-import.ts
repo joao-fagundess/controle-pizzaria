@@ -1,5 +1,5 @@
 // Preserva o contrato legado sem fabricar os campos analíticos ausentes na origem.
-// Esta recepção não promove registros para tickets: o contrato complementar segue pendente.
+// Esta recepção continua exclusiva do legado e não promove registros para tickets.
 import type { TicketDatabase } from './database.js';
 import { ThindeskError } from './thindesk-error.js';
 

@@ -1,0 +1,8 @@
+{
+  "contract_version": "1.0",
+  "types": {
+    "analytics-printing": "printing",
+    "analytics-network": "network",
+    "type-hardware": "hardware"
+  }
+}

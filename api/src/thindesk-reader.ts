@@ -38,11 +38,11 @@ export async function readJsonResponse(response: Response): Promise<unknown> {
       chunks.push(chunk.value);
     }
   }
-  try { return JSON.parse(Buffer.concat(chunks).toString('utf8')); }
+  try { return JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(Buffer.concat(chunks))); }
   catch { throw new ThindeskError('O conteúdo recebido do Thindesk não é um JSON válido.'); }
 }
 
-export async function fetchThindeskTickets(access: ThindeskAccess): Promise<unknown[]> {
+async function fetchThindeskJson(access: ThindeskAccess, path: string): Promise<unknown> {
   const base = new URL(access.baseUrl.endsWith('/') ? access.baseUrl : `${access.baseUrl}/`);
   if (!['http:', 'https:'].includes(base.protocol) || base.username || base.password || base.search || base.hash) {
     throw new ThindeskError('THINDESK_BASE_URL deve ser uma URL HTTP/HTTPS sem credenciais, query ou fragmento.');
@@ -68,9 +68,17 @@ export async function fetchThindeskTickets(access: ThindeskAccess): Promise<unkn
     await loginResponse.body?.cancel();
     if (!sessionCookie) throw new ThindeskError('O Thindesk não forneceu uma sessão autenticada.');
   }
-  const ticketResponse = await fetch(new URL('api/chamados', base), { redirect: 'manual', signal,
+  const ticketResponse = await fetch(new URL(path, base), { redirect: 'manual', signal,
     headers: { Accept: 'application/json', Cookie: sessionCookie } });
-  const sourceTickets = await readJsonResponse(ticketResponse);
+  return readJsonResponse(ticketResponse);
+}
+
+export async function fetchThindeskExport(access: ThindeskAccess): Promise<unknown> {
+  return fetchThindeskJson(access, 'api/v1/analytics/tickets/export');
+}
+
+export async function fetchThindeskTickets(access: ThindeskAccess): Promise<unknown[]> {
+  const sourceTickets = await fetchThindeskJson(access, 'api/chamados');
   if (!Array.isArray(sourceTickets)) throw new ThindeskError('A API do Thindesk deve devolver uma lista de chamados.');
   return sourceTickets;
 }

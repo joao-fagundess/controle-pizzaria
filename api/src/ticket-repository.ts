@@ -12,11 +12,13 @@ interface TicketRow {
   assignee_id: string | null; assignee_name: string | null; requester_id: string; requester_name: string;
   department: string | null; created_at: DateValue; updated_at: DateValue; resolved_at: DateValue | null;
   source_system: string | null; external_id: string | null;
+  title_is_derived: boolean; history_coverage: string; notes_coverage: string;
+  contract_version: string | null; accepted_exported_at: DateValue | null;
   note_id: string | null; note_content: string | null; note_created_at: DateValue | null;
   note_author_id: string | null; note_author_name: string | null;
 }
 interface NoteRow { id: string; content: string; created_at: DateValue; author_id: string | null; author_name: string | null }
-interface HistoryRow { id: string; event_type: string; occurred_at: DateValue; author_id: string | null;
+interface HistoryRow { id: string; event_type: string; occurred_at: DateValue; author_id: string | null; source_sequence: number | null;
   author_name: string | null; previous_value: unknown; new_value: unknown }
 
 function ticketSelection(filters: TicketFilters, basis: 'created_at' | 'resolved_at', completedOnly = false) {
@@ -49,7 +51,8 @@ const ticketJoins = `JOIN ticket_statuses statuses ON statuses.code = t.status_c
   LEFT JOIN LATERAL (
     SELECT notes.id, notes.content, notes.created_at, notes.author_id, authors.name AS author_name
     FROM technical_notes notes LEFT JOIN users authors ON authors.id = notes.author_id
-    WHERE notes.ticket_id = t.id ORDER BY notes.created_at DESC, notes.id DESC LIMIT 1
+    WHERE notes.ticket_id = t.id ORDER BY notes.created_at DESC, notes.source_time_ns DESC NULLS LAST,
+      notes.source_external_id COLLATE "C" DESC NULLS LAST, notes.id DESC LIMIT 1
   ) last_note ON TRUE`;
 
 function authorReference(id: string | null, name: string | null) {
@@ -66,6 +69,8 @@ function presentTicket(ticket: TicketRow) {
     created_at: isoTimestamp(ticket.created_at), updated_at: isoTimestamp(ticket.updated_at),
     resolved_at: isoTimestamp(ticket.resolved_at),
     source: ticket.source_system ? { system: ticket.source_system, external_id: ticket.external_id } : null,
+    provenance: { contract_version: ticket.contract_version, exported_at: isoTimestamp(ticket.accepted_exported_at),
+      title_is_derived: ticket.title_is_derived, history_coverage: ticket.history_coverage, technical_notes_coverage: ticket.notes_coverage },
     latest_technical_note: ticket.note_id ? { id: ticket.note_id, content: ticket.note_content,
       created_at: isoTimestamp(ticket.note_created_at), author: authorReference(ticket.note_author_id, ticket.note_author_name) } : null };
 }
@@ -177,11 +182,12 @@ export class TicketRepository {
   async ticketDetail(ticketId: string) {
     const ticketMatches = await this.database.query<TicketRow & { technical_notes: NoteRow[]; history: HistoryRow[] }>(`
       SELECT ${ticketColumns},
-        (SELECT coalesce(jsonb_agg(to_jsonb(note_rows) ORDER BY note_rows.created_at, note_rows.id), '[]'::jsonb)
-          FROM (SELECT n.id, n.content, n.created_at, n.author_id, u.name AS author_name
+        (SELECT coalesce(jsonb_agg(to_jsonb(note_rows) ORDER BY note_rows.created_at, note_rows.source_time_ns NULLS LAST,
+          note_rows.source_external_id COLLATE "C" NULLS LAST, note_rows.id), '[]'::jsonb)
+          FROM (SELECT n.id, n.content, n.created_at, n.source_time_ns, n.source_external_id, n.author_id, u.name AS author_name
             FROM technical_notes n LEFT JOIN users u ON u.id = n.author_id WHERE n.ticket_id = t.id) note_rows) AS technical_notes,
-        (SELECT coalesce(jsonb_agg(to_jsonb(history_rows) ORDER BY history_rows.occurred_at, history_rows.id), '[]'::jsonb)
-          FROM (SELECT h.id, h.event_type, h.occurred_at, h.author_id, h.previous_value, h.new_value, u.name AS author_name
+        (SELECT coalesce(jsonb_agg(to_jsonb(history_rows) ORDER BY history_rows.source_sequence NULLS LAST, history_rows.occurred_at, history_rows.id), '[]'::jsonb)
+          FROM (SELECT h.id, h.event_type, h.occurred_at, h.source_sequence, h.author_id, h.previous_value, h.new_value, u.name AS author_name
             FROM ticket_history h LEFT JOIN users u ON u.id = h.author_id WHERE h.ticket_id = t.id) history_rows) AS history
       FROM tickets t ${ticketJoins} WHERE t.id = $1::uuid`, [ticketId]);
     const ticket = ticketMatches.rows[0];
@@ -189,7 +195,7 @@ export class TicketRepository {
     return { ticket: presentTicket(ticket),
       technical_notes: ticket.technical_notes.map((note) => ({ id: note.id, content: note.content,
         created_at: isoTimestamp(note.created_at), author: authorReference(note.author_id, note.author_name) })),
-      history: ticket.history.map((event) => ({ id: event.id, event_type: event.event_type,
+      history: ticket.history.map((event) => ({ id: event.id, event_type: event.event_type, sequence: event.source_sequence,
         occurred_at: isoTimestamp(event.occurred_at), author: authorReference(event.author_id, event.author_name),
         previous_value: event.previous_value, new_value: event.new_value })) };
   }

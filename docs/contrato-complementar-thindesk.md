@@ -1,6 +1,6 @@
 # Contrato complementar do Thindesk — versão 1.0
 
-**Estado: aprovado para evolução local da origem.** O usuário autorizou a próxima parte em 12/11/2026 e o [PR #6](https://github.com/joao-fagundess/controle-pizzaria/pull/6) foi integrado em `develop`, commit `6e15ce0ee6e34e8d32d0c39bc3f56040f2156e75`, após CI aprovada. A [implementação local de captura e export](evolucao-local-thindesk.md) deriva uma cópia separada; o ZIP e a extração original permanecem preservados. O conector do painel continua exclusivamente legado, sem promoção para `tickets`.
+**Estado: aprovado e implementado localmente.** O [PR #6](https://github.com/joao-fagundess/controle-pizzaria/pull/6) aprovou o formato e o [PR #7](https://github.com/joao-fagundess/controle-pizzaria/pull/7) integrou a captura/export em cópia derivada. Em 13/11/2026 o usuário autorizou a [recepção versionada](recepcao-versionada-thindesk.md), que valida e promove snapshots confiáveis, com proveniência/completude na API/UI. O fluxo legado permanece sem promoção. ZIP e extração original são preservados.
 
 Entregáveis: [JSON Schema 2020-12](contracts/thindesk-analytics-v1.schema.json), [exemplo resolvido](contracts/examples/valid-resolved.json), [exemplo reaberto/parcial](contracts/examples/valid-reopened-partial.json), [legado recusado](contracts/examples/invalid-legacy.json) e [testes estruturais](../integration/thindesk/contract.test.mjs). Todos os exemplos são fictícios. Validade estrutural não autoriza importação nem comprova a origem dos valores.
 
@@ -82,7 +82,7 @@ Cada coleção tem `{ "coverage": "...", "items": [...] }`:
 
 Uma nota tem `external_id`, `author`, `content` e `created_at`. Um evento tem `external_id`, `sequence`, `event_type`, `author`, `occurred_at`, `previous_value` e `new_value`. IDs de notas/eventos são únicos dentro de cada chamado e não mudam em novas exportações. Para a primeira versão, propõe-se anexar fatos imutáveis; correções exigem novo registro explicativo ou revisão do contrato, sem reescrever evidências silenciosamente.
 
-`sequence` é um inteiro positivo, único e crescente por chamado, atribuído pela origem ao registrar o fato. Na cobertura completa, a criação inicia em 1 e os movimentos conhecidos seguem sem lacunas; na parcial, lacunas são permitidas e explicitam a cobertura incompleta. Instantes não diminuem ao aumentar a sequência. Eventos simultâneos usam essa ordem causal; notas continuam com instante e identidade como desempate estável. Não inventar sequência a partir de um ID MongoDB ou da ordem de leitura. Essa proposta exige persistir e usar a sequência no histórico importado; não altera agora a ordenação da API existente.
+`sequence` é um inteiro positivo, único e crescente por chamado, atribuído pela origem ao registrar o fato. Na cobertura completa, a criação inicia em 1 e os movimentos seguem sem lacunas; na parcial, lacunas são permitidas. Instantes não diminuem ao aumentar a sequência. Eventos simultâneos usam essa ordem causal. Não inventar sequência a partir de um ID MongoDB ou da ordem de leitura. A recepção 1.0 persiste a sequência e a API a usa na ordenação do histórico; registros anteriores sem sequência mantêm o desempate temporal/local.
 
 | Evento | Valores |
 | --- | --- |
@@ -100,7 +100,7 @@ Não fabricar criação ou movimentações a partir de snapshots. Se a fonte só
 
 O schema executável verifica formato, campos obrigatórios, códigos, papel do responsável, resolução condicional, estrutura de eventos e combinação de cobertura/lista. O validador de referência usa Ajv 2020 com formatos completos, sem coerção, defaults ou remoção de campos. Um `true` nesse teste significa apenas que a estrutura corresponde à proposta.
 
-As regras abaixo são obrigatórias para a **implementação futura**, mas não são executadas pelo JSON Schema desta entrega:
+As regras abaixo são executadas pela **recepção 1.0**, mas não pelo JSON Schema isolado:
 
 | Regra semântica | Resultado necessário antes da promoção |
 | --- | --- |
@@ -117,21 +117,21 @@ O teste inclui casos que passam no schema, mas violam cronologia ou unicidade, p
 
 ## Recepção, atualização e compatibilidade
 
-Proposta de fluxo: conferir versão/envelope/limite → identificar e validar cada chamado → resolver catálogos e semântica → promover em transação ou preservar o rejeitado. Falha de envelope, identidades duplicadas ou metadados contraditórios impedem o lote. Um registro sem identidade é contabilizado como não identificado; não recebe ID fabricado.
+Fluxo implementado: conferir versão/envelope/limite → identificar e validar cada chamado → resolver catálogos e semântica → promover em transação ou preservar o rejeitado. Falha de envelope, identidades duplicadas ou metadados contraditórios impedem o lote. Texto não representável no JSONB também impede o lote, sem substituição silenciosa. Um registro sem identidade é contabilizado como não identificado; não recebe ID fabricado.
 
 Novos registros identificados e inválidos podem ser preservados como `rejected`, sem vínculo canônico, usando a área de recepção atual. Para um chamado já vinculado, uma atualização inválida deve abortar o lote e conservar o snapshot e o chamado aceitos. A tabela atual não permite manter vínculo e erros simultaneamente: não remover esse vínculo nem apagar dados válidos para forçar uma rejeição. A auditoria de cada tentativa inválida exigiria armazenamento adicional e fica para decisão própria; o export enviado permanece com seu operador.
 
 Para snapshots vinculados, o payload preservado representa a versão aceita. Uma observação mais antiga pode atualizar apenas a observação local, sem substituir essa versão. Essa distinção precisa ser documentada na futura migration/comentário e no relatório de recepção. Ausência de um chamado no export nunca implica exclusão. Coleções marcadas completas não autorizam apagar fatos locais previamente importados; divergência exige correção explícita.
 
-Nesta proposta, dados principais completos poderão sustentar KPIs mesmo com notas/histórico parciais ou indisponíveis, **depois** de implementar os avisos correspondentes. Não aceitar silenciosamente o DTO novo no comando legado. A futura importação deve selecionar a versão explicitamente; os sete endpoints atuais continuam com seus contratos enquanto as extensões de metadados são projetadas e testadas.
+Dados principais completos podem sustentar KPIs com notas/histórico parciais ou indisponíveis, com os avisos correspondentes implementados na interface. O comando novo seleciona a versão explicitamente; o legado a recusa. Os sete endpoints mantêm suas rotas e acrescentam os metadados de proveniência/completude, conforme o OpenAPI atualizado.
 
 ## Estado da implementação após aprovação
 
 1. **Implementado na cópia local derivada:** captura de datas, prioridade, vínculos, notas/histórico completos de novos chamados e export versionado. Procedimento e limites em [evolução local](evolucao-local-thindesk.md). Não recupera dados antigos nem altera a instância operacional.
-2. Implementar o leitor da versão nova, validação semântica, mapeamento de tipos e promoção transacional. Preservar o fluxo legado e sua política `promoted: 0`.
-3. Acrescentar, em migration nova, identidade externa de notas/eventos e sua unicidade por chamado, além da sequência dos eventos; definir persistência da proveniência/completude e da versão aceita. Não alterar migrations já aplicadas.
-4. Expor metadados de completude e título derivado na API própria e atualizar os rótulos do frontend. Até isso existir, os estados desconhecidos não podem ser apresentados como coleções vazias confirmadas.
-5. Verificar inserção, repetição, atualização válida/inválida, snapshot antigo, reabertura, referência conflitante e cobertura parcial em PostgreSQL e na origem homologada.
+2. **Implementado:** leitor explícito, validação semântica, mapeamento e promoção transacional. O legado mantém `promoted: 0`.
+3. **Implementado:** migrations `003`/`004` com identidades/sequências, unicidade, proveniência/completude, versões de cadastro e precisão de notas. Migrations já aplicadas não foram alteradas.
+4. **Implementado:** metadados na API e rótulos no frontend; desconhecimento não é apresentado como ausência confirmada.
+5. **Verificado:** cenários de atualização/rollback, repetição, snapshot antigo, reabertura, conflitos e cobertura parcial, com PostgreSQL nativo e origem Java real. Referências históricas sem cadastro continuam rejeitadas, conforme [evidências](evidencias/thindesk-import.md).
 
 ## Reprodução da validação da proposta
 

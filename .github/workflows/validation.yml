@@ -39,6 +39,9 @@ jobs:
           node --check scripts/prepare-thindesk-analytics.mjs
           node --check scripts/validate-thindesk-analytics.mjs
           node --check integration/thindesk/analytics.verify.mjs
+          node --check scripts/export-thindesk-analytics.mjs
+          node --check scripts/validate-thindesk-import.mjs
+          node --check integration/thindesk/verify-import.mjs
       - run: npm --prefix api run validate:phase-5
       - uses: actions/upload-artifact@v7
         if: always()

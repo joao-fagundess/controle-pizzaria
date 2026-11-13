@@ -64,6 +64,7 @@ describe('cliente do Thindesk', () => {
   });
 
   it('rejeita JSON inválido e respostas maiores que o limite', async () => {
+    await expect(readJsonResponse(new Response(Buffer.from([34, 255, 34]), { headers: { 'Content-Type': 'application/json' } }))).rejects.toThrow(/JSON válido/);
     await expect(readJsonResponse(new Response('invalid-json', { headers: { 'Content-Type': 'application/json' } }))).rejects.toThrow(/JSON válido/);
     await expect(readJsonResponse(new Response('{}', { headers: { 'Content-Type': 'application/json',
       'Content-Length': String(sourceByteLimit + 1) } }))).rejects.toThrow(/5 MiB/);

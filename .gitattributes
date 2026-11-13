@@ -4,5 +4,6 @@
 Dockerfile text eol=lf
 *.yml text eol=lf
 *.mjs text eol=lf
+*.sql text eol=lf
 *.jpg binary
 *.png binary
