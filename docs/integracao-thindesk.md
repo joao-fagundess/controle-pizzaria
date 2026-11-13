@@ -1,4 +1,4 @@
-# Recepção do Thindesk — Fase 3
+# Importação do contrato legado do Thindesk
 
 O conector implementa leitura HTTP da origem Java e preservação do último payload por identificador no PostgreSQL. Também aceita export JSON local. Não modifica o Thindesk nem promove os registros legados para os indicadores: o modelo fornecido não contém datas, prioridade, identificadores estáveis de pessoas, histórico ou considerações técnicas.
 
@@ -59,6 +59,6 @@ Exemplo de recepção de um chamado legado identificado:
 
 ## Limite operacional
 
-Na Fase 3, o teste de login e leitura usou um servidor HTTP controlado que reproduzia o contrato observado. Na etapa complementar de 12/11/2026, a [homologação local](homologacao-thindesk.md) compilou o Java original do ZIP e verificou login, sessão, leitura e recepção com MongoDB em execução e dados fictícios. Não houve uso das credenciais do ZIP ou de dados reais; a instância operacional continua pendente.
+Na implementação da API, o teste de login e leitura usou um servidor HTTP controlado que reproduzia o contrato observado. Na etapa complementar de 12/11/2026, a [homologação local](homologacao-thindesk.md) compilou o Java original do ZIP e verificou login, sessão, leitura e recepção com MongoDB em execução e dados fictícios. Não houve uso das credenciais do ZIP ou de dados reais; a instância operacional continua pendente.
 
-Para sustentar todos os indicadores reais, a origem deve fornecer datas confiáveis, prioridade, vínculos estáveis e, para o detalhe completo, histórico e considerações. Até lá, o dashboard deve avisar que existem registros excluídos e mostrar a qualidade global devolvida pelo resumo. Polling do frontend apenas refaz consultas e não executa este comando de recepção. Nenhum agendamento automático foi criado nesta fase.
+Para sustentar todos os indicadores reais, a origem deve fornecer datas confiáveis, prioridade, vínculos estáveis e, para o detalhe completo, histórico e considerações. Até lá, o dashboard deve avisar que existem registros excluídos e mostrar a qualidade global devolvida pelo resumo. Polling do frontend apenas refaz consultas e não executa este comando de recepção. Nenhum agendamento automático foi criado nesta versão.

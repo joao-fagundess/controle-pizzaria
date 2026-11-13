@@ -34,6 +34,6 @@ Projeto Compose: `thindesk-homologation`. Bancos, volumes e credenciais são pr�
 
 O build Java terminou com sucesso, compilando os 16 módulos de origem com release 23. Não havia testes Java no pacote; a validação desta etapa é a integração externa, não uma suíte JUnit. O runtime identificado foi Java 23.0.2 e MongoDB 8.0.38; os digests efetivamente executados estão no resumo.
 
-Essas verificações não são os 99 casos distintos/176 execuções da Fase 5, nem as 27 verificações HTTP do Compose principal. As verificações do Java não são incorporadas à cobertura V8 da Fase 5; suas contagens e percentuais permanecem registrados separadamente. O ZIP não é distribuído no repositório nem enviado à CI; a homologação original precisa do arquivo local autorizado. A CI comum continua validando a aplicação e o Compose principal.
+Essas verificações não são os 99 casos distintos/176 execuções da validação consolidada, nem as 27 verificações HTTP do Compose principal. As verificações do Java não são incorporadas à cobertura V8 da validação consolidada; suas contagens e percentuais permanecem registrados separadamente. O ZIP não é distribuído no repositório nem enviado à CI; a homologação original precisa do arquivo local autorizado. A CI comum continua validando a aplicação e o Compose principal.
 
 A execução prova compatibilidade local de login, sessão, leitura e preservação. A instância operacional e dados reais continuam pendentes. Os indicadores reais dependem do contrato complementar de campos ausentes; o resultado `promoted: 0` é esperado nesta versão.

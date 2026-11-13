@@ -140,7 +140,7 @@ npm.cmd --prefix api ci
 npm.cmd --prefix api run test:thindesk-contract
 ```
 
-Esse comando testa o schema e exemplos em memória. Não chama Java/MongoDB, não conecta PostgreSQL e não importa os arquivos. O conector existente não consome esse envelope. Resultados em [evidências do contrato](evidencias/contrato-thindesk.md); testes originais e sua cobertura permanecem registrados nas fases anteriores.
+Esse comando testa o schema e exemplos em memória. Não chama Java/MongoDB, não conecta PostgreSQL e não importa os arquivos. O conector existente não consome esse envelope. Resultados em [evidências do contrato](evidencias/contrato-thindesk.md); testes originais e sua cobertura permanecem registrados nas validações anteriores.
 
 ## Referências
 

@@ -1,6 +1,6 @@
-# Modelagem de dados — Fase 2
+# Modelo de dados
 
-Modelo implementado nas migrations de `api/migrations`. Domínio: chamados técnicos de helpdesk. Referência de execução: PostgreSQL 18; os testes locais desta fase usam PostgreSQL embarcado via PGlite, sem servidor Docker.
+Modelo implementado nas migrations de `api/migrations`. Domínio: chamados técnicos de helpdesk. Referência de execução: PostgreSQL 18; os testes locais desta versão usam PostgreSQL embarcado via PGlite, sem servidor Docker.
 
 ## Modelo lógico
 
@@ -121,7 +121,7 @@ erDiagram
 
 `previous_value` e `author_id` podem ser nulos: uma criação não possui valor anterior, e uma origem pode não identificar autoria. JSONB guarda o valor do evento, não funciona como substituto dos campos consultáveis do chamado.
 
-As seguintes regras envolvem múltiplas entidades ou transições: ordenação e coerência de eventos com as datas do chamado; responsável com papel de técnico; status anterior consistente; preservação da data ao fechar; remoção da resolução ao reabrir; identidade da origem do vínculo. Não são anunciadas como garantias de `CHECK` entre tabelas. Uma promoção ou alteração de estado precisa validá-las e atualizar chamado e histórico na mesma transação. O conector da Fase 3 apenas preserva legados na recepção; não promove nem altera chamados normalizados, pois o contrato complementar está pendente.
+Ordenação dos eventos, coerência das datas, papel do técnico, resolução ao fechar ou reabrir e vínculo com a origem envolvem múltiplas entidades. Essas regras são validadas pelo importador e atualizadas na mesma transação; não são garantias de `CHECK` entre tabelas. O conector legado preserva os registros incompletos, enquanto a [recepção 1.0](recepcao-versionada-thindesk.md) promove apenas os chamados válidos.
 
 Histórico do Thindesk anterior à observação não será reconstruído a partir de diferenças de snapshots. Um evento detectado pela sincronização precisa distinguir o instante de observação do instante real, se este não vier da origem. Receber um chamado pela primeira vez não comprova seu instante de criação.
 
@@ -140,7 +140,7 @@ Histórico do Thindesk anterior à observação não será reconstruído a parti
 | Índices de solicitante e autores | Relações por pessoa e verificação de vínculos sem varrer registros filhos. |
 | `ticket_source_records_state_idx` | Acompanhamento de pendências e rejeições por última observação. |
 
-PKs e constraints `UNIQUE` já criam seus próprios índices; não foram duplicados. Não criar um índice para cada combinação possível de filtros. A Fase 3 registrou `EXPLAIN (ANALYZE, BUFFERS)` de quatro consultas com 10 mil chamados sintéticos; ver `evidencias/fase-3-query-plans.json`. As metas de p95 em servidor independente não foram medidas.
+PKs e constraints `UNIQUE` já criam seus índices. Os índices adicionais atendem aos filtros e consultas, evitando um índice para cada combinação possível. Quatro consultas foram inspecionadas com `EXPLAIN (ANALYZE, BUFFERS)` e 10 mil chamados sintéticos; os planos estão em `evidencias/api-query-plans.json`. A meta de p95 em ambiente representativo ainda não foi medida.
 
 ## Migrations
 
@@ -155,7 +155,7 @@ O executor aplica os arquivos em ordem, com transação por migration, checksum 
 
 O script não chama `random()`. Com uma data de referência fixa e banco vazio, a massa de domínio é reproduzível. UUIDs determinísticos e `ON CONFLICT DO NOTHING` evitam duplicação e preservam alterações já existentes; mudar a data de referência não desloca registros já criados. Para gerar outro calendário integralmente, usar um novo banco de demonstração.
 
-A referência padrão é a data corrente no fuso da operação. `SEED_REFERENCE_DATE=2026-11-11` reproduz a evidência desta fase. Nunca executar esse seed em uma base com dados operacionais: a ferramenta não remove dados, mas a massa fictícia se somaria aos indicadores.
+A referência padrão é a data corrente no fuso da operação. `SEED_REFERENCE_DATE=2026-11-11` reproduz a evidência desta versão. Nunca executar esse seed em uma base com dados operacionais: a ferramenta não remove dados, mas a massa fictícia se somaria aos indicadores.
 
 Os dados de demonstração usam `source_system = demo`. O seed não importa o ZIP nem se conecta ao MongoDB, e não inclui o exemplo legado entre os chamados normalizados.
 
@@ -173,9 +173,9 @@ npm.cmd run db:seed
 npm.cmd run test:database
 ```
 
-Pré-requisitos: Node.js 24 ou superior e PostgreSQL acessível para migrate/seed. `test:database` cria um PostgreSQL embarcado em memória e não usa `DATABASE_URL`. Nenhuma migration é aplicada no MongoDB do Thindesk. O Compose completo com API e frontend pertence à Fase 6.
+Pré-requisitos: Node.js 24+ e PostgreSQL acessível para migrate/seed. O comando `test:database` cria um banco embarcado e não usa `DATABASE_URL`. Nenhuma migration é aplicada no MongoDB do Thindesk. Para executar banco, API e interface juntos, consulte [implantação](implantacao.md).
 
 ## Fontes técnicas consultadas
 
 - [PostgreSQL — constraints](https://www.postgresql.org/docs/18/ddl-constraints.html): limitações de `CHECK` entre linhas/tabelas e uso de integridade referencial.
-- [PGlite — documentação](https://pglite.dev/docs/): PostgreSQL embarcado e execução de SQL em lote. A validação por rede com PostgreSQL independente foi realizada na [Fase 5](evidencias/fase-5.md), com as mesmas suítes de integridade e API.
+- [PGlite — documentação](https://pglite.dev/docs/): PostgreSQL embarcado e execução de SQL em lote. A validação por rede com PostgreSQL independente foi realizada na [Testes e cobertura](evidencias/testes.md), com as mesmas suítes de integridade e API.

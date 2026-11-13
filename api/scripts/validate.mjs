@@ -9,9 +9,9 @@ import { fileURLToPath } from 'node:url';
 
 const apiRoot = fileURLToPath(new URL('../', import.meta.url));
 const projectRoot = resolve(apiRoot, '..');
-const evidenceRoot = join(projectRoot, 'docs', 'evidencias', 'fase-5');
+const evidenceRoot = join(projectRoot, 'docs', 'evidencias', 'testes');
 const npmCli = process.env.npm_execpath;
-if (!npmCli) throw new Error('Execute npm --prefix api run validate:phase-5.');
+if (!npmCli) throw new Error('Execute npm --prefix api run validate.');
 await mkdir(evidenceRoot, { recursive: true });
 const environment = { ...process.env };
 delete environment.DATABASE_URL;
@@ -41,9 +41,9 @@ await runJob('Tipos da API e testes', 'api', ['typecheck'], 'api-typecheck.txt')
 await runJob('Build do frontend', 'web', ['build'], 'web-build.txt');
 const integrityTranscript = await runJob('Integridade em PostgreSQL embarcado', 'api', ['test:database'], 'embedded-integrity.txt');
 await runJob('API com cobertura V8', 'api', ['test:coverage', '--', '--reporter=default', '--reporter=json',
-  '--outputFile=../docs/evidencias/fase-5/api-tests.json'], 'api-tests.txt');
+  '--outputFile=../docs/evidencias/testes/api-tests.json'], 'api-tests.txt');
 await runJob('Frontend com cobertura V8', 'web', ['test:coverage', '--', '--reporter=default', '--reporter=json',
-  '--outputFile=../docs/evidencias/fase-5/web-tests.json'], 'web-tests.txt');
+  '--outputFile=../docs/evidencias/testes/web-tests.json'], 'web-tests.txt');
 await runJob('PostgreSQL nativo e API compilada', 'api', ['test:postgres'], 'postgres-run.txt');
 
 const readJson = async (path) => JSON.parse(await readFile(path, 'utf8'));
@@ -75,15 +75,15 @@ await writeFile(join(evidenceRoot, 'traceability-check.json'), `${JSON.stringify
 const matrixRows = traceability.requirements.map((requirement) => `| ${requirement.id} — ${requirement.description} | ` +
   requirement.endpoints.map((endpoint) => `GET \`${endpoint}\``).join('<br>') + ' | ' +
   requirement.tests.map((test) => `[${test.file}](../${test.file}): ${test.title}`).join('<br><br>') + ' | Passou |');
-await writeFile(join(projectRoot, 'docs', 'rastreabilidade.md'), '# Matriz de rastreabilidade — Fase 5\n\n' +
-  'Gerada por `npm --prefix api run validate:phase-5` a partir de `rastreabilidade.json` e dos resultados reais dos testes. ' +
+await writeFile(join(projectRoot, 'docs', 'rastreabilidade.md'), '# Matriz de rastreabilidade\n\n' +
+  'Gerada por `npm --prefix api run validate` a partir de `rastreabilidade.json` e dos resultados reais dos testes. ' +
   'Cada cenário da API foi aprovado nos modos embarcado e PostgreSQL nativo por TCP; os cenários do frontend usam jsdom.\n\n' +
   '| Requisito | Endpoint | Arquivo e cenário verificado | Resultado |\n| --- | --- | --- | --- |\n' + matrixRows.join('\n') +
   '\n\nOs nomes acima correspondem a testes executados, não a promessas de cobertura total. A lista completa está nos relatórios JSON. ' +
-  'As 13 verificações HTTP da versão compilada usam o pool e o servidor PostgreSQL reais. As capturas do dashboard são da Fase 4; ' +
-  'a correspondência do bundle é registrada no resumo da Fase 5. Homologação da origem Thindesk e autenticação corporativa continuam pendentes.\n');
+  'As 13 verificações HTTP da versão compilada usam o pool e o servidor PostgreSQL reais. Capturas da interface e relatórios têm datas e escopos próprios; ' +
+  'o resumo informa se os assets coincidem com o build verificado no navegador. Homologação operacional do Thindesk e autenticação corporativa continuam pendentes.\n');
 
-const historicalBuild = await readFile(join(projectRoot, 'docs', 'evidencias', 'fase-4-build.txt'), 'utf8');
+const historicalBuild = await readFile(join(projectRoot, 'docs', 'evidencias', 'interface-build.txt'), 'utf8');
 const historicalAssets = [...historicalBuild.matchAll(/dist\/assets\/([^\s]+\.(?:js|css))/g)].map((match) => match[1]);
 const currentAssets = await readdir(join(projectRoot, 'web', 'dist', 'assets'));
 const integrityCount = Number(integrityTranscript.match(/(?:# tests|ℹ tests)\s+(\d+)/)?.[1]);
@@ -98,7 +98,7 @@ const summary = { generated_at: new Date().toISOString(), node: process.version,
     compiled_http_checks: postgresReport.http_checks.length },
   coverage: { api: apiCoverage.total, web: webCoverage.total }, postgres: postgresReport.engine,
   traceability: { requirements: traceChecks.length, status: 'passed' },
-  phase_4_visual_evidence_matches_bundle: historicalAssets.length > 0 && historicalAssets.every((asset) => currentAssets.includes(asset)),
+  visual_evidence_matches_bundle: historicalAssets.length > 0 && historicalAssets.every((asset) => currentAssets.includes(asset)),
   frontend_assets: currentAssets };
 await writeFile(join(evidenceRoot, 'summary.json'), `${JSON.stringify(summary, null, 2)}\n`);
 process.stdout.write(`Validação consolidada: ${summary.tests.unique_cases} casos distintos, ${summary.tests.executions} execuções e ${summary.tests.compiled_http_checks} verificações HTTP aprovados.\n`);

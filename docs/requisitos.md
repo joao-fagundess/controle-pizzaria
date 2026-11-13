@@ -1,6 +1,6 @@
-# Análise e requisitos — Fase 1
+# Requisitos e regras de negócio
 
-Documento de análise em 11/11/2026, revisado após a inspeção do ZIP fornecido e autorização para avançar à modelagem. Ver `thindesk-inspecao.md` para evidências e limitações da origem.
+Requisitos do painel de chamados técnicos integrado ao Thindesk. As limitações do sistema fornecido estão em [inspeção da origem](thindesk-inspecao.md).
 
 ## 1. Problema, objetivo e escopo
 
@@ -91,7 +91,7 @@ Aceite: API valida parâmetros, tipos e intervalos; persistência rejeita relaç
 
 ### RN01 — Identidade, classificação e responsáveis
 
-Cada chamado possui identificador interno único, título, descrição, solicitante, tipo, prioridade, status e datas de criação e atualização. Pode não possuir técnico responsável. Se houver ingestão externa, preservar a identidade da origem e impedir duplicação por sistema de origem e identificador externo. A estrutura física será definida na Fase 2.
+Cada chamado possui identificador interno único, título, descrição, solicitante, tipo, prioridade, status e datas de criação e atualização. O técnico responsável é opcional. A integração preserva a identidade externa e impede duplicação por origem e identificador. A estrutura física está em [modelagem](modelagem.md).
 
 Tipos iniciais propostos: acesso e permissões, rede e conectividade, hardware, impressão e software. Prioridades propostas: `low`, `normal`, `high`, `urgent`, exibidas como Baixa, Normal, Alta e Urgente. Catálogos reais e seu mapeamento dependem do Thindesk.
 
@@ -162,7 +162,7 @@ Usar 400 para formato ou tipo inválido; 422 para parâmetros bem formados mas s
 
 ## 6. Requisitos não funcionais
 
-As metas quantitativas abaixo são critérios propostos para validação nas Fases 3 a 5, não resultados já medidos. O ambiente de medição deve ser registrado junto das evidências.
+As metas quantitativas abaixo são critérios propostos para validação nas testes da API e da interface, não resultados já medidos. O ambiente de medição deve ser registrado junto das evidências.
 
 | ID | Área | Requisito e critério de verificação |
 | --- | --- | --- |
@@ -180,7 +180,7 @@ As metas quantitativas abaixo são critérios propostos para validação nas Fas
 
 ## 7. Rastreabilidade inicial
 
-Os endpoints abaixo foram implementados na Fase 3. A Fase 4 acrescentou a integração frontend–API, atualização e estados da interface; ver `frontend.md` e `evidencias/fase-4.md`. A Fase 5 consolidou a [matriz com arquivos e cenários aprovados](rastreabilidade.md) e os [resultados de testes e cobertura](evidencias/fase-5.md), incluindo PostgreSQL independente por TCP.
+A tabela relaciona cada requisito aos casos de uso e endpoints. Os cenários aprovados estão na [matriz de rastreabilidade](rastreabilidade.md), com [resultados de testes e cobertura](evidencias/testes.md). O [frontend](frontend.md) descreve a integração HTTP, atualização e estados da interface.
 
 | Requisito | Caso de uso | Rota prevista | Cenário de aceite prioritário |
 | --- | --- | --- | --- |
@@ -192,8 +192,8 @@ Os endpoints abaixo foram implementados na Fase 3. A Fase 4 acrescentou a integr
 | RF06 | UC01–UC07 | Todas as rotas acima | Serviço HTTP consome a API e atualiza a seleção aplicada. |
 | RF07 | UC01, UC02, UC07 | Todas as rotas acima | Loading, vazio, erro, nova tentativa, polling e resposta atrasada. |
 
-## 8. Conclusão da fase
+## 8. Situação da implementação
 
 Entregues: definição de domínio e escopo, atores, casos de uso, RF01–RF07 detalhados, requisitos não funcionais, regras dos indicadores e rastreabilidade inicial. Premissas, alternativas e pendências estão em `decisoes-de-analise.md`.
 
-Após a autorização do usuário e a inspeção da origem, a Fase 2 foi registrada em `modelagem.md`. A Fase 3 implementou as rotas documentadas em `endpoints.md` e a recepção descrita em `integracao-thindesk.md`. A Fase 4 entregou o dashboard descrito em `frontend.md`, com validação automatizada e no navegador. As limitações dos dados do Thindesk permanecem explícitas; a promoção de legados incompletos não foi implementada. A Fase 5 concluiu testes, cobertura e rastreabilidade. A Fase 6 entregou Compose, verificação em contêineres, documentação final, CI e roteiro; os quatro PRs foram integrados após autorização do usuário. O estado da publicação Git/GitHub está em [gitflow.md](gitflow.md), nas [evidências](evidencias/fase-6.md) e nas [notas da versão 0.1.0](versao-0.1.0.md).
+Modelo, API, dashboard, importadores e execução com Compose estão implementados. O importador legado preserva registros incompletos fora dos indicadores; a [recepção 1.0](recepcao-versionada-thindesk.md) importa os chamados que atendem ao contrato complementar. A homologação foi local, com dados fictícios. A instância operacional, autenticação corporativa e carga representativa continuam pendentes.

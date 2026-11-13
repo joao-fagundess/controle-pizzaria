@@ -50,7 +50,7 @@ try {
   assert.equal(detail.ticket.id, tickets.tickets[0].id);
   await queryEndpoint('/api/v1/filters/options');
   await queryEndpoint('/docs/openapi.json');
-  await writeFile(new URL('../../docs/evidencias/fase-3-http-smoke.json', import.meta.url),
+  await writeFile(new URL('../../docs/evidencias/api-http-smoke.json', import.meta.url),
     `${JSON.stringify({ mode: 'demo', seed_reference_date: '2026-11-11', summary: summary.summary, checks }, null, 2)}\n`);
   process.stdout.write(`API compilada validada: ${checks.length} consultas HTTP, total ${summary.summary.total} chamados fictícios.\n`);
 } finally {

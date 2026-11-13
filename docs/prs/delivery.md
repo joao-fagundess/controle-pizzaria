@@ -4,6 +4,6 @@ O Compose reúne PostgreSQL, migrations, API e frontend, com volume persistente,
 
 A documentação reúne requisitos, modelo, contrato, evidências, matriz de rastreabilidade, execução com contêineres e roteiro de vídeo de 2min55s. O workflow prepara verificações da aplicação e do Compose para o GitHub.
 
-Validação: consultar os [resultados reais da Fase 6](../evidencias/fase-6.md) e o [resumo da Fase 5](../evidencias/fase-5/summary.json). CI remota, PRs e integração com o Thindesk real só devem ser declarados concluídos quando houver a evidência correspondente.
+Validação: consultar os [resultados do Compose](../evidencias/compose.md) e o [resumo da validação consolidada](../evidencias/testes/summary.json). CI remota, PRs e integração com o Thindesk real só devem ser declarados concluídos quando houver a evidência correspondente.
 
 Integrado em `develop` depois da API e do dashboard, pelo [PR #3](https://github.com/joao-fagundess/controle-pizzaria/pull/3), com autorização do usuário em 12/11/2026 e CI aprovada.

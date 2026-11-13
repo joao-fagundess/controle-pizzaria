@@ -16,7 +16,7 @@ import { applyMigrations, seedTickets } from './database.mjs';
 
 const apiRoot = fileURLToPath(new URL('../', import.meta.url));
 const projectRoot = await realpath(resolve(apiRoot, '..'));
-const evidenceRelative = process.env.ANALYTICS_EVIDENCE === '1' ? 'thindesk-import/native' : 'fase-5';
+const evidenceRelative = process.env.ANALYTICS_EVIDENCE === '1' ? 'thindesk-import/native' : 'testes';
 const evidenceRoot = join(projectRoot, 'docs', 'evidencias', evidenceRelative);
 await mkdir(evidenceRoot, { recursive: true });
 const npmCli = process.env.npm_execpath;
@@ -51,7 +51,7 @@ const resolvedCache = await realpath(cacheRoot);
 if (relative(projectRoot, resolvedCache).startsWith('..') || isAbsolute(relative(projectRoot, resolvedCache))) {
   throw new Error('O diretório de teste deve permanecer dentro do projeto.');
 }
-const temporaryRoot = await mkdtemp(join(resolvedCache, 'phase5-postgres-'));
+const temporaryRoot = await mkdtemp(join(resolvedCache, 'postgres-test-'));
 const clusterDirectory = join(temporaryRoot, 'cluster');
 const passwordFile = join(temporaryRoot, 'init-password');
 const password = randomBytes(24).toString('hex');
@@ -190,7 +190,7 @@ try {
   }
   // Só remove a árvore criada por mkdtemp, depois de confirmar o confinamento ao cache do projeto.
   const cleanupTarget = relative(resolvedCache, resolve(temporaryRoot));
-  if (!cleanupTarget.startsWith('phase5-postgres-') || cleanupTarget.includes('..') || isAbsolute(cleanupTarget)) {
+  if (!cleanupTarget.startsWith('postgres-test-') || cleanupTarget.includes('..') || isAbsolute(cleanupTarget)) {
     throw new Error('Caminho de limpeza recusado.');
   }
   await rm(temporaryRoot, { recursive: true, force: true, maxRetries: 10, retryDelay: 200 });

@@ -60,7 +60,7 @@ Não usar `down --volumes` no ambiente de trabalho se os dados precisarem ser pr
 node scripts/validate-compose.mjs
 ```
 
-O validador cria projeto, credenciais, porta e volume separados do ambiente habitual. Confere migrations, saúde, estado vazio, seed, sete rotas, filtros, erros, Swagger, acesso direto sem bearer, execução sem root e ausência de credenciais nos assets. Reaplica migrations/seed, reinicia o banco e verifica persistência e reconexão. Ao terminar, remove somente os recursos de teste. Saídas em [evidências da Fase 6](evidencias/fase-6.md).
+O validador cria projeto, credenciais, porta e volume separados do ambiente habitual. Confere migrations, saúde, estado vazio, seed, sete rotas, filtros, erros, Swagger, acesso direto sem bearer, execução sem root e ausência de credenciais nos assets. Reaplica migrations/seed, reinicia o banco e verifica persistência e reconexão. Ao terminar, remove somente os recursos de teste. Saídas em [evidências do Compose](evidencias/compose.md).
 
 As tags de base são `node:24-bookworm-slim`, `nginx:stable-alpine` e `postgres:18-bookworm`; recebem atualizações dentro dessas linhas. Os lockfiles fixam dependências npm, e os relatórios registram IDs/digests das imagens efetivamente testadas. Uma implantação que exija builds idênticos deve fixar os digests aprovados e repetir a validação ao atualizá-los.
 

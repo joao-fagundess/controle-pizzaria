@@ -1,4 +1,4 @@
-# API REST — Fase 3
+# API REST
 
 API de leitura em `/api/v1`, implementada com Express e TypeScript. O contrato completo com schemas, parâmetros, respostas e exemplos está em [openapi.json](openapi.json). Com o servidor em execução, Swagger fica em `/docs/` e o mesmo contrato em `/docs/openapi.json`.
 
@@ -123,9 +123,9 @@ Toda resposta inclui `X-Request-Id`. Logs JSON registram identificador, método,
 - `thindesk-reader.ts`, `thindesk-import.ts` e `thindesk-sync.ts`: leitura, recepção e comando operacional, conforme o contrato legado.
 - `openapi.ts`: definição única do Swagger e do JSON exportado.
 
-Express 5 encaminha rejeições de rotas assíncronas ao middleware de erro; não foi criado um wrapper de try/catch por rota. Datas são convertidas pelo PostgreSQL para respeitar regras históricas de fuso. Os planos com 10 mil registros estão nas [evidências](evidencias/fase-3.md); não houve medição de p95 em servidor independente.
+Express 5 encaminha rejeições de rotas assíncronas ao middleware de erro; não foi criado um wrapper de try/catch por rota. Datas são convertidas pelo PostgreSQL para respeitar regras históricas de fuso. Os planos com 10 mil registros estão nas [evidências](evidencias/api.md); não houve medição de p95 em servidor independente.
 
-A [Fase 5](evidencias/fase-5.md) executou as suítes contra PostgreSQL 18.6 independente por TCP, além de 13 verificações HTTP da API compilada usando `pg.Pool`. Essa execução valida integração e comportamento funcional; a meta de p95 permanece sem medição de carga.
+A [Testes e cobertura](evidencias/testes.md) executou as suítes contra PostgreSQL 18.6 independente por TCP, além de 13 verificações HTTP da API compilada usando `pg.Pool`. Essa execução valida integração e comportamento funcional; a meta de p95 permanece sem medição de carga.
 
 ## Referências técnicas
 

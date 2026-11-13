@@ -1,11 +1,11 @@
-# Evidências — inspeção do Thindesk e Fase 2
+# Validação do banco e do seed
 
 Validação realizada em 11/11/2026 no Windows, com Node.js `v24.21.0`, npm `12.2.0`, `pg` `8.23.1` e PGlite `0.5.16`. O motor utilizado informa PostgreSQL `18.6`, compilado para WebAssembly.
 
 ## Artefatos de evidência
 
-- [Saída dos testes em TAP](fase-2-tests.tap)
-- [Perfil do seed em JSON](fase-2-seed.json)
+- [Saída dos testes em TAP](banco-tests.tap)
+- [Perfil do seed em JSON](banco-seed.json)
 - [Inspeção do ZIP e hash do arquivo original](../thindesk-inspecao.md)
 
 ## Execução dos testes
@@ -58,6 +58,6 @@ O intervalo de aproximadamente oito meses atravessa nove meses de calendário na
 
 ## Limites desta evidência
 
-Docker está instalado, mas seu serviço não estava disponível. As migrations e o seed foram executados com sucesso em PostgreSQL embarcado em memória; não houve execução em servidor PostgreSQL por rede, teste de concorrência real, benchmark ou homologação contra MongoDB/Thindesk. Essas verificações continuam pendentes para as fases de integração.
+Docker está instalado, mas seu serviço não estava disponível. As migrations e o seed foram executados com sucesso em PostgreSQL embarcado em memória; não houve execução em servidor PostgreSQL por rede, teste de concorrência real, benchmark ou homologação contra MongoDB/Thindesk. Essas verificações continuam pendentes para os testes de integração.
 
-Não houve medição de cobertura de código nesta fase. Testes dos endpoints, componentes, cobertura consolidada, screenshots e matriz final RF → endpoint → arquivo de teste pertencem à Fase 5. Ainda não há dashboard executável para produzir prints.
+Não houve medição de cobertura de código nesta versão. Testes dos endpoints, componentes, cobertura consolidada, screenshots e matriz final RF → endpoint → arquivo de teste pertencem à validação consolidada. Ainda não há dashboard executável para produzir prints.

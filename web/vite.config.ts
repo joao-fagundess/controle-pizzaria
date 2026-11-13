@@ -27,7 +27,7 @@ export default defineConfig(({ mode }) => {
         provider: "v8",
         include: ["src/**/*.{ts,tsx}"],
         reporter: ["text-summary", "json-summary", "json", "html", "lcov"],
-        reportsDirectory: "../docs/evidencias/fase-5/web-coverage",
+        reportsDirectory: "../docs/evidencias/testes/web-coverage",
         reportOnFailure: true,
       },
     },

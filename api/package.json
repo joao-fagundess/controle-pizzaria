@@ -23,7 +23,7 @@
     "test:smoke": "node scripts/smoke-api.mjs",
     "test:coverage": "vitest run --coverage",
     "test:postgres": "node scripts/test-postgres.mjs",
-    "validate:phase-5": "node scripts/validate-phase-5.mjs",
+    "validate": "node scripts/validate.mjs",
     "test:thindesk-contract": "node --test ../integration/thindesk/contract.test.mjs"
   },
   "dependencies": {
