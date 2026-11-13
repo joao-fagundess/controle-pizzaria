@@ -292,6 +292,11 @@
               "priority_changed"
             ]
           },
+          "sequence": {
+            "type": "integer",
+            "minimum": 1,
+            "nullable": true
+          },
           "occurred_at": {
             "type": "string",
             "format": "date-time"
@@ -324,6 +329,7 @@
         "required": [
           "id",
           "event_type",
+          "sequence",
           "occurred_at",
           "author",
           "previous_value",
@@ -472,6 +478,51 @@
             "additionalProperties": false,
             "nullable": true
           },
+          "provenance": {
+            "type": "object",
+            "properties": {
+              "contract_version": {
+                "type": "string",
+                "enum": [
+                  "1.0",
+                  null
+                ],
+                "nullable": true
+              },
+              "exported_at": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              },
+              "title_is_derived": {
+                "type": "boolean"
+              },
+              "history_coverage": {
+                "type": "string",
+                "enum": [
+                  "complete",
+                  "partial",
+                  "unavailable"
+                ]
+              },
+              "technical_notes_coverage": {
+                "type": "string",
+                "enum": [
+                  "complete",
+                  "partial",
+                  "unavailable"
+                ]
+              }
+            },
+            "required": [
+              "contract_version",
+              "exported_at",
+              "title_is_derived",
+              "history_coverage",
+              "technical_notes_coverage"
+            ],
+            "additionalProperties": false
+          },
           "latest_technical_note": {
             "type": "object",
             "properties": {
@@ -531,6 +582,7 @@
           "updated_at",
           "resolved_at",
           "source",
+          "provenance",
           "latest_technical_note"
         ],
         "additionalProperties": false
@@ -1968,7 +2020,14 @@
                         "system": "demo",
                         "external_id": "ticket-1"
                       },
-                      "latest_technical_note": null
+                      "latest_technical_note": null,
+                      "provenance": {
+                        "contract_version": null,
+                        "exported_at": null,
+                        "title_is_derived": false,
+                        "history_coverage": "complete",
+                        "technical_notes_coverage": "complete"
+                      }
                     }
                   ],
                   "pagination": {
@@ -2145,7 +2204,14 @@
                       "system": "demo",
                       "external_id": "ticket-1"
                     },
-                    "latest_technical_note": null
+                    "latest_technical_note": null,
+                    "provenance": {
+                      "contract_version": null,
+                      "exported_at": null,
+                      "title_is_derived": false,
+                      "history_coverage": "complete",
+                      "technical_notes_coverage": "complete"
+                    }
                   },
                   "technical_notes": [],
                   "history": [],

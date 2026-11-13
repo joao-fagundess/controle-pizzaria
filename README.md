@@ -6,7 +6,7 @@ O domínio é **helpdesk de TI**. O nome da pasta local não define o domínio d
 
 ## Estado da entrega
 
-Fases 1 a 6 concluídas: análise, modelagem, migrations, seed, API REST, Swagger, recepção legada, dashboard React integrado, validação consolidada e entrega com Gitflow e Compose. A interface inclui indicadores, gráficos, filtros, tabela paginada, detalhe e atualização automática. A integração operacional com o Thindesk ainda depende da homologação da instância real e da recepção versionada do contrato complementar aprovado.
+Fases 1 a 6 concluídas: análise, modelagem, migrations, seed, API REST, Swagger, recepção legada, dashboard React integrado, validação consolidada e entrega com Gitflow e Compose. A interface inclui indicadores, gráficos, filtros, tabela paginada, detalhe e atualização automática. A recepção versionada está implementada e homologada localmente; a integração operacional ainda depende da instância real, autenticação e infraestrutura representativa.
 
 Na Fase 6, foram entregues Compose, imagens da API/frontend, proxy Nginx, validação em contêineres, workflow de CI, documentação final e roteiro do vídeo. Os quatro PRs foram integrados com autorização do usuário em 12/11/2026. A versão `0.1.0` reúne essa entrega em `main`; detalhes e evidências no [relatório da Fase 6](docs/evidencias/fase-6.md) e nas [notas da versão](docs/versao-0.1.0.md). Repositório: [joao-fagundess/controle-pizzaria](https://github.com/joao-fagundess/controle-pizzaria).
 
@@ -30,6 +30,7 @@ Na Fase 6, foram entregues Compose, imagens da API/frontend, proxy Nginx, valida
 - [Homologação local do Thindesk original](docs/homologacao-thindesk.md) e [evidências](docs/evidencias/thindesk-local.md)
 - [Contrato complementar aprovado do Thindesk](docs/contrato-complementar-thindesk.md) e [testes estruturais](docs/evidencias/contrato-thindesk.md)
 - [Captura e export na evolução local do Thindesk](docs/evolucao-local-thindesk.md)
+- [Recepção versionada, validação e completude](docs/recepcao-versionada-thindesk.md) e [evidências](docs/evidencias/thindesk-import.md)
 
 ## Estrutura atual
 
@@ -60,9 +61,9 @@ README.md
 
 A Fase 5 consolidou testes, cobertura e rastreabilidade. A Fase 6 acrescentou a execução com contêineres e os documentos de entrega.
 
-A homologação complementar foi integrada em `develop` pelo [PR #5](https://github.com/joao-fagundess/controle-pizzaria/pull/5). Ela reproduz o Thindesk do ZIP com Java/MongoDB, bancos separados e três chamados fictícios. Os testes de login e recepção passaram; o [dashboard de homologação](http://127.0.0.1:8180/) mostra três exclusões e nenhum chamado canônico, pois os campos analíticos continuam ausentes. Preparação, acesso e comandos em [homologacao-thindesk.md](docs/homologacao-thindesk.md). Essa etapa é posterior à tag `v0.1.0`; `main` e a tag preservam a primeira entrega.
+A homologação complementar foi integrada em `develop` pelo [PR #5](https://github.com/joao-fagundess/controle-pizzaria/pull/5). Ela reproduziu o Thindesk do ZIP com Java/MongoDB e três chamados fictícios, inicialmente excluídos por falta de campos. Na etapa de recepção `1.0`, o [dashboard de homologação](http://127.0.0.1:8180/) passou a mostrar **três chamados aceitos e seis registros rejeitados preservados**, após receber o export da origem evoluída. Os legados continuam excluídos. `main` e `v0.1.0` preservam a primeira entrega; a demonstração em 8080 mantém 480 chamados.
 
-O [PR #6](https://github.com/joao-fagundess/controle-pizzaria/pull/6) integrou o contrato aprovado de export complementar `1.0`, com schema, exemplos e 44 testes estruturais. A evolução local acrescenta captura e export em uma cópia derivada, na porta 8082, com datas reais, identidades, notas e histórico de novos chamados. O conector existente não consome esse formato; a promoção depende da validação semântica, do mapeamento e da apresentação de completude ainda a implementar. Procedimento e limites em [evolucao-local-thindesk.md](docs/evolucao-local-thindesk.md).
+O [PR #6](https://github.com/joao-fagundess/controle-pizzaria/pull/6) integrou o contrato aprovado `1.0`; o [PR #7](https://github.com/joao-fagundess/controle-pizzaria/pull/7) integrou captura e export em cópia derivada. O receptor explícito `thindesk:sync:v1` agora valida semântica, identidades, mapeamentos e versões antes da promoção transacional. A interface mostra completude e proveniência. A origem em 8082 fica parada para economizar memória, preservando imagem e volume. Regras e limites em [recepcao-versionada-thindesk.md](docs/recepcao-versionada-thindesk.md).
 
 ## Execução e configuração
 
@@ -121,7 +122,7 @@ Passaram **99 casos distintos**: 14 de integridade, 63 de API/regras/conector/Op
 
 Para verificações menores, `npm.cmd test` na pasta `api` executa tipos, integridade e API no banco embarcado; `npm.cmd run test:coverage` mede a API; `npm.cmd run test:postgres` exige o build da API e executa o banco nativo. Na pasta `web`, `npm.cmd test` executa os 22 testes de componentes, consultas, serviço HTTP e polling; `npm.cmd run test:coverage` gera cobertura e `npm.cmd run build` verifica tipos e gera `web/dist`.
 
-A interface foi verificada no navegador com a API do projeto em 360, 768 e 1440 pixels, incluindo falha de conexão e recuperação. As capturas da Fase 4 continuam representativas: os nomes com hash dos quatro assets compilados coincidem na Fase 5.
+A interface da versão `0.1.0` foi verificada no navegador em 360, 768 e 1440 pixels, incluindo falha e recuperação; os bundles das fases 4/5 coincidem. A evolução atual acrescenta rótulos de proveniência/completude e tem [capturas e testes próprios](docs/evidencias/thindesk-import.md).
 
 As configurações públicas do frontend são `VITE_API_BASE_URL` e `VITE_POLL_INTERVAL_SECONDS`. `API_PROXY_TARGET` e o eventual `API_ACCESS_TOKEN` ficam somente no servidor do proxy local. A implantação estática precisa de gateway autenticado; não colocar credenciais em variáveis `VITE_*`. Ver [frontend.md](docs/frontend.md).
 

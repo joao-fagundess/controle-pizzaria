@@ -141,6 +141,9 @@ SELECT md5('demo-history-last-' || external_id)::uuid, id, assignee_id, 'status_
 FROM tickets WHERE source_system = 'demo' AND status_code IN ('waiting', 'resolved', 'closed')
 ON CONFLICT (id) DO NOTHING;
 
+-- O gerador fornece integralmente as coleções fictícias, inclusive quando vazias.
+UPDATE tickets SET history_coverage = 'complete', notes_coverage = 'complete' WHERE source_system = 'demo';
+
 -- Fechar preserva o instante da resolução; não representa um novo atendimento.
 INSERT INTO ticket_history (id, ticket_id, author_id, event_type, previous_value, new_value, occurred_at)
 SELECT md5('demo-history-closed-' || external_id)::uuid, id, assignee_id, 'status_changed',

@@ -135,6 +135,21 @@ services:
         condition: service_completed_successfully
     restart: "no"
 
+  sync-v1:
+    <<: *api-image
+    profiles: [tools]
+    command: [node, dist/thindesk-analytics-sync.js, --mapping, /imports/mapping.json, --file, /imports/export.json]
+    environment: *database-environment
+    volumes:
+      - ./.cache/thindesk-homologation/analytics-export.json:/imports/export.json:ro
+      - ./integration/thindesk/analytics-mapping.example.json:/imports/mapping.json:ro
+    depends_on:
+      db:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+    restart: "no"
+
   verify:
     <<: *api-image
     profiles: [tools]

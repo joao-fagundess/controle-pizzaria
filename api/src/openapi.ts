@@ -34,7 +34,7 @@ const schemas: Record<string, Schema> = {
     resolution_rate: { type: 'number', minimum: 0, maximum: 100, nullable: true } }),
   TechnicalNote: technicalNoteSchema,
   HistoryEvent: objectSchema({ id: uuidSchema, event_type: { type: 'string', enum: ['created', 'status_changed',
-    'assignee_changed', 'type_changed', 'priority_changed'] }, occurred_at: timestampSchema,
+    'assignee_changed', 'type_changed', 'priority_changed'] }, sequence: nullable({ type: 'integer', minimum: 1 }), occurred_at: timestampSchema,
     author: personReference, previous_value: { description: 'Valor JSON anterior; null quando não há valor anterior.' }, new_value: {} }),
   Ticket: objectSchema({ id: uuidSchema, title: stringSchema, description: stringSchema,
     status: countOption, type: objectSchema({ id: uuidSchema, code: stringSchema, name: stringSchema }),
@@ -42,6 +42,9 @@ const schemas: Record<string, Schema> = {
     requester: objectSchema({ id: uuidSchema, name: stringSchema, department: nullable(stringSchema) }),
     created_at: timestampSchema, updated_at: timestampSchema, resolved_at: nullable(timestampSchema),
     source: nullable(objectSchema({ system: stringSchema, external_id: stringSchema })),
+    provenance: objectSchema({ contract_version: nullable({ type: 'string', enum: ['1.0', null] }), exported_at: nullable(timestampSchema),
+      title_is_derived: { type: 'boolean' }, history_coverage: { type: 'string', enum: ['complete', 'partial', 'unavailable'] },
+      technical_notes_coverage: { type: 'string', enum: ['complete', 'partial', 'unavailable'] } }),
     latest_technical_note: nullable(technicalNoteSchema) }),
   Pagination: objectSchema({ page: { type: 'integer', minimum: 1 }, page_size: { type: 'integer', minimum: 1, maximum: 100 },
     total: integerSchema, total_pages: integerSchema }),
@@ -80,7 +83,8 @@ const ticketExample = { id: '10000000-0000-4000-8000-000000000002', title: 'Impr
   priority: { code: 'normal', name: 'Normal' }, assignee: null,
   requester: { id: '10000000-0000-4000-8000-000000000004', name: 'Ana Paula Ribeiro', department: 'Recepção' },
   created_at: '2026-11-11T12:00:00.000Z', updated_at: '2026-11-11T12:00:00.000Z', resolved_at: null,
-  source: { system: 'demo', external_id: 'ticket-1' }, latest_technical_note: null };
+  source: { system: 'demo', external_id: 'ticket-1' }, latest_technical_note: null,
+  provenance: { contract_version: null, exported_at: null, title_is_derived: false, history_coverage: 'complete', technical_notes_coverage: 'complete' } };
 
 function operation(operationId: string, summary: string, description: string, responseSchema: string,
   parameters: unknown[], example: unknown) {

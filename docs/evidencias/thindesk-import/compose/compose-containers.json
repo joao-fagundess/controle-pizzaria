@@ -1,0 +1,115 @@
+[
+  {
+    "Command": "\"docker-entrypoint.s…\"",
+    "CreatedAt": "2026-11-13 09:24:13 -0300 -03",
+    "Engine": "",
+    "ExitCode": 0,
+    "Health": "healthy",
+    "ID": "33858c5d2008",
+    "Image": "thindesk-dashboard-api:local",
+    "Labels": "com.docker.compose.project=thindesk-phase6-f7b3fdee65c0,com.docker.compose.service=api,com.docker.compose.version=5.5.1,com.docker.compose.config-hash=712c622bbde87e52f8185455ff52f127d324fe8fa816ef5f74a34afc632b9fe9,com.docker.compose.container-number=1,com.docker.compose.depends_on=migrate:service_completed_successfully:false,com.docker.compose.project.config_files=C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria\\docker-compose.yml,com.docker.compose.project.environment_file=C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria\\.cache\\phase6-compose-2NBXYp\\.env,com.docker.compose.project.working_dir=C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria,desktop.docker.io/ports.scheme=v2,com.docker.compose.image=sha256:6a60286979bb89d982ed1d84fa9dc3c219f70b72a0f8269a18044a4c3b665582,com.docker.compose.oneoff=False",
+    "LocalVolumes": "0",
+    "Mounts": "",
+    "Name": "thindesk-phase6-f7b3fdee65c0-api-1",
+    "Names": "thindesk-phase6-f7b3fdee65c0-api-1",
+    "Networks": "thindesk-phase6-f7b3fdee65c0_default",
+    "Ports": "3000/tcp",
+    "Project": "thindesk-phase6-f7b3fdee65c0",
+    "Publishers": [
+      {
+        "URL": "",
+        "TargetPort": 3000,
+        "PublishedPort": 0,
+        "Protocol": "tcp"
+      }
+    ],
+    "RunningFor": "44 seconds ago",
+    "Service": "api",
+    "Size": "0B",
+    "State": "running",
+    "Status": "Up 31 seconds (healthy)"
+  },
+  {
+    "Command": "\"docker-entrypoint.s…\"",
+    "CreatedAt": "2026-11-13 09:24:13 -0300 -03",
+    "Engine": "",
+    "ExitCode": 0,
+    "Health": "healthy",
+    "ID": "70a54ce7ebf7",
+    "Image": "postgres:18-bookworm",
+    "Labels": "com.docker.compose.version=5.5.1,com.docker.compose.config-hash=752ec50736ac8c879fe3e1cba9abd7efdfc28cdaeee1df64ee62e435ae9200f8,com.docker.compose.container-number=1,com.docker.compose.project=thindesk-phase6-f7b3fdee65c0,com.docker.compose.project.working_dir=C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria,com.docker.compose.service=db,desktop.docker.io/ports.scheme=v2,com.docker.compose.depends_on=,com.docker.compose.image=sha256:02fb3245e038f33536cf13bc6c4e59f21d07b0cea3c1fe1c07c6e8aa8f083bcc,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria\\docker-compose.yml,com.docker.compose.project.environment_file=C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria\\.cache\\phase6-compose-2NBXYp\\.env",
+    "LocalVolumes": "1",
+    "Mounts": "thindesk-phase…",
+    "Name": "thindesk-phase6-f7b3fdee65c0-db-1",
+    "Names": "thindesk-phase6-f7b3fdee65c0-db-1",
+    "Networks": "thindesk-phase6-f7b3fdee65c0_default",
+    "Ports": "5432/tcp",
+    "Project": "thindesk-phase6-f7b3fdee65c0",
+    "Publishers": [
+      {
+        "URL": "",
+        "TargetPort": 5432,
+        "PublishedPort": 0,
+        "Protocol": "tcp"
+      }
+    ],
+    "RunningFor": "44 seconds ago",
+    "Service": "db",
+    "Size": "0B",
+    "State": "running",
+    "Status": "Up 9 seconds (healthy)"
+  },
+  {
+    "Command": "\"docker-entrypoint.s…\"",
+    "CreatedAt": "2026-11-13 09:24:13 -0300 -03",
+    "Engine": "",
+    "ExitCode": 0,
+    "Health": "",
+    "ID": "70fbd7f591de",
+    "Image": "thindesk-dashboard-api:local",
+    "Labels": "com.docker.compose.depends_on=db:service_healthy:false,com.docker.compose.image=sha256:6a60286979bb89d982ed1d84fa9dc3c219f70b72a0f8269a18044a4c3b665582,com.docker.compose.project=thindesk-phase6-f7b3fdee65c0,com.docker.compose.project.environment_file=C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria\\.cache\\phase6-compose-2NBXYp\\.env,com.docker.compose.project.working_dir=C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria,desktop.docker.io/ports.scheme=v2,com.docker.compose.container-number=1,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria\\docker-compose.yml,com.docker.compose.service=migrate,com.docker.compose.version=5.5.1,com.docker.compose.config-hash=15a345d984f88901b46b7614c13c212542b71af350d34ec065c4e4e37c945122",
+    "LocalVolumes": "0",
+    "Mounts": "",
+    "Name": "thindesk-phase6-f7b3fdee65c0-migrate-1",
+    "Names": "thindesk-phase6-f7b3fdee65c0-migrate-1",
+    "Networks": "thindesk-phase6-f7b3fdee65c0_default",
+    "Ports": "",
+    "Project": "thindesk-phase6-f7b3fdee65c0",
+    "Publishers": [],
+    "RunningFor": "44 seconds ago",
+    "Service": "migrate",
+    "Size": "0B",
+    "State": "exited",
+    "Status": "Exited (0) 2 seconds ago"
+  },
+  {
+    "Command": "\"/docker-entrypoint.…\"",
+    "CreatedAt": "2026-11-13 09:24:13 -0300 -03",
+    "Engine": "",
+    "ExitCode": 0,
+    "Health": "healthy",
+    "ID": "242721dd44c1",
+    "Image": "thindesk-dashboard-web:local",
+    "Labels": "com.docker.compose.depends_on=api:service_healthy:false,com.docker.compose.image=sha256:ebb75bacb82131afa9dd05703e28862910eb13596e1d108f0d6e15bc01c5659c,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria\\docker-compose.yml,com.docker.compose.project.working_dir=C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria,desktop.docker.io/ports.scheme=v2,maintainer=NGINX Docker Maintainers <docker-maint@nginx.com>,com.docker.compose.config-hash=9e410549f498ff32700fb1007da4d735966e1030726d3353063311149bc92d33,com.docker.compose.container-number=1,com.docker.compose.project=thindesk-phase6-f7b3fdee65c0,com.docker.compose.project.environment_file=C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria\\.cache\\phase6-compose-2NBXYp\\.env,com.docker.compose.service=web,com.docker.compose.version=5.5.1,desktop.docker.io/ports/8080/tcp=127.0.0.1:64375",
+    "LocalVolumes": "0",
+    "Mounts": "",
+    "Name": "thindesk-phase6-f7b3fdee65c0-web-1",
+    "Names": "thindesk-phase6-f7b3fdee65c0-web-1",
+    "Networks": "thindesk-phase6-f7b3fdee65c0_default",
+    "Ports": "127.0.0.1:64375->8080/tcp",
+    "Project": "thindesk-phase6-f7b3fdee65c0",
+    "Publishers": [
+      {
+        "URL": "127.0.0.1",
+        "TargetPort": 8080,
+        "PublishedPort": 64375,
+        "Protocol": "tcp"
+      }
+    ],
+    "RunningFor": "44 seconds ago",
+    "Service": "web",
+    "Size": "0B",
+    "State": "running",
+    "Status": "Up 25 seconds (healthy)"
+  }
+]

@@ -89,6 +89,7 @@ export const pageFixture: TicketPage = {
       updated_at: "2026-11-11T16:00:00.000Z",
       resolved_at: "2026-11-11T16:00:00.000Z",
       source: { system: "demo", external_id: "ticket-1" },
+      provenance: { contract_version: null, exported_at: null, title_is_derived: false, history_coverage: "complete", technical_notes_coverage: "complete" },
       latest_technical_note: {
         id: ticketId,
         content: "Fila revisada e impressão validada.",

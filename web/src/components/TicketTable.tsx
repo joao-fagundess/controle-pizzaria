@@ -109,6 +109,7 @@ export function TicketTable({
                     >
                       {ticket.title}
                     </button>
+                    {ticket.provenance?.title_is_derived && <small className="ticket-subline">Título derivado da descrição</small>}
                     <span className="ticket-subline">
                       <span className="ticket-id">
                         #{ticket.id.slice(0, 8).toUpperCase()}
@@ -138,10 +139,11 @@ export function TicketTable({
                     <p className="note-preview">
                       {ticket.latest_technical_note?.content || (
                         <span className="muted-text">
-                          Sem considerações técnicas
+                          {ticket.provenance?.technical_notes_coverage === "complete" ? "Sem considerações técnicas" : "Não fornecido pela origem"}
                         </span>
                       )}
                     </p>
+                    {ticket.provenance?.technical_notes_coverage === "partial" && <small className="muted-text">Considerações parciais</small>}
                     {ticket.latest_technical_note && (
                       <small className="note-author">
                         {ticket.latest_technical_note.author?.name ||

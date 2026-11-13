@@ -9,13 +9,15 @@ import { createRequire } from 'node:module';
 import { createServer } from 'node:net';
 import { basename, isAbsolute, join, relative, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import { parseEnv } from 'node:util';
 import { setTimeout as wait } from 'node:timers/promises';
 import pg from 'pg';
 import { applyMigrations, seedTickets } from './database.mjs';
 
 const apiRoot = fileURLToPath(new URL('../', import.meta.url));
 const projectRoot = await realpath(resolve(apiRoot, '..'));
-const evidenceRoot = join(projectRoot, 'docs', 'evidencias', 'fase-5');
+const evidenceRelative = process.env.ANALYTICS_EVIDENCE === '1' ? 'thindesk-import/native' : 'fase-5';
+const evidenceRoot = join(projectRoot, 'docs', 'evidencias', evidenceRelative);
 await mkdir(evidenceRoot, { recursive: true });
 const npmCli = process.env.npm_execpath;
 if (!npmCli) throw new Error('Execute npm run test:postgres na pasta api.');
@@ -62,6 +64,7 @@ let postgresProcess;
 let applicationProcess;
 let nativeLog = '';
 let report;
+let sourceHomologation;
 
 try {
   await writeFile(passwordFile, password, { mode: 0o600 });
@@ -93,7 +96,7 @@ try {
   await writeFile(join(evidenceRoot, 'postgres-integrity.tap'), integrity.transcript);
   if (integrity.exitCode !== 0) throw new Error('Testes de integridade falharam; consulte postgres-integrity.tap.');
   const endpoints = await runProgram(process.execPath, [npmCli, 'run', 'test:api', '--', '--reporter=default',
-    '--reporter=json', '--outputFile=../docs/evidencias/fase-5/postgres-tests.json'], testEnvironment);
+    '--reporter=json', `--outputFile=../docs/evidencias/${evidenceRelative}/postgres-tests.json`], testEnvironment);
   await writeFile(join(evidenceRoot, 'postgres-tests.txt'), endpoints.transcript);
   if (endpoints.exitCode !== 0) throw new Error('Testes dos endpoints falharam; consulte postgres-tests.txt.');
 
@@ -108,6 +111,25 @@ try {
     await applyMigrations(database);
     await seedTickets(database, '2026-11-11');
   } finally { await database.end(); }
+
+  // Opt-in local: lê apenas as duas origens fictícias já preparadas, nunca configurações do ZIP.
+  if (process.env.THINDESK_HOMOLOGATION === '1') {
+    const credentials = parseEnv(await readFile(join(projectRoot, '.cache/thindesk-homologation/.env'), 'utf8'));
+    const sourceEnvironment = { ...process.env, DATABASE_URL: testUrl, THINDESK_USERNAME: credentials.THINDESK_LOGIN_USERNAME,
+      THINDESK_PASSWORD: credentials.THINDESK_LOGIN_PASSWORD, THINDESK_SESSION_COOKIE: '' };
+    const legacy = await runProgram(process.execPath, ['dist/thindesk-sync.js'], {
+      ...sourceEnvironment, THINDESK_BASE_URL: `http://127.0.0.1:${credentials.THINDESK_PORT || 8081}` });
+    const versioned = await runProgram(process.execPath, ['dist/thindesk-analytics-sync.js', '--mapping',
+      join(projectRoot, 'integration/thindesk/analytics-mapping.example.json')], {
+      ...sourceEnvironment, THINDESK_BASE_URL: `http://127.0.0.1:${process.env.THINDESK_ANALYTICS_PORT || 8082}` });
+    for (const output of [legacy.transcript, versioned.transcript]) for (const secret of [password, credentials.THINDESK_LOGIN_PASSWORD])
+      assert.ok(!output.includes(secret), 'A recepção não deve registrar credenciais.');
+    assert.equal(legacy.exitCode, 0, 'A leitura da origem legada precisa concluir.');
+    assert.equal(versioned.exitCode, 2, 'O export local contém referências históricas não resolvidas, explicitamente rejeitadas.');
+    sourceHomologation = { legacy: JSON.parse(legacy.transcript), versioned: JSON.parse(versioned.transcript), origin_writes: false };
+    assert.equal(sourceHomologation.legacy.promoted, 0); assert.equal(sourceHomologation.versioned.promoted, 3);
+    assert.equal(sourceHomologation.versioned.rejected, 3);
+  }
 
   const applicationPort = await availablePort();
   const accessToken = randomBytes(32).toString('hex');
@@ -133,7 +155,11 @@ try {
   }
   await queryApplication('/health');
   const summary = await queryApplication('/api/v1/dashboard/summary');
-  assert.equal(summary.summary.total, 480);
+  assert.equal(summary.summary.total, 480 + (sourceHomologation?.versioned.promoted ?? 0));
+  if (sourceHomologation) {
+    assert.equal(summary.meta.source_quality.linked, 3); assert.equal(summary.meta.source_quality.rejected, 6);
+    sourceHomologation.http_verified = { total: summary.summary.total, source_quality: summary.meta.source_quality };
+  }
   await queryApplication('/api/v1/dashboard/tickets-by-period?group_by=week');
   await queryApplication('/api/v1/dashboard/status-distribution');
   await queryApplication('/api/v1/dashboard/top-ticket-types?limit=3');
@@ -152,7 +178,7 @@ try {
   assert.equal(unavailable.error.code, 'INTERNAL_ERROR');
   assert.ok(!JSON.stringify(unavailable).includes(password));
   const testOutcome = JSON.parse(await readFile(join(evidenceRoot, 'postgres-tests.json'), 'utf8'));
-  report = { status: 'passed', engine, transport: 'TCP', host: '127.0.0.1', port,
+  report = { status: 'passed', engine, transport: 'TCP', host: '127.0.0.1', port, source_homologation: sourceHomologation,
     server_process: basename(binaries.postgres), server_pid: postgresProcess.pid,
     integrity_tests: Number(integrity.transcript.match(/# tests (\d+)/)?.[1]),
     endpoint_and_connector_tests: testOutcome.numPassedTests, leaked_schemas: leakedSchemas, http_checks: httpChecks };

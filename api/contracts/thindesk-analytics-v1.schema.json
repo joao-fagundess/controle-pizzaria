@@ -1,0 +1,666 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:thindesk:analytics-export:1.0",
+  "$comment": "Estrutura aprovada para evolução local do export complementar. Não habilita importação nem valida cronologia, vínculos ou transições entre registros.",
+  "title": "Export analítico Thindesk 1.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "source_system",
+    "exported_at",
+    "tickets"
+  ],
+  "properties": {
+    "contract_version": {
+      "const": "1.0"
+    },
+    "source_system": {
+      "const": "thindesk"
+    },
+    "exported_at": {
+      "$ref": "#/$defs/instant"
+    },
+    "tickets": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ticket"
+      }
+    }
+  },
+  "$defs": {
+    "externalId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[^\\s\\u0000-\\u001F\\u007F]+$"
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S",
+      "not": {
+        "pattern": "[\\u0000-\\u0008\\u000B\\u000C\\u000E-\\u001F\\u007F]"
+      }
+    },
+    "instant": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "(?:Z|[+-][0-9]{2}:[0-9]{2})$"
+    },
+    "status": {
+      "enum": [
+        "open",
+        "in_progress",
+        "waiting",
+        "resolved",
+        "closed"
+      ]
+    },
+    "priority": {
+      "enum": [
+        "low",
+        "normal",
+        "high",
+        "urgent"
+      ]
+    },
+    "staff": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "external_id",
+        "name",
+        "role",
+        "active"
+      ],
+      "properties": {
+        "external_id": {
+          "$ref": "#/$defs/externalId"
+        },
+        "name": {
+          "$ref": "#/$defs/text"
+        },
+        "role": {
+          "enum": [
+            "technician",
+            "supervisor"
+          ]
+        },
+        "active": {
+          "type": "boolean"
+        }
+      }
+    },
+    "author": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/staff"
+        }
+      ]
+    },
+    "assignee": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/staff"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "role": {
+                  "const": "technician"
+                }
+              },
+              "required": [
+                "role"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "requester": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "external_id",
+        "name"
+      ],
+      "properties": {
+        "external_id": {
+          "$ref": "#/$defs/externalId"
+        },
+        "name": {
+          "$ref": "#/$defs/text"
+        },
+        "department": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/text"
+            }
+          ]
+        }
+      }
+    },
+    "ticketType": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "external_id",
+        "name"
+      ],
+      "properties": {
+        "external_id": {
+          "$ref": "#/$defs/externalId"
+        },
+        "name": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    },
+    "initialState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "type_external_id",
+        "priority",
+        "assignee_external_id"
+      ],
+      "properties": {
+        "status": {
+          "$ref": "#/$defs/status"
+        },
+        "type_external_id": {
+          "$ref": "#/$defs/externalId"
+        },
+        "priority": {
+          "$ref": "#/$defs/priority"
+        },
+        "assignee_external_id": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/externalId"
+            }
+          ]
+        }
+      }
+    },
+    "event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "external_id",
+        "sequence",
+        "event_type",
+        "author",
+        "occurred_at",
+        "previous_value",
+        "new_value"
+      ],
+      "properties": {
+        "external_id": {
+          "$ref": "#/$defs/externalId"
+        },
+        "sequence": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "event_type": {
+          "enum": [
+            "created",
+            "status_changed",
+            "assignee_changed",
+            "type_changed",
+            "priority_changed"
+          ]
+        },
+        "author": {
+          "$ref": "#/$defs/author"
+        },
+        "occurred_at": {
+          "$ref": "#/$defs/instant"
+        },
+        "previous_value": {},
+        "new_value": {}
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "event_type": {
+                "const": "created"
+              }
+            },
+            "required": [
+              "event_type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "previous_value": {
+                "type": "null"
+              },
+              "new_value": {
+                "$ref": "#/$defs/initialState"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "event_type": {
+                "const": "status_changed"
+              }
+            },
+            "required": [
+              "event_type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "previous_value": {
+                "$ref": "#/$defs/status"
+              },
+              "new_value": {
+                "$ref": "#/$defs/status"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "event_type": {
+                "const": "priority_changed"
+              }
+            },
+            "required": [
+              "event_type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "previous_value": {
+                "$ref": "#/$defs/priority"
+              },
+              "new_value": {
+                "$ref": "#/$defs/priority"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "event_type": {
+                "const": "type_changed"
+              }
+            },
+            "required": [
+              "event_type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "previous_value": {
+                "$ref": "#/$defs/externalId"
+              },
+              "new_value": {
+                "$ref": "#/$defs/externalId"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "event_type": {
+                "const": "assignee_changed"
+              }
+            },
+            "required": [
+              "event_type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "previous_value": {
+                "anyOf": [
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "$ref": "#/$defs/externalId"
+                  }
+                ]
+              },
+              "new_value": {
+                "anyOf": [
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "$ref": "#/$defs/externalId"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "note": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "external_id",
+        "author",
+        "content",
+        "created_at"
+      ],
+      "properties": {
+        "external_id": {
+          "$ref": "#/$defs/externalId"
+        },
+        "author": {
+          "$ref": "#/$defs/author"
+        },
+        "content": {
+          "$ref": "#/$defs/text"
+        },
+        "created_at": {
+          "$ref": "#/$defs/instant"
+        }
+      }
+    },
+    "history": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "coverage",
+        "items"
+      ],
+      "properties": {
+        "coverage": {
+          "enum": [
+            "complete",
+            "partial",
+            "unavailable"
+          ]
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/event"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "coverage": {
+                "const": "unavailable"
+              }
+            },
+            "required": [
+              "coverage"
+            ]
+          },
+          "then": {
+            "properties": {
+              "items": {
+                "type": "array",
+                "maxItems": 0
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "coverage": {
+                "const": "partial"
+              }
+            },
+            "required": [
+              "coverage"
+            ]
+          },
+          "then": {
+            "properties": {
+              "items": {
+                "type": "array",
+                "minItems": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "coverage": {
+                "const": "complete"
+              }
+            },
+            "required": [
+              "coverage"
+            ]
+          },
+          "then": {
+            "properties": {
+              "items": {
+                "type": "array",
+                "minItems": 1,
+                "minContains": 1,
+                "maxContains": 1,
+                "contains": {
+                  "type": "object",
+                  "properties": {
+                    "event_type": {
+                      "const": "created"
+                    }
+                  },
+                  "required": [
+                    "event_type"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "notes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "coverage",
+        "items"
+      ],
+      "properties": {
+        "coverage": {
+          "enum": [
+            "complete",
+            "partial",
+            "unavailable"
+          ]
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/note"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "coverage": {
+                "const": "unavailable"
+              }
+            },
+            "required": [
+              "coverage"
+            ]
+          },
+          "then": {
+            "properties": {
+              "items": {
+                "type": "array",
+                "maxItems": 0
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "coverage": {
+                "const": "partial"
+              }
+            },
+            "required": [
+              "coverage"
+            ]
+          },
+          "then": {
+            "properties": {
+              "items": {
+                "type": "array",
+                "minItems": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "ticket": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "external_id",
+        "title",
+        "title_is_derived",
+        "description",
+        "status",
+        "priority",
+        "type",
+        "requester",
+        "assignee",
+        "created_at",
+        "updated_at",
+        "resolved_at",
+        "history",
+        "technical_notes"
+      ],
+      "properties": {
+        "external_id": {
+          "$ref": "#/$defs/externalId"
+        },
+        "title": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/text"
+            },
+            {
+              "type": "string",
+              "maxLength": 240
+            }
+          ]
+        },
+        "title_is_derived": {
+          "type": "boolean"
+        },
+        "description": {
+          "$ref": "#/$defs/text"
+        },
+        "status": {
+          "$ref": "#/$defs/status"
+        },
+        "priority": {
+          "$ref": "#/$defs/priority"
+        },
+        "type": {
+          "$ref": "#/$defs/ticketType"
+        },
+        "requester": {
+          "$ref": "#/$defs/requester"
+        },
+        "assignee": {
+          "$ref": "#/$defs/assignee"
+        },
+        "created_at": {
+          "$ref": "#/$defs/instant"
+        },
+        "updated_at": {
+          "$ref": "#/$defs/instant"
+        },
+        "resolved_at": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/instant"
+            }
+          ]
+        },
+        "history": {
+          "$ref": "#/$defs/history"
+        },
+        "technical_notes": {
+          "$ref": "#/$defs/notes"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "resolved",
+                  "closed"
+                ]
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "resolved_at": {
+                "$ref": "#/$defs/instant"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "resolved_at": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
