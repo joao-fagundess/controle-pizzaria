@@ -1,65 +1,24 @@
-# Dashboard administrativo de chamados técnicos
+# Painel de chamados Thindesk
 
-Projeto de um painel para acompanhar chamados técnicos relacionados ao Thindesk, com indicadores, filtros, gráficos e consulta de histórico e considerações técnicas.
+Dashboard para acompanhar a fila de suporte, consultar o histórico dos chamados e entender onde a equipe concentra seus atendimentos. O painel consome uma API REST própria e recebe dados do Thindesk por uma integração de leitura.
 
-O domínio é **helpdesk de TI**. O nome da pasta local não define o domínio do produto.
+O projeto trata de **chamados técnicos de TI**, conforme a introdução e os requisitos funcionais da atividade. A referência a pizzaria no objetivo do enunciado e no nome do repositório não corresponde ao domínio implementado.
 
-## Estado da entrega
+## O que o painel oferece
 
-Fases 1 a 6 concluídas: análise, modelagem, migrations, seed, API REST, Swagger, recepção legada, dashboard React integrado, validação consolidada e entrega com Gitflow e Compose. A interface inclui indicadores, gráficos, filtros, tabela paginada, detalhe e atualização automática. A integração operacional com o Thindesk ainda depende de uma instância acessível e de um contrato complementar para os campos analíticos ausentes.
+- Indicadores de total, abertos, em andamento, resolvidos, tempo médio e taxa de resolução.
+- Gráfico de conclusões por dia, semana ou mês, distribuição por status e ranking dos tipos mais atendidos.
+- Filtros por período, status, tipo, prioridade e responsável.
+- Lista paginada com detalhes, histórico e considerações técnicas de cada chamado.
+- Atualização manual ou automática, com mensagens de carregamento, ausência de resultados e falhas de conexão.
 
-Na Fase 6, foram entregues Compose, imagens da API/frontend, proxy Nginx, validação em contêineres, workflow de CI, documentação final e roteiro do vídeo. Os quatro PRs foram integrados com autorização do usuário em 12/11/2026. A versão `0.1.0` reúne essa entrega em `main`; detalhes e evidências no [relatório da Fase 6](docs/evidencias/fase-6.md) e nas [notas da versão](docs/versao-0.1.0.md). Repositório: [joao-fagundess/controle-pizzaria](https://github.com/joao-fagundess/controle-pizzaria).
+O painel é de consulta. Abertura de chamados, mudança de status e atribuição de técnicos continuam no Thindesk.
 
-- [Requisitos, atores, casos de uso e regras de negócio](docs/requisitos.md)
-- [Premissas, decisões e pontos a validar](docs/decisoes-de-analise.md)
-- [Inspeção do Thindesk e limitações da origem](docs/thindesk-inspecao.md)
-- [Modelo em Mermaid, constraints e índices](docs/modelagem.md)
-- [Evidências da Fase 2](docs/evidencias/fase-2.md)
-- [Endpoints e execução da API](docs/endpoints.md)
-- [Contrato OpenAPI](docs/openapi.json) e [requisições HTTP](docs/requisicoes.http)
-- [Recepção e limitações da integração](docs/integracao-thindesk.md)
-- [Evidências da Fase 3](docs/evidencias/fase-3.md)
-- [Dashboard: execução, configuração e comportamento](docs/frontend.md)
-- [Evidências e capturas da Fase 4](docs/evidencias/fase-4.md)
-- [Testes, cobertura e evidências da Fase 5](docs/evidencias/fase-5.md)
-- [Matriz RF → endpoint → teste](docs/rastreabilidade.md)
-- [Execução com Docker Compose](docs/implantacao.md)
-- [Gitflow e revisão](docs/gitflow.md)
-- [Documento final da entrega](docs/entrega.md)
-- [Roteiro de vídeo de até três minutos](docs/roteiro-video.md)
+## Como executar
 
-## Estrutura atual
+### Com Docker Compose
 
-```text
-api/
-  src/
-  migrations/
-  seeds/
-  scripts/
-  tests/
-web/
-  src/
-    components/
-    services/
-  tests/
-docs/
-  evidencias/
-  prs/
-  requisitos.md
-  decisoes-de-analise.md
-  thindesk-inspecao.md
-  modelagem.md
-scripts/                    Configuração local e validação do Compose
-.github/                    Workflow de validação e template de PR
-docker-compose.yml
-README.md
-```
-
-A Fase 5 consolidou testes, cobertura e rastreabilidade. A Fase 6 acrescentou a execução com contêineres e os documentos de entrega.
-
-## Execução e configuração
-
-Pré-requisitos do Compose: Node.js 24+, Docker Desktop com engine Linux e Compose em execução. Na raiz:
+É preciso ter Node.js 24+ e Docker Desktop com o engine Linux e o Compose em execução. Na raiz do projeto:
 
 ```powershell
 node scripts/prepare-compose.mjs
@@ -67,65 +26,77 @@ docker compose up --build -d --wait --wait-timeout 120
 docker compose --profile demo run --rm seed
 ```
 
-Dashboard: [http://127.0.0.1:8080/](http://127.0.0.1:8080/). Swagger: [http://127.0.0.1:8080/docs/](http://127.0.0.1:8080/docs/). O banco tem volume persistente; somente o frontend publica uma porta, restrita ao computador local. O seed opcional carrega os 480 chamados fictícios. As credenciais são geradas em `.env`, sem aparecer no frontend. Para parar e preservar os dados, usar `docker compose down`. Configuração e manutenção em [implantacao.md](docs/implantacao.md).
+Abra o [painel](http://127.0.0.1:8080/) ou a [documentação interativa da API](http://127.0.0.1:8080/docs/).
 
-Para executar a API com dados fictícios, sem Docker, usar Node.js 24 ou superior:
+O último comando carrega **480 chamados fictícios** e deve ser usado apenas na base de demonstração. As credenciais ficam no `.env`, gerado pelo script de preparação. O banco usa um volume persistente e a aplicação só fica acessível neste computador. Para parar sem apagar os dados, execute `docker compose down`.
 
-```powershell
-Set-Location api
-npm.cmd ci
-npm.cmd run build
-npm.cmd run start:demo
-```
+### Sem Docker
 
-Swagger: [http://127.0.0.1:3000/docs/](http://127.0.0.1:3000/docs/). A demonstração cria 480 chamados em PostgreSQL embarcado e perde os dados ao encerrar.
-
-Com a API em execução, abrir outro terminal na raiz do projeto para o dashboard:
+Com Node.js 24+, inicie a API na raiz do projeto:
 
 ```powershell
-Set-Location web
-npm.cmd ci
-npm.cmd run dev
+npm.cmd --prefix api ci
+npm.cmd --prefix api run build
+npm.cmd --prefix api run start:demo
 ```
 
-Dashboard: [http://127.0.0.1:5173/](http://127.0.0.1:5173/). O frontend usa proxy local para a API. Para validar a versão compilada, executar `npm.cmd run build` e `npm.cmd run preview` na pasta `web`; a prévia usa a porta 4173.
-
-Para usar um PostgreSQL independente, ainda na pasta `api`:
+Em outro terminal, inicie o frontend:
 
 ```powershell
-Copy-Item .env.example .env
-# Ajustar DATABASE_URL no .env antes de executar.
-npm.cmd run db:migrate
-npm.cmd run db:seed
-npm.cmd start
+npm.cmd --prefix web ci
+npm.cmd --prefix web run dev
 ```
 
-`DATABASE_URL` configura o PostgreSQL. `SEED_REFERENCE_DATE` fixa opcionalmente o calendário do seed; sem ela, usa hoje em São Paulo. `HOST` e `PORT` definem a escuta; `CORS_ORIGINS` permite origens explícitas. `API_ACCESS_TOKEN` protege `/api/v1` com bearer e é obrigatório em produção ou fora do loopback. O seed só deve ser aplicado em banco exclusivo de demonstração. Configuração completa em [endpoints.md](docs/endpoints.md).
+O painel fica em [localhost:5173](http://127.0.0.1:5173/) e o Swagger em [localhost:3000/docs](http://127.0.0.1:3000/docs/). Nesse modo, o banco de demonstração é temporário: os dados são recriados ao reiniciar a API.
 
-Para verificar toda a entrega, executar na raiz depois de instalar as dependências de `api` e `web`:
+Para usar um PostgreSQL persistente, configurar autenticação ou ajustar portas e proxy, consulte [execução da API](docs/endpoints.md), [frontend](docs/frontend.md) e [implantação](docs/implantacao.md). Senhas e tokens devem ficar no servidor; nunca em variáveis `VITE_*`.
+
+## Arquitetura
+
+O frontend usa React, TypeScript e Vite, com Recharts nos gráficos e TanStack Query nas consultas. A API usa Node.js, Express e TypeScript, valida os parâmetros e calcula os indicadores no PostgreSQL. O contrato dos endpoints está disponível em OpenAPI e Swagger.
+
+Essa separação mantém as regras de negócio no backend e permite evoluir a interface sem acessar diretamente o banco ou o Thindesk. O PostgreSQL concentra filtros e agregações, enquanto o navegador cuida da apresentação. As escolhas e suas justificativas estão em [decisões de projeto](docs/decisoes-de-analise.md).
+
+## Integração com o Thindesk
+
+O Thindesk fornecido usa Java e MongoDB. Seus chamados originais não trazem datas, prioridade, histórico ou considerações técnicas suficientes para todos os indicadores. O importador legado preserva esses registros e informa por que ficaram fora dos cálculos.
+
+Uma cópia local do Thindesk foi ampliada para registrar e exportar os campos necessários no contrato `1.0`. O comando `thindesk:sync:v1` valida o conteúdo, identifica cada registro e importa os chamados válidos em transação. Registros incompletos ficam separados dos indicadores; datas, autores e eventos ausentes não são inventados.
+
+Na homologação local foram aceitos três chamados, dois deles concluídos, e preservados seis registros rejeitados. A interface distingue informações completas, parciais e não fornecidas. O ZIP e o código original foram mantidos sem alterações.
+
+A integração foi verificada **localmente, com dados fictícios**. O uso operacional ainda exige validar a instância real, autenticação, HTTPS e infraestrutura. Os testes funcionais não substituem uma medição de carga. Os comandos e limites estão em [recepção Thindesk 1.0](docs/recepcao-versionada-thindesk.md) e nas [evidências da integração](docs/evidencias/thindesk-import.md).
+
+## Testes
+
+Depois de instalar as dependências de `api` e `web`, execute a validação completa na raiz:
 
 ```powershell
 npm.cmd --prefix api run validate:phase-5
 ```
 
-O comando compila API e frontend, verifica tipos, executa as suítes em bancos descartáveis e gera cobertura e matriz. Não lê `DATABASE_URL` nem usa banco operacional. O PostgreSQL nativo é um processo temporário em loopback, instalado como dependência de desenvolvimento; dispensa Docker e serviço do Windows. Os binários portáteis são obtidos durante a instalação das dependências. Esta execução foi validada no Windows x64 com Node.js 24.21.0 e PostgreSQL 18.6.
+O comando compila os dois projetos, verifica os tipos, executa os testes em bancos descartáveis e gera os relatórios de cobertura. Ele não usa o banco configurado em `DATABASE_URL`. Os binários do PostgreSQL nativo são instalados como dependência de desenvolvimento; no Windows, execute com um usuário sem privilégios de administrador.
 
-Passaram **99 casos distintos**: 14 de integridade, 63 de API/regras/conector/OpenAPI e 22 do frontend. Repetir os 77 casos de backend em PostgreSQL nativo por TCP totalizou **176 execuções**, além de **13 verificações HTTP da API compilada**. Cobertura de linhas: API **80,45%** e frontend **91,50%**, com escopo e lacunas no relatório da Fase 5.
+Para conferir apenas o frontend ou o empacotamento em contêineres:
 
-Para verificações menores, `npm.cmd test` na pasta `api` executa tipos, integridade e API no banco embarcado; `npm.cmd run test:coverage` mede a API; `npm.cmd run test:postgres` exige o build da API e executa o banco nativo. Na pasta `web`, `npm.cmd test` executa os 22 testes de componentes, consultas, serviço HTTP e polling; `npm.cmd run test:coverage` gera cobertura e `npm.cmd run build` verifica tipos e gera `web/dist`.
+```powershell
+npm.cmd --prefix web test
+npm.cmd --prefix web run build
+node scripts/validate-compose.mjs
+```
 
-A interface foi verificada no navegador com a API do projeto em 360, 768 e 1440 pixels, incluindo falha de conexão e recuperação. As capturas da Fase 4 continuam representativas: os nomes com hash dos quatro assets compilados coincidem na Fase 5.
+O workflow do [GitHub Actions](https://github.com/joao-fagundess/controle-pizzaria/actions) verifica aplicação, PostgreSQL e Compose. Os resultados por requisito estão na [matriz de rastreabilidade](docs/rastreabilidade.md); os testes mais recentes da integração estão nas [evidências Thindesk 1.0](docs/evidencias/thindesk-import.md).
 
-As configurações públicas do frontend são `VITE_API_BASE_URL` e `VITE_POLL_INTERVAL_SECONDS`. `API_PROXY_TARGET` e o eventual `API_ACCESS_TOKEN` ficam somente no servidor do proxy local. A implantação estática precisa de gateway autenticado; não colocar credenciais em variáveis `VITE_*`. Ver [frontend.md](docs/frontend.md).
+## Documentação e entrega
 
-Para verificar o empacotamento em contêineres, executar `node scripts/validate-compose.mjs` na raiz. O comando usa porta, credenciais e projeto Compose próprios, testa HTTP e persistência e remove seus recursos descartáveis. Os resultados ficam em `docs/evidencias/fase-6/`. O workflow em `.github/workflows/validation.yml` executa os checks nas branches de entrega e PRs; resultados em [GitHub Actions](https://github.com/joao-fagundess/controle-pizzaria/actions).
+| Assunto | Documento |
+| --- | --- |
+| Requisitos e regras de negócio | [Requisitos](docs/requisitos.md) |
+| Modelo de dados, constraints e índices | [Modelagem](docs/modelagem.md) |
+| Rotas, filtros e respostas da API | [Endpoints](docs/endpoints.md), [OpenAPI](docs/openapi.json) e [requisições HTTP](docs/requisicoes.http) |
+| Comportamento e configuração do painel | [Frontend](docs/frontend.md) |
+| Origem e integração | [Inspeção do ZIP](docs/thindesk-inspecao.md), [homologação local](docs/homologacao-thindesk.md) e [recepção 1.0](docs/recepcao-versionada-thindesk.md) |
+| Testes, capturas e histórico da entrega | [Índice da entrega](docs/entrega.md) e [encerramento local](docs/encerramento.md) |
+| Execução e versionamento | [Implantação](docs/implantacao.md) e [Gitflow](docs/gitflow.md) |
 
-## Stack e decisões
-
-API REST com Node.js, Express e TypeScript; PostgreSQL; validação com Zod; testes com Vitest e Supertest; contrato OpenAPI e Swagger. O frontend usa React, Vite, Recharts e TanStack Query para isolamento por seleção, cache e cancelamento. A justificativa está no registro de decisões e na documentação do frontend.
-
-Indicadores, distribuição e lista usam criação; série e ranking de atendimentos usam resolução vigente. Resolvidos inclui fechados, e o tempo médio usa horas corridas. O resumo informa a qualidade global dos registros recebidos.
-
-O Thindesk fornecido usa Java/MongoDB e possui listagens autenticadas, mas seus chamados não têm datas, prioridade, histórico ou considerações técnicas. O comando `npm.cmd run thindesk:sync` preserva os legados e os motivos de rejeição separados dos indicadores; não promove dados incompletos. Sua autenticação foi testada com uma origem HTTP local controlada. Credenciais do ZIP não foram copiadas nem usadas.
-
-O PostgreSQL independente foi validado na Fase 5. Não houve homologação com Thindesk real ou autenticação corporativa. Os planos SQL com 10 mil registros são uma inspeção local, sem comprovação da meta de p95 ou concorrência. A branch `release/0.1.0` preserva a candidata integrada e a tag `v0.1.0` identifica a entrega em `main`. O roteiro foi entregue, mas o vídeo ainda precisa ser gravado.
+A `main` reúne a entrega atual, incluindo a integração local do Thindesk e a revisão dos textos. A tag `v0.1.0` mantém o registro da primeira versão; os relatórios das fases anteriores descrevem o que foi validado em cada etapa.

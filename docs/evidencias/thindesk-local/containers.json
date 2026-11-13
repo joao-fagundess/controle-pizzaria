@@ -1,0 +1,175 @@
+[
+  {
+    "Command": "\"docker-entrypoint.s…\"",
+    "CreatedAt": "2026-11-12 11:19:45 -0300 -03",
+    "Engine": "",
+    "ExitCode": 0,
+    "Health": "healthy",
+    "ID": "bebd753b6fb3",
+    "Image": "sha256:c7a1108ba6a6afcc7ee033ee456c90890d3b69d62ba9873d178ab9ceacc45313",
+    "Labels": "com.docker.compose.project.config_files=C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria\\docker-compose.thindesk.yml,com.docker.compose.project.working_dir=C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria,com.docker.compose.image=sha256:71f85101355540d5de80aec38f489c2cbbbefd4b2c2f33cd4b3c0d284baaf26d,com.docker.compose.oneoff=False,com.docker.compose.project=thindesk-homologation,com.docker.compose.project.environment_file=C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria\\.cache\\thindesk-homologation\\.env,com.docker.compose.service=api,com.docker.compose.version=5.5.1,desktop.docker.io/ports.scheme=v2,com.docker.compose.config-hash=63e80035fecadd93a67bd3c0f08e0f86c247fd0ac49fd8d463fb8fa457c7262c,com.docker.compose.container-number=1,com.docker.compose.depends_on=migrate:service_completed_successfully:false",
+    "LocalVolumes": "0",
+    "Mounts": "",
+    "Name": "thindesk-homologation-api-1",
+    "Names": "thindesk-homologation-api-1",
+    "Networks": "thindesk-homologation_default",
+    "Ports": "3000/tcp",
+    "Project": "thindesk-homologation",
+    "Publishers": [
+      {
+        "URL": "",
+        "TargetPort": 3000,
+        "PublishedPort": 0,
+        "Protocol": "tcp"
+      }
+    ],
+    "RunningFor": "3 minutes ago",
+    "Service": "api",
+    "Size": "0B",
+    "State": "running",
+    "Status": "Up 3 minutes (healthy)"
+  },
+  {
+    "Command": "\"docker-entrypoint.s…\"",
+    "CreatedAt": "2026-11-12 11:19:43 -0300 -03",
+    "Engine": "",
+    "ExitCode": 0,
+    "Health": "healthy",
+    "ID": "e521eaaccdf2",
+    "Image": "postgres:18-bookworm",
+    "Labels": "com.docker.compose.depends_on=,com.docker.compose.oneoff=False,com.docker.compose.project=thindesk-homologation,com.docker.compose.service=db,desktop.docker.io/ports.scheme=v2,com.docker.compose.config-hash=aab2e4c36019c2c387ec343134e73acd84c2be4e140bbe09c31072ac8c6002ee,com.docker.compose.container-number=1,com.docker.compose.image=sha256:02fb3245e038f33536cf13bc6c4e59f21d07b0cea3c1fe1c07c6e8aa8f083bcc,com.docker.compose.project.config_files=C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria\\docker-compose.thindesk.yml,com.docker.compose.project.environment_file=C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria\\.cache\\thindesk-homologation\\.env,com.docker.compose.project.working_dir=C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria,com.docker.compose.version=5.5.1",
+    "LocalVolumes": "1",
+    "Mounts": "thindesk-homol…",
+    "Name": "thindesk-homologation-db-1",
+    "Names": "thindesk-homologation-db-1",
+    "Networks": "thindesk-homologation_default",
+    "Ports": "5432/tcp",
+    "Project": "thindesk-homologation",
+    "Publishers": [
+      {
+        "URL": "",
+        "TargetPort": 5432,
+        "PublishedPort": 0,
+        "Protocol": "tcp"
+      }
+    ],
+    "RunningFor": "3 minutes ago",
+    "Service": "db",
+    "Size": "0B",
+    "State": "running",
+    "Status": "Up 3 minutes (healthy)"
+  },
+  {
+    "Command": "\"docker-entrypoint.s…\"",
+    "CreatedAt": "2026-11-12 11:19:44 -0300 -03",
+    "Engine": "",
+    "ExitCode": 0,
+    "Health": "",
+    "ID": "7e952a46eecd",
+    "Image": "sha256:c7a1108ba6a6afcc7ee033ee456c90890d3b69d62ba9873d178ab9ceacc45313",
+    "Labels": "com.docker.compose.config-hash=4090c01890936428f1e49ac584c1d8fde58143f9c5d13919435456d05b0cc53e,com.docker.compose.container-number=1,com.docker.compose.depends_on=db:service_healthy:false,com.docker.compose.image=sha256:71f85101355540d5de80aec38f489c2cbbbefd4b2c2f33cd4b3c0d284baaf26d,com.docker.compose.oneoff=False,com.docker.compose.project=thindesk-homologation,com.docker.compose.project.working_dir=C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria,desktop.docker.io/ports.scheme=v2,com.docker.compose.project.config_files=C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria\\docker-compose.thindesk.yml,com.docker.compose.project.environment_file=C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria\\.cache\\thindesk-homologation\\.env,com.docker.compose.service=migrate,com.docker.compose.version=5.5.1",
+    "LocalVolumes": "0",
+    "Mounts": "",
+    "Name": "thindesk-homologation-migrate-1",
+    "Names": "thindesk-homologation-migrate-1",
+    "Networks": "thindesk-homologation_default",
+    "Ports": "",
+    "Project": "thindesk-homologation",
+    "Publishers": [],
+    "RunningFor": "3 minutes ago",
+    "Service": "migrate",
+    "Size": "0B",
+    "State": "exited",
+    "Status": "Exited (0) 12 seconds ago"
+  },
+  {
+    "Command": "\"docker-entrypoint.s…\"",
+    "CreatedAt": "2026-11-12 11:19:43 -0300 -03",
+    "Engine": "",
+    "ExitCode": 0,
+    "Health": "healthy",
+    "ID": "e3509b55be2d",
+    "Image": "mongo:8.0",
+    "Labels": "com.docker.compose.image=sha256:9b73c38e39783bd21335f603a9f08be60fe385f5c28933ea32bb4a9fa1fd6d23,com.docker.compose.project=thindesk-homologation,com.docker.compose.project.config_files=C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria\\docker-compose.thindesk.yml,desktop.docker.io/ports.scheme=v2,org.opencontainers.image.version=24.04,com.docker.compose.container-number=1,com.docker.compose.depends_on=,com.docker.compose.oneoff=False,com.docker.compose.project.environment_file=C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria\\.cache\\thindesk-homologation\\.env,com.docker.compose.project.working_dir=C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria,com.docker.compose.service=mongo,com.docker.compose.version=5.5.1,com.docker.compose.config-hash=32c0e4d5897804abc174a772e534de83b1be23820804afd3b9f65aa69544fd06",
+    "LocalVolumes": "2",
+    "Mounts": "4e17a2cd51aff4…,thindesk-homol…",
+    "Name": "thindesk-homologation-mongo-1",
+    "Names": "thindesk-homologation-mongo-1",
+    "Networks": "thindesk-homologation_default",
+    "Ports": "27017/tcp",
+    "Project": "thindesk-homologation",
+    "Publishers": [
+      {
+        "URL": "",
+        "TargetPort": 27017,
+        "PublishedPort": 0,
+        "Protocol": "tcp"
+      }
+    ],
+    "RunningFor": "3 minutes ago",
+    "Service": "mongo",
+    "Size": "0B",
+    "State": "running",
+    "Status": "Up 3 minutes (healthy)"
+  },
+  {
+    "Command": "\"java -jar /app/app.…\"",
+    "CreatedAt": "2026-11-12 11:19:44 -0300 -03",
+    "Engine": "",
+    "ExitCode": 0,
+    "Health": "healthy",
+    "ID": "2be0d23a2213",
+    "Image": "sha256:82d9aa7f0c05785691df95116d8bc4450600d8834e8ca91d523148874f95d832",
+    "Labels": "com.docker.compose.depends_on=mongo:service_healthy:false,com.docker.compose.project=thindesk-homologation,com.docker.compose.project.config_files=C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria\\docker-compose.thindesk.yml,com.docker.compose.version=5.5.1,org.opencontainers.image.version=24.04,com.docker.compose.image=sha256:9e148636bc0c94531e3773f008ca80776f0f326538d898dba90ad3bc5e743d93,org.opencontainers.image.ref.name=ubuntu,com.docker.compose.config-hash=b4f2bc5547990f2e238d130f0ca9d222eb6f1d5de852e643b95f9d2211357c29,com.docker.compose.container-number=1,com.docker.compose.oneoff=False,com.docker.compose.service=thindesk,desktop.docker.io/ports.scheme=v2,com.docker.compose.project.environment_file=C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria\\.cache\\thindesk-homologation\\.env,com.docker.compose.project.working_dir=C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria,desktop.docker.io/ports/8080/tcp=127.0.0.1:8081",
+    "LocalVolumes": "0",
+    "Mounts": "",
+    "Name": "thindesk-homologation-thindesk-1",
+    "Names": "thindesk-homologation-thindesk-1",
+    "Networks": "thindesk-homologation_default",
+    "Ports": "127.0.0.1:8081->8080/tcp",
+    "Project": "thindesk-homologation",
+    "Publishers": [
+      {
+        "URL": "127.0.0.1",
+        "TargetPort": 8080,
+        "PublishedPort": 8081,
+        "Protocol": "tcp"
+      }
+    ],
+    "RunningFor": "3 minutes ago",
+    "Service": "thindesk",
+    "Size": "0B",
+    "State": "running",
+    "Status": "Up 2 minutes (healthy)"
+  },
+  {
+    "Command": "\"/docker-entrypoint.…\"",
+    "CreatedAt": "2026-11-12 11:19:45 -0300 -03",
+    "Engine": "",
+    "ExitCode": 0,
+    "Health": "healthy",
+    "ID": "31cf365931e7",
+    "Image": "sha256:c8b926362b8688f8005eec10344903ace8814147fd50956c44f94dab66561810",
+    "Labels": "com.docker.compose.version=5.5.1,desktop.docker.io/ports.scheme=v2,com.docker.compose.depends_on=api:service_healthy:false,com.docker.compose.image=sha256:f7648613639b4910205f1c71167128c2bb195af3d7f963be7bed122c0124d116,com.docker.compose.project=thindesk-homologation,com.docker.compose.project.working_dir=C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria,desktop.docker.io/ports/8080/tcp=127.0.0.1:8180,maintainer=NGINX Docker Maintainers <docker-maint@nginx.com>,com.docker.compose.config-hash=54c0331fa7b7063125897c8929ca71a508fd8fa27e3f023a77a19763037a7314,com.docker.compose.container-number=1,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria\\docker-compose.thindesk.yml,com.docker.compose.project.environment_file=C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria\\.cache\\thindesk-homologation\\.env,com.docker.compose.service=web",
+    "LocalVolumes": "0",
+    "Mounts": "",
+    "Name": "thindesk-homologation-web-1",
+    "Names": "thindesk-homologation-web-1",
+    "Networks": "thindesk-homologation_default",
+    "Ports": "127.0.0.1:8180->8080/tcp",
+    "Project": "thindesk-homologation",
+    "Publishers": [
+      {
+        "URL": "127.0.0.1",
+        "TargetPort": 8080,
+        "PublishedPort": 8180,
+        "Protocol": "tcp"
+      }
+    ],
+    "RunningFor": "3 minutes ago",
+    "Service": "web",
+    "Size": "0B",
+    "State": "running",
+    "Status": "Up 2 minutes (healthy)"
+  }
+]

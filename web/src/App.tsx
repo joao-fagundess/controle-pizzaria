@@ -127,7 +127,7 @@ export default function App() {
             <p className="eyebrow">Acompanhamento da operação</p>
             <h1>Chamados técnicos</h1>
             <p className="page-description">
-              Indicadores, andamento e considerações da equipe.
+              Acompanhe a fila e os atendimentos da equipe.
             </p>
           </div>
           <div className="refresh-area">
@@ -162,7 +162,7 @@ export default function App() {
                   ? "Consultando chamados…"
                   : dashboard.completeAt
                     ? `Visão geral atualizada às ${formatClock(dashboard.completeAt)}`
-                    : "Aguardando consulta."}
+                    : "Aguardando os dados."}
             </p>
           </div>
         </div>
@@ -170,15 +170,15 @@ export default function App() {
           <div className="source-notice">
             <span className="notice-tag">Demonstração</span>
             <p>
-              Os chamados exibidos são fictícios. A integração com o Thindesk
-              real ainda requer homologação.
+              Você está vendo chamados fictícios. A conexão com a sua instância
+              do Thindesk ainda precisa ser validada.
             </p>
           </div>
         )}
         {quality?.mode === "mixed" && (
           <div className="source-notice notice-warning">
             <strong>Base mista.</strong>
-            <p>Esta consulta contém dados operacionais e de demonstração.</p>
+            <p>Esta base reúne chamados importados e fictícios.</p>
           </div>
         )}
         {excluded > 0 && (
@@ -190,10 +190,9 @@ export default function App() {
                 : "registros fora dos indicadores."}
             </strong>
             <p>
-              Dados recebidos do Thindesk estão incompletos ou aguardam
-              validação.
+              Esses registros estão incompletos ou ainda precisam ser validados.
               {quality?.last_received_at
-                ? " O recebimento local não comprova atualização completa da origem."
+                ? " A importação local não garante que todos os dados do Thindesk estejam atualizados."
                 : ""}
             </p>
           </div>
@@ -268,7 +267,7 @@ export default function App() {
               {filters.status &&
                 !["resolved", "closed"].includes(filters.status) && (
                   <p className="chart-hint">
-                    O status selecionado não representa chamados concluídos.
+                    Este gráfico mostra apenas chamados resolvidos ou fechados.
                   </p>
                 )}
               <QueryState
@@ -318,7 +317,7 @@ export default function App() {
                 <div>
                   <h2 id="ranking-title">Tipos mais atendidos</h2>
                   <p className="panel-description">
-                    Por data de resolução · top 5
+                    Por data de resolução · cinco primeiros
                   </p>
                 </div>
               </div>
@@ -343,7 +342,7 @@ export default function App() {
             <div>
               <h2 id="tickets-title">Chamados e considerações técnicas</h2>
               <p className="panel-description">
-                Selecione um chamado para consultar o detalhe e o histórico.
+                Abra um chamado para ver os detalhes e o histórico.
               </p>
             </div>
             {dashboard.tickets.data && (

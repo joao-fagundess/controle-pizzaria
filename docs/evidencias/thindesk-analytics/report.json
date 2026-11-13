@@ -1,0 +1,247 @@
+{
+  "generated_at": "2026-11-12T19:23:08.049Z",
+  "status": "passed",
+  "project": "thindesk-analytics-source",
+  "contract_version": "1.0",
+  "promotion_implemented": false,
+  "checks": [
+    {
+      "name": "export exige autenticação",
+      "status": "passed"
+    },
+    {
+      "name": "sessão válida acessa a captura complementar",
+      "status": "passed"
+    },
+    {
+      "name": "catálogos explícitos são idempotentes e impedem metadados conflitantes",
+      "status": "passed"
+    },
+    {
+      "name": "captura recusa dados ausentes, inválidos e datas fornecidas pelo cliente",
+      "status": "passed"
+    },
+    {
+      "name": "novo chamado registra criação real, prioridade explícita e histórico completo",
+      "status": "passed"
+    },
+    {
+      "name": "uma edição registra quatro transições ordenadas no mesmo instante",
+      "status": "passed"
+    },
+    {
+      "name": "notas concorrentes preservam uma revisão e retornam conflito na outra",
+      "status": "passed"
+    },
+    {
+      "name": "resolução e fechamento preservam o instante de resolução",
+      "status": "passed"
+    },
+    {
+      "name": "reabertura limpa a resolução atual e mantém os fatos anteriores",
+      "status": "passed"
+    },
+    {
+      "name": "edição sem mudanças é estável; edição descritiva atualiza o snapshot",
+      "status": "passed"
+    },
+    {
+      "name": "revisão antiga e campos de auditoria não sobrescrevem a versão aceita",
+      "status": "passed"
+    },
+    {
+      "name": "API legada lê seis campos e recusa sobrescrever chamados complementares",
+      "status": "passed"
+    },
+    {
+      "name": "criação e edição legadas continuam disponíveis sem inventar dados analíticos",
+      "status": "passed"
+    },
+    {
+      "name": "fechamento direto captura resolução e título Unicode respeita caracteres",
+      "status": "passed"
+    },
+    {
+      "name": "export maior que 5 MiB falha inteiro e não retorna lote truncado",
+      "status": "passed"
+    },
+    {
+      "name": "export versionado valida schema, cronologia, identidades e sequência produzida",
+      "status": "passed"
+    },
+    {
+      "name": "repetição do export preserva IDs, snapshots, notas e histórico",
+      "status": "passed"
+    }
+  ],
+  "verification_groups": 17,
+  "tested_ticket_id": "bb5bb49d-ea80-41a8-bb03-d2199441fdea",
+  "exported_tickets": 6,
+  "excluded_legacy": 5,
+  "legacy_fixtures_unchanged": true,
+  "legacy_snapshot_sha256": "8dd7954b4f618764cdc0509b1da004fbc670fa3b44ce5b072b79e14d4af02b51",
+  "existing_dashboard": {
+    "total": 0,
+    "rejected": 3,
+    "unchanged": true
+  },
+  "build_provenance": {
+    "archive_sha256": "CECBA3087577848DF5A975217F42AEE4821DB30B61E3D0DA326F90AB3E2E73C7",
+    "original_files_verified": 29,
+    "original_source_modified": false,
+    "patched_files": [
+      "src/main/java/com/pfc/thindesk/service/ChamadoService.java"
+    ],
+    "overlays": [
+      {
+        "path": "integration/thindesk/analytics/AnalyticsController.java",
+        "sha256": "013AEF522D053CE572379AFB79379C691DEDEFED3390FD0C9B379AD9A71996C0"
+      },
+      {
+        "path": "integration/thindesk/analytics/AnalyticsService.java",
+        "sha256": "54E93E053AC62E7FE567E687AB39A7CB643E2B1C2288A8800707E8E9E1E3C370"
+      }
+    ],
+    "preparation_script_sha256": "3C7F83AF0EC55F13BD8AB53952976A6E48C90A66FD5AB5A59182320443C3635B",
+    "dockerfile_sha256": "EFC890FF74B596F50F7D4C1A67021556BCC7DAB7C50DA128D13225D09D3ED3A8",
+    "compose_sha256": "F4B4D23E6F09865A96AAC1B0A2815F214C516044E9F0158F5A9D820EDD9E1AEE",
+    "files": [
+      {
+        "path": "pom.xml",
+        "sha256": "0DDB0BA27C9FBC6C76CF64DCF0C454CB39C1B5A5405DB4B59692D43BFD604FAF"
+      },
+      {
+        "path": "src/main/java/com/pfc/MongoInitConfig.java",
+        "sha256": "F60A4272918754E71FD86CB2473D8F41636515825C5A1D19BEB8353F8426FC4E"
+      },
+      {
+        "path": "src/main/java/com/pfc/SecurityConfig.java",
+        "sha256": "C2CF11AD36F8747521C29E3D50455F240F302FF5058C2BA009C94A25DE12D27C"
+      },
+      {
+        "path": "src/main/java/com/pfc/thindesk/controller/ChamadoController.java",
+        "sha256": "8ED7E881D8D8EE544B7B4948F49DDF3B3B5A5E50C4ED2B5BB6E199C2D10AF72F"
+      },
+      {
+        "path": "src/main/java/com/pfc/thindesk/controller/ClienteController.java",
+        "sha256": "B74A452AEC55B87D0DE0F916DA83137D83D92B50B73B7A8C2DCCA57F5E807814"
+      },
+      {
+        "path": "src/main/java/com/pfc/thindesk/controller/HomeController.java",
+        "sha256": "72873400A1CAFDEB41AE5E40813F94787EEA9C40495A022086CC4AA2FF43560E"
+      },
+      {
+        "path": "src/main/java/com/pfc/thindesk/controller/HorarioAtendimentoController.java",
+        "sha256": "69B867DE205DF190C0F5B6A2841D862E379ECBCA7B09ED1EE37D1C64E8227B31"
+      },
+      {
+        "path": "src/main/java/com/pfc/thindesk/entity/Chamado.java",
+        "sha256": "3D37A0112C7C03F7DECAF18074DFAF8CCF20D2EAC10CA8CA152941F812FB71B7"
+      },
+      {
+        "path": "src/main/java/com/pfc/thindesk/entity/Cliente.java",
+        "sha256": "F99896A12768F3B660BAFDE4854376774684741EF79153CAB46E3403F2393549"
+      },
+      {
+        "path": "src/main/java/com/pfc/thindesk/entity/HorarioAtendimento.java",
+        "sha256": "498EEDC70D125A144B944F5107EBD3734E984EB55FC2FC8BB3DBDF6E9B7F3FEF"
+      },
+      {
+        "path": "src/main/java/com/pfc/thindesk/repository/ChamadoRepository.java",
+        "sha256": "FCF87CD07963B1682121F029E4BE46B79DBC868B528D10CD6BBC58050EA1CF87"
+      },
+      {
+        "path": "src/main/java/com/pfc/thindesk/repository/ClienteRepository.java",
+        "sha256": "C4B68F903630A2B61B6D774EC831754DAE8962F64690CEB59061EA5E48699EB6"
+      },
+      {
+        "path": "src/main/java/com/pfc/thindesk/repository/HorarioAtendimentoRepository.java",
+        "sha256": "A3A9B69F2C6E08B6F84D70C5BE73B95B673DBFABA3C267C3D702EEC9B52244DE"
+      },
+      {
+        "path": "src/main/java/com/pfc/thindesk/service/ChamadoService.java",
+        "sha256": "1397E258CBA25381D1C33C615989AC4BA57DC57BAC3DFA063FC222934F673D9E"
+      },
+      {
+        "path": "src/main/java/com/pfc/thindesk/service/ClienteService.java",
+        "sha256": "C1B22926D3B1F313036810299E015B824B8333180C49A497581FFE6677B53E63"
+      },
+      {
+        "path": "src/main/java/com/pfc/thindesk/service/HorarioAtendimentoService.java",
+        "sha256": "CC912002097D742ED8670104EF56C847B89C48254A4541DE70AD45C01C04D38F"
+      },
+      {
+        "path": "src/main/java/com/pfc/ThindeskApplication.java",
+        "sha256": "4FC11A59439AFB2CD64FBB8D5B49EDEB6AFB573C14C6A7E8E07B8EC1F83FDF1C"
+      },
+      {
+        "path": "src/main/resources/static/css/style.css",
+        "sha256": "02365F93D4BB2B9BBC2C379FE49825A189A41D164BFB26A0D8A1142877CB9276"
+      },
+      {
+        "path": "src/main/resources/static/images/logo.png",
+        "sha256": "9FA2C4134BBBE530F1E3E4B5D2E803B97243F740736248BC936721E8ECCBD859"
+      },
+      {
+        "path": "src/main/resources/static/js/script.js",
+        "sha256": "B10354614758F31074C739619D285FAD8F113E7D62F37849516460322F47B865"
+      },
+      {
+        "path": "src/main/resources/templates/ajustes-horarios.html",
+        "sha256": "0ED654E99BEE2027241CDE62D099637EDB610858711C899DFEDFA911D4F86A29"
+      },
+      {
+        "path": "src/main/resources/templates/chamados/atualizar.html",
+        "sha256": "7063E5003CD52B9719E67139DF6993B98B154E36FE0425C4D6FF68136F2B988E"
+      },
+      {
+        "path": "src/main/resources/templates/chamados.html",
+        "sha256": "6E2A77F6DAC67FD3CE7701BB792BD2E660E43D43BF54745C627ABC872FBF938A"
+      },
+      {
+        "path": "src/main/resources/templates/clientes.html",
+        "sha256": "17C13532730A5C66C6B62BD13D50BA42FCE25A9F9FE8F3AA14CE14AAFC361C24"
+      },
+      {
+        "path": "src/main/resources/templates/error.html",
+        "sha256": "624BFF5C9B4263ABF60DBE6FEE11B209F87AC8750E8564A96788074B17C919F8"
+      },
+      {
+        "path": "src/main/resources/templates/fragments/sidebar.html",
+        "sha256": "38884CB722B9EE995C88395F7527751C20001A152923F584533739CD214FC357"
+      },
+      {
+        "path": "src/main/resources/templates/home.html",
+        "sha256": "B0D414AF8998E67582D649CFBC1D7F708B42FF179E38660FF02D6C6C48A4E01C"
+      },
+      {
+        "path": "src/main/resources/templates/layout.html",
+        "sha256": "10D00C439BE91BF47A350AE206C5ABFDD5706604987AE970D469D4748CC8DFC4"
+      },
+      {
+        "path": "src/main/resources/templates/login.html",
+        "sha256": "DDC479E599ACD874F7CAADD4CE67426CDE7E94F40C68DC6625876C294E039AF4"
+      },
+      {
+        "path": "src/main/resources/application.properties",
+        "sha256": "11F8C48BECC3F8DCAB2CD7EA08DD9B422E153A8553F3E92AD0ADFAA24F43CF34"
+      },
+      {
+        "path": ".dockerignore",
+        "sha256": "CCB97FE4D6109C71F5C057EADE95922AD620F7DE0099F9E20B2573DADD0C55AC"
+      },
+      {
+        "path": "src/main/java/com/pfc/thindesk/analytics/AnalyticsController.java",
+        "sha256": "013AEF522D053CE572379AFB79379C691DEDEFED3390FD0C9B379AD9A71996C0"
+      },
+      {
+        "path": "src/main/java/com/pfc/thindesk/analytics/AnalyticsService.java",
+        "sha256": "54E93E053AC62E7FE567E687AB39A7CB643E2B1C2288A8800707E8E9E1E3C370"
+      }
+    ]
+  },
+  "image_id": "sha256:e2656f94d6ab3df04c2cba229e3ae29ca1de504b0ba2617e5fd780da539545c1",
+  "java": "openjdk 23.0.2 2025-01-21\nOpenJDK Runtime Environment Temurin-23.0.2+7 (build 23.0.2+7)\nOpenJDK 64-Bit Server VM Temurin-23.0.2+7 (build 23.0.2+7, mixed mode, sharing)",
+  "original_archive_unchanged": true,
+  "local_url": "http://127.0.0.1:8082/login"
+}

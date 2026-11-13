@@ -33,13 +33,15 @@ Aceita `id` textual da API ou `_id` textual/`{ "$oid": "..." }` de export MongoD
 2. Iniciar transação e lock para serializar recepções.
 3. Preservar o payload original em `ticket_source_records`, com origem `thindesk`, erros explícitos e estado `rejected` por insuficiência do contrato legado.
 4. Atualizar a mesma identidade em novas observações, sem criar outro registro. `first_seen_at` é preservado; `last_seen_at` indica recebimento local.
-5. Confirmar o lote ou revertê-lo integralmente em falha. Se um registro já possuir vínculo canônico, este conector legado recusa o lote: atualizar um vínculo exige uma sincronização completa ainda não suportada.
+5. Confirmar o lote ou revertê-lo integralmente em falha. Se um registro já possuir vínculo canônico, este conector legado recusa o lote: usar a [recepção explícita 1.0](recepcao-versionada-thindesk.md) para snapshots completos.
 
 Registros sem identificador confiável são contabilizados como `unidentified` e não podem ser gravados numa tabela cuja identidade é obrigatória. Duplicidade da mesma identidade no lote causa erro, sem alterações. Não deduplicar pessoas por nome; não converter `Manutenção` automaticamente em hardware; não usar ObjectId ou instante de importação como data de criação do chamado.
 
 Normalização de status reconhece `Aberto`/`ABERTO`, `EM_ANDAMENTO`/`Em andamento` e `CONCLUIDO`/`Concluído`. Espaços laterais, caixa e acentos são normalizados apenas nessa classificação. O payload original é preservado. Valores desconhecidos e conflito entre `tipo` e `Tipo` são registrados como erros adicionais. A normalização não libera a promoção sem os demais campos.
 
 Campos que eventualmente apareçam em um payload novo não são interpretados como extensão oficial: é preciso aprovar e implementar um contrato complementar antes da promoção. Isso evita atribuir significado incorreto a datas ou autores com nomes semelhantes.
+
+O [contrato complementar 1.0 aprovado](contrato-complementar-thindesk.md) define campos e completude. A [evolução local](evolucao-local-thindesk.md) produz esse export. O leitor legado não o aceita; o comando separado `thindesk:sync:v1` implementa a [recepção com validação semântica](recepcao-versionada-thindesk.md), sem fallback. Validade estrutural isolada continua não autorizando promoção.
 
 ## Relatório e códigos de saída
 
@@ -57,6 +59,6 @@ Exemplo de recepção de um chamado legado identificado:
 
 ## Limite operacional
 
-O teste de login e leitura usa um servidor HTTP local de teste que reproduz o contrato observado. Não foi fornecida uma instância Thindesk acessível; não houve uso das credenciais do ZIP, acesso a dados reais ou homologação com MongoDB.
+Na Fase 3, o teste de login e leitura usou um servidor HTTP controlado que reproduzia o contrato observado. Na etapa complementar de 12/11/2026, a [homologação local](homologacao-thindesk.md) compilou o Java original do ZIP e verificou login, sessão, leitura e recepção com MongoDB em execução e dados fictícios. Não houve uso das credenciais do ZIP ou de dados reais; a instância operacional continua pendente.
 
 Para sustentar todos os indicadores reais, a origem deve fornecer datas confiáveis, prioridade, vínculos estáveis e, para o detalhe completo, histórico e considerações. Até lá, o dashboard deve avisar que existem registros excluídos e mostrar a qualidade global devolvida pelo resumo. Polling do frontend apenas refaz consultas e não executa este comando de recepção. Nenhum agendamento automático foi criado nesta fase.

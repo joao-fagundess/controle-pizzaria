@@ -25,6 +25,7 @@ import {
   typeId,
   technicianId,
   ticketId,
+  meta,
 } from "./ticket-fixtures";
 
 const clients: ReturnType<typeof createDashboardQueryClient>[] = [];
@@ -78,6 +79,51 @@ function totalCard() {
   return screen.getByText("Total de chamados").parentElement!;
 }
 
+describe("proveniência e completude", () => {
+  it("coleções não fornecidas não são apresentadas como ausência confirmada", async () => {
+    const page = structuredClone(pageFixture), detail = structuredClone(detailFixture);
+    page.tickets[0].provenance = { contract_version: "1.0", exported_at: meta.generated_at, title_is_derived: false, history_coverage: "unavailable", technical_notes_coverage: "unavailable" };
+    page.tickets[0].latest_technical_note = null;
+    detail.ticket = page.tickets[0]; detail.technical_notes = []; detail.history = [];
+    vi.mocked(dashboardApi.tickets).mockResolvedValue(page); vi.mocked(dashboardApi.detail).mockResolvedValue(detail);
+    renderDashboard(); await ready();
+    expect(screen.getByText("Não fornecido pela origem")).toBeInTheDocument();
+    await userEvent.click(screen.getByRole("button", { name: detail.ticket.title }));
+    // O detalhe é carregado sob demanda; a primeira importação pode demorar nos testes.
+    const dialog = await screen.findByRole("dialog", {}, { timeout: 5_000 });
+    await waitFor(() => expect(within(dialog).getAllByText("Não fornecido pela origem.")).toHaveLength(2));
+    expect(within(dialog).queryByText("Sem considerações técnicas.")).not.toBeInTheDocument();
+  });
+  it("expõe coleções parciais e título derivado junto dos dados recebidos", async () => {
+    const page = structuredClone(pageFixture), detail = structuredClone(detailFixture);
+    page.tickets[0].provenance = { contract_version: "1.0", exported_at: meta.generated_at, title_is_derived: true, history_coverage: "partial", technical_notes_coverage: "partial" };
+    detail.ticket = page.tickets[0];
+    vi.mocked(dashboardApi.tickets).mockResolvedValue(page); vi.mocked(dashboardApi.detail).mockResolvedValue(detail);
+    renderDashboard(); await ready(); expect(screen.getByText("Título derivado da descrição")).toBeInTheDocument();
+    await userEvent.click(screen.getByRole("button", { name: detail.ticket.title }));
+    const dialog = await screen.findByRole("dialog");
+    expect(await within(dialog).findByText(/Considerações parciais:/)).toBeInTheDocument();
+    expect(within(dialog).getByText(/Histórico parcial:/)).toBeInTheDocument();
+    expect(within(dialog).getByText(/Título criado a partir da descrição do Thindesk/)).toBeInTheDocument();
+  });
+  it("lista vazia completa confirma ausência; resposta antiga sem metadados mantém desconhecimento", async () => {
+    const detail = structuredClone(detailFixture); detail.technical_notes = []; detail.ticket.latest_technical_note = null;
+    vi.mocked(dashboardApi.detail).mockResolvedValue(detail);
+    renderDashboard(); await ready(); await userEvent.click(screen.getByRole("button", { name: detail.ticket.title }));
+    expect(await screen.findByText("Sem considerações técnicas.")).toBeInTheDocument();
+    await userEvent.click(screen.getByRole("button", { name: "Fechar detalhe do chamado" }));
+    delete detail.ticket.provenance;
+    vi.mocked(dashboardApi.detail).mockResolvedValue(detail);
+    // Outra identidade invalida o cache do detalhe anterior e simula uma API antiga.
+    const page = structuredClone(pageFixture); page.tickets[0].id = "10000000-0000-4000-8000-000000000009";
+    vi.mocked(dashboardApi.tickets).mockResolvedValue(page);
+    await userEvent.click(screen.getByRole("button", { name: "Atualizar dados" }));
+    await waitFor(() => expect(dashboardApi.tickets).toHaveBeenCalledTimes(2));
+    await userEvent.click(screen.getByRole("button", { name: detail.ticket.title }));
+    expect(await within(screen.getByRole("dialog")).findByText("Não fornecido pela origem.")).toBeInTheDocument();
+  });
+});
+
 describe("consulta e apresentação", () => {
   it("exibe os seis indicadores, bases temporais e aviso de demonstração", async () => {
     renderDashboard();
@@ -90,7 +136,7 @@ describe("consulta e apresentação", () => {
       await screen.findByText("Concluídos por data de resolução"),
     ).toBeInTheDocument();
     expect(
-      screen.getByText(/Os chamados exibidos são fictícios/),
+      screen.getByText(/Você está vendo chamados fictícios/),
     ).toBeInTheDocument();
     // O ranking chega no chunk de gráficos; a instrumentação pode atrasar a importação inicial.
     const ranking = await screen.findByRole(
@@ -322,7 +368,7 @@ describe("estados de atualização", () => {
     ).toBeInTheDocument();
     expect(totalCard()).toHaveTextContent("3");
     expect(
-      screen.getByText(/Exibindo a última consulta válida/),
+      screen.getByText(/Mostrando os dados de/),
     ).toBeInTheDocument();
     expect(screen.getByText(/Atualização incompleta/)).toBeInTheDocument();
     await userEvent.click(

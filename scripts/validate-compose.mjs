@@ -11,7 +11,7 @@ import { setTimeout as wait } from 'node:timers/promises';
 import { fileURLToPath } from 'node:url';
 
 const projectRoot = await realpath(fileURLToPath(new URL('../', import.meta.url)));
-const evidenceRoot = join(projectRoot, 'docs/evidencias/fase-6');
+const evidenceRoot = join(projectRoot, process.env.ANALYTICS_EVIDENCE === '1' ? 'docs/evidencias/thindesk-import/compose' : 'docs/evidencias/fase-6');
 await mkdir(evidenceRoot, { recursive: true });
 const cacheRoot = join(projectRoot, '.cache');
 await mkdir(cacheRoot, { recursive: true });
@@ -141,6 +141,14 @@ try {
   await writeFile(join(evidenceRoot, 'compose-containers.json'), redact(JSON.stringify(containerStates, null, 2)));
   report.image_digests = (await command('Identificação das imagens', ['image', 'inspect', 'thindesk-dashboard-api:local', 'thindesk-dashboard-web:local', 'postgres:18-bookworm',
     '--format', '{{.RepoTags}} {{.Id}} {{json .RepoDigests}}'])).trim().split(/\r?\n/);
+  for (const [file, destination] of [
+    ['integration/thindesk/verify-import.mjs', '/tmp/thindesk-import-check.mjs'],
+    ['integration/thindesk/analytics-mapping.example.json', '/tmp/thindesk-import-mapping.json'],
+    ['docs/evidencias/thindesk-analytics/export.json', '/tmp/thindesk-import-input.json'],
+    ['docs/contracts/examples/valid-reopened-partial.json', '/tmp/thindesk-import-partial.json'],
+  ]) await compose('Fixtures fictícias no container descartável', ['cp', join(projectRoot, file), `api:${destination}`]);
+  report.analytics_import = JSON.parse((await compose('CLI 1.0 e consultas da API de produção', ['exec', '-T', 'api', 'node', '/tmp/thindesk-import-check.mjs'])).trim());
+  assert.equal(report.analytics_import.status, 'passed');
   report.status = 'passed';
 } catch (failure) {
   report.status = 'failed';
@@ -164,7 +172,7 @@ try {
     report.cleanup_error = redact(cleanupFailure.message);
     process.exitCode = 1;
   }
-  await writeFile(join(evidenceRoot, 'compose-validation.txt'), redact(transcript));
+  await writeFile(join(evidenceRoot, 'compose-validation.txt'), redact(transcript).replace(/[\t ]+$/gm, ''));
   await writeFile(join(evidenceRoot, 'compose-report.json'), `${JSON.stringify(report, null, 2)}\n`);
 }
 if (report.status === 'passed') process.stdout.write(`Compose validado: ${report.http_checks.length} verificações HTTP; recursos de teste removidos.\n`);

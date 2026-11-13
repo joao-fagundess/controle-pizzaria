@@ -1,0 +1,86 @@
+{
+  "contract_version": "1.0",
+  "source_system": "thindesk",
+  "exported_at": "2026-11-12T15:00:00.000Z",
+  "tickets": [
+    {
+      "external_id": "example-ticket-001",
+      "title": "Impressora de teste voltou a imprimir",
+      "title_is_derived": false,
+      "description": "Fila de impressão do laboratório de homologação bloqueada após atualização do driver.",
+      "status": "resolved",
+      "priority": "high",
+      "type": {
+        "external_id": "type-printing",
+        "name": "Impressão"
+      },
+      "requester": {
+        "external_id": "example-requester-001",
+        "name": "Solicitante de Homologação",
+        "department": "Recepção de teste"
+      },
+      "assignee": {
+        "external_id": "example-staff-001",
+        "name": "Técnica de Homologação",
+        "role": "technician",
+        "active": true
+      },
+      "created_at": "2026-11-11T09:00:00.000Z",
+      "updated_at": "2026-11-11T12:00:00.000Z",
+      "resolved_at": "2026-11-11T12:00:00.000Z",
+      "history": {
+        "coverage": "complete",
+        "items": [
+          {
+            "external_id": "event-001",
+            "sequence": 1,
+            "event_type": "created",
+            "author": null,
+            "occurred_at": "2026-11-11T09:00:00.000Z",
+            "previous_value": null,
+            "new_value": {
+              "status": "open",
+              "type_external_id": "type-printing",
+              "priority": "high",
+              "assignee_external_id": "example-staff-001"
+            }
+          },
+          {
+            "external_id": "event-002",
+            "sequence": 2,
+            "event_type": "status_changed",
+            "author": null,
+            "occurred_at": "2026-11-11T10:00:00.000Z",
+            "previous_value": "open",
+            "new_value": "in_progress"
+          },
+          {
+            "external_id": "event-003",
+            "sequence": 3,
+            "event_type": "status_changed",
+            "author": null,
+            "occurred_at": "2026-11-11T12:00:00.000Z",
+            "previous_value": "in_progress",
+            "new_value": "resolved"
+          }
+        ]
+      },
+      "technical_notes": {
+        "coverage": "complete",
+        "items": [
+          {
+            "external_id": "note-001",
+            "author": {
+              "external_id": "example-staff-001",
+              "name": "Técnica de Homologação",
+              "role": "technician",
+              "active": true
+            },
+            "content": "Driver reinstalado e impressão de teste validada no laboratório.",
+            "created_at": "2026-11-11T11:50:00.000Z"
+          }
+        ]
+      }
+    }
+  ]
+}

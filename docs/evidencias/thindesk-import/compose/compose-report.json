@@ -1,0 +1,332 @@
+{
+  "generated_at": "2026-11-13T12:23:45.416Z",
+  "status": "passed",
+  "project": "thindesk-phase6-f7b3fdee65c0",
+  "host": "127.0.0.1",
+  "port": 64375,
+  "node": "v24.21.0",
+  "platform": "win32",
+  "steps": [
+    {
+      "name": "Docker disponível",
+      "exit_code": 0,
+      "duration_ms": 415
+    },
+    {
+      "name": "Configuração do Compose",
+      "exit_code": 0,
+      "duration_ms": 2779
+    },
+    {
+      "name": "Build das imagens",
+      "exit_code": 0,
+      "duration_ms": 24011
+    },
+    {
+      "name": "Subida e healthchecks",
+      "exit_code": 0,
+      "duration_ms": 24536
+    },
+    {
+      "name": "Seed explícito de demonstração",
+      "exit_code": 0,
+      "duration_ms": 2696
+    },
+    {
+      "name": "Bearer obrigatório no acesso direto à API",
+      "exit_code": 0,
+      "duration_ms": 436
+    },
+    {
+      "name": "Usuário sem root: api",
+      "exit_code": 0,
+      "duration_ms": 675
+    },
+    {
+      "name": "Usuário sem root: web",
+      "exit_code": 0,
+      "duration_ms": 414
+    },
+    {
+      "name": "Inventário dos assets estáticos",
+      "exit_code": 0,
+      "duration_ms": 362
+    },
+    {
+      "name": "Migrations idempotentes",
+      "exit_code": 0,
+      "duration_ms": 2016
+    },
+    {
+      "name": "Seed idempotente",
+      "exit_code": 0,
+      "duration_ms": 2673
+    },
+    {
+      "name": "Reinício do banco persistente",
+      "exit_code": 0,
+      "duration_ms": 1644
+    },
+    {
+      "name": "Saúde após reinício do banco",
+      "exit_code": 0,
+      "duration_ms": 7826
+    },
+    {
+      "name": "Versão do PostgreSQL",
+      "exit_code": 0,
+      "duration_ms": 488
+    },
+    {
+      "name": "Estado final dos contêineres",
+      "exit_code": 0,
+      "duration_ms": 501
+    },
+    {
+      "name": "Identificação das imagens",
+      "exit_code": 0,
+      "duration_ms": 435
+    },
+    {
+      "name": "Fixtures fictícias no container descartável",
+      "exit_code": 0,
+      "duration_ms": 394
+    },
+    {
+      "name": "Fixtures fictícias no container descartável",
+      "exit_code": 0,
+      "duration_ms": 270
+    },
+    {
+      "name": "Fixtures fictícias no container descartável",
+      "exit_code": 0,
+      "duration_ms": 418
+    },
+    {
+      "name": "Fixtures fictícias no container descartável",
+      "exit_code": 0,
+      "duration_ms": 324
+    },
+    {
+      "name": "CLI 1.0 e consultas da API de produção",
+      "exit_code": 0,
+      "duration_ms": 4209
+    },
+    {
+      "name": "Confinamento dos volumes de teste",
+      "exit_code": 0,
+      "duration_ms": 98
+    },
+    {
+      "name": "Limpeza do projeto descartável",
+      "exit_code": 0,
+      "duration_ms": 2486
+    }
+  ],
+  "http_checks": [
+    {
+      "path": "/healthz",
+      "status": 200
+    },
+    {
+      "path": "/",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/dashboard/summary",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/dashboard/summary",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/dashboard/tickets-by-period?group_by=day",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/dashboard/tickets-by-period?group_by=week",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/dashboard/tickets-by-period?group_by=month",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/dashboard/status-distribution",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/dashboard/top-ticket-types?limit=3",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/tickets?page_size=25&sort_by=priority&sort_order=desc",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/tickets/f9e409f6-f07f-b99e-502d-6e581ea00df2",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/filters/options",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/dashboard/summary?start_date=2026-01-01&end_date=2026-12-31&status=waiting&priority=urgent&type_id=ace62067-82e1-6d43-bdb7-f1f42e8b10c2&assignee_id=82a3dc19-a33f-9c59-470a-8aa7720edbbb",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/dashboard/summary?start_date=invalid",
+      "status": 400
+    },
+    {
+      "path": "/api/v1/dashboard/summary?start_date=2026-11-11&end_date=2026-10-01",
+      "status": 422
+    },
+    {
+      "path": "/api/v1/tickets/00000000-0000-0000-0000-000000000000",
+      "status": 404
+    },
+    {
+      "path": "/api/v1/filters/options",
+      "status": 403
+    },
+    {
+      "path": "/api/v1/dashboard/summary?start_date=2020-01-01&end_date=2020-01-31",
+      "status": 200
+    },
+    {
+      "path": "/docs/openapi.json",
+      "status": 200
+    },
+    {
+      "path": "/docs/",
+      "status": 200
+    },
+    {
+      "path": "/.env",
+      "status": 403
+    },
+    {
+      "path": "/assets/TicketCharts-BVQwMgFU.js",
+      "status": 200
+    },
+    {
+      "path": "/assets/index-cvZfgB9g.css",
+      "status": 200
+    },
+    {
+      "path": "/assets/TicketDetailDialog-CKBYDCm8.js",
+      "status": 200
+    },
+    {
+      "path": "/assets/index-C6jmjV3O.js",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/dashboard/summary",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/dashboard/summary",
+      "status": 200
+    }
+  ],
+  "cleanup_completed": true,
+  "assets_checked_for_secrets": 4,
+  "database_restart_preserved_tickets": true,
+  "postgres": "PostgreSQL 18.6 (Debian 18.6-1.pgdg12+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit",
+  "image_digests": [
+    "[thindesk-dashboard-api:local] sha256:3d950d531cba374a8387b43cb9051639636eb6745db001e708b782ec140769e9 [\"thindesk-dashboard-api@sha256:3d950d531cba374a8387b43cb9051639636eb6745db001e708b782ec140769e9\"]",
+    "[thindesk-dashboard-web:local] sha256:ed3c3dd4f164c36249b99b3e48c77ea6620faf0e2afcaa09c18f1e64fce5b410 [\"thindesk-dashboard-web@sha256:ed3c3dd4f164c36249b99b3e48c77ea6620faf0e2afcaa09c18f1e64fce5b410\"]",
+    "[postgres:18-bookworm] sha256:f1ea2a1a4fb7b68d4836be1fdcb8a6466a89b072158bf9d97663600538c294c5 [\"postgres@sha256:f1ea2a1a4fb7b68d4836be1fdcb8a6466a89b072158bf9d97663600538c294c5\"]"
+  ],
+  "analytics_import": {
+    "status": "passed",
+    "checks": [
+      {
+        "name": "export real promove somente referências resolvidas na imagem de produção",
+        "status": "passed"
+      },
+      {
+        "name": "arquivo repetido não duplica dados",
+        "status": "passed"
+      },
+      {
+        "name": "cobertura parcial e coleção desconhecida ficam explícitas na API",
+        "status": "passed"
+      },
+      {
+        "name": "atualização válida e observação antiga preservam a versão aceita",
+        "status": "passed"
+      },
+      {
+        "name": "conflito de versão reverte inclusive novos registros do mesmo lote",
+        "status": "passed"
+      }
+    ],
+    "cli_executions": [
+      {
+        "exit_code": 2,
+        "received": 6,
+        "preserved": 6,
+        "rejected": 3,
+        "unidentified": 0,
+        "promoted": 3,
+        "updated": 0,
+        "unchanged": 0,
+        "stale": 0
+      },
+      {
+        "exit_code": 2,
+        "received": 6,
+        "preserved": 6,
+        "rejected": 3,
+        "unidentified": 0,
+        "promoted": 0,
+        "updated": 0,
+        "unchanged": 3,
+        "stale": 0
+      },
+      {
+        "exit_code": 0,
+        "received": 1,
+        "preserved": 1,
+        "rejected": 0,
+        "unidentified": 0,
+        "promoted": 1,
+        "updated": 0,
+        "unchanged": 0,
+        "stale": 0
+      },
+      {
+        "exit_code": 0,
+        "received": 1,
+        "preserved": 1,
+        "rejected": 0,
+        "unidentified": 0,
+        "promoted": 0,
+        "updated": 1,
+        "unchanged": 0,
+        "stale": 0
+      },
+      {
+        "exit_code": 0,
+        "received": 1,
+        "preserved": 1,
+        "rejected": 0,
+        "unidentified": 0,
+        "promoted": 0,
+        "updated": 0,
+        "unchanged": 0,
+        "stale": 1
+      },
+      {
+        "exit_code": 1,
+        "controlled_failure": true
+      }
+    ],
+    "total_after": 484
+  }
+}

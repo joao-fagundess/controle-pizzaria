@@ -69,3 +69,5 @@ Os horários de atendimento existentes não serão usados para calcular horas ú
 ## Limites da inspeção
 
 Não houve build nem execução do Thindesk: Java e Maven não estão disponíveis no PATH deste ambiente, e não foi fornecida uma instância MongoDB acessível. Portanto, os endpoints e formatos acima são contratos observados no código, sem comprovação de resposta em execução. Também não há evidência de dados reais além do objeto de exemplo.
+
+Atualização de 12/11/2026: após autorização do usuário, a [etapa de homologação local](homologacao-thindesk.md) compilou uma cópia selecionada do ZIP em Docker e verificou a aplicação Java com MongoDB separado. Os fontes originais e o POM foram preservados; a configuração de acesso foi substituída por um template próprio, com credenciais novas. Login, sessão e listagem foram confirmados em execução com três chamados fictícios. A limitação de campos analíticos permanece, e a instância operacional não foi homologada. Ver [evidências](evidencias/thindesk-local.md).

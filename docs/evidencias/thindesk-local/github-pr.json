@@ -1,0 +1,16 @@
+{
+  "recorded_at": "2026-11-12T15:41:12.401Z",
+  "repository": "joao-fagundess/controle-pizzaria",
+  "authenticated_as": "joao-fagundess",
+  "authorization": "Integração em develop autorizada pelo usuário no chat em 12/11/2026.",
+  "number": 5,
+  "url": "https://github.com/joao-fagundess/controle-pizzaria/pull/5",
+  "state": "closed",
+  "draft": false,
+  "merged": true,
+  "head": "feature/thindesk-homologation",
+  "head_sha": "b750a613d851090c3798373b4a4f3f76f34254d0",
+  "base": "develop",
+  "merge_commit_sha": "5a59436f59c2651cde64e7d81f3894a90f6d8bb4",
+  "merged_at": "2026-11-12T15:41:10Z"
+}

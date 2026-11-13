@@ -1,0 +1,165 @@
+
+Identificar imagem validada
+sha256:95a2038210890f8ca369180f3ebe07a267d57a03bc8ce7ef4bd8cc18d941f57f
+
+Reusar artefato validado na homologação
+
+Identificar imagem validada
+sha256:b43372e7f865fe61467d81d7206a4bb9d810e845e1369890447bb54649df71da
+
+Reusar artefato validado na homologação
+
+Iniciar banco preservado
+ Container thindesk-homologation-db-1 Starting
+ Container thindesk-homologation-db-1 Started
+ Container thindesk-homologation-db-1 Waiting
+ Container thindesk-homologation-db-1 Healthy
+
+Consulta de integridade
+[Dados da consulta omitidos; hashes e contagens registrados.]
+Aplicar somente migrations pendentes
+Migrations aplicadas: 1.
+ Container thindesk-homologation-db-1 Running
+ Container thindesk-homologation-db-1 Waiting
+ Container thindesk-homologation-db-1 Healthy
+ Container thindesk-homologation-migrate-run-5e7e7b73e0e4 Creating
+ Container thindesk-homologation-migrate-run-5e7e7b73e0e4 Created
+
+Atualizar API e interface de homologação
+ Container thindesk-homologation-db-1 Running
+ Container thindesk-homologation-migrate-1 Recreate
+ Container thindesk-homologation-migrate-1 Recreated
+ Container thindesk-homologation-api-1 Recreate
+ Container thindesk-homologation-api-1 Recreated
+ Container thindesk-homologation-web-1 Recreate
+ Container thindesk-homologation-web-1 Recreated
+ Container thindesk-homologation-db-1 Waiting
+ Container thindesk-homologation-db-1 Healthy
+ Container thindesk-homologation-migrate-1 Starting
+ Container thindesk-homologation-migrate-1 Started
+ Container thindesk-homologation-migrate-1 Waiting
+ Container thindesk-homologation-migrate-1 Exited
+ Container thindesk-homologation-api-1 Starting
+ Container thindesk-homologation-api-1 Started
+ Container thindesk-homologation-api-1 Waiting
+ Container thindesk-homologation-api-1 Healthy
+ Container thindesk-homologation-web-1 Starting
+ Container thindesk-homologation-web-1 Started
+ Container thindesk-homologation-web-1 Waiting
+ Container thindesk-homologation-db-1 Waiting
+ Container thindesk-homologation-api-1 Waiting
+ Container thindesk-homologation-migrate-1 Waiting
+ Container thindesk-homologation-api-1 Healthy
+ Container thindesk-homologation-migrate-1 Exited
+ Container thindesk-homologation-db-1 Healthy
+ Container thindesk-homologation-web-1 Healthy
+
+Receber export 1.0
+{"received":6,"preserved":6,"rejected":3,"unidentified":0,"promoted":3,"updated":0,"unchanged":0,"stale":0}
+ Container thindesk-homologation-db-1 Running
+ Container thindesk-homologation-db-1 Waiting
+ Container thindesk-homologation-db-1 Healthy
+ Container thindesk-homologation-migrate-1 Starting
+ Container thindesk-homologation-migrate-1 Started
+ Container thindesk-homologation-db-1 Waiting
+ Container thindesk-homologation-migrate-1 Waiting
+ Container thindesk-homologation-db-1 Healthy
+ Container thindesk-homologation-migrate-1 Exited
+ Container thindesk-homologation-sync-v1-run-1ea8fb840169 Creating
+ Container thindesk-homologation-sync-v1-run-1ea8fb840169 Created
+
+
+Repetir sem duplicação
+{"received":6,"preserved":6,"rejected":3,"unidentified":0,"promoted":0,"updated":0,"unchanged":3,"stale":0}
+ Container thindesk-homologation-db-1 Running
+ Container thindesk-homologation-db-1 Waiting
+ Container thindesk-homologation-db-1 Healthy
+ Container thindesk-homologation-migrate-1 Starting
+ Container thindesk-homologation-migrate-1 Started
+ Container thindesk-homologation-db-1 Waiting
+ Container thindesk-homologation-migrate-1 Waiting
+ Container thindesk-homologation-db-1 Healthy
+ Container thindesk-homologation-migrate-1 Exited
+ Container thindesk-homologation-sync-v1-run-0b1fe0bd9077 Creating
+ Container thindesk-homologation-sync-v1-run-0b1fe0bd9077 Created
+
+
+Consulta de integridade
+[Dados da consulta omitidos; hashes e contagens registrados.]
+Consulta de integridade
+[Dados da consulta omitidos; hashes e contagens registrados.]
+Restaurar bancos das demonstrações
+thindesk-dashboard-db-1
+thindesk-homologation-mongo-1
+thindesk-homologation-db-1
+
+Restaurar serviços deste projeto
+thindesk-dashboard-api-1
+thindesk-dashboard-web-1
+thindesk-homologation-thindesk-1
+thindesk-homologation-api-1
+thindesk-homologation-web-1
+
+Conferir saúde
+/thindesk-dashboard-db-1 running starting
+/thindesk-dashboard-api-1 running starting
+/thindesk-dashboard-web-1 running starting
+/thindesk-homologation-db-1 running healthy
+/thindesk-homologation-mongo-1 running starting
+/thindesk-homologation-thindesk-1 running starting
+/thindesk-homologation-api-1 running healthy
+/thindesk-homologation-web-1 running healthy
+
+Conferir saúde
+/thindesk-dashboard-db-1 running healthy
+/thindesk-dashboard-api-1 running healthy
+/thindesk-dashboard-web-1 running healthy
+/thindesk-homologation-db-1 running healthy
+/thindesk-homologation-mongo-1 running starting
+/thindesk-homologation-thindesk-1 running starting
+/thindesk-homologation-api-1 running healthy
+/thindesk-homologation-web-1 running healthy
+
+Conferir saúde
+/thindesk-dashboard-db-1 running healthy
+/thindesk-dashboard-api-1 running healthy
+/thindesk-dashboard-web-1 running healthy
+/thindesk-homologation-db-1 running healthy
+/thindesk-homologation-mongo-1 running starting
+/thindesk-homologation-thindesk-1 running starting
+/thindesk-homologation-api-1 running healthy
+/thindesk-homologation-web-1 running healthy
+
+Conferir saúde
+/thindesk-dashboard-db-1 running healthy
+/thindesk-dashboard-api-1 running healthy
+/thindesk-dashboard-web-1 running healthy
+/thindesk-homologation-db-1 running healthy
+/thindesk-homologation-mongo-1 running starting
+/thindesk-homologation-thindesk-1 running starting
+/thindesk-homologation-api-1 running healthy
+/thindesk-homologation-web-1 running healthy
+
+Conferir saúde
+/thindesk-dashboard-db-1 running healthy
+/thindesk-dashboard-api-1 running healthy
+/thindesk-dashboard-web-1 running healthy
+/thindesk-homologation-db-1 running healthy
+/thindesk-homologation-mongo-1 running starting
+/thindesk-homologation-thindesk-1 running healthy
+/thindesk-homologation-api-1 running healthy
+/thindesk-homologation-web-1 running healthy
+
+Conferir saúde
+/thindesk-dashboard-db-1 running healthy
+/thindesk-dashboard-api-1 running healthy
+/thindesk-dashboard-web-1 running healthy
+/thindesk-homologation-db-1 running healthy
+/thindesk-homologation-mongo-1 running healthy
+/thindesk-homologation-thindesk-1 running healthy
+/thindesk-homologation-api-1 running healthy
+/thindesk-homologation-web-1 running healthy
+
+Confirmar encerramento da origem analítica
+exited
+exited

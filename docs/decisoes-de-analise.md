@@ -94,8 +94,8 @@ Esses pontos não impedem a análise. A aprovação das premissas permite inicia
 | ID | Informação pendente | Momento em que é necessária |
 | --- | --- | --- |
 | PV01 | Parcialmente resolvido pelo ZIP: versão `1.0-alpha`, listagens sem paginação e login por sessão. Faltam URL operacional, acesso autorizado e limites de consumo. | Antes de homologar o conector real. |
-| PV02 | Campos analíticos ausentes confirmados. Definir evolução da origem ou export complementar, catálogo completo, identidades de pessoas e política de reabertura/cancelamento. | Antes de importar chamados reais para os indicadores completos. |
-| PV03 | Origem atual não possui considerações técnicas. Confirmar como serão produzidas/exportadas e quais usuários poderão acessá-las, com restrições por equipe se aplicáveis. | Antes de disponibilizar dados reais aos usuários do painel. |
+| PV02 | O [contrato 1.0](contrato-complementar-thindesk.md), captura/export e [recepção versionada](recepcao-versionada-thindesk.md) foram homologados localmente. Mapeamento operacional e proveniência dos dados reais continuam pendentes; referências históricas não resolvidas são excluídas. | Antes de importar chamados reais para os indicadores completos. |
+| PV03 | O ZIP original não possui considerações técnicas; a evolução local captura notas futuras com autoria do login. Confirmar produção operacional e quais usuários poderão acessá-las, com restrições por equipe se aplicáveis. | Antes de disponibilizar dados reais aos usuários do painel. |
 | PV04 | Mecanismo corporativo de autenticação, ambiente de implantação e origens permitidas por CORS. | Antes da configuração do ambiente compartilhado ou de produção. |
 | PV05 | Volume esperado, usuários simultâneos, infraestrutura e tolerância à defasagem dos dados do Thindesk. | Antes de validar desempenho e definir sincronização operacional. |
 | PV06 | Regras da Fase 1 mantidas após a autorização para avançar; nova limitação de completude da origem registrada em `thindesk-inspecao.md`. | Revisar antes de homologar indicadores com a operação. |

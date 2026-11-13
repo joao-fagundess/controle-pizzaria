@@ -10,7 +10,7 @@ const connection = database;
 
 before(async () => {
   const appliedNames = await applyMigrations(connection);
-  assert.equal(appliedNames.length, 2);
+  assert.equal(appliedNames.length, 4);
   await seedTickets(connection, '2026-11-11');
 });
 
@@ -19,7 +19,7 @@ after(async () => testDatabase.close());
 test('reexecutar migrations não altera o schema já aplicado', async () => {
   assert.deepEqual(await applyMigrations(connection), []);
   const migrationCount = await database.query('SELECT count(*)::int AS total FROM schema_migrations');
-  assert.equal(migrationCount.rows[0].total, 2);
+  assert.equal(migrationCount.rows[0].total, 4);
 });
 
 test('checksum divergente impede ignorar uma migration modificada', async () => {

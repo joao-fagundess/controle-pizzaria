@@ -47,6 +47,13 @@ const ticket = z.object({
   updated_at: instant,
   resolved_at: instant.nullable(),
   source: z.object({ system: z.string(), external_id: z.string() }).nullable(),
+  provenance: z.object({
+    contract_version: z.literal("1.0").nullable(),
+    exported_at: instant.nullable(),
+    title_is_derived: z.boolean(),
+    history_coverage: z.enum(["complete", "partial", "unavailable"]),
+    technical_notes_coverage: z.enum(["complete", "partial", "unavailable"]),
+  }).optional(),
   latest_technical_note: technicalNote.nullable(),
 });
 
@@ -102,6 +109,7 @@ export const detailContract = z.object({
     z.object({
       id: identifier,
       event_type: z.string(),
+      sequence: z.number().int().positive().nullable().optional(),
       occurred_at: instant,
       author: person,
       previous_value: z.unknown(),

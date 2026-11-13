@@ -21,6 +21,7 @@ COPY package.json ./
 COPY --from=build /app/dist ./dist
 COPY scripts/database.mjs ./scripts/
 COPY migrations ./migrations
+COPY contracts ./contracts
 COPY seeds ./seeds
 USER node
 EXPOSE 3000

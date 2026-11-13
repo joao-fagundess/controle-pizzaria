@@ -1,0 +1,175 @@
+{
+  "generated_at": "2026-11-13T12:29:08.255Z",
+  "status": "passed",
+  "project": "thindesk-homologation",
+  "steps": [
+    {
+      "name": "Identificar imagem validada",
+      "exit_code": 0
+    },
+    {
+      "name": "Reusar artefato validado na homologação",
+      "exit_code": 0
+    },
+    {
+      "name": "Identificar imagem validada",
+      "exit_code": 0
+    },
+    {
+      "name": "Reusar artefato validado na homologação",
+      "exit_code": 0
+    },
+    {
+      "name": "Iniciar banco preservado",
+      "exit_code": 0
+    },
+    {
+      "name": "Consulta de integridade",
+      "exit_code": 0
+    },
+    {
+      "name": "Aplicar somente migrations pendentes",
+      "exit_code": 0
+    },
+    {
+      "name": "Atualizar API e interface de homologação",
+      "exit_code": 0
+    },
+    {
+      "name": "Receber export 1.0",
+      "exit_code": 2
+    },
+    {
+      "name": "Repetir sem duplicação",
+      "exit_code": 2
+    },
+    {
+      "name": "Consulta de integridade",
+      "exit_code": 0
+    },
+    {
+      "name": "Consulta de integridade",
+      "exit_code": 0
+    },
+    {
+      "name": "Restaurar bancos das demonstrações",
+      "exit_code": 0
+    },
+    {
+      "name": "Restaurar serviços deste projeto",
+      "exit_code": 0
+    },
+    {
+      "name": "Conferir saúde",
+      "exit_code": 0
+    },
+    {
+      "name": "Conferir saúde",
+      "exit_code": 0
+    },
+    {
+      "name": "Conferir saúde",
+      "exit_code": 0
+    },
+    {
+      "name": "Conferir saúde",
+      "exit_code": 0
+    },
+    {
+      "name": "Conferir saúde",
+      "exit_code": 0
+    },
+    {
+      "name": "Conferir saúde",
+      "exit_code": 0
+    },
+    {
+      "name": "Conferir saúde",
+      "exit_code": 0
+    },
+    {
+      "name": "Conferir saúde",
+      "exit_code": 0
+    },
+    {
+      "name": "Conferir saúde",
+      "exit_code": 0
+    },
+    {
+      "name": "Conferir saúde",
+      "exit_code": 0
+    },
+    {
+      "name": "Confirmar encerramento da origem analítica",
+      "exit_code": 0
+    }
+  ],
+  "images": {
+    "api": "sha256:3d950d531cba374a8387b43cb9051639636eb6745db001e708b782ec140769e9",
+    "web": "sha256:ed3c3dd4f164c36249b99b3e48c77ea6620faf0e2afcaa09c18f1e64fce5b410"
+  },
+  "input_sha256": "5e9dc61696b647022093e67613b8c4e185f663d212d6ddf63b51bd21acce4466",
+  "legacy_snapshot_sha256": "f86e77c7258c057bf12321f1f608e30bbd145e110e7181583194f254a84227ed",
+  "first_sync": {
+    "received": 6,
+    "preserved": 6,
+    "rejected": 3,
+    "unidentified": 0,
+    "promoted": 0,
+    "updated": 0,
+    "unchanged": 3,
+    "stale": 0
+  },
+  "repeated_sync": {
+    "received": 6,
+    "preserved": 6,
+    "rejected": 3,
+    "unidentified": 0,
+    "promoted": 0,
+    "updated": 0,
+    "unchanged": 3,
+    "stale": 0
+  },
+  "dashboard": {
+    "url": "http://127.0.0.1:8180/",
+    "summary": {
+      "total": 3,
+      "open": 1,
+      "in_progress": 0,
+      "waiting": 0,
+      "resolved": 2,
+      "average_resolution_seconds": 0.018835,
+      "resolution_rate": 66.66666666666667
+    },
+    "source_quality": {
+      "received": 9,
+      "rejected": 6,
+      "pending": 0,
+      "linked": 3,
+      "last_received_at": "2026-11-13T12:30:39.128Z",
+      "mode": "operational"
+    }
+  },
+  "original_legacy_records_unchanged": true,
+  "migrations": [
+    "001_initial_schema.sql",
+    "002_ticket_catalogs.sql",
+    "003_analytics_source.sql",
+    "004_note_source_precision.sql"
+  ],
+  "original_archive_unchanged": true,
+  "original_sources_verified": 29,
+  "services": [
+    "/thindesk-dashboard-db-1 running healthy",
+    "/thindesk-dashboard-api-1 running healthy",
+    "/thindesk-dashboard-web-1 running healthy",
+    "/thindesk-homologation-db-1 running healthy",
+    "/thindesk-homologation-mongo-1 running healthy",
+    "/thindesk-homologation-thindesk-1 running healthy",
+    "/thindesk-homologation-api-1 running healthy",
+    "/thindesk-homologation-web-1 running healthy"
+  ],
+  "main_demo_total": 480,
+  "analytics_source_stopped": true,
+  "unrelated_containers_modified": false
+}

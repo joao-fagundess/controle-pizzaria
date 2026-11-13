@@ -17,6 +17,8 @@ async function synchronizeSource() {
     let exportedTickets: unknown;
     try { exportedTickets = JSON.parse((await readFile(sourceFile, 'utf8')).replace(/^\uFEFF/, '')); }
     catch { throw new ThindeskError('O export deve conter JSON válido.'); }
+    if (exportedTickets && typeof exportedTickets === 'object' && 'contract_version' in exportedTickets)
+      throw new ThindeskError('Use thindesk:sync:v1 para o envelope versionado; o comando atual aceita somente legados.');
     sourceTickets = Array.isArray(exportedTickets) ? exportedTickets : [exportedTickets];
   } else {
     if (!process.env.THINDESK_BASE_URL) throw new ThindeskError('Configure THINDESK_BASE_URL ou informe --file.');

@@ -1,0 +1,172 @@
+# Homologação local do ZIP: bancos, credenciais, rede e portas separados da demonstração entregue.
+# Preparar o código com scripts/prepare-thindesk.ps1 e usar o .env próprio deste ambiente.
+name: thindesk-homologation
+
+x-api-image: &api-image
+  image: thindesk-homologation-api:local
+
+x-database-environment: &database-environment
+  DATABASE_URL: postgresql://dashboard_hml:${THINDESK_PG_PASSWORD:?Prepare o ambiente de homologação}@db:5432/thindesk_homologation
+
+x-source-environment: &source-environment
+  <<: *database-environment
+  THINDESK_BASE_URL: http://127.0.0.1:8080
+  THINDESK_USERNAME: ${THINDESK_LOGIN_USERNAME:?Prepare o ambiente de homologação}
+  THINDESK_PASSWORD: ${THINDESK_LOGIN_PASSWORD:?Prepare o ambiente de homologação}
+
+services:
+  mongo:
+    image: mongo:8.0
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: homologacao
+      MONGO_INITDB_ROOT_PASSWORD: ${THINDESK_MONGO_PASSWORD:?Prepare o ambiente de homologação}
+    volumes:
+      - mongo_data:/data/db
+    healthcheck:
+      test: [CMD, mongosh, --quiet, --eval, "db.getSiblingDB('admin').auth(process.env.MONGO_INITDB_ROOT_USERNAME,process.env.MONGO_INITDB_ROOT_PASSWORD);db.adminCommand({ping:1})"]
+      interval: 5s
+      timeout: 5s
+      retries: 24
+    restart: unless-stopped
+
+  db:
+    image: postgres:18-bookworm
+    environment:
+      POSTGRES_USER: dashboard_hml
+      POSTGRES_DB: thindesk_homologation
+      POSTGRES_PASSWORD: ${THINDESK_PG_PASSWORD:?Prepare o ambiente de homologação}
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U "$${POSTGRES_USER}" -d "$${POSTGRES_DB}"']
+      interval: 5s
+      timeout: 3s
+      retries: 24
+    restart: unless-stopped
+
+  thindesk:
+    image: thindesk-homologation-source:local
+    build:
+      context: ./.cache/thindesk-homologation/source
+      dockerfile: ../../../integration/thindesk/Dockerfile
+    environment:
+      THINDESK_MONGO_URI: mongodb://homologacao:${THINDESK_MONGO_PASSWORD:?Prepare o ambiente de homologação}@mongo:27017/thindesk_homologation?authSource=admin
+      THINDESK_USERNAME: ${THINDESK_LOGIN_USERNAME:?Prepare o ambiente de homologação}
+      THINDESK_PASSWORD: ${THINDESK_LOGIN_PASSWORD:?Prepare o ambiente de homologação}
+    ports:
+      - "127.0.0.1:${THINDESK_PORT:-8081}:8080"
+    depends_on:
+      mongo:
+        condition: service_healthy
+    healthcheck:
+      test: [CMD, curl, --fail, --silent, http://127.0.0.1:8080/login]
+      interval: 5s
+      timeout: 5s
+      retries: 36
+      start_period: 20s
+    security_opt: [no-new-privileges:true]
+    cap_drop: [ALL]
+    restart: unless-stopped
+
+  migrate:
+    <<: *api-image
+    command: [node, scripts/database.mjs, migrate]
+    environment: *database-environment
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: "no"
+
+  api:
+    <<: *api-image
+    build:
+      context: ./api
+    environment:
+      <<: *database-environment
+      NODE_ENV: production
+      HOST: 0.0.0.0
+      PORT: 3000
+      API_ACCESS_TOKEN: ${THINDESK_API_TOKEN:?Prepare o ambiente de homologação}
+      CORS_ORIGINS: http://localhost:${THINDESK_DASHBOARD_PORT:-8180},http://127.0.0.1:${THINDESK_DASHBOARD_PORT:-8180}
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    healthcheck:
+      test: [CMD, node, -e, "fetch('http://127.0.0.1:3000/health',{signal:AbortSignal.timeout(2000)}).then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 5s
+      timeout: 3s
+      retries: 24
+    security_opt: [no-new-privileges:true]
+    cap_drop: [ALL]
+    restart: unless-stopped
+
+  web:
+    image: thindesk-homologation-web:local
+    build:
+      context: ./web
+    environment:
+      API_ACCESS_TOKEN: ${THINDESK_API_TOKEN:?Prepare o ambiente de homologação}
+      NGINX_ENVSUBST_FILTER: API_ACCESS_TOKEN
+    ports:
+      - "127.0.0.1:${THINDESK_DASHBOARD_PORT:-8180}:8080"
+    depends_on:
+      api:
+        condition: service_healthy
+    healthcheck:
+      test: [CMD, wget, -q, --spider, http://127.0.0.1:8080/healthz]
+      interval: 5s
+      timeout: 3s
+      retries: 24
+    security_opt: [no-new-privileges:true]
+    cap_drop: [ALL]
+    restart: unless-stopped
+
+  sync:
+    <<: *api-image
+    profiles: [tools]
+    # A namespace compartilhada permite HTTP loopback sem flexibilizar a política HTTPS do conector.
+    network_mode: service:thindesk
+    command: [node, dist/thindesk-sync.js]
+    environment: *source-environment
+    depends_on:
+      thindesk:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+    restart: "no"
+
+  sync-v1:
+    <<: *api-image
+    profiles: [tools]
+    command: [node, dist/thindesk-analytics-sync.js, --mapping, /imports/mapping.json, --file, /imports/export.json]
+    environment: *database-environment
+    volumes:
+      - ./.cache/thindesk-homologation/analytics-export.json:/imports/export.json:ro
+      - ./integration/thindesk/analytics-mapping.example.json:/imports/mapping.json:ro
+    depends_on:
+      db:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+    restart: "no"
+
+  verify:
+    <<: *api-image
+    profiles: [tools]
+    network_mode: service:thindesk
+    command: [node, /checks/verify-thindesk.mjs]
+    environment:
+      <<: *source-environment
+      API_ACCESS_TOKEN: ${THINDESK_API_TOKEN:?Prepare o ambiente de homologação}
+    volumes:
+      - ./integration/thindesk:/checks:ro
+    depends_on:
+      thindesk:
+        condition: service_healthy
+      api:
+        condition: service_healthy
+    restart: "no"
+
+volumes:
+  mongo_data:
+  postgres_data:

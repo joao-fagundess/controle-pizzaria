@@ -1,0 +1,527 @@
+
+Docker disponível
+29.8.2
+
+Configuração do Compose
+{
+  "name": "thindesk-phase6-f7b3fdee65c0",
+  "networks": {
+    "default": {
+      "name": "thindesk-phase6-f7b3fdee65c0_default",
+      "ipam": {}
+    }
+  },
+  "services": {
+    "api": {
+      "build": {
+        "context": "C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria\\api",
+        "dockerfile": "Dockerfile"
+      },
+      "cap_drop": [
+        "ALL"
+      ],
+      "command": null,
+      "depends_on": {
+        "migrate": {
+          "condition": "service_completed_successfully",
+          "required": true
+        }
+      },
+      "entrypoint": null,
+      "environment": {
+        "API_ACCESS_TOKEN": "[REDACTED]",
+        "CORS_ORIGINS": "http://localhost:64375,http://127.0.0.1:64375",
+        "DATABASE_URL": "postgresql://dashboard:[REDACTED]@db:5432/thindesk_dashboard",
+        "HOST": "0.0.0.0",
+        "NODE_ENV": "production",
+        "PORT": "3000"
+      },
+      "healthcheck": {
+        "test": [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:3000/health',{signal:AbortSignal.timeout(2000)}).then(r=\u003eprocess.exit(r.ok?0:1)).catch(()=\u003eprocess.exit(1))"
+        ],
+        "timeout": "3s",
+        "interval": "5s",
+        "retries": 12,
+        "start_period": "10s"
+      },
+      "image": "thindesk-dashboard-api:local",
+      "networks": {
+        "default": null
+      },
+      "restart": "unless-stopped",
+      "security_opt": [
+        "no-new-privileges:true"
+      ]
+    },
+    "db": {
+      "command": null,
+      "entrypoint": null,
+      "environment": {
+        "POSTGRES_DB": "thindesk_dashboard",
+        "POSTGRES_PASSWORD": "[REDACTED]",
+        "POSTGRES_USER": "dashboard"
+      },
+      "healthcheck": {
+        "test": [
+          "CMD-SHELL",
+          "pg_isready -U \"$${POSTGRES_USER}\" -d \"$${POSTGRES_DB}\""
+        ],
+        "timeout": "3s",
+        "interval": "5s",
+        "retries": 12,
+        "start_period": "10s"
+      },
+      "image": "postgres:18-bookworm",
+      "networks": {
+        "default": null
+      },
+      "restart": "unless-stopped",
+      "volumes": [
+        {
+          "type": "volume",
+          "source": "postgres_data",
+          "target": "/var/lib/postgresql",
+          "volume": {}
+        }
+      ]
+    },
+    "migrate": {
+      "command": [
+        "node",
+        "scripts/database.mjs",
+        "migrate"
+      ],
+      "depends_on": {
+        "db": {
+          "condition": "service_healthy",
+          "required": true
+        }
+      },
+      "entrypoint": null,
+      "environment": {
+        "DATABASE_URL": "postgresql://dashboard:[REDACTED]@db:5432/thindesk_dashboard"
+      },
+      "image": "thindesk-dashboard-api:local",
+      "networks": {
+        "default": null
+      },
+      "restart": "no"
+    },
+    "web": {
+      "build": {
+        "context": "C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria\\web",
+        "dockerfile": "Dockerfile"
+      },
+      "cap_drop": [
+        "ALL"
+      ],
+      "command": null,
+      "depends_on": {
+        "api": {
+          "condition": "service_healthy",
+          "required": true
+        }
+      },
+      "entrypoint": null,
+      "environment": {
+        "API_ACCESS_TOKEN": "[REDACTED]",
+        "NGINX_ENVSUBST_FILTER": "API_ACCESS_TOKEN"
+      },
+      "healthcheck": {
+        "test": [
+          "CMD",
+          "wget",
+          "-q",
+          "--spider",
+          "http://127.0.0.1:8080/healthz"
+        ],
+        "timeout": "3s",
+        "interval": "5s",
+        "retries": 12,
+        "start_period": "5s"
+      },
+      "image": "thindesk-dashboard-web:local",
+      "networks": {
+        "default": null
+      },
+      "ports": [
+        {
+          "mode": "ingress",
+          "host_ip": "127.0.0.1",
+          "target": 8080,
+          "published": "64375",
+          "protocol": "tcp"
+        }
+      ],
+      "restart": "unless-stopped",
+      "security_opt": [
+        "no-new-privileges:true"
+      ]
+    }
+  },
+  "volumes": {
+    "postgres_data": {
+      "name": "thindesk-phase6-f7b3fdee65c0_postgres_data"
+    }
+  },
+  "x-api-image": {
+    "image": "thindesk-dashboard-api:local"
+  },
+  "x-database-environment": {
+    "DATABASE_URL": "postgresql://dashboard:[REDACTED]@db:5432/thindesk_dashboard"
+  }
+}
+Build das imagens
+ Image thindesk-dashboard-api:local Building
+ Image thindesk-dashboard-web:local Building
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.16kB 0.0s done
+#1 DONE 0.0s
+
+#2 [api internal] load build definition from Dockerfile
+#2 transferring dockerfile: 893B 0.0s done
+#2 DONE 0.1s
+
+#3 [web internal] load build definition from Dockerfile
+#3 transferring dockerfile: 749B 0.0s done
+#3 DONE 0.1s
+
+#4 [web internal] load metadata for docker.io/library/node:24-bookworm-slim
+#4 DONE 2.7s
+
+#5 [web internal] load metadata for docker.io/library/nginx:stable-alpine
+#5 DONE 2.7s
+
+#6 [api internal] load .dockerignore
+#6 transferring context: 189B 0.0s done
+#6 DONE 0.1s
+
+#7 [web internal] load .dockerignore
+#7 transferring context: 195B 0.0s done
+#7 DONE 0.1s
+
+#8 [api internal] load build context
+#8 DONE 0.0s
+
+#9 [api build 1/8] FROM docker.io/library/node:24-bookworm-slim@sha256:dc26ae92c9fb15cf6b1d63e20f0944b2efe0f115b20e00be48fb23fceb061c54
+#9 ...
+
+#10 [web internal] load build context
+#10 DONE 0.0s
+
+#8 [api internal] load build context
+#8 transferring context: 33.87kB 0.0s done
+#8 DONE 0.1s
+
+#9 [web build 1/8] FROM docker.io/library/node:24-bookworm-slim@sha256:dc26ae92c9fb15cf6b1d63e20f0944b2efe0f115b20e00be48fb23fceb061c54
+#9 resolve docker.io/library/node:24-bookworm-slim@sha256:dc26ae92c9fb15cf6b1d63e20f0944b2efe0f115b20e00be48fb23fceb061c54
+#9 resolve docker.io/library/node:24-bookworm-slim@sha256:dc26ae92c9fb15cf6b1d63e20f0944b2efe0f115b20e00be48fb23fceb061c54 0.2s done
+#9 DONE 0.3s
+
+#11 [web runtime 1/6] FROM docker.io/library/nginx:stable-alpine@sha256:583b7f2fce1cdb8da5ad5c39ebd3c33b98b87d493190e548bdee1fa8c619c311
+#11 resolve docker.io/library/nginx:stable-alpine@sha256:583b7f2fce1cdb8da5ad5c39ebd3c33b98b87d493190e548bdee1fa8c619c311 0.2s done
+#11 DONE 0.2s
+
+#10 [web internal] load build context
+#10 transferring context: 996B 0.0s done
+#10 DONE 0.1s
+
+#12 [api build 4/8] RUN npm ci --ignore-scripts
+#12 CACHED
+
+#13 [api build 3/8] COPY package.json package-lock.json ./
+#13 CACHED
+
+#14 [api build 5/8] COPY tsconfig.json ./
+#14 CACHED
+
+#15 [web runtime 3/6] COPY nginx/default.conf.template /etc/nginx/templates/default.conf.template
+#15 CACHED
+
+#16 [web build 3/7] COPY package.json package-lock.json ./
+#16 CACHED
+
+#17 [web runtime 2/6] COPY nginx/nginx.conf /etc/nginx/nginx.conf
+#17 CACHED
+
+#18 [web build 7/7] RUN npm run build
+#18 CACHED
+
+#19 [web build 2/8] WORKDIR /app
+#19 CACHED
+
+#20 [web runtime 4/6] COPY --chmod=755 nginx/15-validate-token.sh /docker-entrypoint.d/15-validate-token.sh
+#20 CACHED
+
+#21 [web build 5/7] COPY index.html tsconfig.json vite.config.ts ./
+#21 CACHED
+
+#22 [web runtime 5/6] RUN rm -f /etc/nginx/conf.d/default.conf && chown -R nginx:nginx /etc/nginx/conf.d /var/cache/nginx
+#22 CACHED
+
+#23 [web build 4/7] RUN npm ci --ignore-scripts
+#23 CACHED
+
+#24 [web build 6/7] COPY src ./src
+#24 CACHED
+
+#25 [web runtime 6/6] COPY --from=build /app/dist /usr/share/nginx/html
+#25 CACHED
+
+#26 [web] exporting to image
+#26 exporting layers
+#26 exporting layers 0.0s done
+#26 exporting manifest sha256:ebb75bacb82131afa9dd05703e28862910eb13596e1d108f0d6e15bc01c5659c 0.1s done
+#26 exporting config sha256:0280ec516f83ef35a8bfb08e589a72df77d051cce94d66f2f1b90f9fab16984f
+#26 ...
+
+#27 [api build 6/8] COPY src ./src
+#27 DONE 0.4s
+
+#26 [web] exporting to image
+#26 exporting config sha256:0280ec516f83ef35a8bfb08e589a72df77d051cce94d66f2f1b90f9fab16984f 0.1s done
+#26 exporting attestation manifest sha256:d5e348f3ee14f5a9c7a3b6ac26f417894ce75f819a45995b9e0cf39689914c3e
+#26 exporting attestation manifest sha256:d5e348f3ee14f5a9c7a3b6ac26f417894ce75f819a45995b9e0cf39689914c3e 0.1s done
+#26 exporting manifest list sha256:ed3c3dd4f164c36249b99b3e48c77ea6620faf0e2afcaa09c18f1e64fce5b410 0.1s done
+#26 ...
+
+#28 [api build 7/8] COPY scripts/database.mjs scripts/database.d.mts ./scripts/
+#28 DONE 0.4s
+
+#26 [web] exporting to image
+#26 naming to docker.io/library/thindesk-dashboard-web:local 0.0s done
+#26 unpacking to docker.io/library/thindesk-dashboard-web:local 0.1s done
+#26 DONE 0.8s
+
+#29 [api build 8/8] RUN npm run build
+#29 ...
+
+#30 [web] resolving provenance for metadata file
+#30 DONE 0.1s
+
+#29 [api build 8/8] RUN npm run build
+#29 3.772
+#29 3.772 > thindesk-dashboard-api@0.1.0 build
+#29 3.772 > tsc -p tsconfig.json
+#29 3.772
+#29 DONE 9.4s
+
+#31 [api runtime 3/9] COPY --from=dependencies /app/node_modules ./node_modules
+#31 CACHED
+
+#32 [api dependencies 4/4] RUN npm ci --omit=dev --ignore-scripts && npm cache clean --force
+#32 CACHED
+
+#33 [api runtime 4/9] COPY package.json ./
+#33 CACHED
+
+#34 [api runtime 5/9] COPY --from=build /app/dist ./dist
+#34 DONE 0.1s
+
+#35 [api runtime 6/9] COPY scripts/database.mjs ./scripts/
+#35 DONE 0.2s
+
+#36 [api runtime 7/9] COPY migrations ./migrations
+#36 DONE 0.2s
+
+#37 [api runtime 8/9] COPY contracts ./contracts
+#37 DONE 0.2s
+
+#38 [api runtime 9/9] COPY seeds ./seeds
+#38 DONE 0.2s
+
+#39 [api] exporting to image
+#39 exporting layers
+#39 exporting layers 1.1s done
+#39 exporting manifest sha256:6a60286979bb89d982ed1d84fa9dc3c219f70b72a0f8269a18044a4c3b665582 0.1s done
+#39 exporting config sha256:f27f385d6c6c77827365343634ee7d8e39bd035e9f4b85725abc18202329beaf
+#39 exporting config sha256:f27f385d6c6c77827365343634ee7d8e39bd035e9f4b85725abc18202329beaf 0.1s done
+#39 exporting attestation manifest sha256:a734980e852c547f3111c899c80730e6800dcbf7e3d336f3099578bded06862e
+#39 exporting attestation manifest sha256:a734980e852c547f3111c899c80730e6800dcbf7e3d336f3099578bded06862e 0.1s done
+#39 exporting manifest list sha256:3d950d531cba374a8387b43cb9051639636eb6745db001e708b782ec140769e9 0.0s done
+#39 naming to docker.io/library/thindesk-dashboard-api:local
+#39 naming to docker.io/library/thindesk-dashboard-api:local 0.0s done
+#39 unpacking to docker.io/library/thindesk-dashboard-api:local
+#39 unpacking to docker.io/library/thindesk-dashboard-api:local 0.3s done
+#39 DONE 1.9s
+
+#40 [api] resolving provenance for metadata file
+#40 DONE 0.1s
+ Image thindesk-dashboard-web:local Built
+ Image thindesk-dashboard-api:local Built
+
+Subida e healthchecks
+ Volume thindesk-phase6-f7b3fdee65c0_postgres_data Creating
+ Network thindesk-phase6-f7b3fdee65c0_default Creating
+ Volume thindesk-phase6-f7b3fdee65c0_postgres_data Creating
+ Network thindesk-phase6-f7b3fdee65c0_default Creating
+ Volume thindesk-phase6-f7b3fdee65c0_postgres_data Created
+ Volume thindesk-phase6-f7b3fdee65c0_postgres_data Created
+ Network thindesk-phase6-f7b3fdee65c0_default Created
+ Network thindesk-phase6-f7b3fdee65c0_default Created
+ Container thindesk-phase6-f7b3fdee65c0-db-1 Creating
+ Container thindesk-phase6-f7b3fdee65c0-db-1 Created
+ Container thindesk-phase6-f7b3fdee65c0-migrate-1 Creating
+ Container thindesk-phase6-f7b3fdee65c0-migrate-1 Created
+ Container thindesk-phase6-f7b3fdee65c0-api-1 Creating
+ Container thindesk-phase6-f7b3fdee65c0-api-1 Created
+ Container thindesk-phase6-f7b3fdee65c0-web-1 Creating
+ Container thindesk-phase6-f7b3fdee65c0-web-1 Created
+ Container thindesk-phase6-f7b3fdee65c0-db-1 Starting
+ Container thindesk-phase6-f7b3fdee65c0-db-1 Started
+ Container thindesk-phase6-f7b3fdee65c0-db-1 Waiting
+ Container thindesk-phase6-f7b3fdee65c0-db-1 Healthy
+ Container thindesk-phase6-f7b3fdee65c0-migrate-1 Starting
+ Container thindesk-phase6-f7b3fdee65c0-migrate-1 Started
+ Container thindesk-phase6-f7b3fdee65c0-migrate-1 Waiting
+ Container thindesk-phase6-f7b3fdee65c0-migrate-1 Exited
+ Container thindesk-phase6-f7b3fdee65c0-api-1 Starting
+ Container thindesk-phase6-f7b3fdee65c0-api-1 Started
+ Container thindesk-phase6-f7b3fdee65c0-api-1 Waiting
+ Container thindesk-phase6-f7b3fdee65c0-api-1 Healthy
+ Container thindesk-phase6-f7b3fdee65c0-web-1 Starting
+ Container thindesk-phase6-f7b3fdee65c0-web-1 Started
+ Container thindesk-phase6-f7b3fdee65c0-web-1 Waiting
+ Container thindesk-phase6-f7b3fdee65c0-db-1 Waiting
+ Container thindesk-phase6-f7b3fdee65c0-migrate-1 Waiting
+ Container thindesk-phase6-f7b3fdee65c0-api-1 Waiting
+ Container thindesk-phase6-f7b3fdee65c0-migrate-1 Exited
+ Container thindesk-phase6-f7b3fdee65c0-api-1 Healthy
+ Container thindesk-phase6-f7b3fdee65c0-db-1 Healthy
+ Container thindesk-phase6-f7b3fdee65c0-web-1 Healthy
+
+Seed explícito de demonstração
+ Container thindesk-phase6-f7b3fdee65c0-db-1 Running
+ Container thindesk-phase6-f7b3fdee65c0-db-1 Waiting
+ Container thindesk-phase6-f7b3fdee65c0-db-1 Healthy
+ Container thindesk-phase6-f7b3fdee65c0-migrate-1 Starting
+ Container thindesk-phase6-f7b3fdee65c0-migrate-1 Started
+ Container thindesk-phase6-f7b3fdee65c0-migrate-1 Waiting
+ Container thindesk-phase6-f7b3fdee65c0-migrate-1 Exited
+ Container thindesk-phase6-f7b3fdee65c0-seed-run-13ced365a89c Creating
+ Container thindesk-phase6-f7b3fdee65c0-seed-run-13ced365a89c Created
+Seed de demonstração aplicado, sem apagar registros existentes.
+
+Bearer obrigatório no acesso direto à API
+HTTP 401 sem bearer
+
+Usuário sem root: api
+1000
+
+Usuário sem root: web
+101
+
+Inventário dos assets estáticos
+/usr/share/nginx/html/index.html
+/usr/share/nginx/html/50x.html
+/usr/share/nginx/html/assets/TicketCharts-BVQwMgFU.js
+/usr/share/nginx/html/assets/index-cvZfgB9g.css
+/usr/share/nginx/html/assets/TicketDetailDialog-CKBYDCm8.js
+/usr/share/nginx/html/assets/index-C6jmjV3O.js
+
+Migrations idempotentes
+ Container thindesk-phase6-f7b3fdee65c0-db-1 Running
+ Container thindesk-phase6-f7b3fdee65c0-db-1 Waiting
+ Container thindesk-phase6-f7b3fdee65c0-db-1 Healthy
+ Container thindesk-phase6-f7b3fdee65c0-migrate-run-1c26603e6117 Creating
+ Container thindesk-phase6-f7b3fdee65c0-migrate-run-1c26603e6117 Created
+Migrations aplicadas: 0.
+
+Seed idempotente
+ Container thindesk-phase6-f7b3fdee65c0-db-1 Running
+ Container thindesk-phase6-f7b3fdee65c0-db-1 Waiting
+ Container thindesk-phase6-f7b3fdee65c0-db-1 Healthy
+ Container thindesk-phase6-f7b3fdee65c0-migrate-1 Starting
+ Container thindesk-phase6-f7b3fdee65c0-migrate-1 Started
+ Container thindesk-phase6-f7b3fdee65c0-migrate-1 Waiting
+ Container thindesk-phase6-f7b3fdee65c0-migrate-1 Exited
+ Container thindesk-phase6-f7b3fdee65c0-seed-run-e66951386879 Creating
+ Container thindesk-phase6-f7b3fdee65c0-seed-run-e66951386879 Created
+Seed de demonstração aplicado, sem apagar registros existentes.
+
+Reinício do banco persistente
+ Container thindesk-phase6-f7b3fdee65c0-db-1 Restarting
+ Container thindesk-phase6-f7b3fdee65c0-db-1 Started
+
+Saúde após reinício do banco
+ Container thindesk-phase6-f7b3fdee65c0-api-1 Running
+ Container thindesk-phase6-f7b3fdee65c0-web-1 Running
+ Container thindesk-phase6-f7b3fdee65c0-db-1 Running
+ Container thindesk-phase6-f7b3fdee65c0-db-1 Waiting
+ Container thindesk-phase6-f7b3fdee65c0-db-1 Healthy
+ Container thindesk-phase6-f7b3fdee65c0-migrate-1 Starting
+ Container thindesk-phase6-f7b3fdee65c0-migrate-1 Started
+ Container thindesk-phase6-f7b3fdee65c0-migrate-1 Waiting
+ Container thindesk-phase6-f7b3fdee65c0-migrate-1 Exited
+ Container thindesk-phase6-f7b3fdee65c0-api-1 Waiting
+ Container thindesk-phase6-f7b3fdee65c0-api-1 Healthy
+ Container thindesk-phase6-f7b3fdee65c0-migrate-1 Waiting
+ Container thindesk-phase6-f7b3fdee65c0-api-1 Waiting
+ Container thindesk-phase6-f7b3fdee65c0-web-1 Waiting
+ Container thindesk-phase6-f7b3fdee65c0-db-1 Waiting
+ Container thindesk-phase6-f7b3fdee65c0-migrate-1 Exited
+ Container thindesk-phase6-f7b3fdee65c0-api-1 Healthy
+ Container thindesk-phase6-f7b3fdee65c0-web-1 Healthy
+ Container thindesk-phase6-f7b3fdee65c0-db-1 Healthy
+
+Versão do PostgreSQL
+PostgreSQL 18.6 (Debian 18.6-1.pgdg12+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
+
+Estado final dos contêineres
+{"Command":"\"docker-entrypoint.s…\"","CreatedAt":"2026-11-13 09:24:13 -0300 -03","Engine":"","ExitCode":0,"Health":"healthy","ID":"33858c5d2008","Image":"thindesk-dashboard-api:local","Labels":"com.docker.compose.project=thindesk-phase6-f7b3fdee65c0,com.docker.compose.service=api,com.docker.compose.version=5.5.1,com.docker.compose.config-hash=712c622bbde87e52f8185455ff52f127d324fe8fa816ef5f74a34afc632b9fe9,com.docker.compose.container-number=1,com.docker.compose.depends_on=migrate:service_completed_successfully:false,com.docker.compose.project.config_files=C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria\\docker-compose.yml,com.docker.compose.project.environment_file=C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria\\.cache\\phase6-compose-2NBXYp\\.env,com.docker.compose.project.working_dir=C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria,desktop.docker.io/ports.scheme=v2,com.docker.compose.image=sha256:6a60286979bb89d982ed1d84fa9dc3c219f70b72a0f8269a18044a4c3b665582,com.docker.compose.oneoff=False","LocalVolumes":"0","Mounts":"","Name":"thindesk-phase6-f7b3fdee65c0-api-1","Names":"thindesk-phase6-f7b3fdee65c0-api-1","Networks":"thindesk-phase6-f7b3fdee65c0_default","Ports":"3000/tcp","Project":"thindesk-phase6-f7b3fdee65c0","Publishers":[{"URL":"","TargetPort":3000,"PublishedPort":0,"Protocol":"tcp"}],"RunningFor":"44 seconds ago","Service":"api","Size":"0B","State":"running","Status":"Up 31 seconds (healthy)"}
+{"Command":"\"docker-entrypoint.s…\"","CreatedAt":"2026-11-13 09:24:13 -0300 -03","Engine":"","ExitCode":0,"Health":"healthy","ID":"70a54ce7ebf7","Image":"postgres:18-bookworm","Labels":"com.docker.compose.version=5.5.1,com.docker.compose.config-hash=752ec50736ac8c879fe3e1cba9abd7efdfc28cdaeee1df64ee62e435ae9200f8,com.docker.compose.container-number=1,com.docker.compose.project=thindesk-phase6-f7b3fdee65c0,com.docker.compose.project.working_dir=C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria,com.docker.compose.service=db,desktop.docker.io/ports.scheme=v2,com.docker.compose.depends_on=,com.docker.compose.image=sha256:02fb3245e038f33536cf13bc6c4e59f21d07b0cea3c1fe1c07c6e8aa8f083bcc,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria\\docker-compose.yml,com.docker.compose.project.environment_file=C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria\\.cache\\phase6-compose-2NBXYp\\.env","LocalVolumes":"1","Mounts":"thindesk-phase…","Name":"thindesk-phase6-f7b3fdee65c0-db-1","Names":"thindesk-phase6-f7b3fdee65c0-db-1","Networks":"thindesk-phase6-f7b3fdee65c0_default","Ports":"5432/tcp","Project":"thindesk-phase6-f7b3fdee65c0","Publishers":[{"URL":"","TargetPort":5432,"PublishedPort":0,"Protocol":"tcp"}],"RunningFor":"44 seconds ago","Service":"db","Size":"0B","State":"running","Status":"Up 9 seconds (healthy)"}
+{"Command":"\"docker-entrypoint.s…\"","CreatedAt":"2026-11-13 09:24:13 -0300 -03","Engine":"","ExitCode":0,"Health":"","ID":"70fbd7f591de","Image":"thindesk-dashboard-api:local","Labels":"com.docker.compose.depends_on=db:service_healthy:false,com.docker.compose.image=sha256:6a60286979bb89d982ed1d84fa9dc3c219f70b72a0f8269a18044a4c3b665582,com.docker.compose.project=thindesk-phase6-f7b3fdee65c0,com.docker.compose.project.environment_file=C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria\\.cache\\phase6-compose-2NBXYp\\.env,com.docker.compose.project.working_dir=C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria,desktop.docker.io/ports.scheme=v2,com.docker.compose.container-number=1,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria\\docker-compose.yml,com.docker.compose.service=migrate,com.docker.compose.version=5.5.1,com.docker.compose.config-hash=15a345d984f88901b46b7614c13c212542b71af350d34ec065c4e4e37c945122","LocalVolumes":"0","Mounts":"","Name":"thindesk-phase6-f7b3fdee65c0-migrate-1","Names":"thindesk-phase6-f7b3fdee65c0-migrate-1","Networks":"thindesk-phase6-f7b3fdee65c0_default","Ports":"","Project":"thindesk-phase6-f7b3fdee65c0","Publishers":[],"RunningFor":"44 seconds ago","Service":"migrate","Size":"0B","State":"exited","Status":"Exited (0) 2 seconds ago"}
+{"Command":"\"/docker-entrypoint.…\"","CreatedAt":"2026-11-13 09:24:13 -0300 -03","Engine":"","ExitCode":0,"Health":"healthy","ID":"242721dd44c1","Image":"thindesk-dashboard-web:local","Labels":"com.docker.compose.depends_on=api:service_healthy:false,com.docker.compose.image=sha256:ebb75bacb82131afa9dd05703e28862910eb13596e1d108f0d6e15bc01c5659c,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria\\docker-compose.yml,com.docker.compose.project.working_dir=C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria,desktop.docker.io/ports.scheme=v2,maintainer=NGINX Docker Maintainers \u003cdocker-maint@nginx.com\u003e,com.docker.compose.config-hash=9e410549f498ff32700fb1007da4d735966e1030726d3353063311149bc92d33,com.docker.compose.container-number=1,com.docker.compose.project=thindesk-phase6-f7b3fdee65c0,com.docker.compose.project.environment_file=C:\\Users\\arthur.randis\\Documents\\Programas\\Controle de Pizzaria\\.cache\\phase6-compose-2NBXYp\\.env,com.docker.compose.service=web,com.docker.compose.version=5.5.1,desktop.docker.io/ports/8080/tcp=127.0.0.1:64375","LocalVolumes":"0","Mounts":"","Name":"thindesk-phase6-f7b3fdee65c0-web-1","Names":"thindesk-phase6-f7b3fdee65c0-web-1","Networks":"thindesk-phase6-f7b3fdee65c0_default","Ports":"127.0.0.1:64375-\u003e8080/tcp","Project":"thindesk-phase6-f7b3fdee65c0","Publishers":[{"URL":"127.0.0.1","TargetPort":8080,"PublishedPort":64375,"Protocol":"tcp"}],"RunningFor":"44 seconds ago","Service":"web","Size":"0B","State":"running","Status":"Up 25 seconds (healthy)"}
+
+Identificação das imagens
+[thindesk-dashboard-api:local] sha256:3d950d531cba374a8387b43cb9051639636eb6745db001e708b782ec140769e9 ["thindesk-dashboard-api@sha256:3d950d531cba374a8387b43cb9051639636eb6745db001e708b782ec140769e9"]
+[thindesk-dashboard-web:local] sha256:ed3c3dd4f164c36249b99b3e48c77ea6620faf0e2afcaa09c18f1e64fce5b410 ["thindesk-dashboard-web@sha256:ed3c3dd4f164c36249b99b3e48c77ea6620faf0e2afcaa09c18f1e64fce5b410"]
+[postgres:18-bookworm] sha256:f1ea2a1a4fb7b68d4836be1fdcb8a6466a89b072158bf9d97663600538c294c5 ["postgres@sha256:f1ea2a1a4fb7b68d4836be1fdcb8a6466a89b072158bf9d97663600538c294c5"]
+
+Fixtures fictícias no container descartável
+ thindesk-phase6-f7b3fdee65c0-api-1 Copying C:\Users\arthur.randis\Documents\Programas\Controle de Pizzaria\integration\thindesk\verify-import.mjs to thindesk-phase6-f7b3fdee65c0-api-1:/tmp/thindesk-import-check.mjs
+ thindesk-phase6-f7b3fdee65c0-api-1 Copied C:\Users\arthur.randis\Documents\Programas\Controle de Pizzaria\integration\thindesk\verify-import.mjs to thindesk-phase6-f7b3fdee65c0-api-1:/tmp/thindesk-import-check.mjs
+
+Fixtures fictícias no container descartável
+ thindesk-phase6-f7b3fdee65c0-api-1 Copying C:\Users\arthur.randis\Documents\Programas\Controle de Pizzaria\integration\thindesk\analytics-mapping.example.json to thindesk-phase6-f7b3fdee65c0-api-1:/tmp/thindesk-import-mapping.json
+ thindesk-phase6-f7b3fdee65c0-api-1 Copied C:\Users\arthur.randis\Documents\Programas\Controle de Pizzaria\integration\thindesk\analytics-mapping.example.json to thindesk-phase6-f7b3fdee65c0-api-1:/tmp/thindesk-import-mapping.json
+
+Fixtures fictícias no container descartável
+ thindesk-phase6-f7b3fdee65c0-api-1 Copying C:\Users\arthur.randis\Documents\Programas\Controle de Pizzaria\docs\evidencias\thindesk-analytics\export.json to thindesk-phase6-f7b3fdee65c0-api-1:/tmp/thindesk-import-input.json
+ thindesk-phase6-f7b3fdee65c0-api-1 Copied C:\Users\arthur.randis\Documents\Programas\Controle de Pizzaria\docs\evidencias\thindesk-analytics\export.json to thindesk-phase6-f7b3fdee65c0-api-1:/tmp/thindesk-import-input.json
+
+Fixtures fictícias no container descartável
+ thindesk-phase6-f7b3fdee65c0-api-1 Copying C:\Users\arthur.randis\Documents\Programas\Controle de Pizzaria\docs\contracts\examples\valid-reopened-partial.json to thindesk-phase6-f7b3fdee65c0-api-1:/tmp/thindesk-import-partial.json
+ thindesk-phase6-f7b3fdee65c0-api-1 Copied C:\Users\arthur.randis\Documents\Programas\Controle de Pizzaria\docs\contracts\examples\valid-reopened-partial.json to thindesk-phase6-f7b3fdee65c0-api-1:/tmp/thindesk-import-partial.json
+
+CLI 1.0 e consultas da API de produção
+{"status":"passed","checks":[{"name":"export real promove somente referências resolvidas na imagem de produção","status":"passed"},{"name":"arquivo repetido não duplica dados","status":"passed"},{"name":"cobertura parcial e coleção desconhecida ficam explícitas na API","status":"passed"},{"name":"atualização válida e observação antiga preservam a versão aceita","status":"passed"},{"name":"conflito de versão reverte inclusive novos registros do mesmo lote","status":"passed"}],"cli_executions":[{"exit_code":2,"received":6,"preserved":6,"rejected":3,"unidentified":0,"promoted":3,"updated":0,"unchanged":0,"stale":0},{"exit_code":2,"received":6,"preserved":6,"rejected":3,"unidentified":0,"promoted":0,"updated":0,"unchanged":3,"stale":0},{"exit_code":0,"received":1,"preserved":1,"rejected":0,"unidentified":0,"promoted":1,"updated":0,"unchanged":0,"stale":0},{"exit_code":0,"received":1,"preserved":1,"rejected":0,"unidentified":0,"promoted":0,"updated":1,"unchanged":0,"stale":0},{"exit_code":0,"received":1,"preserved":1,"rejected":0,"unidentified":0,"promoted":0,"updated":0,"unchanged":0,"stale":1},{"exit_code":1,"controlled_failure":true}],"total_after":484}
+
+Confinamento dos volumes de teste
+thindesk-phase6-f7b3fdee65c0_postgres_data
+
+Limpeza do projeto descartável
+ Container thindesk-phase6-f7b3fdee65c0-web-1 Stopping
+ Container thindesk-phase6-f7b3fdee65c0-web-1 Stopped
+ Container thindesk-phase6-f7b3fdee65c0-web-1 Removing
+ Container thindesk-phase6-f7b3fdee65c0-web-1 Removed
+ Container thindesk-phase6-f7b3fdee65c0-api-1 Stopping
+ Container thindesk-phase6-f7b3fdee65c0-api-1 Stopped
+ Container thindesk-phase6-f7b3fdee65c0-api-1 Removing
+ Container thindesk-phase6-f7b3fdee65c0-api-1 Removed
+ Container thindesk-phase6-f7b3fdee65c0-migrate-1 Stopping
+ Container thindesk-phase6-f7b3fdee65c0-migrate-1 Stopped
+ Container thindesk-phase6-f7b3fdee65c0-migrate-1 Removing
+ Container thindesk-phase6-f7b3fdee65c0-migrate-1 Removed
+ Container thindesk-phase6-f7b3fdee65c0-db-1 Stopping
+ Container thindesk-phase6-f7b3fdee65c0-db-1 Stopped
+ Container thindesk-phase6-f7b3fdee65c0-db-1 Removing
+ Container thindesk-phase6-f7b3fdee65c0-db-1 Removed
+ Network thindesk-phase6-f7b3fdee65c0_default Removing
+ Volume thindesk-phase6-f7b3fdee65c0_postgres_data Removing
+ Volume thindesk-phase6-f7b3fdee65c0_postgres_data Removed
+ Network thindesk-phase6-f7b3fdee65c0_default Removed

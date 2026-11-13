@@ -1,0 +1,776 @@
+{
+  "contract_version": "1.0",
+  "source_system": "thindesk",
+  "exported_at": "2026-11-12T19:28:02.242067259Z",
+  "tickets": [
+    {
+      "title": "😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀",
+      "title_is_derived": false,
+      "description": "Falha fictícia criada durante a homologação.",
+      "priority": "normal",
+      "type": {
+        "external_id": "analytics-printing",
+        "name": "Impressão"
+      },
+      "requester": {
+        "external_id": "analytics-requester-01",
+        "name": "Solicitante Analítico Fictício",
+        "department": "Laboratório"
+      },
+      "assignee": null,
+      "external_id": "164f12d6-98a2-4f20-b098-bddb5c9ad50c",
+      "status": "closed",
+      "created_at": "2026-11-12T19:27:50.765356029Z",
+      "updated_at": "2026-11-12T19:27:50.785034872Z",
+      "resolved_at": "2026-11-12T19:27:50.785034872Z",
+      "history": {
+        "coverage": "complete",
+        "items": [
+          {
+            "external_id": "cf1a77e3-f247-4526-a12a-e13e091cbd70",
+            "sequence": 1,
+            "event_type": "created",
+            "author": {
+              "external_id": "homologacao",
+              "name": "Operador de Homologação Analítica",
+              "role": "supervisor",
+              "active": true
+            },
+            "occurred_at": "2026-11-12T19:27:50.765356029Z",
+            "previous_value": null,
+            "new_value": {
+              "status": "open",
+              "priority": "normal",
+              "type_external_id": "analytics-printing",
+              "assignee_external_id": null
+            }
+          },
+          {
+            "external_id": "a8823e25-42f3-4364-864f-d823d7aece1e",
+            "sequence": 2,
+            "event_type": "status_changed",
+            "author": {
+              "external_id": "homologacao",
+              "name": "Operador de Homologação Analítica",
+              "role": "supervisor",
+              "active": true
+            },
+            "occurred_at": "2026-11-12T19:27:50.785034872Z",
+            "previous_value": "open",
+            "new_value": "closed"
+          }
+        ]
+      },
+      "technical_notes": {
+        "coverage": "complete",
+        "items": []
+      }
+    },
+    {
+      "title": "😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀",
+      "title_is_derived": false,
+      "description": "Falha fictícia criada durante a homologação.",
+      "priority": "normal",
+      "type": {
+        "external_id": "analytics-printing",
+        "name": "Impressão"
+      },
+      "requester": {
+        "external_id": "analytics-requester-01",
+        "name": "Solicitante Analítico Fictício",
+        "department": "Laboratório"
+      },
+      "assignee": null,
+      "external_id": "8cf7cc22-89dd-41dd-b857-9fb8e31da69a",
+      "status": "closed",
+      "created_at": "2026-11-12T19:22:00.985837246Z",
+      "updated_at": "2026-11-12T19:22:01.003829923Z",
+      "resolved_at": "2026-11-12T19:22:01.003829923Z",
+      "history": {
+        "coverage": "complete",
+        "items": [
+          {
+            "external_id": "b2e6f7f0-8a13-4006-8b0c-78a6f7878cdb",
+            "sequence": 1,
+            "event_type": "created",
+            "author": {
+              "external_id": "homologacao",
+              "name": "Operador de Homologação Analítica",
+              "role": "supervisor",
+              "active": true
+            },
+            "occurred_at": "2026-11-12T19:22:00.985837246Z",
+            "previous_value": null,
+            "new_value": {
+              "status": "open",
+              "priority": "normal",
+              "type_external_id": "analytics-printing",
+              "assignee_external_id": null
+            }
+          },
+          {
+            "external_id": "37725623-9530-4fe8-b114-8fc6c097f460",
+            "sequence": 2,
+            "event_type": "status_changed",
+            "author": {
+              "external_id": "homologacao",
+              "name": "Operador de Homologação Analítica",
+              "role": "supervisor",
+              "active": true
+            },
+            "occurred_at": "2026-11-12T19:22:01.003829923Z",
+            "previous_value": "open",
+            "new_value": "closed"
+          }
+        ]
+      },
+      "technical_notes": {
+        "coverage": "complete",
+        "items": []
+      }
+    },
+    {
+      "title": "Título revisado no laboratório",
+      "title_is_derived": false,
+      "description": "Falha fictícia criada durante a homologação. Descrição complementada.",
+      "priority": "high",
+      "type": {
+        "external_id": "analytics-network",
+        "name": "Rede"
+      },
+      "requester": {
+        "external_id": "analytics-requester-01",
+        "name": "Solicitante Analítico Fictício",
+        "department": "Laboratório"
+      },
+      "assignee": null,
+      "external_id": "9e4a0cd1-3ee8-4d73-a89b-271886a7997f",
+      "status": "resolved",
+      "created_at": "2026-11-12T19:22:00.250802815Z",
+      "updated_at": "2026-11-12T19:22:00.627276776Z",
+      "resolved_at": "2026-11-12T19:22:00.545418875Z",
+      "history": {
+        "coverage": "complete",
+        "items": [
+          {
+            "external_id": "92f64804-4cf2-4cdf-a31f-96286fef0066",
+            "sequence": 1,
+            "event_type": "created",
+            "author": {
+              "external_id": "homologacao",
+              "name": "Operador de Homologação Analítica",
+              "role": "supervisor",
+              "active": true
+            },
+            "occurred_at": "2026-11-12T19:22:00.250802815Z",
+            "previous_value": null,
+            "new_value": {
+              "status": "open",
+              "priority": "normal",
+              "type_external_id": "analytics-printing",
+              "assignee_external_id": null
+            }
+          },
+          {
+            "external_id": "5bbb1c06-cd81-4d79-9574-8d946373c49f",
+            "sequence": 2,
+            "event_type": "status_changed",
+            "author": {
+              "external_id": "homologacao",
+              "name": "Operador de Homologação Analítica",
+              "role": "supervisor",
+              "active": true
+            },
+            "occurred_at": "2026-11-12T19:22:00.333341137Z",
+            "previous_value": "open",
+            "new_value": "in_progress"
+          },
+          {
+            "external_id": "79531208-c213-43e6-bfc8-2764ab21575f",
+            "sequence": 3,
+            "event_type": "priority_changed",
+            "author": {
+              "external_id": "homologacao",
+              "name": "Operador de Homologação Analítica",
+              "role": "supervisor",
+              "active": true
+            },
+            "occurred_at": "2026-11-12T19:22:00.333341137Z",
+            "previous_value": "normal",
+            "new_value": "high"
+          },
+          {
+            "external_id": "b6d5a299-2481-4bfb-a870-83ca51710876",
+            "sequence": 4,
+            "event_type": "type_changed",
+            "author": {
+              "external_id": "homologacao",
+              "name": "Operador de Homologação Analítica",
+              "role": "supervisor",
+              "active": true
+            },
+            "occurred_at": "2026-11-12T19:22:00.333341137Z",
+            "previous_value": "analytics-printing",
+            "new_value": "analytics-network"
+          },
+          {
+            "external_id": "e4ac737b-a489-4a15-9b8b-3bda4400e2b7",
+            "sequence": 5,
+            "event_type": "assignee_changed",
+            "author": {
+              "external_id": "homologacao",
+              "name": "Operador de Homologação Analítica",
+              "role": "supervisor",
+              "active": true
+            },
+            "occurred_at": "2026-11-12T19:22:00.333341137Z",
+            "previous_value": null,
+            "new_value": "analytics-tech-01"
+          },
+          {
+            "external_id": "f9579c8f-1704-4141-af87-9efc781309fa",
+            "sequence": 6,
+            "event_type": "status_changed",
+            "author": {
+              "external_id": "homologacao",
+              "name": "Operador de Homologação Analítica",
+              "role": "supervisor",
+              "active": true
+            },
+            "occurred_at": "2026-11-12T19:22:00.430155012Z",
+            "previous_value": "in_progress",
+            "new_value": "resolved"
+          },
+          {
+            "external_id": "3c7c5051-3435-4b52-bf8c-6b86607bdc79",
+            "sequence": 7,
+            "event_type": "status_changed",
+            "author": {
+              "external_id": "homologacao",
+              "name": "Operador de Homologação Analítica",
+              "role": "supervisor",
+              "active": true
+            },
+            "occurred_at": "2026-11-12T19:22:00.457050216Z",
+            "previous_value": "resolved",
+            "new_value": "closed"
+          },
+          {
+            "external_id": "b0aed8c6-2cd5-4519-86c9-8761238a3404",
+            "sequence": 8,
+            "event_type": "status_changed",
+            "author": {
+              "external_id": "homologacao",
+              "name": "Operador de Homologação Analítica",
+              "role": "supervisor",
+              "active": true
+            },
+            "occurred_at": "2026-11-12T19:22:00.486811915Z",
+            "previous_value": "closed",
+            "new_value": "waiting"
+          },
+          {
+            "external_id": "b10cb0f7-48c3-4e75-8bd1-1c3382960a59",
+            "sequence": 9,
+            "event_type": "status_changed",
+            "author": {
+              "external_id": "homologacao",
+              "name": "Operador de Homologação Analítica",
+              "role": "supervisor",
+              "active": true
+            },
+            "occurred_at": "2026-11-12T19:22:00.545418875Z",
+            "previous_value": "waiting",
+            "new_value": "resolved"
+          },
+          {
+            "external_id": "90aab9a0-efff-48cf-88fd-9e3beb783701",
+            "sequence": 10,
+            "event_type": "assignee_changed",
+            "author": {
+              "external_id": "homologacao",
+              "name": "Operador de Homologação Analítica",
+              "role": "supervisor",
+              "active": true
+            },
+            "occurred_at": "2026-11-12T19:22:00.627276776Z",
+            "previous_value": "analytics-tech-01",
+            "new_value": null
+          }
+        ]
+      },
+      "technical_notes": {
+        "coverage": "complete",
+        "items": [
+          {
+            "external_id": "d94cd5fd-e50c-4c74-a66b-29a062c33607",
+            "author": {
+              "external_id": "homologacao",
+              "name": "Operador de Homologação Analítica",
+              "role": "supervisor",
+              "active": true
+            },
+            "content": "Nota concorrente A.",
+            "created_at": "2026-11-12T19:22:00.383570977Z"
+          },
+          {
+            "external_id": "64e49b9d-b176-405b-a9ef-0493e6cb47b7",
+            "author": {
+              "external_id": "homologacao",
+              "name": "Operador de Homologação Analítica",
+              "role": "supervisor",
+              "active": true
+            },
+            "content": "Nova observação após reabertura.",
+            "created_at": "2026-11-12T19:22:00.521790311Z"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Impressora do laboratório analítico",
+      "title_is_derived": false,
+      "description": "Falha fictícia criada durante a homologação.",
+      "priority": "normal",
+      "type": {
+        "external_id": "analytics-printing",
+        "name": "Impressão"
+      },
+      "requester": {
+        "external_id": "analytics-requester-01",
+        "name": "Solicitante Analítico Fictício",
+        "department": "Laboratório"
+      },
+      "assignee": null,
+      "external_id": "af2d838d-eebb-4132-b5a8-0ae28af134ed",
+      "status": "open",
+      "created_at": "2026-11-12T19:15:53.572892438Z",
+      "updated_at": "2026-11-12T19:15:53.572892438Z",
+      "resolved_at": null,
+      "history": {
+        "coverage": "complete",
+        "items": [
+          {
+            "external_id": "f6ace5c9-990e-4fa1-ae3d-a37f372bcba1",
+            "sequence": 1,
+            "event_type": "created",
+            "author": {
+              "external_id": "homologacao",
+              "name": "Operador de Homologação Analítica",
+              "role": "supervisor",
+              "active": true
+            },
+            "occurred_at": "2026-11-12T19:15:53.572892438Z",
+            "previous_value": null,
+            "new_value": {
+              "status": "open",
+              "priority": "normal",
+              "type_external_id": "analytics-printing",
+              "assignee_external_id": null
+            }
+          }
+        ]
+      },
+      "technical_notes": {
+        "coverage": "complete",
+        "items": []
+      }
+    },
+    {
+      "title": "Título revisado no laboratório",
+      "title_is_derived": false,
+      "description": "Falha fictícia criada durante a homologação. Descrição complementada.",
+      "priority": "high",
+      "type": {
+        "external_id": "analytics-network",
+        "name": "Rede"
+      },
+      "requester": {
+        "external_id": "analytics-requester-01",
+        "name": "Solicitante Analítico Fictício",
+        "department": "Laboratório"
+      },
+      "assignee": null,
+      "external_id": "bb5bb49d-ea80-41a8-bb03-d2199441fdea",
+      "status": "resolved",
+      "created_at": "2026-11-12T19:27:49.795471427Z",
+      "updated_at": "2026-11-12T19:27:50.196965189Z",
+      "resolved_at": "2026-11-12T19:27:50.135823423Z",
+      "history": {
+        "coverage": "complete",
+        "items": [
+          {
+            "external_id": "ad303ea5-e3f8-49c2-871c-084d1459ce53",
+            "sequence": 1,
+            "event_type": "created",
+            "author": {
+              "external_id": "homologacao",
+              "name": "Operador de Homologação Analítica",
+              "role": "supervisor",
+              "active": true
+            },
+            "occurred_at": "2026-11-12T19:27:49.795471427Z",
+            "previous_value": null,
+            "new_value": {
+              "status": "open",
+              "priority": "normal",
+              "type_external_id": "analytics-printing",
+              "assignee_external_id": null
+            }
+          },
+          {
+            "external_id": "09b5a579-5522-4202-8827-c1f51dc566f7",
+            "sequence": 2,
+            "event_type": "status_changed",
+            "author": {
+              "external_id": "homologacao",
+              "name": "Operador de Homologação Analítica",
+              "role": "supervisor",
+              "active": true
+            },
+            "occurred_at": "2026-11-12T19:27:49.888420798Z",
+            "previous_value": "open",
+            "new_value": "in_progress"
+          },
+          {
+            "external_id": "e25e1153-409d-41f8-9ab1-38b9a1d1db20",
+            "sequence": 3,
+            "event_type": "priority_changed",
+            "author": {
+              "external_id": "homologacao",
+              "name": "Operador de Homologação Analítica",
+              "role": "supervisor",
+              "active": true
+            },
+            "occurred_at": "2026-11-12T19:27:49.888420798Z",
+            "previous_value": "normal",
+            "new_value": "high"
+          },
+          {
+            "external_id": "ddf1e8eb-7cdd-4425-b037-5249f037872c",
+            "sequence": 4,
+            "event_type": "type_changed",
+            "author": {
+              "external_id": "homologacao",
+              "name": "Operador de Homologação Analítica",
+              "role": "supervisor",
+              "active": true
+            },
+            "occurred_at": "2026-11-12T19:27:49.888420798Z",
+            "previous_value": "analytics-printing",
+            "new_value": "analytics-network"
+          },
+          {
+            "external_id": "bfe84f64-c1f1-4ff4-8669-5d243cc6c625",
+            "sequence": 5,
+            "event_type": "assignee_changed",
+            "author": {
+              "external_id": "homologacao",
+              "name": "Operador de Homologação Analítica",
+              "role": "supervisor",
+              "active": true
+            },
+            "occurred_at": "2026-11-12T19:27:49.888420798Z",
+            "previous_value": null,
+            "new_value": "analytics-tech-01"
+          },
+          {
+            "external_id": "ea382a4c-8022-4c49-a909-6e6964402083",
+            "sequence": 6,
+            "event_type": "status_changed",
+            "author": {
+              "external_id": "homologacao",
+              "name": "Operador de Homologação Analítica",
+              "role": "supervisor",
+              "active": true
+            },
+            "occurred_at": "2026-11-12T19:27:50.041197644Z",
+            "previous_value": "in_progress",
+            "new_value": "resolved"
+          },
+          {
+            "external_id": "98c31539-24e2-4749-b5cc-b44469e4056c",
+            "sequence": 7,
+            "event_type": "status_changed",
+            "author": {
+              "external_id": "homologacao",
+              "name": "Operador de Homologação Analítica",
+              "role": "supervisor",
+              "active": true
+            },
+            "occurred_at": "2026-11-12T19:27:50.068150112Z",
+            "previous_value": "resolved",
+            "new_value": "closed"
+          },
+          {
+            "external_id": "70b04712-d73d-4127-844c-3adfaeebd99a",
+            "sequence": 8,
+            "event_type": "status_changed",
+            "author": {
+              "external_id": "homologacao",
+              "name": "Operador de Homologação Analítica",
+              "role": "supervisor",
+              "active": true
+            },
+            "occurred_at": "2026-11-12T19:27:50.095081342Z",
+            "previous_value": "closed",
+            "new_value": "waiting"
+          },
+          {
+            "external_id": "b4985a83-406a-49f1-8479-1dca0ee357bc",
+            "sequence": 9,
+            "event_type": "status_changed",
+            "author": {
+              "external_id": "homologacao",
+              "name": "Operador de Homologação Analítica",
+              "role": "supervisor",
+              "active": true
+            },
+            "occurred_at": "2026-11-12T19:27:50.135823423Z",
+            "previous_value": "waiting",
+            "new_value": "resolved"
+          },
+          {
+            "external_id": "e0c685bf-e362-4036-a01b-44dcf0ef295d",
+            "sequence": 10,
+            "event_type": "assignee_changed",
+            "author": {
+              "external_id": "homologacao",
+              "name": "Operador de Homologação Analítica",
+              "role": "supervisor",
+              "active": true
+            },
+            "occurred_at": "2026-11-12T19:27:50.196965189Z",
+            "previous_value": "analytics-tech-01",
+            "new_value": null
+          }
+        ]
+      },
+      "technical_notes": {
+        "coverage": "complete",
+        "items": [
+          {
+            "external_id": "8e6b6185-e3ce-4ab1-ad13-e7c328c3fc93",
+            "author": {
+              "external_id": "homologacao",
+              "name": "Operador de Homologação Analítica",
+              "role": "supervisor",
+              "active": true
+            },
+            "content": "Nota concorrente A.",
+            "created_at": "2026-11-12T19:27:49.954993051Z"
+          },
+          {
+            "external_id": "237d6185-5c2d-4091-b66f-2df930210201",
+            "author": {
+              "external_id": "homologacao",
+              "name": "Operador de Homologação Analítica",
+              "role": "supervisor",
+              "active": true
+            },
+            "content": "Nova observação após reabertura.",
+            "created_at": "2026-11-12T19:27:50.118038853Z"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Título revisado no laboratório",
+      "title_is_derived": false,
+      "description": "Falha fictícia criada durante a homologação. Descrição complementada.",
+      "priority": "high",
+      "type": {
+        "external_id": "analytics-network",
+        "name": "Rede"
+      },
+      "requester": {
+        "external_id": "analytics-requester-01",
+        "name": "Solicitante Analítico Fictício",
+        "department": "Laboratório"
+      },
+      "assignee": null,
+      "external_id": "ff0365a8-8eed-4b32-9be4-eea6d5cf366b",
+      "status": "resolved",
+      "created_at": "2026-11-12T19:17:51.320733301Z",
+      "updated_at": "2026-11-12T19:17:58.673020565Z",
+      "resolved_at": "2026-11-12T19:17:58.281362910Z",
+      "history": {
+        "coverage": "complete",
+        "items": [
+          {
+            "external_id": "67e8af35-56de-40ca-acfa-81ac871ed197",
+            "sequence": 1,
+            "event_type": "created",
+            "author": {
+              "external_id": "homologacao",
+              "name": "Operador de Homologação Analítica",
+              "role": "supervisor",
+              "active": true
+            },
+            "occurred_at": "2026-11-12T19:17:51.320733301Z",
+            "previous_value": null,
+            "new_value": {
+              "status": "open",
+              "priority": "normal",
+              "type_external_id": "analytics-printing",
+              "assignee_external_id": null
+            }
+          },
+          {
+            "external_id": "7b3fba1d-3cd0-4e41-b101-20e755e82fda",
+            "sequence": 2,
+            "event_type": "status_changed",
+            "author": {
+              "external_id": "homologacao",
+              "name": "Operador de Homologação Analítica",
+              "role": "supervisor",
+              "active": true
+            },
+            "occurred_at": "2026-11-12T19:17:51.926107838Z",
+            "previous_value": "open",
+            "new_value": "in_progress"
+          },
+          {
+            "external_id": "d551443e-8b1e-427d-b4bc-c11663723ba0",
+            "sequence": 3,
+            "event_type": "priority_changed",
+            "author": {
+              "external_id": "homologacao",
+              "name": "Operador de Homologação Analítica",
+              "role": "supervisor",
+              "active": true
+            },
+            "occurred_at": "2026-11-12T19:17:51.926107838Z",
+            "previous_value": "normal",
+            "new_value": "high"
+          },
+          {
+            "external_id": "601c3967-d147-4571-9927-73adb31f1413",
+            "sequence": 4,
+            "event_type": "type_changed",
+            "author": {
+              "external_id": "homologacao",
+              "name": "Operador de Homologação Analítica",
+              "role": "supervisor",
+              "active": true
+            },
+            "occurred_at": "2026-11-12T19:17:51.926107838Z",
+            "previous_value": "analytics-printing",
+            "new_value": "analytics-network"
+          },
+          {
+            "external_id": "e3fe1095-6552-451a-a38c-4c554ca2f9d3",
+            "sequence": 5,
+            "event_type": "assignee_changed",
+            "author": {
+              "external_id": "homologacao",
+              "name": "Operador de Homologação Analítica",
+              "role": "supervisor",
+              "active": true
+            },
+            "occurred_at": "2026-11-12T19:17:51.926107838Z",
+            "previous_value": null,
+            "new_value": "analytics-tech-01"
+          },
+          {
+            "external_id": "9cd87fed-89d0-4b46-8a75-658c63f86fff",
+            "sequence": 6,
+            "event_type": "status_changed",
+            "author": {
+              "external_id": "homologacao",
+              "name": "Operador de Homologação Analítica",
+              "role": "supervisor",
+              "active": true
+            },
+            "occurred_at": "2026-11-12T19:17:52.309537285Z",
+            "previous_value": "in_progress",
+            "new_value": "resolved"
+          },
+          {
+            "external_id": "82cc31cc-c18e-4ff0-9906-d7b23615c89b",
+            "sequence": 7,
+            "event_type": "status_changed",
+            "author": {
+              "external_id": "homologacao",
+              "name": "Operador de Homologação Analítica",
+              "role": "supervisor",
+              "active": true
+            },
+            "occurred_at": "2026-11-12T19:17:52.365789276Z",
+            "previous_value": "resolved",
+            "new_value": "closed"
+          },
+          {
+            "external_id": "d713483c-4f59-4bf5-b3b1-d60dff98b336",
+            "sequence": 8,
+            "event_type": "status_changed",
+            "author": {
+              "external_id": "homologacao",
+              "name": "Operador de Homologação Analítica",
+              "role": "supervisor",
+              "active": true
+            },
+            "occurred_at": "2026-11-12T19:17:57.969523778Z",
+            "previous_value": "closed",
+            "new_value": "waiting"
+          },
+          {
+            "external_id": "fbaa2cf9-2d93-4ce1-99e5-ea0e0bc8dec6",
+            "sequence": 9,
+            "event_type": "status_changed",
+            "author": {
+              "external_id": "homologacao",
+              "name": "Operador de Homologação Analítica",
+              "role": "supervisor",
+              "active": true
+            },
+            "occurred_at": "2026-11-12T19:17:58.281362910Z",
+            "previous_value": "waiting",
+            "new_value": "resolved"
+          },
+          {
+            "external_id": "485ba0d2-0b99-4f79-8d28-2faca6ba4fa1",
+            "sequence": 10,
+            "event_type": "assignee_changed",
+            "author": {
+              "external_id": "homologacao",
+              "name": "Operador de Homologação Analítica",
+              "role": "supervisor",
+              "active": true
+            },
+            "occurred_at": "2026-11-12T19:17:58.673020565Z",
+            "previous_value": "analytics-tech-01",
+            "new_value": null
+          }
+        ]
+      },
+      "technical_notes": {
+        "coverage": "complete",
+        "items": [
+          {
+            "external_id": "fb5c64b2-669c-48cc-b6ad-3ce80734b3d7",
+            "author": {
+              "external_id": "homologacao",
+              "name": "Operador de Homologação Analítica",
+              "role": "supervisor",
+              "active": true
+            },
+            "content": "Nota concorrente A.",
+            "created_at": "2026-11-12T19:17:52.105395056Z"
+          },
+          {
+            "external_id": "ae384e1c-c6b7-416b-8beb-bf44e640c976",
+            "author": {
+              "external_id": "homologacao",
+              "name": "Operador de Homologação Analítica",
+              "role": "supervisor",
+              "active": true
+            },
+            "content": "Nova observação após reabertura.",
+            "created_at": "2026-11-12T19:17:58.136585402Z"
+          }
+        ]
+      }
+    }
+  ]
+}
